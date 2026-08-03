@@ -142,3 +142,23 @@ was added; `basefood` てんさい糖/はちみつ/玄米/そば (previously cod
 dropped because the source only recommends them as substitutes for white
 sugar/refined flour, without assigning a warming nature (§3). Final Tier-1
 first-round dataset: 268 rows, all grounded, both coders in full agreement.
+
+**Second round (remaining 9 sources prezo/jsfca/kracie and Tier-2
+attaka_navi/onkatsu_note/karada_onkatsu/hiesyo_com/macrobiotic_rashinban/gveggie,
+2026-08-04):** Coder 1 (author, 236 records) and coder 2 (independent, 377
+records) coded the nine sources into the shared schema. Reconciliation on the
+(source, food, condition) key gave Cohen's kappa = 1.000 on the 214 co-coded
+items (0 direction disagreements); grounding passed for every record of both
+coders. The 185 coverage differences (22 coder-1-only, 163 coder-2-only —
+coder 2 coded more exhaustively) were each adjudicated against the source text
+per §3. Seven were dropped: substitute-recommendation context without a nature
+attribution (`attaka_navi` 黒糖; `karada_onkatsu` はちみつ/玄米), prepared
+beverages rather than a food's nature (`kracie` 白湯/生姜湯), and forms not
+present verbatim as coded (`hiesyo_com` アジ/サケ, present only as アジの開き/塩サケ).
+Three `jsfca` records (トマト/スイカ/きゅうり) that coder 2 had read as warm from
+an adjacent 陽性 sentence were corrected to cool, matching the source clause
+「…を摂り、体をクールダウンさせましょう」. After removing eight within-source
+duplicate records created when coder-1 and coder-2 codings collapsed to the same
+(food, direction, season) key, the second round added 381 rows. Combined frozen
+dataset: 649 rows across 15 sources, all grounded, both coders in full agreement
+on direction (kappa = 1.000).

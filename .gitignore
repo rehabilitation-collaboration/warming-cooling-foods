@@ -11,11 +11,16 @@ venv/
 # Raw fetched HTML (not redistributed; sources.csv records provenance)
 data/sources_raw/
 
-# Inter-coder reconciliation intermediates (coder JSON dumps, merge output).
-# Only the reconciled claims.csv and the kappa reported in Methods are public.
+# Inter-coder reconciliation intermediates (coder JSON dumps, merge output,
+# per-source adjudication verdicts, adopted-record staging, generated literal
+# block). Only the reconciled claims.csv and the kappa reported in Methods are
+# public.
 data/coder1_*.json
 data/coder2_*.json
 data/reconciliation_*.csv
+data/adjudicate/
+data/round2_adopted.json
+data/round2_claims_block.txt
 
 # Internal development docs (excluded from public repository)
 PLAN.md
