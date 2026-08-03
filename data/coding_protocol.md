@@ -77,6 +77,13 @@ Map each source's own vocabulary onto the binary lay direction:
   `condition` note.
 - Do **not** infer a direction the source does not state. No coding from the
   coder's own knowledge.
+- **Two-column tables — read the column header, not adjacent prose.** Several
+  sources present a "warming | cooling" two-column table. Code each food by the
+  column it sits under, not by nearby sentences. Kracie's extracted text, for
+  example, lists coffee under the "体を冷やすもの" (cooling) column of its
+  drinks row; a separate "冷たい飲み物" (cold drinks) item just below refers to
+  serving temperature, not the food's nature — do not conflate the two. Coffee
+  is coded `cool` for Kracie on the column header.
 
 ## 4. Food naming
 
