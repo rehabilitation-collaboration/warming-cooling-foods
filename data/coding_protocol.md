@@ -12,13 +12,31 @@ verified (2026-08-03, two independent existence scans) to (a) be reachable over
 HTTP, (b) present a concrete list assigning individual foods to warming/cooling,
 and (c) permit fetching per robots.txt.
 
-- **Tier 1 (primary frame): 10 corporate/association-operated sources.** Sources
+- **Tier 1 (primary frame): 9 corporate/association-operated sources.** Sources
   sharing one operator count as one (e.g. Kracie).
 - **Tier 2 (sensitivity only): 6 individual-expert blogs.**
 
 Axis A metrics are computed on Tier 1. Tier 2 is added only to test whether
 conclusions are stable (sensitivity analysis). The frame is frozen before
 coding; no source is added or dropped after seeing the results.
+
+**Frame corrections applied 2026-08-03 (before any coding of results).** Two
+entries were verified during fetching to not meet inclusion criterion (b) — a
+concrete per-food warm/cool list — at their registered URL:
+
+- **`tsumugu` (紡ぐしあわせ薬膳協会, Tier 1) — excluded.** The registered URL was
+  the association's landing page. A search of the same operator's domain
+  (`yakuzen.or.jp`) found only seasonal wellness columns naming a few 寒涼性
+  foods, not a comprehensive per-food warm/cool list comparable to the other
+  Tier-1 sources. It fails criterion (b) and is excluded rather than substituted,
+  keeping the frame homogeneous. **Tier 1: 10 → 9.**
+- **`hiesyo_com` (冷え症.com, Tier 2) — URL corrected.** The registered URL was a
+  blog index. A concrete macrobiotic yin-yang food list on the same domain was
+  located and the `url` field corrected. This is a URL correction (same source,
+  same operator), not a substitution, so frame identity is preserved.
+
+No source was added, and the correction/exclusion was decided from page content
+during fetching — not from any Axis A result.
 
 **robots.txt `unknown` handling** (`sources.csv` `robots_ok=unknown`): a 404 on
 `/robots.txt` means no robots file exists → fetching is permitted (treat as
