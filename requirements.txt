@@ -1,0 +1,10 @@
+beautifulsoup4==4.15.0
+lxml==6.1.1
+markdown==3.10.2
+matplotlib==3.11.1
+numpy==2.5.1
+pandas==3.0.5
+pytest==9.1.1
+requests==2.34.2
+scipy==1.18.0
+weasyprint==69.0

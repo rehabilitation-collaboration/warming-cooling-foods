@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
+
+# Mac
+.DS_Store
+
+# Raw fetched HTML (not redistributed; sources.csv records provenance)
+data/sources_raw/
+
+# Internal development docs (excluded from public repository)
+PLAN.md
+PLAN-DEVIATIONS.md
+LITERATURE.md
+REVIEW-REPORT.md
