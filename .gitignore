@@ -13,7 +13,7 @@ data/sources_raw/
 
 # Inter-coder reconciliation intermediates (coder JSON dumps, merge output).
 # Only the reconciled claims.csv and the kappa reported in Methods are public.
-data/coder1_incumbent.json
+data/coder1_*.json
 data/coder2_*.json
 data/reconciliation_*.csv
 
