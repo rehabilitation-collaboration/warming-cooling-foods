@@ -113,3 +113,32 @@ Kampoful Life already codes coffee as cooling; final count decided from data.)
 Every coded row records `source_id`, `accessed` date, and `quote`. Raw HTML is
 saved under `data/sources_raw/` (git-ignored, not redistributed); `sources.csv`
 carries the public provenance.
+
+## 8. Inter-coder reliability (reproducibility)
+
+Each source is coded **independently by two coders** into the same schema. The
+two codings are reconciled on the (source, food, condition) key by
+`src/reconcile_coders.py`, which reports agreements, direction disagreements,
+and coverage differences (a food one coder found and the other missed), and
+computes Cohen's kappa on the co-coded items.
+
+- **Agreement** rows are accepted as-is.
+- **Disagreements and coverage differences** are adjudicated by the author
+  against the source text and resolved per §3 (no direction is coded that the
+  source does not state; substitute-recommendation context is not a nature
+  attribution).
+- The **reconciled** `claims.csv` is the frozen dataset; the reported kappa is
+  the reproducibility evidence for Methods.
+
+This two-coder pass complements `verify_claims.py`: grounding only checks that a
+food label exists in its source, whereas reconciliation catches direction
+errors, missed foods, and inclusion-rule slips that grounding cannot.
+
+**First round (Tier-1 sources yomeishu/esse/macaroni/oitr/kawashimaya/basefood,
+2026-08-04):** Cohen's kappa = 1.000 on 267 co-coded items (0 direction
+disagreements). Five coverage differences were adjudicated: `yomeishu` celery
+(coded cool — coder 1 had missed it, present verbatim in the cooling 野菜 line)
+was added; `basefood` てんさい糖/はちみつ/玄米/そば (previously coded warm) were
+dropped because the source only recommends them as substitutes for white
+sugar/refined flour, without assigning a warming nature (§3). Final Tier-1
+first-round dataset: 268 rows, all grounded, both coders in full agreement.

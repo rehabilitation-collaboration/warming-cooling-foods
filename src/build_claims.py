@@ -72,6 +72,9 @@ CLAIMS: list[tuple[str, str, str, str, str, str]] = [
     ("bitter melon", "ゴーヤ", "yomeishu", "cool", "体を冷やす食べ物＞野菜: ゴーヤ", ""),
     ("spinach", "ほうれん草", "yomeishu", "cool", "体を冷やす食べ物＞野菜: ほうれん草", ""),
     ("bok choy", "チンゲン菜", "yomeishu", "cool", "体を冷やす食べ物＞野菜: チンゲン菜", ""),
+    # celery added 2026-08-04 after inter-coder reconciliation: coder 1 missed
+    # it though it is listed verbatim in the 野菜 cooling line (protocol §3).
+    ("celery", "セロリ", "yomeishu", "cool", "体を冷やす食べ物＞野菜: セロリ", ""),
     ("radish sprouts", "かいわれ大根", "yomeishu", "cool", "体を冷やす食べ物＞野菜: かいわれ大根", ""),
     ("winter melon", "冬瓜", "yomeishu", "cool", "体を冷やす食べ物＞野菜: 冬瓜", ""),
     # -- cool 果物 --
@@ -352,11 +355,13 @@ CLAIMS: list[tuple[str, str, str, str, str, str]] = [
     ("black tea", "紅茶", "basefood", "warm", "飲み物の選び方: 発酵茶(紅茶)は体を温めやすい", ""),
     ("oolong tea", "ウーロン茶", "basefood", "warm", "飲み物の選び方: 発酵茶(ウーロン茶)は体を温めやすい", ""),
     ("cocoa", "ココア", "basefood", "warm", "飲み物の選び方: 温活向き ココア", ""),
-    # -- warm 甘味代替 --
-    ("beet sugar", "てんさい糖", "basefood", "warm", "白い食べ物と糖質対策: てんさい糖に置き換えるのが有効", ""),
-    ("honey", "はちみつ", "basefood", "warm", "白い食べ物と糖質対策: はちみつに置き換えるのが有効", ""),
-    ("brown rice", "玄米", "basefood", "warm", "白い食べ物と糖質対策: 全粒粉や玄米を選ぶ", ""),
-    ("buckwheat", "そば", "basefood", "warm", "白い食べ物と糖質対策: そばを選ぶ", ""),
+    # NOTE: てんさい糖/はちみつ/玄米/そば were previously coded warm here but
+    # DROPPED after inter-coder reconciliation (2026-08-04, kappa pass): the
+    # source (L172-173 "白い食べ物と糖質対策") only recommends them as
+    # substitutes for white sugar/refined flour ("置き換えるのも有効") and does
+    # NOT assign them a warming nature. Coding them warm violated protocol §3
+    # (do not infer a direction the source does not state). Coder 2 correctly
+    # omitted them.
     # -- cool 南国系フルーツ --
     ("banana", "バナナ", "basefood", "cool", "フルーツの選び方: バナナなど南国系は体の熱を落ち着かせる", ""),
     ("mango", "マンゴー", "basefood", "cool", "フルーツの選び方: マンゴーなど南国系は体の熱を落ち着かせる", ""),
