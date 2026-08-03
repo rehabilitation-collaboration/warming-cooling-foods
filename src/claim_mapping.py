@@ -72,9 +72,14 @@ def _add_food_key(df: pd.DataFrame) -> pd.DataFrame:
 def load_claims(path=CLAIMS_CSV) -> pd.DataFrame:
     """Load the hand-coded claims table and normalize food names.
 
-    Expected columns: food_en, food_ja, source_id, direction, quote.
+    Expected columns: food_en, food_ja, source_id, direction, quote, and an
+    optional ``condition`` (raw/cooked etc.). When ``condition`` is absent it is
+    added as empty so downstream code can rely on the column existing.
     """
-    return _add_food_key(pd.read_csv(path))
+    df = pd.read_csv(path)
+    if "condition" not in df.columns:
+        df["condition"] = ""
+    return _add_food_key(df)
 
 
 def load_sources(path=SOURCES_CSV) -> pd.DataFrame:

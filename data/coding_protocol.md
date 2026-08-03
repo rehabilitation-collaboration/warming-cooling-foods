@@ -20,10 +20,26 @@ Axis A metrics are computed on Tier 1. Tier 2 is added only to test whether
 conclusions are stable (sensitivity analysis). The frame is frozen before
 coding; no source is added or dropped after seeing the results.
 
+**robots.txt `unknown` handling** (`sources.csv` `robots_ok=unknown`): a 404 on
+`/robots.txt` means no robots file exists → fetching is permitted (treat as
+`yes`). If `/robots.txt` is unreachable for other reasons, check the target page
+responds 2xx with `curl -I` before fetching and record the outcome in the
+source's `notes`. This applies to `kracie` (robots 404 → allowed) and
+`karada_onkatsu` (robots not retrievable → verify page reachability first).
+Kracie stays in the Tier-1 frame (it is a coffee=cool source and drops out only
+if the page itself becomes unreachable).
+
 ## 2. Unit of coding
 
 One row per (food, source) pair where that source assigns the food a direction.
 A source that does not mention a food produces no row for it (absence ≠ neutral).
+
+**`claims.csv` schema** (columns): `food_en`, `food_ja`, `source_id`,
+`direction` (warm/cool/neutral), `quote` (verbatim label + short location),
+`condition` (optional, blank unless the source splits by state — e.g. `raw` vs
+`cooked` ginger). A food split by condition gets one row per condition. The
+`condition` column may be omitted from the file entirely when unused;
+`load_claims()` tolerates its absence.
 
 ## 3. Direction rules
 
