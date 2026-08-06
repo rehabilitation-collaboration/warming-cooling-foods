@@ -3,8 +3,9 @@
 Joins Axis A (belief breadth = how many independent sources call a food
 warming/cooling) with Axis B (research attention = PubMed L2 hits, i.e. studies
 that examine the food in a thermal-effect context) and plots one against the
-other. The story is the **bottom-right void**: foods believed by many sources
-but studied by almost no one.
+other. The story is **decoupling**: belief breadth does not predict research
+attention (Spearman rho ~ 0), and a **bottom-right void** persists — foods
+believed by many sources but studied by almost no one.
 
 Data prep is separated from drawing so the join, the log transform, and the
 bottom-right selection are pure and unit-tested; matplotlib only renders what
@@ -189,7 +190,7 @@ def make_scatter(df: pd.DataFrame, *, scope: str | None = None, title: str | Non
 
     ax.set_xlabel("Belief breadth (number of independent sources)")
     ax.set_ylabel("Research attention  log10(PubMed L2 hits + 1)")
-    ax.set_title(title or "Attention gap: widely believed foods are rarely studied")
+    ax.set_title(title or "Belief breadth is decoupled from research attention")
     ax.grid(True, linewidth=0.4, alpha=0.4)
     ax.legend(title="Lay direction", frameon=False, loc="upper right")
     fig.tight_layout()
