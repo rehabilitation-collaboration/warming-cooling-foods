@@ -31,6 +31,9 @@ PLAN-DEVIATIONS.md
 LITERATURE.md
 REVIEW-REPORT.md
 
+# SSRN submission guide (internal workflow tool, not a reproducibility artifact)
+ssrn-submission.html
+
 # Reference-verification pre-processing output (audit artifact, regenerable
 # via verify_refs.py; the public reference list lives in manuscript.md)
 output/reference_verification.md
