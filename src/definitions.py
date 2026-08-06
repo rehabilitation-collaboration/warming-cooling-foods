@@ -13,6 +13,9 @@ SOURCES_CSV = DATA_DIR / "sources.csv"
 CLAIMS_CSV = DATA_DIR / "claims.csv"
 WU_XING_CSV = DATA_DIR / "wu_xing_reference.csv"
 SOURCES_RAW_DIR = DATA_DIR / "sources_raw"
+# Axis B evidence mapping (evidence_mapping.py).
+QUERY_LOG_DIR = DATA_DIR / "query_log"          # raw API JSON (audit trail; git-ignored)
+PUBMED_COUNTS_CSV = DATA_DIR / "pubmed_counts.csv"  # per-food study counts (tracked data)
 
 # --- Belief direction (Axis A coding) ------------------------------------
 # Each source assigns a food to one of these directions. Sources using the

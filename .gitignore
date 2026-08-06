@@ -22,6 +22,9 @@ data/adjudicate/
 data/round2_adopted.json
 data/round2_claims_block.txt
 
+# Axis B raw API responses (audit trail; pubmed_counts.csv is the public output)
+data/query_log/
+
 # Internal development docs (excluded from public repository)
 PLAN.md
 PLAN-DEVIATIONS.md
