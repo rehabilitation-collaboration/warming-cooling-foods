@@ -4,11 +4,11 @@
 
 ## Authors
 
-Mizuki Shirai^1^
+Mizuki Shirai, MHS^1^
 
 ^1^ Specified Nonprofit Corporation Rehabilitation Collaboration, Suita, Osaka, Japan
 
-<p style="text-align: left;"><strong>Corresponding author:</strong> Mizuki Shirai, Specified Nonprofit Corporation Rehabilitation Collaboration, Suita, Osaka, Japan. Email: rehabilitation.collaboration@gmail.com. ORCID: 0009-0005-3615-0670.</p>
+<p style="text-align: left;"><strong>Corresponding author:</strong> Mizuki Shirai, MHS, Specified Nonprofit Corporation Rehabilitation Collaboration, Suita, Osaka, Japan. Email: rehabilitation.collaboration@gmail.com. ORCID: 0009-0005-3615-0670.</p>
 
 ---
 
@@ -18,7 +18,7 @@ Mizuki Shirai^1^
 
 **Methods:** We built a two-axis bibliometric map. Axis A (belief breadth) counts, per food, the independent Japanese lay-facing sources assigning a warming or cooling direction, coded from a frozen frame of 15 sources following García-Hernández et al. (2023); two-coder agreement was Cohen's κ = 1.000 over 649 rows. Axis B (research attention) counts PubMed hits for each food co-occurring with four thermal-effect terms (the "claimed-context" layer, L2), all queries logged. The analysis, planned before extraction, correlated the two axes for 76 core foods (Axis A ≥ 3 sources).
 
-**Results:** Belief breadth and research attention were decoupled: Spearman ρ = +0.057 (p = 0.62) among core foods and ρ = +0.128 (p = 0.18) across all 110 foods — no monotonic association either way. Seventeen of 76 core foods (22.4%) had zero claimed-context studies, and this fraction rose among the most widely believed (3 of 9 with ≥ 11 sources; 33.3%), led by carrot (13 sources, 0 studies), burdock (12, 0), and eggplant (11, 0). The warming zero rate (28.3%) exceeded the cooling rate (10.3%) numerically but not significantly (Mann–Whitney p = 0.54). Coffee, popularly held to "cool," is dominated by caffeine, which *raises* core temperature (Peel 2025).
+**Results:** Belief breadth and research attention were decoupled: Spearman ρ = +0.057 (p = 0.62; 95% CI −0.17 to +0.28) among core foods and ρ = +0.128 (p = 0.18) across all 110 foods — no monotonic association either way, with the confidence interval spanning zero. Seventeen of 76 core foods (22.4%) had zero claimed-context studies, and this fraction rose among the most widely believed (3 of 9 with ≥ 11 sources; 33.3%), led by carrot (13 sources, 0 studies), burdock (12, 0), and eggplant (11, 0). The warming zero rate (28.3%) exceeded the cooling rate (10.3%) numerically but not significantly (Fisher exact p = 0.085; odds ratio 3.41, 95% CI 0.88–13.26); warming and cooling foods did not differ in overall research attention either (Mann–Whitney p = 0.54). Coffee, popularly held to "cool," is dominated by caffeine, which *raises* core temperature (Peel 2025).
 
 **Conclusions:** Lay belief breadth does not predict direct research attention for warming/cooling foods in Japan. The evidence base is fragmentary and unevenly attended — and, for at least one flagship food, oriented opposite to belief — rather than uniformly absent.
 
@@ -32,7 +32,7 @@ The idea that individual foods "warm" or "cool" the body is a durable feature of
 
 Crucially, the scientific literature on warm/cool food theory is not empty, and this study does not claim that it is. Ormsby (2021), in a scoping review of the nutritional evidence, characterized the support as "heterogeneous and of mixed quality" while identifying partial mechanistic correlates — heating foods associated with higher caloric density, sympathetic activation, and vasodilation, and cooling foods with higher water and fiber content and anti-inflammatory processes. Namiranian et al. (2021), a companion review in the same volume, surveyed the physiological basis of hot/cold theory across Persian medicine, traditional Chinese medicine, and Ayurveda. Zhou & Xu (2021) integrated candidate molecular mechanisms (for example, differential NF-κB and MAPK signaling) linking the cold/hot nature of foods to biological effects — while explicitly noting that research applying these mechanisms to foods is scarce relative to research on Chinese medicines. Any framing of the field as an "evidential desert" is thus untenable; the appropriate description is fragmentary, unintegrated, and unevenly attended.
 
-At the level of individual foods, the available evidence is not only fragmentary but sometimes contradictory or opposite to belief. Ginger, the archetypal "warming" food, showed a significantly enhanced thermic effect of food in one small randomized crossover pilot (Mansour et al. 2012, n = 10), yet a larger, near-identical double-blind trial reported no such increase (Fagundes et al. 2021, n = 20). Coffee, popularly classified as "cooling" (or "yin") in Japan, is dominated by caffeine, whose best-powered synthesis under thermal stress — a meta-analysis of k = 30 studies — found that caffeine significantly *raises* peak core temperature (Hedges' g = 0.44; Peel et al. 2025). The physiological direction most relevant to coffee's principal active compound therefore runs opposite to the folk attribution, even after allowing for the distinct measurement context (heat-exposure performance settings rather than everyday thermal sensation).
+At the level of individual foods, the available evidence is not only fragmentary but sometimes contradictory or opposite to belief. Ginger, the archetypal "warming" food, showed a significantly enhanced thermic effect of food in one small randomized crossover pilot (Mansour et al. 2012, n = 10 overweight men), yet a larger, double-blind crossover trial in a different population reported no such increase (Fagundes et al. 2021, n = 20 normal-weight women). Coffee, popularly classified as "cooling" (or "yin") in Japan, is dominated by caffeine, whose best-powered synthesis under thermal stress — a meta-analysis of k = 30 studies — found that caffeine significantly *raises* peak core temperature (Hedges' g = 0.44; Peel et al. 2025). The physiological direction most relevant to coffee's principal active compound therefore runs opposite to the folk attribution, even after allowing for the distinct measurement context (heat-exposure performance settings rather than everyday thermal sensation).
 
 Methodologically, the practice of mapping a hot–cold belief system bibliometrically has direct precedent. García-Hernández et al. (2023) assembled and classified 101 academic publications spanning roughly a century to characterize Mexico's hot–cold system by research approach, depth, and conceptual domain. Nagata et al. (2017) demonstrated, within Japan, that the four extant warm/cool classification lists disagree with one another when applied to cohort data — an internal inconsistency that is itself a symptom of the field's uneven development. These works establish that belief systems of this kind can be quantified and that the classification schemes underlying them are neither unified nor exhaustively validated.
 
@@ -56,7 +56,7 @@ The analysis focused on the **core** foods — those reaching belief breadth ≥
 
 ### Axis B: research attention
 
-Axis B quantifies direct research attention to each food's thermal claim using the NCBI PubMed E-utilities (no API key; queries rate-limited under 3 requests/s). For each food we counted hits at three nested layers:
+Axis B quantifies direct research attention to each food's thermal claim using the NCBI PubMed E-utilities (no API key; queries rate-limited under 3 requests/s). All PubMed, CiNii, and OpenAlex queries were executed on 2026-08-06; because bibliometric counts grow over time, this snapshot date fixes the reported values. For each food we counted hits at three nested layers:
 
 - **L1 (total):** the food term alone — total research volume, reported as a denominator only.
 - **L2 (claimed context) — the primary Axis B metric:** the food term co-occurring with any of four thermal-effect terms — *thermogenesis*, *body temperature*, *peripheral circulation*, *thermoregulation* — i.e., studies that examine the food in the context of the warming/cooling claim.
@@ -66,7 +66,7 @@ The four-term thermal vocabulary was frozen after a one-time validity check on r
 
 ### Analysis
 
-The primary test of the study's thesis is the Spearman rank correlation between belief breadth (`n_sources`) and claimed-context research attention (L2 hits) among the 76 core foods, with the same correlation across all counted foods reported alongside. Research attention was plotted as log10(L2 + 1) so that zero-study foods appear at the baseline rather than being dropped by a logarithmic scale. We report the zero-attention rate (share of core foods with 0 L2 studies) overall and among the most widely believed foods, and compared research attention between lay-warming and lay-cooling foods with the Mann–Whitney U test, with a Fisher exact test on the warm-versus-cool zero-attention contrast. Analyses used Python 3.14.3 with pandas 3.0.1, scipy 1.17.1, numpy 2.4.2, and matplotlib 3.10.8; the pipeline is covered by 48 unit tests (all passing). Figure labels are in English (romanized food keys) to avoid CJK-glyph problems in the PDF build (weasyprint 68.1).
+The primary test of the study's thesis is the Spearman rank correlation between belief breadth (`n_sources`) and claimed-context research attention (L2 hits) among the 76 core foods, with the same correlation across all counted foods reported alongside. Spearman (rather than Pearson) correlation was chosen because the L2 counts are heavily right-skewed and contain many ties at zero, making a rank-based measure the appropriate summary. Research attention was plotted as log10(L2 + 1) so that zero-study foods appear at the baseline rather than being dropped by a logarithmic scale. We report the zero-attention rate (share of core foods with 0 L2 studies) overall and among the most widely believed foods, and compared research attention between lay-warming and lay-cooling foods with the Mann–Whitney U test, with a Fisher exact test on the warm-versus-cool zero-attention contrast. All tests were two-sided at α = 0.05. The core Spearman correlation is the single planned primary test; the all-foods correlation, the zero-rate comparisons, and the warm-versus-cool tests are reported descriptively without correction for multiple comparisons, and are interpreted accordingly. Ninety-five-percent confidence intervals are reported for the correlations (Fisher z-transformation with the Bonett–Wright variance for rank correlations) and for the warm-versus-cool odds ratio (Woolf's logit method). Analyses used Python 3.14.3 with pandas 3.0.1, scipy 1.17.1, numpy 2.4.2, and matplotlib 3.10.8; the pipeline is covered by 48 unit tests (all passing), and every statistic reported here is recomputed from the pipeline output by `src/verify_stats.py`. Figure labels are in English (romanized food keys) to avoid CJK-glyph problems in the PDF build (weasyprint 68.1).
 
 ### Coverage note
 
@@ -82,7 +82,7 @@ Axis A coding covered 197 distinct foods; 76 met the core criterion (belief brea
 
 ### Belief breadth and research attention are decoupled
 
-Belief breadth showed no association with claimed-context research attention. Among the 76 core foods, the Spearman correlation between `n_sources` and L2 hits was **ρ = +0.057 (p = 0.62)**; across all 110 counted foods it was **ρ = +0.128 (p = 0.18)** (Table 2). Neither is a monotonic relationship in either direction: the data are consistent with belief breadth and research attention being decoupled, and specifically do *not* support the intuition that more widely believed foods are better studied — nor its converse. The scatter of the two axes (Figure 1, all foods; Figure 2, core only) shows the two dimensions varying largely independently, with a persistent cluster of widely believed foods along the zero-attention baseline.
+Belief breadth showed no association with claimed-context research attention. Among the 76 core foods, the Spearman correlation between `n_sources` and L2 hits was **ρ = +0.057 (p = 0.62; 95% CI −0.17 to +0.28)**; across all 110 counted foods it was **ρ = +0.128 (p = 0.18; 95% CI −0.06 to +0.31)** (Table 2). Both confidence intervals span zero and exclude even a moderate association in either direction. Neither is a monotonic relationship in either direction: the data are consistent with belief breadth and research attention being decoupled, and specifically do *not* support the intuition that more widely believed foods are better studied — nor its converse. The scatter of the two axes (Figure 1, all foods; Figure 2, core only) shows the two dimensions varying largely independently, with a persistent cluster of widely believed foods along the zero-attention baseline.
 
 ### A concentration of belief with zero direct attention
 
@@ -92,7 +92,7 @@ The research attention that does exist is highly skewed. Across the 76 core food
 
 ### Warming versus cooling foods
 
-Warming foods had a numerically higher zero-attention rate (13/46, 28.3%) than cooling foods (3/29, 10.3%), but the difference did not reach significance (Mann–Whitney U = 610.5, p = 0.54 on L2 counts; Fisher exact p = 0.085 on the zero-attention contrast; median L2 warming = 2.5, cooling = 4.0). We therefore do not claim a warm/cool asymmetry in research attention.
+Warming foods had a numerically higher zero-attention rate (13/46, 28.3%) than cooling foods (3/29, 10.3%), but the difference did not reach significance (Fisher exact p = 0.085 on the zero-attention contrast; odds ratio 3.41, 95% CI 0.88–13.26). Overall research attention also did not differ between the two (Mann–Whitney U = 610.5, p = 0.54 on L2 counts; median L2 warming = 2.5, cooling = 4.0). We therefore do not claim a warm/cool asymmetry in research attention.
 
 ### Flagship foods: attention present but thin, skewed, or reversed
 
@@ -116,7 +116,7 @@ Because this is a descriptive, ecological mapping rather than a designed test of
 
 ## Limitations
 
-**First — Belief breadth is a source-count proxy, not a measure of conviction.** Axis A counts how many independent lay sources assign a food a warming/cooling direction; it does not weight by readership, and breadth of appearance is not the same as depth of public conviction. The frame is 15 Japanese lay-facing web sources, frozen in advance and dominated by corporate/association wellness media; a different frame (e.g., print encyclopedias of *yakuzen*, or reader surveys) could shift individual foods' breadth values, though the Tier 1/Tier 2 split showed the core pattern to be stable.
+**First — Belief breadth is a source-count proxy, not a measure of conviction.** Axis A counts how many independent lay sources assign a food a warming/cooling direction; it does not weight by readership, and breadth of appearance is not the same as depth of public conviction. The frame is 15 Japanese lay-facing web sources, frozen in advance and dominated by corporate/association wellness media; a different frame (e.g., print encyclopedias of *yakuzen*, or reader surveys) could shift individual foods' breadth values. The Tier 1/Tier 2 split showed the core pattern to be stable: restricting the frame to the nine Tier 1 (corporate/association) sources left 51 core foods with a near-identical null correlation (Spearman ρ = +0.047, p = 0.75, 95% CI −0.23 to +0.32) and a comparable zero-attention rate (9/51, 17.6%), against ρ = +0.057 and 17/76 (22.4%) for the full Tier 1+2 frame.
 
 **Second — Research attention is a keyword-count proxy.** The L2 metric counts co-occurrence of a food term with four thermoregulation terms and cannot judge study quality, relevance, or whether a hit truly tests the thermal claim; a zero count means "no indexed study matched the claimed-context query," not "no relevant work could ever exist." The four-term vocabulary was validated once against real hits but may still miss studies phrased in other terms, and PubMed's English-language emphasis under-counts Japanese and other-language work — partially mitigated by the auxiliary CiNii query but not eliminated.
 
@@ -138,7 +138,7 @@ Because this is a descriptive, ecological mapping rather than a designed test of
 
 2\. Namiranian P, Naghizadeh A, Adel-Mehraban MS, Karimi M. Hot and Cold Theory: Evidence in Physiology. *Adv Exp Med Biol*. 2021;1343:119-133. doi:10.1007/978-3-030-80983-6_8. PMID: 35015280.
 
-3\. Zhou Y, Xu B. East meets West: an integrative review on the molecular mechanisms underlying the hot-cold nature of food and Chinese medicines. *Food Res Int*. 2021;144:110361. doi:10.1016/j.foodres.2021.110361. PMID: 34053554.
+3\. Zhou Y, Xu B. New insights into molecular mechanisms of "Cold or Hot" nature of food: When East meets West. *Food Res Int*. 2021;144:110361. doi:10.1016/j.foodres.2021.110361. PMID: 34053554.
 
 4\. Mansour MS, Ni YM, Roberts AL, Kelleman M, Roychoudhury A, St-Onge MP. Ginger consumption enhances the thermic effect of food and promotes feelings of satiety without affecting metabolic and hormonal parameters in overweight men: a pilot study. *Metabolism*. 2012;61(10):1347-1352. doi:10.1016/j.metabol.2012.03.016. PMID: 22538118.
 
@@ -186,7 +186,7 @@ Analysis code (Python 3.14.3, pandas 3.0.1, scipy 1.17.1, numpy 2.4.2, matplotli
 
 **Figure 1. The attention gap across all counted foods (n = 110).** Belief breadth (Axis A, x = number of independent lay sources assigning a warming/cooling direction) plotted against research attention (Axis B, y = log10(PubMed claimed-context L2 hits + 1)). Lay direction is encoded by both colour and marker shape (warming = vermillion circle, cooling = blue triangle, contested/neutral = grey square/diamond) so that identity never rests on colour alone. Foods with zero claimed-context studies are drawn with hollow markers on the y = 0 baseline; the shaded bottom-right region marks widely believed (n_sources ≥ 3) foods with little or no research attention. A selection of the widest-belief, zero-attention foods is directly labelled. Okabe–Ito colour-blind-safe palette.
 
-**Figure 2. The attention gap among core foods (n = 76; belief breadth ≥ 3 sources).** As Figure 1, restricted to the core set for which a food can be said to be widely believed. The persistence of the bottom-right cluster (17 foods at y = 0) illustrates the concentration of widely believed but directly unstudied foods; the near-zero Spearman correlation (ρ = +0.057, p = 0.62) is visible as the absence of any upward or downward trend.
+**Figure 2. The attention gap among core foods (n = 76; belief breadth ≥ 3 sources).** As Figure 1, restricted to the core set for which a food can be said to be widely believed. The persistence of the bottom-right cluster (17 foods at y = 0) illustrates the concentration of widely believed but directly unstudied foods; the near-zero Spearman correlation (ρ = +0.057, p = 0.62; 95% CI −0.17 to +0.28) is visible as the absence of any upward or downward trend.
 
 ---
 
@@ -204,17 +204,17 @@ Analysis code (Python 3.14.3, pandas 3.0.1, scipy 1.17.1, numpy 2.4.2, matplotli
 
 ### Table 2. Primary statistics: belief breadth versus research attention
 
-| Test | Set | Statistic | p |
-|---|---|---|---|
-| Spearman ρ (n_sources vs L2) | core (n = 76) | +0.057 | 0.62 |
-| Spearman ρ (n_sources vs L2) | all (n = 110) | +0.128 | 0.18 |
-| Zero-attention rate (L2 = 0) | core | 17/76 = 22.4% | — |
-| Zero-attention rate, belief ≥ 11 | core subset | 3/9 = 33.3% | — |
-| Zero-attention rate, belief ≥ 9 | core subset | 5/18 = 27.8% | — |
-| Mann–Whitney U (warming vs cooling, L2) | core | U = 610.5 | 0.54 |
-| Fisher exact (warm vs cool zero-attention) | core | OR = 3.41 | 0.085 |
+| Test | Set | Statistic | 95% CI | p |
+|---|---|---|---|---|
+| Spearman ρ (n_sources vs L2) | core (n = 76) | +0.057 | −0.17 to +0.28 | 0.62 |
+| Spearman ρ (n_sources vs L2) | all (n = 110) | +0.128 | −0.06 to +0.31 | 0.18 |
+| Zero-attention rate (L2 = 0) | core | 17/76 = 22.4% | — | — |
+| Zero-attention rate, belief ≥ 11 | core subset | 3/9 = 33.3% | — | — |
+| Zero-attention rate, belief ≥ 9 | core subset | 5/18 = 27.8% | — | — |
+| Mann–Whitney U (warming vs cooling, L2) | core | U = 610.5 | — | 0.54 |
+| Fisher exact (warm vs cool zero-attention) | core | OR = 3.41 | 0.88 to 13.26 | 0.085 |
 
-*Median claimed-context (L2) hits among core foods = 3.5; 48/76 (63%) had ≤ 5 L2 hits; mean = 31.0 (pulled up by 7 foods with ≥ 100 L2 hits). 25/76 core foods (33%) had ≥ 1 claimed-context RCT (L3 ≥ 1). Warming median L2 = 2.5, cooling median L2 = 4.0.*
+*Spearman 95% CIs via Fisher z-transformation with the Bonett–Wright variance for rank correlations; the odds-ratio CI via Woolf's logit method. Median claimed-context (L2) hits among core foods = 3.5; 48/76 (63%) had ≤ 5 L2 hits; mean = 31.0 (pulled up by 7 foods with ≥ 100 L2 hits). 25/76 core foods (33%) had ≥ 1 claimed-context RCT (L3 ≥ 1). Warming median L2 = 2.5, cooling median L2 = 4.0.*
 
 ### Table 3. The seventeen widely believed core foods with zero claimed-context (L2) studies, by belief breadth
 
