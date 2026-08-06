@@ -30,3 +30,8 @@ PLAN.md
 PLAN-DEVIATIONS.md
 LITERATURE.md
 REVIEW-REPORT.md
+
+# Reference-verification pre-processing output (audit artifact, regenerable
+# via verify_refs.py; the public reference list lives in manuscript.md)
+output/reference_verification.md
+output/reference_verification.json
