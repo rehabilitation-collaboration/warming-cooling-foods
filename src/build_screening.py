@@ -27,6 +27,7 @@ import pandas as pd
 from .definitions import DATA_DIR, PUBMED_COUNTS_CSV
 from .screening import (
     GOLDEN_CSV,
+    L2_RECORDS_CSV,
     SCREENING_CSV,
     adjudicate,
     attach_l2_screened,
@@ -215,18 +216,26 @@ def main() -> None:
           f"{int(out['adjudicated'].sum())} author-adjudicated)")
 
     l2s = l2_screened(adjudicated)
-    screened = sorted(adjudicated["food_key"].unique())
     counts_df = pd.read_csv(PUBMED_COUNTS_CSV)
+    l2_foods = set(counts_df.loc[counts_df["layer"] == "L2", "food_key"])
+    coded = set(adjudicated["food_key"])
+    # A food whose L2 query returned nothing has no records to screen, so its
+    # L2′ is 0 by construction — screening only ever removes records. Those
+    # foods are as measured as the coded ones and belong in the denominator of
+    # "N foods with no direct research"; only foods never queried stay NaN.
+    zero_hit = l2_foods - set(pd.read_csv(L2_RECORDS_CSV, dtype=str)["food_key"])
+    screened = sorted(coded | zero_hit)
     updated = attach_l2_screened(counts_df, l2s, screened_foods=screened)
     updated.to_csv(PUBMED_COUNTS_CSV, index=False)
 
-    print(f"\nL2' per screened food ({len(screened)} of "
-          f"{(counts_df['layer'] == 'L2').sum()} L2 foods; the rest stay blank "
-          "until screened):")
-    for food in screened:
+    print(f"\nL2' over {len(screened)} of {len(l2_foods)} L2 foods "
+          f"({len(coded)} coded, {len(zero_hit)} with no L2 hit to screen):")
+    nonzero = [f for f in screened if l2s.get(f, 0)]
+    for food in sorted(nonzero, key=lambda f: -l2s.get(f, 0)):
         raw = counts_df[(counts_df.food_key == food) & (counts_df.layer == "L2")]
         n_raw = int(raw["n_pubmed"].iloc[0]) if len(raw) else -1
         print(f"  {food:14s} L2 {n_raw:4d} → L2' {int(l2s.get(food, 0)):3d}")
+    print(f"  ... and {len(screened) - len(nonzero)} foods with L2' = 0")
 
 
 if __name__ == "__main__":
