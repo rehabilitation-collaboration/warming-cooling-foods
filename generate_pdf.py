@@ -5,9 +5,14 @@ from plots/ (the two attention-gap scatter plots). Adapted from the 8th-paper
 (kokutai) build pipeline; figure labels are English-only so there are no
 CJK-glyph problems in the PDF.
 
-Figure map:
-- Figure 1 = attention_gap_all.png  (all 110 counted foods)
-- Figure 2 = attention_gap_core.png (76 core foods, belief breadth >= 3)
+Figure map (must match the Figure Legends section of manuscript.md):
+- Figure 1 = presence_by_breadth_and_volume.png (the primary result: what predicts
+  having any on-construct study — observed by coverage, observed by literature
+  volume, and the adjusted model)
+- Figure 2 = attention_gap_all.png (per-food scatter over the primary Tier-1 frame)
+
+The core-only scatter (attention_gap_core.png) is still produced by analysis.py
+but is not carried in the manuscript.
 """
 
 import re
@@ -23,8 +28,8 @@ PDF_DIR.mkdir(exist_ok=True)
 MANUSCRIPT_MD = PROJECT_DIR / "manuscript.md"
 
 MAIN_FIGURES = {
-    "Figure 1": "attention_gap_all.png",
-    "Figure 2": "attention_gap_core.png",
+    "Figure 1": "presence_by_breadth_and_volume.png",
+    "Figure 2": "attention_gap_all.png",
 }
 
 CSS = """
@@ -94,6 +99,16 @@ def extract_figure_legends(md_text: str) -> dict[str, str]:
     return legends
 
 
+def _caption_html(caption: str) -> str:
+    """Render a legend's inline markdown (bold panel letters, italics) as HTML.
+
+    The legend text is pulled straight out of the markdown source, so dropping
+    it into the HTML verbatim prints literal `**(a)**` in the PDF.
+    """
+    rendered = markdown.markdown(caption)
+    return re.sub(r"^<p>|</p>$", "", rendered.strip())
+
+
 def _render_figure_block(fig_label: str, fig_file: str, caption: str) -> str:
     fig_path = PLOTS_DIR / fig_file
     if not fig_path.exists():
@@ -101,7 +116,8 @@ def _render_figure_block(fig_label: str, fig_file: str, caption: str) -> str:
         return ""
     html = '<div class="figure-block">'
     html += f'<img src="file://{fig_path.resolve()}" alt="{fig_label}">'
-    html += f'<p class="figure-caption"><strong>{fig_label}.</strong> {caption}</p></div>\n'
+    html += (f'<p class="figure-caption"><strong>{fig_label}.</strong> '
+             f'{_caption_html(caption)}</p></div>\n')
     return html
 
 
@@ -115,6 +131,16 @@ def build_figures_html(legends: dict[str, str]) -> str:
 def convert():
     md_text = MANUSCRIPT_MD.read_text(encoding="utf-8")
     legends = extract_figure_legends(md_text)
+
+    # The figure map above is hand-maintained, so it goes stale when the
+    # manuscript's figures change — and a stale map silently prints the wrong
+    # image under the right caption. Fail instead.
+    if set(legends) != set(MAIN_FIGURES):
+        raise SystemExit(
+            "figure map is out of sync with manuscript.md\n"
+            f"  legends in manuscript: {sorted(legends)}\n"
+            f"  files in MAIN_FIGURES: {sorted(MAIN_FIGURES)}"
+        )
 
     # Remove the Figure Legends section (rebuilt with actual images below).
     md_text = re.sub(r"## Figure Legends.*?(?=\n## )", "", md_text, flags=re.DOTALL)

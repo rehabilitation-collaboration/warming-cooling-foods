@@ -254,9 +254,9 @@ def make_scatter(df: pd.DataFrame, *, scope: str | None = None, title: str | Non
                    edgecolors="#555555", marker="o", linewidths=1.2,
                    label=f"{n} food" + ("s" if n > 1 else ""))
 
-    ax.set_xlabel("Belief breadth (number of independent sources)")
+    ax.set_xlabel("Lay-source coverage (number of independent sources)")
     ax.set_ylabel("Research attention  log10(screened studies + 1)")
-    ax.set_title(title or "Belief breadth and on-construct research attention")
+    ax.set_title(title or "Lay-source coverage and on-construct research attention")
     ax.grid(True, linewidth=0.4, alpha=0.4)
     ax.legend(title="Lay direction / marker size", frameon=False, loc="upper right",
               labelspacing=1.1, borderpad=0.9)
@@ -376,44 +376,64 @@ def make_presence_plot(df: pd.DataFrame):
     from .gap_models import prepare_model_frame, presence_logit_curve
 
     panels = (
-        ("(a) Belief breadth (independent sources)", breadth_bin_labels(df), "#D55E00"),
+        ("(a) Lay-source coverage (independent sources)", breadth_bin_labels(df), "#D55E00"),
         ("(b) Total literature on the food (L1 tertile)", l1_tertile_labels(df), "#0072B2"),
     )
-    fig, axes = plt.subplots(1, 3, figsize=(14.5, 4.8), sharey=True)
-    for ax, (xlabel, labels, colour) in zip(axes, panels):
-        prop = _proportion_by_group(df, labels)
-        xs = np.arange(len(prop))
-        ax.errorbar(
-            xs, prop["p"],
-            yerr=[prop["p"] - prop["lo"], prop["hi"] - prop["p"]],
-            fmt="o", color=colour, ecolor=colour, elinewidth=1.2,
-            capsize=4, markersize=8, markeredgecolor="white",
-        )
-        ax.set_xticks(xs)
-        ax.set_xticklabels([f"{r.label}\n(n={r.n})" for r in prop.itertuples()])
-        ax.set_xlim(-0.5, len(prop) - 0.5)
-        ax.set_xlabel(xlabel)
-        ax.grid(True, axis="y", linewidth=0.4, alpha=0.4)
-
-    # (c) the adjusted model: breadth on x, one curve per literature-volume level.
-    ax = axes[2]
     curve = presence_logit_curve(prepare_model_frame(df))
     shades = {0.25: "#9ECAE1", 0.5: "#4292C6", 0.75: "#08519C"}
-    for q, grp in curve.groupby("l1_quantile"):
-        colour = shades[q]
-        ax.plot(grp["n_sources"], grp["p"], color=colour, linewidth=2,
-                label=f"L1 at {int(q * 100)}th pct ({int(round(grp['l1'].iloc[0])):,} hits)")
-        ax.fill_between(grp["n_sources"], grp["lo"], grp["hi"], color=colour, alpha=0.15,
-                        linewidth=0)
-    ax.set_xlabel("(c) Belief breadth, adjusted for literature volume")
-    ax.set_xticks(sorted(curve["n_sources"].unique()))
-    ax.grid(True, axis="y", linewidth=0.4, alpha=0.4)
-    ax.legend(frameon=False, fontsize=8, loc="upper left")
 
-    axes[0].set_ylim(0, 1)
-    axes[0].set_ylabel("Share of foods with ≥1 screened study")
-    fig.suptitle("What predicts whether a food has been studied for a thermal effect")
-    fig.tight_layout()
+    # Two rows, not three across: the manuscript builds to A4 portrait, where a
+    # three-across figure is scaled down far enough that the axis labels stop
+    # being readable. The adjusted model spans the bottom row because it is the
+    # panel carrying the result. The font size is raised for the same reason —
+    # the figure lands at roughly 70% of its nominal width on the page — and the
+    # whole body runs inside the rc_context, because a Text artist takes its
+    # size from rcParams at creation time, not at draw time.
+    with plt.rc_context({"font.size": 12}):
+        fig = plt.figure(figsize=(9.5, 8.0))
+        gs = fig.add_gridspec(2, 2, height_ratios=[1, 1.1], hspace=0.42, wspace=0.06,
+                              left=0.10, right=0.98, top=0.92, bottom=0.08)
+        ax_a = fig.add_subplot(gs[0, 0])
+        ax_b = fig.add_subplot(gs[0, 1], sharey=ax_a)
+        ax_c = fig.add_subplot(gs[1, :], sharey=ax_a)
+
+        for ax, (xlabel, labels, colour) in zip((ax_a, ax_b), panels):
+            prop = _proportion_by_group(df, labels)
+            xs = np.arange(len(prop))
+            ax.errorbar(
+                xs, prop["p"],
+                yerr=[prop["p"] - prop["lo"], prop["hi"] - prop["p"]],
+                fmt="o", color=colour, ecolor=colour, elinewidth=1.2,
+                capsize=4, markersize=8, markeredgecolor="white",
+            )
+            ax.set_xticks(xs)
+            ax.set_xticklabels([f"{r.label}\n(n={r.n})" for r in prop.itertuples()],
+                               fontsize=10)
+            ax.set_xlim(-0.5, len(prop) - 0.5)
+            ax.set_xlabel(xlabel, fontsize=11)
+            ax.grid(True, axis="y", linewidth=0.4, alpha=0.4)
+        ax_b.tick_params(labelleft=False)
+
+        # (c) the adjusted model: coverage on x, one curve per literature volume.
+        for q, grp in curve.groupby("l1_quantile"):
+            colour = shades[q]
+            ax_c.plot(grp["n_sources"], grp["p"], color=colour, linewidth=2.2,
+                      label=f"L1 at {int(q * 100)}th percentile "
+                            f"({int(round(grp['l1'].iloc[0])):,} hits)")
+            ax_c.fill_between(grp["n_sources"], grp["lo"], grp["hi"], color=colour,
+                              alpha=0.15, linewidth=0)
+        ax_c.set_xlabel("(c) Lay-source coverage, adjusted for literature volume",
+                        fontsize=11)
+        ax_c.set_xticks(sorted(curve["n_sources"].unique()))
+        ax_c.grid(True, axis="y", linewidth=0.4, alpha=0.4)
+        ax_c.legend(frameon=False, fontsize=10, loc="upper left", ncol=3,
+                    columnspacing=1.0, handlelength=1.4)
+
+        ax_a.set_ylim(0, 1)
+        for ax in (ax_a, ax_c):
+            ax.set_ylabel("Share with ≥1 screened study", fontsize=11)
+        fig.suptitle("What predicts whether a food has been studied for a thermal effect",
+                     fontsize=13)
     return fig
 
 if __name__ == "__main__":
