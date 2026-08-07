@@ -111,6 +111,49 @@ def presence_logit(frame: pd.DataFrame, *, adjust_l1: bool = True) -> dict:
     }
 
 
+def presence_logit_curve(
+    frame: pd.DataFrame,
+    l1_quantiles: tuple[float, ...] = (0.25, 0.5, 0.75),
+    conf: float = 0.95,
+) -> pd.DataFrame:
+    """Fitted P(has study) across belief breadth, at fixed literature volumes.
+
+    Same specification as the primary ``presence_logit`` — this only evaluates
+    it. Marginal proportions cannot show the adjusted result (a food believed by
+    many sources also tends to have a large general literature), so the figure
+    needs the model's own prediction: hold L1 at a quantile, sweep belief
+    breadth, and read whether the curve tilts.
+
+    Returns one row per (l1_quantile, n_sources) with ``p``, ``lo``, ``hi``.
+    Confidence bounds are computed on the linear predictor and then transformed,
+    so they stay inside [0, 1].
+    """
+    import statsmodels.api as sm
+
+    X = sm.add_constant(frame[["n_sources", "log_l1"]], has_constant="add")
+    fit = sm.Logit(frame["has_study"], X).fit(disp=0)
+    crit = stats.norm.ppf(1 - (1 - conf) / 2)
+
+    grid = np.arange(int(frame["n_sources"].min()), int(frame["n_sources"].max()) + 1)
+    rows = []
+    for q in l1_quantiles:
+        log_l1 = float(frame["log_l1"].quantile(q))
+        design = np.column_stack([np.ones_like(grid, dtype=float), grid.astype(float),
+                                  np.full(grid.shape, log_l1)])
+        eta = design @ fit.params.to_numpy()
+        se = np.sqrt(np.einsum("ij,jk,ik->i", design, fit.cov_params().to_numpy(), design))
+        for n, e, s in zip(grid, eta, se):
+            rows.append({
+                "l1_quantile": q,
+                "l1": float(np.exp(log_l1) - 1.0),
+                "n_sources": int(n),
+                "p": float(1 / (1 + np.exp(-e))),
+                "lo": float(1 / (1 + np.exp(-(e - crit * s)))),
+                "hi": float(1 / (1 + np.exp(-(e + crit * s)))),
+            })
+    return pd.DataFrame(rows)
+
+
 def count_negbin(frame: pd.DataFrame) -> dict:
     """SENSITIVITY: NB regression of L2' with log(L1 + 1) as offset.
 

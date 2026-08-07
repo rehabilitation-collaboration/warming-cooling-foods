@@ -117,3 +117,48 @@ def test_count_negbin_offset_uses_l1_not_a_covariate():
     b = gm.count_negbin(gm.prepare_model_frame(_frame(breadth, counts, l1=l1 * 2)))
     assert a["converged"] and b["converged"]
     assert np.sign(a["terms"]["n_sources"]["beta"]) == np.sign(b["terms"]["n_sources"]["beta"])
+
+
+# --- Adjusted prediction curve (the primary-result figure) ----------------
+def test_presence_logit_curve_spans_the_breadth_range_at_each_l1_level():
+    rng = np.random.default_rng(3)
+    breadth = rng.integers(1, 10, 140)
+    l1 = rng.integers(50, 30000, 140)
+    counts = rng.poisson(0.4, 140) * (rng.random(140) < 0.25)
+    curve = gm.presence_logit_curve(gm.prepare_model_frame(_frame(breadth, counts, l1=l1)))
+    assert set(curve["l1_quantile"]) == {0.25, 0.5, 0.75}
+    # One row per (quantile, breadth level) over the observed breadth range.
+    assert sorted(curve["n_sources"].unique()) == list(range(1, 10))
+    assert len(curve) == 3 * 9
+
+
+def test_presence_logit_curve_keeps_probabilities_and_bounds_in_range():
+    # Bounds are built on the linear predictor and transformed, so they must
+    # never leave [0, 1] even where the data are sparse.
+    rng = np.random.default_rng(4)
+    breadth = rng.integers(1, 10, 120)
+    l1 = rng.integers(10, 50000, 120)
+    counts = rng.poisson(0.2, 120) * (rng.random(120) < 0.15)
+    curve = gm.presence_logit_curve(gm.prepare_model_frame(_frame(breadth, counts, l1=l1)))
+    for col in ("p", "lo", "hi"):
+        assert curve[col].between(0, 1).all()
+    assert (curve["lo"] <= curve["p"]).all() and (curve["p"] <= curve["hi"]).all()
+
+
+def test_presence_logit_curve_separates_levels_when_l1_drives_the_outcome():
+    # Build data where only literature volume predicts having a study: the
+    # curves must stack by L1 level and stay flat across belief breadth.
+    rng = np.random.default_rng(9)
+    breadth = rng.integers(1, 10, 240)
+    l1 = rng.integers(10, 100000, 240)
+    # Strong but not deterministic: a hard threshold would separate the data and
+    # the fit would not converge, so the test would be asserting on a fit the
+    # code is supposed to refuse.
+    p = 1 / (1 + np.exp(-(np.log(l1 + 1) - 9.0)))
+    counts = rng.binomial(1, p)
+    curve = gm.presence_logit_curve(gm.prepare_model_frame(_frame(breadth, counts, l1=l1)))
+    by_q = curve.groupby("l1_quantile")["p"].mean()
+    assert by_q[0.25] < by_q[0.5] < by_q[0.75]
+    # Flat in breadth: the spread within a level is far smaller than between.
+    within = curve.groupby("l1_quantile")["p"].agg(lambda s: s.max() - s.min()).max()
+    assert within < (by_q[0.75] - by_q[0.25])

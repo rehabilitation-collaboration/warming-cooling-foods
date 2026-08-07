@@ -17,8 +17,12 @@ bottom-right selection are pure and unit-tested; matplotlib only renders what
 those functions produce. Figure labels are English-only (food_key), avoiding CJK
 glyph problems in the PDF pipeline.
 
+The **source frame** is Tier 1 (the nine corporate/association sources), which
+is what ``coding_protocol.md`` §1 fixes as primary; Tier 1+2 is available via
+``max_tier`` for the stability check and is not the default.
+
 Axis choices:
-- x = n_sources (belief breadth), linear — the range is small (1–14).
+- x = n_sources (belief breadth), linear — the range is small (single digits).
 - y = log10(L2′ + 1), so zero-study foods land at y=0 instead of being dropped by
   a log scale; they are the core attention-gap cases and are drawn with a
   distinct marker rather than hidden.
@@ -34,8 +38,16 @@ import numpy as np
 import pandas as pd
 
 from .claim_mapping import CONTESTED, aggregate_axis_a, load_claims, load_sources
-from .definitions import COOL, NEUTRAL, PLOTS_DIR, PUBMED_COUNTS_CSV, WARM
-from .evidence_mapping import CORE_MIN_SOURCES
+from .definitions import (
+    COOL,
+    NEUTRAL,
+    PLOTS_DIR,
+    PUBMED_COUNTS_CSV,
+    TIER_INDIVIDUAL,
+    TIER_ORG,
+    WARM,
+)
+from .evidence_mapping import CORE_MIN_SOURCES, _scope_of
 
 # --- Direction styling (colour + shape; colour alone is never load-bearing) --
 # Okabe-Ito colour-blind-safe hues: warm=vermillion, cool=blue, contested=grey.
@@ -89,6 +101,8 @@ def prepare_scatter_data(
     claims: pd.DataFrame,
     sources: pd.DataFrame,
     counts: pd.DataFrame,
+    *,
+    max_tier: int = TIER_ORG,
 ) -> pd.DataFrame:
     """Join belief breadth (Axis A) with screened research counts (Axis B).
 
@@ -97,26 +111,49 @@ def prepare_scatter_data(
     carries its own ``n_sources`` copy, so we select the A columns explicitly to
     avoid a ``n_sources_x/_y`` split on merge.
 
+    ``max_tier`` selects the **source frame**. The protocol
+    (``coding_protocol.md`` §1) fixes Tier 1 — the nine corporate/association
+    sources — as the primary frame and adds Tier 2 only to test stability, so
+    that is the default here. Axis B was queried over the wider Tier 1+2
+    universe, so under the primary frame some queried foods have no Tier-1
+    source at all: those sit outside the frame and are dropped, with their keys
+    recorded on ``df.attrs["outside_frame"]`` so a caller reports the exclusion
+    rather than absorbing it silently.
+
+    ``scope`` is recomputed from the selected frame's breadth — the value stored
+    in ``pubmed_counts.csv`` was derived under Tier 1+2 and would otherwise
+    label foods by a breadth the primary analysis never uses.
+
     Returns one row per food with: food_key, food_ja, scope, direction,
     n_sources, l1, l2_raw, l2_screened, n_openalex, x (=n_sources),
     y (=log10(L2′+1)), is_zero (L2′ == 0).
     """
-    a = aggregate_axis_a(claims, sources, max_tier=2)
+    # Validate against the widest frame first: an Axis B food with no Axis A row
+    # anywhere means the two sides are out of sync (e.g. claims edited without
+    # regenerating pubmed_counts.csv), which would silently drop points from the
+    # figure. That is a pipeline error, distinct from "outside the primary
+    # frame" below, so it still fails loudly.
+    full = aggregate_axis_a(claims, sources, max_tier=TIER_INDIVIDUAL)
+    orphans = sorted(set(counts["food_key"]) - set(full["food_key"]))
+    if orphans:
+        raise ValueError(f"Axis B foods with no Axis A match: {orphans}")
+
+    a = aggregate_axis_a(claims, sources, max_tier=max_tier)
     a_slim = a[["food_key", "direction", "n_sources"]]
 
-    df = counts.merge(a_slim, on="food_key", how="left")
+    df = counts.drop(columns=["scope"]).merge(a_slim, on="food_key", how="left")
+    outside = sorted(df.loc[df["direction"].isna(), "food_key"])
+    df = df[df["direction"].notna()].copy()
 
-    # Every Axis B food must match an Axis A row; a mismatch (e.g. claims edited
-    # without regenerating pubmed_counts.csv) would silently drop points from the
-    # figure. Fail loudly instead.
-    missing = df.loc[df["direction"].isna(), "food_key"].tolist()
-    if missing:
-        raise ValueError(f"Axis B foods with no Axis A match: {missing}")
-
+    df["n_sources"] = df["n_sources"].astype(int)
+    df["scope"] = df["n_sources"].map(_scope_of)
     df["x"] = df["n_sources"]
     df["y"] = np.log10(df[MEASURE] + 1)
     df["is_zero"] = df[MEASURE] == 0
-    return df.reset_index(drop=True)
+    df = df.reset_index(drop=True)
+    df.attrs["outside_frame"] = outside
+    df.attrs["max_tier"] = max_tier
+    return df
 
 
 def bottom_right_foods(
@@ -231,6 +268,11 @@ def main() -> None:
     claims, sources = load_claims(), load_sources()
     df = prepare_scatter_data(claims, sources, _read_counts())
 
+    outside = df.attrs["outside_frame"]
+    print(f"primary frame = Tier {df.attrs['max_tier']}: {len(df)} foods")
+    if outside:
+        print(f"  outside the primary frame ({len(outside)} foods, Tier-2 only): {outside}")
+
     PLOTS_DIR.mkdir(parents=True, exist_ok=True)
     # Figure 1 — the primary result: belief breadth vs literature volume as
     # predictors of having any on-construct study.
@@ -262,7 +304,7 @@ def main() -> None:
 # --- Primary-result figure -----------------------------------------------
 # Belief-breadth bins. The upper tiers are pooled because breadth thins out
 # quickly (one food at 14), and a per-level proportion there is one food wide.
-BREADTH_BINS = ((1, 1, "1"), (2, 2, "2"), (3, 4, "3-4"), (5, 8, "5-8"), (9, 99, "9+"))
+BREADTH_BINS = ((1, 1, "1"), (2, 2, "2"), (3, 4, "3-4"), (5, 6, "5-6"), (7, 99, "7+"))
 
 
 def wilson_interval(k: int, n: int, conf: float = 0.95) -> tuple[float, float]:
@@ -316,22 +358,28 @@ def l1_tertile_labels(df: pd.DataFrame) -> pd.Series:
 def make_presence_plot(df: pd.DataFrame):
     """The primary result: what predicts having any on-construct study at all.
 
-    Left panel varies belief breadth, right panel varies the food's total
-    literature volume (L1). Both show the same outcome on the same y scale, so
-    the contrast — a flat line against a rising one — is the finding, and the
-    per-group food counts are printed on the axis so no proportion is read
-    without its denominator.
+    Panels (a) and (b) are the observed proportions — belief breadth, then the
+    food's total literature volume (L1) — on a shared y scale, with per-group
+    counts on the axis so no proportion is read without its denominator.
+
+    Panel (c) is the primary model, and it is here because the marginal picture
+    cannot show the finding on its own: widely believed foods also tend to carry
+    large general literatures, so (a) inherits part of (b). Holding L1 fixed and
+    sweeping belief breadth separates them — the curves are flat in breadth and
+    far apart in L1, which is the result stated in the text.
     """
     import matplotlib
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
+    from .gap_models import prepare_model_frame, presence_logit_curve
+
     panels = (
-        ("Belief breadth (independent sources)", breadth_bin_labels(df), "#D55E00"),
-        ("Total literature on the food (L1 tertile)", l1_tertile_labels(df), "#0072B2"),
+        ("(a) Belief breadth (independent sources)", breadth_bin_labels(df), "#D55E00"),
+        ("(b) Total literature on the food (L1 tertile)", l1_tertile_labels(df), "#0072B2"),
     )
-    fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.8), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(14.5, 4.8), sharey=True)
     for ax, (xlabel, labels, colour) in zip(axes, panels):
         prop = _proportion_by_group(df, labels)
         xs = np.arange(len(prop))
@@ -346,6 +394,21 @@ def make_presence_plot(df: pd.DataFrame):
         ax.set_xlim(-0.5, len(prop) - 0.5)
         ax.set_xlabel(xlabel)
         ax.grid(True, axis="y", linewidth=0.4, alpha=0.4)
+
+    # (c) the adjusted model: breadth on x, one curve per literature-volume level.
+    ax = axes[2]
+    curve = presence_logit_curve(prepare_model_frame(df))
+    shades = {0.25: "#9ECAE1", 0.5: "#4292C6", 0.75: "#08519C"}
+    for q, grp in curve.groupby("l1_quantile"):
+        colour = shades[q]
+        ax.plot(grp["n_sources"], grp["p"], color=colour, linewidth=2,
+                label=f"L1 at {int(q * 100)}th pct ({int(round(grp['l1'].iloc[0])):,} hits)")
+        ax.fill_between(grp["n_sources"], grp["lo"], grp["hi"], color=colour, alpha=0.15,
+                        linewidth=0)
+    ax.set_xlabel("(c) Belief breadth, adjusted for literature volume")
+    ax.set_xticks(sorted(curve["n_sources"].unique()))
+    ax.grid(True, axis="y", linewidth=0.4, alpha=0.4)
+    ax.legend(frameon=False, fontsize=8, loc="upper left")
 
     axes[0].set_ylim(0, 1)
     axes[0].set_ylabel("Share of foods with ≥1 screened study")

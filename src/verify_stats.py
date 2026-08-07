@@ -24,7 +24,7 @@ import numpy as np
 from scipy import stats
 
 from .analysis import MEASURE, _read_counts, bottom_right_foods, prepare_scatter_data
-from .claim_mapping import aggregate_axis_a, load_claims, load_sources
+from .claim_mapping import load_claims, load_sources
 from .definitions import COOL, TIER_INDIVIDUAL, TIER_ORG, WARM
 from .evidence_mapping import CORE_MIN_SOURCES
 from .gap_models import count_negbin, prepare_model_frame, presence_logit, spearman_with_ci
@@ -74,9 +74,13 @@ def main() -> None:
     frame = prepare_model_frame(df)
 
     dropped = frame.attrs["dropped_unscreened"]
+    outside = df.attrs["outside_frame"]
     print(RULE)
-    print(f"N foods queried: {len(df)}   modelled: {len(frame)}   "
+    print(f"PRIMARY FRAME = Tier 1 ({TIER_ORG}) — coding_protocol.md §1")
+    print(f"N foods in frame: {len(df)}   modelled: {len(frame)}   "
           f"dropped as unscreened: {len(dropped)}")
+    if outside:
+        print(f"  outside the Tier-1 frame (queried but Tier-2 only): {len(outside)} foods")
     if dropped:
         print(f"  (not measured, so not counted as zero: {dropped})")
     print(f"L2' total studies: {int(frame['l2_screened'].sum())}   "
@@ -128,10 +132,16 @@ def main() -> None:
     cz = int(core["is_zero"].sum())
     print(f"  core (n_sources>={CORE_MIN_SOURCES}): {cz}/{len(core)} = "
           f"{100 * cz / len(core):.1f}%")
-    for thr in (9, 11):
+    # Every breadth level, not a pair of chosen cut-points: the claim is that the
+    # zero rate does not fall as belief widens, and picking two thresholds after
+    # seeing the data would let the frame choose the most striking pair. The
+    # frame also fixes the top of the scale (9 sources on Tier 1, 14 on Tier 1+2),
+    # so hard-coded thresholds silently empty out when the frame changes.
+    print("  zero rate at each belief-breadth threshold:")
+    for thr in sorted(df["n_sources"].unique()):
         hb = df[df["n_sources"] >= thr]
         z = int(hb["is_zero"].sum())
-        print(f"  high belief (n_sources>={thr}): {z}/{len(hb)} = {100 * z / len(hb):.1f}%")
+        print(f"    n_sources>={int(thr):2d}: {z:3d}/{len(hb):3d} = {100 * z / len(hb):5.1f}%")
     print(THIN)
 
     # --- Descriptive: warm vs cool (core) ---------------------------------
@@ -168,16 +178,16 @@ def main() -> None:
                   f"({r['direction']})")
     print(RULE)
 
-    # --- Tier sensitivity: Tier1-only vs Tier1+2 --------------------------
-    # The primary frame is Tier1+2. This re-derives belief breadth under the
-    # Tier1-only frame and refits the primary model, so the reader can see the
-    # belief measure's frame is not carrying the result.
-    print("[Tier sensitivity] primary model refit under each source frame")
-    b_slim = df[["food_key", MEASURE, "l1", "l2_raw"]]
-    for label, mt in (("Tier1 only ", TIER_ORG), ("Tier1+Tier2", TIER_INDIVIDUAL)):
-        a_frame = aggregate_axis_a(claims, sources, max_tier=mt)[["food_key", "n_sources"]]
-        merged = a_frame.merge(b_slim, on="food_key", how="inner")
-        f = prepare_model_frame(merged)
+    # --- Frame sensitivity: Tier1 (primary) vs Tier1+2 --------------------
+    # The primary frame is Tier 1 per coding_protocol.md §1. Widening it to
+    # Tier 1+2 re-derives belief breadth over 15 sources instead of 9 and adds
+    # the foods only individual bloggers mention, so refitting the primary model
+    # there shows the source frame is not carrying the result.
+    print("[Frame sensitivity] primary model refit under each source frame")
+    counts = _read_counts()
+    for label, mt in (("Tier1 (primary)", TIER_ORG), ("Tier1+2 (sens.)", TIER_INDIVIDUAL)):
+        d = prepare_scatter_data(claims, sources, counts, max_tier=mt)
+        f = prepare_model_frame(d)
         res = presence_logit(f)
         t = res["terms"]["n_sources"] if res.get("converged") else None
         z = int((f["has_study"] == 0).sum())
