@@ -86,6 +86,100 @@ RULINGS = {
         "exclude",
         "name-only: the exposure of interest is forced water intake (phase II is water alone), not salt (§2 criterion 4)",
     ),
+    # --- remaining 76 foods, settled 2026-08-07 -----------------------------
+    # (a) Food identity. `pepper` is 黒胡椒 (Piper nigrum; query `pepper[tiab]`),
+    # and 唐辛子 / パプリカ are their own food_keys (`chili pepper`,
+    # `bell pepper`). Capsicum records therefore belong to those keys, not this
+    # one — counting them here would double-count the same studies under two
+    # foods and attach them to a belief Axis A recorded separately (§3
+    # botanical species identity, the ginger sensu-stricto rule).
+    **{
+        ("pepper", pmid): (
+            "exclude",
+            "species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3)",
+        )
+        for pmid in (
+            "10211048", "11227803", "11676017", "17341828", "20925950",
+            "21093467", "23179202", "23844093", "24100669", "24267043",
+            "33063385", "33789250", "38571755", "3957721", "42186269",
+        )
+    },
+    ("orange", "26856274"): (
+        "exclude",
+        "species-mismatch: the thermogenic agent reviewed is bitter orange (Citrus aurantium/p-synephrine), not sweet orange",
+    ),
+    ("green tea", "10702779"): (
+        "exclude",
+        "animal: MeSH Animals/Rats (Dulloo 2000); the abstract states no species, so coder 2's uncertain-species hold was right",
+    ),
+    # (b) The food is present but is not the exposure of interest (§2
+    # criterion 4): comparator arms, vehicles, placebos, tracers. Its thermal
+    # readout exists only as the baseline another substance is tested against.
+    **{
+        key: (
+            "exclude",
+            "name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",
+        )
+        for key in (
+            ("rapeseed oil", "11756059"), ("rapeseed oil", "12775122"),
+            ("rapeseed oil", "14718746"), ("rapeseed oil", "27430386"),
+            ("soybean", "12775122"),
+            ("orange", "1885267"), ("orange", "7816004"),
+            ("white sugar", "8508195"),
+        )
+    },
+    # (c) Reviews whose stated objective is obesity / weight loss / fat
+    # reduction, with thermogenesis only one listed mechanism (§3 review rule).
+    **{
+        key: (
+            "exclude",
+            "name-only: review whose stated objective is obesity/weight-loss, thermogenesis only a listed mechanism (§3)",
+        )
+        for key in (
+            ("green tea", "11924761"), ("green tea", "20156466"),
+            ("green tea", "26421678"), ("green tea", "37450930"),
+            ("orange", "34409177"),
+        )
+    },
+    ("corn", "23941499"): (
+        "exclude",
+        "name-only: high-fructose sweeteners are an industrial isomerisation product, not a food-form of corn (cf. corn oil/starch)",
+    ),
+    # (d) Individually settled.
+    ("bell pepper", "23179202"): (
+        "exclude",
+        "name-only: bell pepper is the non-pungent control arm against chilli, not the exposure of interest (§2 criterion 4)",
+    ),
+    ("beer", "29501558"): (
+        "exclude",
+        "name-only: sensory-acceptability study; biometrics index liking, and no thermal MeSH is indexed",
+    ),
+    ("milk", "4002723"): (
+        "exclude",
+        "no-thermal: neonatal feeding RCT on drinking behaviour/weight; body temperature is routine monitoring, no thermal MeSH",
+    ),
+    # (e) Records flagged uncertain-species / no-abstract, settled against MeSH
+    # (protocol §2/§5: agreement on absent information is not evidence).
+    ("cinnamon", "33388379"): ("exclude", "animal: MeSH Animals/Mice/Rats; abstract states no species"),
+    ("cinnamon", "32980484"): ("exclude", "animal: MeSH Animals/Mice; abstract states no species"),
+    ("egg", "6552612"): ("exclude", "name-only: midwifery forum piece, no thermal MeSH indexed"),
+    ("milk", "14115557"): (
+        "exclude",
+        "name-only: body temperature is the febrile response to measles vaccine, not a thermal effect of the milk",
+    ),
+    ("milk", "14314552"): ("exclude", "name-only: brain temperature and arousal, unrelated to milk ingestion"),
+    ("milk", "2428285"): ("exclude", "name-only: review of low-birthweight infant care, no thermal outcome indexed"),
+    ("milk", "3478916"): ("exclude", "name-only: neonatal care service report, no thermal outcome indexed"),
+    ("milk", "38486985"): ("exclude", "name-only: commentary on mammary beige-adipocyte biology, not milk ingestion"),
+    ("spinach", "1745900"): ("exclude", "name-only: iron deficiency review, no thermal outcome indexed"),
+    ("wakame", "11365014"): (
+        "exclude",
+        "uncertain-species: seaweed-extract product notice; no MeSH, no species, no study design stated",
+    ),
+    ("white sugar", "36745510"): (
+        "exclude",
+        "no-thermal: the exposure is a whole obesogenic diet, with no sugar-specific thermal readout (§3 whole-diet rule)",
+    ),
 }
 
 
