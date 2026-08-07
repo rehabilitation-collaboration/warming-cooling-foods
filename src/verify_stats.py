@@ -1,17 +1,19 @@
-"""One-time statistical confirmation for the manuscript (Phase 4).
+"""Recompute every number the manuscript asserts, from the pipeline output.
 
-Recomputes every number the manuscript will assert, directly from the pipeline
-output (not from any hand-recorded value), so the written claims are grounded in
-what a reviewer would obtain by re-running the code:
+Nothing here is read from a hand-recorded value: a reviewer re-running the code
+should obtain exactly the figures in the text. Route B version — the research
+measure is **L2′ (screened, on-construct studies)**, not the raw keyword
+co-occurrence count, and the belief effect is estimated with the models fixed in
+PLAN Phase RB-5 before any estimate was computed:
 
-- Spearman rho / p (and 95% CI) for belief breadth (n_sources) vs research
-  attention (PubMed L2 hits), on the core (n_sources>=3) subset and on all foods.
-- Zero-research rate overall and split by lay direction (warm vs cool).
-- Mann-Whitney U for warm-vs-cool difference in research attention.
-- Fisher exact test (with odds-ratio 95% CI) on the warm-vs-cool
-  zero-attention contrast.
-- High-belief (n_sources>=11) zero-research rate.
-- Tier1-only vs Tier1+2 sensitivity: rho and core zero-rate under each frame.
+- primary: logistic regression of "has any on-construct study" on belief
+  breadth, adjusted for log(L1 + 1); the unadjusted fit is printed beside it.
+- alongside: Spearman rho on L2′, on raw L2, and on the L2′/L1 ratio, so the
+  effect of screening and of literature volume are both legible.
+- sensitivity: negative binomial regression of L2′ with log(L1 + 1) as offset,
+  after a Poisson over-dispersion check.
+- descriptive: zero-research rates overall, by belief tier and by lay direction,
+  plus the widest-belief zero-research foods behind the figure.
 
 Run: python3 -m src.verify_stats  (from the project root)
 """
@@ -21,176 +23,170 @@ from __future__ import annotations
 import numpy as np
 from scipy import stats
 
-from .analysis import Y_LAYER, _read_counts, prepare_scatter_data
+from .analysis import MEASURE, _read_counts, bottom_right_foods, prepare_scatter_data
 from .claim_mapping import aggregate_axis_a, load_claims, load_sources
 from .definitions import COOL, TIER_INDIVIDUAL, TIER_ORG, WARM
 from .evidence_mapping import CORE_MIN_SOURCES
+from .gap_models import count_negbin, prepare_model_frame, presence_logit, spearman_with_ci
 
-
-def _spearman(df):
-    rho, p = stats.spearmanr(df["n_sources"], df["n_pubmed"])
-    return rho, p, len(df)
-
-
-def _spearman_ci(rho: float, n: int, conf: float = 0.95):
-    """95% CI for a Spearman rho via Fisher z, with the Bonett-Wright
-    variance correction ((1 + rho**2 / 2) / (n - 3)) for rank correlations.
-
-    Returns (lo, hi). Requires n > 3; NaN bounds otherwise.
-    """
-    if n <= 3 or not np.isfinite(rho):
-        return float("nan"), float("nan")
-    z = np.arctanh(rho)
-    se = np.sqrt((1 + rho**2 / 2) / (n - 3))
-    crit = stats.norm.ppf(1 - (1 - conf) / 2)
-    return np.tanh(z - crit * se), np.tanh(z + crit * se)
+RULE = "=" * 72
+THIN = "-" * 72
 
 
 def _or_ci_woolf(a: int, b: int, c: int, d: int, conf: float = 0.95):
-    """Sample odds ratio (ad/bc) and its 95% CI via Woolf's logit method.
+    """Sample odds ratio (ad/bc) and its CI via Woolf's logit method.
 
-    Table is [[a, b], [c, d]] = [[warm-zero, warm-nonzero],
-    [cool-zero, cool-nonzero]]. No cell is zero in this fixed 2x2
-    (min cell = 3), so no continuity correction is applied and the point
-    estimate matches the sample OR reported in Table 2 (= scipy.fisher_exact's
-    OR). Returns (or, lo, hi).
+    Table is [[a, b], [c, d]] = [[warm-zero, warm-nonzero], [cool-zero,
+    cool-nonzero]]. Returns (or, lo, hi); NaN bounds if any cell is zero, where
+    the logit CI is undefined and a continuity correction would silently change
+    the estimand.
     """
+    if min(a, b, c, d) == 0:
+        return (a * d) / (b * c) if b and c else float("nan"), float("nan"), float("nan")
     or_s = (a * d) / (b * c)
     se = np.sqrt(1 / a + 1 / b + 1 / c + 1 / d)
     crit = stats.norm.ppf(1 - (1 - conf) / 2)
-    lo = np.exp(np.log(or_s) - crit * se)
-    hi = np.exp(np.log(or_s) + crit * se)
-    return or_s, lo, hi
+    return or_s, np.exp(np.log(or_s) - crit * se), np.exp(np.log(or_s) + crit * se)
 
 
-def _core_from_axis_a(claims, sources, counts_l2, max_tier):
-    """Axis A (belief breadth) at ``max_tier`` inner-joined to L2 counts, then
-    cut to the core (n_sources >= CORE_MIN_SOURCES).
+def _print_spearman(label: str, x, y) -> None:
+    s = spearman_with_ci(x, y)
+    print(f"[Spearman] {label:28s} n={s['n']:3d}  rho={s['rho']:+.4f}  "
+          f"p={s['p']:.4f}  95%CI=[{s['ci_lo']:+.3f}, {s['ci_hi']:+.3f}]")
 
-    Used for the Tier sensitivity check: unlike ``prepare_scatter_data`` (which
-    fixes max_tier=2 and fails loud on any Axis-B food missing from Axis A), this
-    re-derives belief breadth under each frame and inner-joins, so a food that
-    drops below the frame simply leaves that frame's set.
-    """
-    a = aggregate_axis_a(claims, sources, max_tier=max_tier)[
-        ["food_key", "direction", "n_sources"]
-    ]
-    b = counts_l2[["food_key", "n_pubmed"]]
-    df = a.merge(b, on="food_key", how="inner")
-    df["is_zero"] = df["n_pubmed"] == 0
-    return df[df["n_sources"] >= CORE_MIN_SOURCES].copy()
+
+def _print_logit(label: str, res: dict) -> None:
+    if not res.get("converged"):
+        print(f"[Logit] {label}: DID NOT CONVERGE — {res.get('error', 'no finite MLE')}")
+        return
+    print(f"[Logit] {label} (n={res['n']}, with study={res['n_with_study']}, "
+          f"pseudo-R2={res['pseudo_r2']:.4f})")
+    for name, t in res["terms"].items():
+        if name == "const":
+            continue
+        print(f"    {name:10s} beta={t['beta']:+.4f}  OR={t['or']:.3f} "
+              f"[{t['or_lo']:.3f}, {t['or_hi']:.3f}]  p={t['p']:.4f}")
 
 
 def main() -> None:
     claims, sources = load_claims(), load_sources()
     df = prepare_scatter_data(claims, sources, _read_counts())
+    frame = prepare_model_frame(df)
 
-    core = df[df["n_sources"] >= CORE_MIN_SOURCES].copy()
+    dropped = frame.attrs["dropped_unscreened"]
+    print(RULE)
+    print(f"N foods queried: {len(df)}   modelled: {len(frame)}   "
+          f"dropped as unscreened: {len(dropped)}")
+    if dropped:
+        print(f"  (not measured, so not counted as zero: {dropped})")
+    print(f"L2' total studies: {int(frame['l2_screened'].sum())}   "
+          f"foods with >=1 study: {int(frame['has_study'].sum())}   "
+          f"foods with none: {int((frame['has_study'] == 0).sum())}")
+    print(RULE)
 
-    print("=" * 64)
-    print("N foods total:", len(df))
-    print("N core (n_sources >= %d):" % CORE_MIN_SOURCES, len(core))
-    print("=" * 64)
+    # --- PRIMARY: does belief breadth predict having any study at all? ----
+    print_ = _print_logit
+    print_("adjusted for log(L1+1)", presence_logit(frame))
+    print_("unadjusted", presence_logit(frame, adjust_l1=False))
+    print(THIN)
 
-    # --- Spearman: belief breadth vs research attention ------------------
-    for label, d in (("core (n_sources>=3)", core), ("all foods", df)):
-        rho, p, n = _spearman(d)
-        lo, hi = _spearman_ci(rho, n)
-        print(f"[Spearman] {label:22s} n={n:3d}  rho={rho:+.4f}  "
-              f"p={p:.4f}  95%CI=[{lo:+.3f}, {hi:+.3f}]")
+    # --- Alongside: rank correlations -------------------------------------
+    _print_spearman("n_sources vs L2' (screened)", frame["n_sources"], frame["l2_screened"])
+    _print_spearman("n_sources vs L2 (raw)", frame["n_sources"], frame["l2_raw"])
+    _print_spearman("n_sources vs L2'/L1 ratio",
+                    frame["n_sources"], frame["l2_screened"] / (frame["l1"] + 1))
+    _print_spearman("n_sources vs L1 (volume)", frame["n_sources"], frame["l1"])
+    print(THIN)
 
-    # Also Pearson on log-transformed y for completeness (reported as robustness).
-    rho_l, p_l = stats.spearmanr(core["n_sources"], core["y"])
-    print(f"[Spearman] core, n_sources vs y=log10(L2+1): rho={rho_l:+.4f} p={p_l:.4f}")
+    # --- SENSITIVITY: NB with log(L1+1) offset ----------------------------
+    nb = count_negbin(frame)
+    if nb["converged"]:
+        print(f"[NB] Poisson deviance/df = {nb['poisson_dispersion']:.3f} "
+              f"(over-dispersed: {nb['overdispersed']})   alpha={nb['alpha']:.3f}")
+        for name, t in nb["terms"].items():
+            if name == "const":
+                continue
+            print(f"    {name:10s} beta={t['beta']:+.4f}  IRR={t['irr']:.3f} "
+                  f"[{t['irr_lo']:.3f}, {t['irr_hi']:.3f}]  p={t['p']:.4f}")
+    else:
+        # Planned fallback: report non-convergence, do not substitute a
+        # zero-inflated model this data cannot identify (PLAN Phase RB-5).
+        print(f"[NB] DID NOT CONVERGE — {nb.get('error')}")
+        print("     Reported as such; the primary logistic model stands alone.")
+    print(RULE)
 
-    print("-" * 64)
-
-    # --- Zero-research rate ---------------------------------------------
-    n_zero = int(core["is_zero"].sum())
-    print(f"[Zero rate] core: {n_zero}/{len(core)} = {100*n_zero/len(core):.1f}%")
-
-    all_zero = int(df["is_zero"].sum())
-    print(f"[Zero rate] all:  {all_zero}/{len(df)} = {100*all_zero/len(df):.1f}%")
-
-    print("-" * 64)
-
-    # --- Warm vs cool zero-research rate (core) --------------------------
-    for direction in (WARM, COOL):
-        grp = core[core["direction"] == direction]
-        z = int(grp["is_zero"].sum())
-        print(f"[Zero by dir] {direction:5s}: {z}/{len(grp)} = {100*z/len(grp):.1f}%")
-
-    # Direction breakdown of the core set (sanity).
-    print("[Direction counts, core]:")
-    print(core["direction"].value_counts().to_string())
-
-    print("-" * 64)
-
-    # --- Mann-Whitney U: warm vs cool research attention (core) ----------
-    warm_hits = core.loc[core["direction"] == WARM, "n_pubmed"].to_numpy()
-    cool_hits = core.loc[core["direction"] == COOL, "n_pubmed"].to_numpy()
-    u, p_mw = stats.mannwhitneyu(warm_hits, cool_hits, alternative="two-sided")
-    print(f"[Mann-Whitney] warm(n={len(warm_hits)}) vs cool(n={len(cool_hits)}) "
-          f"research attention: U={u:.1f} p={p_mw:.4f}")
-    print(f"  median L2 hits: warm={np.median(warm_hits):.1f} cool={np.median(cool_hits):.1f}")
-
-    print("-" * 64)
-
-    # --- Fisher exact: warm vs cool zero-attention contrast (core) --------
-    warm = core[core["direction"] == WARM]
-    cool = core[core["direction"] == COOL]
-    a = int(warm["is_zero"].sum())          # warm, zero L2
-    b = len(warm) - a                       # warm, >0 L2
-    c = int(cool["is_zero"].sum())          # cool, zero L2
-    d = len(cool) - c                       # cool, >0 L2
-    or_fisher, p_fisher = stats.fisher_exact([[a, b], [c, d]], alternative="two-sided")
-    or_c, or_lo, or_hi = _or_ci_woolf(a, b, c, d)
-    print(f"[Fisher] warm-zero {a}/{a+b} vs cool-zero {c}/{c+d}: "
-          f"OR={or_fisher:.3f} p={p_fisher:.4f}")
-    print(f"  Woolf-logit OR = {or_c:.3f}  95%CI=[{or_lo:.3f}, {or_hi:.3f}]")
-
-    print("-" * 64)
-
-    # --- High-belief zero rate (n_sources >= 11) -------------------------
-    for thr in (11, 9):
-        hb = core[core["n_sources"] >= thr]
+    # --- Descriptive: zero-research rates ---------------------------------
+    n_zero = int(df["is_zero"].sum())
+    print(f"[Zero rate] all foods: {n_zero}/{len(df)} = {100 * n_zero / len(df):.1f}%")
+    for scope in ("core", "sensitivity", "single"):
+        s = df[df["scope"] == scope]
+        if len(s):
+            z = int(s["is_zero"].sum())
+            print(f"  scope={scope:12s} n={len(s):3d}  zero={z:3d} ({100 * z / len(s):5.1f}%)"
+                  f"  L2' total={int(s[MEASURE].sum()):3d}")
+    core = df[df["n_sources"] >= CORE_MIN_SOURCES]
+    cz = int(core["is_zero"].sum())
+    print(f"  core (n_sources>={CORE_MIN_SOURCES}): {cz}/{len(core)} = "
+          f"{100 * cz / len(core):.1f}%")
+    for thr in (9, 11):
+        hb = df[df["n_sources"] >= thr]
         z = int(hb["is_zero"].sum())
-        print(f"[High-belief zero] n_sources>={thr}: {z}/{len(hb)} = "
-              f"{100*z/len(hb):.1f}%")
+        print(f"  high belief (n_sources>={thr}): {z}/{len(hb)} = {100 * z / len(hb):.1f}%")
+    print(THIN)
 
-    print("-" * 64)
+    # --- Descriptive: warm vs cool (core) ---------------------------------
+    warm, cool = core[core["direction"] == WARM], core[core["direction"] == COOL]
+    a, b = int(warm["is_zero"].sum()), len(warm) - int(warm["is_zero"].sum())
+    c, d = int(cool["is_zero"].sum()), len(cool) - int(cool["is_zero"].sum())
+    or_f, p_f = stats.fisher_exact([[a, b], [c, d]], alternative="two-sided")
+    or_w, lo, hi = _or_ci_woolf(a, b, c, d)
+    print(f"[Warm vs cool, core] warm-zero {a}/{a + b} vs cool-zero {c}/{c + d}: "
+          f"OR={or_f:.3f} p={p_f:.4f}")
+    print(f"  Woolf-logit OR = {or_w:.3f}  95%CI=[{lo:.3f}, {hi:.3f}]")
+    u, p_mw = stats.mannwhitneyu(warm[MEASURE], cool[MEASURE], alternative="two-sided")
+    print(f"  Mann-Whitney on L2': U={u:.1f} p={p_mw:.4f}  "
+          f"median warm={np.median(warm[MEASURE]):.1f} cool={np.median(cool[MEASURE]):.1f}")
+    print(THIN)
 
-    # --- The bottom-right void foods (for the manuscript's exemplar list) -
-    void = core[core["is_zero"]].sort_values("n_sources", ascending=False)
-    print(f"[Void] {len(void)} core foods with 0 L2 studies:")
-    for _, r in void.iterrows():
-        print(f"  {r['food_key']:16s} n_sources={int(r['n_sources']):2d} dir={r['direction']}")
+    # --- The void: widest-belief foods with no on-construct study ---------
+    gap = bottom_right_foods(df)
+    print(f"[Void] {len(gap)} core-belief foods with 0 screened studies "
+          f"(showing the 12 widest):")
+    for _, r in gap.head(12).iterrows():
+        print(f"  {r['food_key']:16s} n_sources={int(r['n_sources']):2d} "
+              f"{r['direction']:9s} L1={int(r['l1']):6d} rawL2={int(r['l2_raw']):4d}")
+    print(RULE)
 
-    print("=" * 64)
-    # --- Flagship examples (coffee, ginger, green tea) -------------------
-    for key in ("coffee", "ginger", "green tea"):
+    # --- Screening effect on the flagship foods ---------------------------
+    print("[Screening effect] raw L2 -> L2' for the foods the review named:")
+    for key in ("chicken", "ginger", "milk", "green tea", "coffee", "chili pepper"):
         r = df[df["food_key"] == key]
         if len(r):
             r = r.iloc[0]
-            print(f"[Flagship] {key:10s} dir={r['direction']:5s} "
-                  f"n_sources={int(r['n_sources']):2d} L2={int(r['n_pubmed'])}")
+            print(f"  {key:14s} L1={int(r['l1']):6d}  L2={int(r['l2_raw']):4d} -> "
+                  f"L2'={int(r[MEASURE]):3d}   n_sources={int(r['n_sources']):2d} "
+                  f"({r['direction']})")
+    print(RULE)
 
-    print("=" * 64)
-    # --- Tier sensitivity: Tier1-only vs Tier1+2 -------------------------
-    # The primary axis uses Tier1+2 (max_tier=2). This checks the core pattern
-    # holds under the Tier1-only frame (max_tier=1), re-deriving belief breadth
-    # and the core set under each frame.
-    counts_l2 = _read_counts()
-    print(f"[Tier sensitivity] core = n_sources>={CORE_MIN_SOURCES}, y-layer={Y_LAYER}")
-    for label, mt in (("Tier1 only (max_tier=1)", TIER_ORG),
-                      ("Tier1+2   (max_tier=2)", TIER_INDIVIDUAL)):
-        c = _core_from_axis_a(claims, sources, counts_l2, max_tier=mt)
-        rho, p = stats.spearmanr(c["n_sources"], c["n_pubmed"])
-        lo, hi = _spearman_ci(rho, len(c))
-        nz = int(c["is_zero"].sum())
-        print(f"  {label}: n_core={len(c):3d}  rho={rho:+.4f} p={p:.4f} "
-              f"95%CI=[{lo:+.3f}, {hi:+.3f}]  zero-rate={nz}/{len(c)}="
-              f"{100*nz/len(c):.1f}%")
+    # --- Tier sensitivity: Tier1-only vs Tier1+2 --------------------------
+    # The primary frame is Tier1+2. This re-derives belief breadth under the
+    # Tier1-only frame and refits the primary model, so the reader can see the
+    # belief measure's frame is not carrying the result.
+    print("[Tier sensitivity] primary model refit under each source frame")
+    b_slim = df[["food_key", MEASURE, "l1", "l2_raw"]]
+    for label, mt in (("Tier1 only ", TIER_ORG), ("Tier1+Tier2", TIER_INDIVIDUAL)):
+        a_frame = aggregate_axis_a(claims, sources, max_tier=mt)[["food_key", "n_sources"]]
+        merged = a_frame.merge(b_slim, on="food_key", how="inner")
+        f = prepare_model_frame(merged)
+        res = presence_logit(f)
+        t = res["terms"]["n_sources"] if res.get("converged") else None
+        z = int((f["has_study"] == 0).sum())
+        head = (f"  {label}: n={len(f):3d}  zero={z:3d} ({100 * z / len(f):.1f}%)")
+        if t:
+            print(f"{head}  n_sources OR={t['or']:.3f} "
+                  f"[{t['or_lo']:.3f}, {t['or_hi']:.3f}] p={t['p']:.4f}")
+        else:
+            print(f"{head}  model did not converge")
 
 
 if __name__ == "__main__":
