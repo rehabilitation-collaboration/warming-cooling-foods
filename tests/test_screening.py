@@ -123,11 +123,12 @@ def test_adjudicate_ruling_may_carry_the_authors_reason():
     assert adj.iloc[0]["reason"] == "33 rabbits per full text"
 
 
-def test_uncertain_species_needs_a_ruling_even_when_coders_agree():
-    # Agreement on a species the abstract never states is not evidence about
-    # the species (protocol §2/§5) — it must reach the author.
+@pytest.mark.parametrize("flag", ["uncertain-species", "no-abstract"])
+def test_information_gap_flags_need_a_ruling_even_when_coders_agree(flag):
+    # Agreement reached on what a record does not say is not evidence about it
+    # (protocol §2/§5) — those rows must reach the author.
     agreed = [
-        {"food_key": "f", "pmid": "1", "label": "exclude", "reason": "uncertain-species"},
+        {"food_key": "f", "pmid": "1", "label": "exclude", "reason": flag},
         {"food_key": "f", "pmid": "2", "label": "exclude", "reason": "animal"},
     ]
     recon = sc.reconcile(agreed, agreed)

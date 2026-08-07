@@ -90,6 +90,17 @@ human subjects. It carries no MeSH, and the PMC full text states 33 rabbits
 (IACUC BUCM-3-2015032502-1002) — so the correct label is `exclude` (`animal`).
 Coder 2 labelled it `animal`; the coder disagreement is what surfaced the error.
 
+### When the record has no abstract
+
+40 of the 2,772 L2 records (1.4%) are title-only, mostly older indexed articles.
+Judge those on title and publication types. Where the title alone settles it —
+"Ultradian rhythm of chicken body temperature", say — label it normally. Where
+the title cannot establish all four INCLUDE conditions and the record might
+belong in L2′, label it `exclude` with the `no-abstract` reason, which routes it
+to the author (§5) rather than resolving an unknown by guessing. All 18
+title-only records among the golden foods were unambiguous animal studies, so
+this is expected to be rare.
+
 ## 3. Boundary rules
 
 - **Isolated constituents** (capsaicin, caffeine, catechins, gingerols, menthol):
@@ -176,8 +187,9 @@ reported in Methods.
   co-coded count, never inflated to the full record count (the GPT #4 lesson).
 - **Disagreements** are adjudicated by the author against title + abstract per
   §2–§3; the adjudicated label is `final_label`. Records either coder marked
-  `uncertain-species` are adjudicated too, **even when the coders agree**, since
-  agreement on an undeterminable species is not evidence about the species.
+  `uncertain-species` or `no-abstract` are adjudicated too, **even when the
+  coders agree**, since agreement reached on information the record does not
+  contain is not evidence about that information.
 - Divergence target: κ ≥ 0.60. If lower, refine §2–§3 definitions and re-code; if
   still low, the author hand-adjudicates every record (PLAN branch condition).
 

@@ -36,9 +36,14 @@ INCLUDE = "include"
 EXCLUDE = "exclude"
 LABELS = (INCLUDE, EXCLUDE)
 
-# Reason flag a coder writes when the abstract never states the subject species;
-# such rows go to the author even if both coders agree (protocol §2/§5).
+# Reason flags a coder writes when the record itself does not carry enough to
+# judge on — the abstract never states the subject species, or there is no
+# abstract at all. Rows carrying one go to the author even if both coders agree,
+# because agreement reached on absent information is not evidence (protocol
+# §2/§5).
 UNCERTAIN_SPECIES = "uncertain-species"
+NO_ABSTRACT = "no-abstract"
+AUTHOR_FLAGS = (UNCERTAIN_SPECIES, NO_ABSTRACT)
 
 L2_RECORDS_CSV = DATA_DIR / "l2_records.csv"
 SCREENING_CSV = DATA_DIR / "screening.csv"
@@ -162,18 +167,18 @@ def _split_ruling(value) -> tuple[str, str]:
 
 
 def _needs_ruling(row) -> bool:
-    """Rows the author must settle: divergences and undeterminable species.
+    """Rows the author must settle: divergences and judgments made blind.
 
-    Agreement on a record whose abstract never states the subject species is not
-    evidence about the species (protocol §2/§5) — ginger/29259648 read as human
-    from its acupoint names but is a 33-rabbit study — so an
-    ``uncertain-species`` flag from either coder goes to the author even when
-    both coders wrote the same label.
+    Agreement reached on information the record does not contain is not evidence
+    (protocol §2/§5) — ginger/29259648 read as human from its acupoint names but
+    is a 33-rabbit study — so an ``uncertain-species`` or ``no-abstract`` flag
+    from either coder goes to the author even when both coders wrote the same
+    label.
     """
     if row["status"] != "agree":
         return True
     flags = f"{row.get('reason_c1', '')} {row.get('reason_c2', '')}".lower()
-    return UNCERTAIN_SPECIES in flags
+    return any(f in flags for f in AUTHOR_FLAGS)
 
 
 def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame:
