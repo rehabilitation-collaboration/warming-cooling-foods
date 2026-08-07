@@ -25,6 +25,15 @@ data/round2_claims_block.txt
 # Axis B raw API responses (audit trail; pubmed_counts.csv is the public output)
 data/query_log/
 
+# Axis B L2 raw records (full PubMed titles+abstracts, not redistributed;
+# regenerable via fetch_l2_records.py, provenance in query_log). The public
+# outputs are screening_golden.csv (titles only) and screening.csv.
+data/l2_records.csv
+
+# L2 screening intermediates (per-coder record dumps + per-coder CSVs, mirrors
+# the Axis A coder-JSON policy). Only the reconciled screening.csv is public.
+data/screening_work/
+
 # Internal development docs (excluded from public repository)
 PLAN.md
 PLAN-DEVIATIONS.md
