@@ -27,7 +27,6 @@ import pandas as pd
 from .definitions import DATA_DIR, PUBMED_COUNTS_CSV
 from .screening import (
     GOLDEN_CSV,
-    L2_RECORDS_CSV,
     SCREENING_CSV,
     adjudicate,
     attach_l2_screened,
@@ -181,6 +180,17 @@ RULINGS = {
         "exclude",
         "no-thermal: the exposure is a whole obesogenic diet, with no sugar-specific thermal readout (§3 whole-diet rule)",
     ),
+    # --- foods added when the universe widened to n_sources = 1 (2026-08-07) --
+    # Same review class as green tea 11924761 / 20156466 / 37450930 and orange
+    # 34409177: published in Int J Obes, opening on obesity prevalence and
+    # closing on preventing a positive energy balance, with thermogenesis as the
+    # proposed mechanism rather than the subject. §3 excludes a review whose
+    # stated objective is obesity / weight loss, so including it here would
+    # count one review class one way for oolong tea and the other for green tea.
+    ("oolong tea", "20142827"): (
+        "exclude",
+        "name-only: review whose stated objective is obesity/weight-loss, thermogenesis only the proposed mechanism (§3)",
+    ),
 }
 
 
@@ -217,14 +227,22 @@ def main() -> None:
 
     l2s = l2_screened(adjudicated)
     counts_df = pd.read_csv(PUBMED_COUNTS_CSV)
-    l2_foods = set(counts_df.loc[counts_df["layer"] == "L2", "food_key"])
+    l2_rows = counts_df[counts_df["layer"] == "L2"]
+    l2_foods = set(l2_rows["food_key"])
     coded = set(adjudicated["food_key"])
     # A food whose L2 query returned nothing has no records to screen, so its
     # L2′ is 0 by construction — screening only ever removes records. Those
     # foods are as measured as the coded ones and belong in the denominator of
-    # "N foods with no direct research"; only foods never queried stay NaN.
-    zero_hit = l2_foods - set(pd.read_csv(L2_RECORDS_CSV, dtype=str)["food_key"])
+    # "N foods with no direct research". Read that off the L2 count itself
+    # rather than off which foods appear in l2_records.csv: once the food
+    # universe is widened, a food can have L2 hits that have not been fetched or
+    # screened yet, and those must stay NaN rather than be silently called zero.
+    zero_hit = set(l2_rows.loc[l2_rows["n_pubmed"] == 0, "food_key"])
     screened = sorted(coded | zero_hit)
+    unscreened = sorted(l2_foods - set(screened))
+    if unscreened:
+        print(f"\n{len(unscreened)} foods have L2 hits that are not screened yet "
+              f"(L2_screened stays blank): {unscreened}")
     updated = attach_l2_screened(counts_df, l2s, screened_foods=screened)
     updated.to_csv(PUBMED_COUNTS_CSV, index=False)
 

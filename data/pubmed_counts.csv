@@ -164,12 +164,15 @@ wakame,わかめ,core,4,L3,0,,,"(wakame[tiab] OR ""Undaria pinnatifida""[tiab] O
 buckwheat,そば,core,4,L1,2799,,11637.0,buckwheat[tiab],,そば,
 buckwheat,そば,core,4,L2,1,613.0,,"buckwheat[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","buckwheat AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 buckwheat,そば,core,4,L3,1,,,"buckwheat[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
-hijiki,ひじき,core,4,L1,306,,774.0,"(hijiki[tiab] OR ""Sargassum fusiforme""[tiab])",,ひじき,
-hijiki,ひじき,core,4,L2,2,101.0,,"(hijiki[tiab] OR ""Sargassum fusiforme""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","(hijiki OR ""Sargassum fusiforme"") AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
-hijiki,ひじき,core,4,L3,0,,,"(hijiki[tiab] OR ""Sargassum fusiforme""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 persimmon,柿,core,4,L1,1045,,51701.0,persimmon[tiab],,柿,
 persimmon,柿,core,4,L2,1,283.0,,"persimmon[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","persimmon AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,1.0
 persimmon,柿,core,4,L3,0,,,"persimmon[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+hijiki,ひじき,core,4,L1,306,,774.0,"(hijiki[tiab] OR ""Sargassum fusiforme""[tiab])",,ひじき,
+hijiki,ひじき,core,4,L2,2,101.0,,"(hijiki[tiab] OR ""Sargassum fusiforme""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","(hijiki OR ""Sargassum fusiforme"") AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+hijiki,ひじき,core,4,L3,0,,,"(hijiki[tiab] OR ""Sargassum fusiforme""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+adzuki bean,小豆,core,3,L1,632,,5876.0,"(""adzuki bean""[tiab] OR ""azuki bean""[tiab] OR ""Vigna angularis""[tiab])",,小豆,
+adzuki bean,小豆,core,3,L2,1,120.0,,"(""adzuki bean""[tiab] OR ""azuki bean""[tiab] OR ""Vigna angularis""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","(""adzuki bean"" OR ""azuki bean"" OR ""Vigna angularis"") AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+adzuki bean,小豆,core,3,L3,0,,,"(""adzuki bean""[tiab] OR ""azuki bean""[tiab] OR ""Vigna angularis""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 amazake,甘酒,core,3,L1,24,,419.0,"(amazake[tiab] OR ""fermented rice drink""[tiab])",,甘酒,
 amazake,甘酒,core,3,L2,0,4.0,,"(amazake[tiab] OR ""fermented rice drink""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","(amazake OR ""fermented rice drink"") AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 amazake,甘酒,core,3,L3,0,,,"(amazake[tiab] OR ""fermented rice drink""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
@@ -221,15 +224,15 @@ soybean,大豆,core,3,L3,2,,,"soybean[tiab] AND (thermogenesis[tiab] OR ""body t
 barley,大麦,core,3,L1,23481,,4333.0,barley[tiab],,大麦,
 barley,大麦,core,3,L2,16,4720.0,,"barley[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","barley AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,3.0
 barley,大麦,core,3,L3,3,,,"barley[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+dried persimmon,干し柿,core,3,L1,32,,155.0,"""dried persimmon""[tiab]",,干し柿,
+dried persimmon,干し柿,core,3,L2,0,4.0,,"""dried persimmon""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""dried persimmon"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+dried persimmon,干し柿,core,3,L3,0,,,"""dried persimmon""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 octopus,タコ,core,3,L1,3597,,353277.0,octopus[tiab],,タコ,
 octopus,タコ,core,3,L2,6,1219.0,,"octopus[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","octopus AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 octopus,タコ,core,3,L3,0,,,"octopus[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 komatsuna,小松菜,core,3,L1,91,,212.0,"(komatsuna[tiab] OR ""Japanese mustard spinach""[tiab])",,小松菜,
 komatsuna,小松菜,core,3,L2,0,13.0,,"(komatsuna[tiab] OR ""Japanese mustard spinach""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","(komatsuna OR ""Japanese mustard spinach"") AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 komatsuna,小松菜,core,3,L3,0,,,"(komatsuna[tiab] OR ""Japanese mustard spinach""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
-adzuki bean,小豆,sensitivity,2,L1,632,,5876.0,"(""adzuki bean""[tiab] OR ""azuki bean""[tiab] OR ""Vigna angularis""[tiab])",,小豆,
-adzuki bean,小豆,sensitivity,2,L2,1,120.0,,"(""adzuki bean""[tiab] OR ""azuki bean""[tiab] OR ""Vigna angularis""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","(""adzuki bean"" OR ""azuki bean"" OR ""Vigna angularis"") AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
-adzuki bean,小豆,sensitivity,2,L3,0,,,"(""adzuki bean""[tiab] OR ""azuki bean""[tiab] OR ""Vigna angularis""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 almond,アーモンド,sensitivity,2,L1,3958,,1943.0,almond[tiab],,アーモンド,
 almond,アーモンド,sensitivity,2,L2,3,2746.0,,"almond[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","almond AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 almond,アーモンド,sensitivity,2,L3,0,,,"almond[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
@@ -291,41 +294,233 @@ pork liver,レバー,sensitivity,2,L1,257,,224415.0,"""pork liver""[tiab]",,レ�
 pork liver,レバー,sensitivity,2,L2,0,81.0,,"""pork liver""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""pork liver"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 pork liver,レバー,sensitivity,2,L3,0,,,"""pork liver""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 sardine,イワシ,sensitivity,2,L1,919,,10576.0,sardine[tiab],,イワシ,
-sardine,イワシ,sensitivity,2,L2,0,,,"sardine[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","sardine AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+sardine,イワシ,sensitivity,2,L2,0,928.0,,"sardine[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","sardine AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 sardine,イワシ,sensitivity,2,L3,0,,,"sardine[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 sesame,ごま,sensitivity,2,L1,5128,,19054.0,sesame[tiab],,ごま,
-sesame,ごま,sensitivity,2,L2,7,,,"sesame[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","sesame AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+sesame,ごま,sensitivity,2,L2,7,1702.0,,"sesame[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","sesame AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 sesame,ごま,sensitivity,2,L3,0,,,"sesame[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 shrimp,エビ,sensitivity,2,L1,17962,,55519.0,shrimp[tiab],,エビ,
-shrimp,エビ,sensitivity,2,L2,7,,,"shrimp[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","shrimp AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+shrimp,エビ,sensitivity,2,L2,7,3818.0,,"shrimp[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","shrimp AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 shrimp,エビ,sensitivity,2,L3,0,,,"shrimp[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 tsukemono,たくあん,sensitivity,2,L1,27,,733.0,"(tsukemono[tiab] OR ""Japanese pickles""[tiab])",,たくあん,
-tsukemono,たくあん,sensitivity,2,L2,0,,,"(tsukemono[tiab] OR ""Japanese pickles""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","(tsukemono OR ""Japanese pickles"") AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+tsukemono,たくあん,sensitivity,2,L2,0,9.0,,"(tsukemono[tiab] OR ""Japanese pickles""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","(tsukemono OR ""Japanese pickles"") AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 tsukemono,たくあん,sensitivity,2,L3,0,,,"(tsukemono[tiab] OR ""Japanese pickles""[tiab]) AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 walnut,くるみ,sensitivity,2,L1,4061,,3484.0,walnut[tiab],,くるみ,
-walnut,くるみ,sensitivity,2,L2,3,,,"walnut[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","walnut AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+walnut,くるみ,sensitivity,2,L2,3,1823.0,,"walnut[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","walnut AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 walnut,くるみ,sensitivity,2,L3,0,,,"walnut[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 white fish,白身の魚,sensitivity,2,L1,185,,30.0,"""white fish""[tiab]",,白身の魚,
-white fish,白身の魚,sensitivity,2,L2,0,,,"""white fish""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""white fish"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+white fish,白身の魚,sensitivity,2,L2,0,101.0,,"""white fish""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""white fish"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 white fish,白身の魚,sensitivity,2,L3,0,,,"""white fish""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 whole grain bread,全粒粉の天然酵母パン,sensitivity,2,L1,191,,0.0,"""whole grain bread""[tiab]",,全粒粉の天然酵母パン,
-whole grain bread,全粒粉の天然酵母パン,sensitivity,2,L2,0,,,"""whole grain bread""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""whole grain bread"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+whole grain bread,全粒粉の天然酵母パン,sensitivity,2,L2,0,134.0,,"""whole grain bread""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""whole grain bread"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 whole grain bread,全粒粉の天然酵母パン,sensitivity,2,L3,0,,,"""whole grain bread""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 yam,山芋,sensitivity,2,L1,1886,,121.0,yam[tiab],,山芋,
-yam,山芋,sensitivity,2,L2,1,,,"yam[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","yam AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+yam,山芋,sensitivity,2,L2,1,2181.0,,"yam[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","yam AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 yam,山芋,sensitivity,2,L3,0,,,"yam[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 bell pepper,パプリカ,sensitivity,2,L1,627,,448.0,"""bell pepper""[tiab]",,パプリカ,
-bell pepper,パプリカ,sensitivity,2,L2,1,,,"""bell pepper""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""bell pepper"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+bell pepper,パプリカ,sensitivity,2,L2,1,268.0,,"""bell pepper""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""bell pepper"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 bell pepper,パプリカ,sensitivity,2,L3,0,,,"""bell pepper""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 duck meat,鴨,sensitivity,2,L1,300,,23442.0,"""duck meat""[tiab]",,鴨,
-duck meat,鴨,sensitivity,2,L2,0,,,"""duck meat""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""duck meat"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+duck meat,鴨,sensitivity,2,L2,0,121.0,,"""duck meat""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""duck meat"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 duck meat,鴨,sensitivity,2,L3,0,,,"""duck meat""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 rapeseed oil,なたね油,sensitivity,2,L1,1896,,338.0,"""rapeseed oil""[tiab]",,なたね油,
-rapeseed oil,なたね油,sensitivity,2,L2,8,,,"""rapeseed oil""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""rapeseed oil"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,2.0
+rapeseed oil,なたね油,sensitivity,2,L2,8,546.0,,"""rapeseed oil""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""rapeseed oil"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,2.0
 rapeseed oil,なたね油,sensitivity,2,L3,4,,,"""rapeseed oil""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 taro,サトイモ,sensitivity,2,L1,669,,2120.0,taro[tiab],,サトイモ,
-taro,サトイモ,sensitivity,2,L2,0,,,"taro[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","taro AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+taro,サトイモ,sensitivity,2,L2,0,481.0,,"taro[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","taro AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 taro,サトイモ,sensitivity,2,L3,0,,,"taro[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
 wheat,小麦,sensitivity,2,L1,85471,,15112.0,wheat[tiab],,小麦,
-wheat,小麦,sensitivity,2,L2,46,,,"wheat[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","wheat AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+wheat,小麦,sensitivity,2,L2,46,12449.0,,"wheat[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","wheat AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
 wheat,小麦,sensitivity,2,L3,3,,,"wheat[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+acerola,アセロラ,single,1,L1,240,,101.0,acerola[tiab],,アセロラ,
+acerola,アセロラ,single,1,L2,0,110.0,,"acerola[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","acerola AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+acerola,アセロラ,single,1,L3,0,,,"acerola[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+agar,寒天,single,1,L1,75001,,7283.0,agar[tiab],,寒天,
+agar,寒天,single,1,L2,52,16414.0,,"agar[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","agar AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,1.0
+agar,寒天,single,1,L3,2,,,"agar[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+amaranth,アマランサス,single,1,L1,2051,,277.0,amaranth[tiab],,アマランサス,
+amaranth,アマランサス,single,1,L2,1,378.0,,"amaranth[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","amaranth AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+amaranth,アマランサス,single,1,L3,0,,,"amaranth[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+apricot,あんず,single,1,L1,1779,,2174.0,apricot[tiab],,あんず,
+apricot,あんず,single,1,L2,0,658.0,,"apricot[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","apricot AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+apricot,あんず,single,1,L3,0,,,"apricot[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+arame,あらめ,single,1,L1,11,,694.0,arame[tiab],,あらめ,
+arame,あらめ,single,1,L2,0,77.0,,"arame[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","arame AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+arame,あらめ,single,1,L3,0,,,"arame[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+asparagus,アスパラガス,single,1,L1,1672,,2204.0,asparagus[tiab],,アスパラガス,
+asparagus,アスパラガス,single,1,L2,1,670.0,,"asparagus[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","asparagus AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+asparagus,アスパラガス,single,1,L3,0,,,"asparagus[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+bean sprouts,モヤシ,single,1,L1,327,,1188.0,"""bean sprouts""[tiab]",,モヤシ,
+bean sprouts,モヤシ,single,1,L2,0,86.0,,"""bean sprouts""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""bean sprouts"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+bean sprouts,モヤシ,single,1,L3,0,,,"""bean sprouts""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+beet sugar,てんさい糖,single,1,L1,123,,24.0,"""beet sugar""[tiab]",,てんさい糖,
+beet sugar,てんさい糖,single,1,L2,0,52.0,,"""beet sugar""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""beet sugar"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+beet sugar,てんさい糖,single,1,L3,0,,,"""beet sugar""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+black sesame,黒ごま,single,1,L1,79,,53.0,"""black sesame""[tiab]",,黒ごま,
+black sesame,黒ごま,single,1,L2,1,24.0,,"""black sesame""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""black sesame"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+black sesame,黒ごま,single,1,L3,0,,,"""black sesame""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+black soybean tea,黒豆茶,single,1,L1,0,,7.0,"""black soybean tea""[tiab]",,黒豆茶,
+black soybean tea,黒豆茶,single,1,L2,0,0.0,,"""black soybean tea""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""black soybean tea"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+black soybean tea,黒豆茶,single,1,L3,0,,,"""black soybean tea""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+bok choy,チンゲン菜,single,1,L1,116,,14.0,"""bok choy""[tiab]",,チンゲン菜,
+bok choy,チンゲン菜,single,1,L2,0,42.0,,"""bok choy""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""bok choy"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+bok choy,チンゲン菜,single,1,L3,0,,,"""bok choy""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+bonito,カツオ,single,1,L1,363,,8414.0,bonito[tiab],,カツオ,
+bonito,カツオ,single,1,L2,3,572.0,,"bonito[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","bonito AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,1.0
+bonito,カツオ,single,1,L3,1,,,"bonito[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+broccoli,ブロッコリー,single,1,L1,3594,,1444.0,broccoli[tiab],,ブロッコリー,
+broccoli,ブロッコリー,single,1,L2,3,1445.0,,"broccoli[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","broccoli AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+broccoli,ブロッコリー,single,1,L3,0,,,"broccoli[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+chestnut,栗,single,1,L1,3244,,175307.0,chestnut[tiab],,栗,
+chestnut,栗,single,1,L2,3,1904.0,,"chestnut[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","chestnut AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+chestnut,栗,single,1,L3,0,,,"chestnut[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+chickpea,ひよこ豆,single,1,L1,3584,,38.0,chickpea[tiab],,ひよこ豆,
+chickpea,ひよこ豆,single,1,L2,1,688.0,,"chickpea[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","chickpea AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+chickpea,ひよこ豆,single,1,L3,0,,,"chickpea[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+curry powder,カレー粉,single,1,L1,95,,62.0,"""curry powder""[tiab]",,カレー粉,
+curry powder,カレー粉,single,1,L2,0,48.0,,"""curry powder""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""curry powder"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+curry powder,カレー粉,single,1,L3,0,,,"""curry powder""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+dried daikon,切り干し大根,single,1,L1,0,,47.0,"""dried daikon""[tiab]",,切り干し大根,
+dried daikon,切り干し大根,single,1,L2,0,0.0,,"""dried daikon""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""dried daikon"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+dried daikon,切り干し大根,single,1,L3,0,,,"""dried daikon""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+eel,うなぎ,single,1,L1,6021,,5342.0,eel[tiab],,うなぎ,
+eel,うなぎ,single,1,L2,8,3118.0,,"eel[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","eel AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+eel,うなぎ,single,1,L3,0,,,"eel[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+flaxseed oil,あまに油,single,1,L1,1042,,216.0,"""flaxseed oil""[tiab]",,あまに油,
+flaxseed oil,あまに油,single,1,L2,2,473.0,,"""flaxseed oil""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""flaxseed oil"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,1.0
+flaxseed oil,あまに油,single,1,L3,1,,,"""flaxseed oil""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+freeze-dried tofu,高野豆腐,single,1,L1,7,,77.0,"""freeze-dried tofu""[tiab]",,高野豆腐,
+freeze-dried tofu,高野豆腐,single,1,L2,0,2.0,,"""freeze-dried tofu""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""freeze-dried tofu"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+freeze-dried tofu,高野豆腐,single,1,L3,0,,,"""freeze-dried tofu""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+glutinous rice,もち米,single,1,L1,444,,555.0,"""glutinous rice""[tiab]",,もち米,
+glutinous rice,もち米,single,1,L2,1,90.0,,"""glutinous rice""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""glutinous rice"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+glutinous rice,もち米,single,1,L3,0,,,"""glutinous rice""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+grapefruit,グレープフルーツ,single,1,L1,2645,,442.0,grapefruit[tiab],,グレープフルーツ,
+grapefruit,グレープフルーツ,single,1,L2,5,1054.0,,"grapefruit[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","grapefruit AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+grapefruit,グレープフルーツ,single,1,L3,0,,,"grapefruit[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+hamaguri clam,はまぐり,single,1,L1,0,,970.0,"""hamaguri clam""[tiab]",,はまぐり,
+hamaguri clam,はまぐり,single,1,L2,0,0.0,,"""hamaguri clam""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""hamaguri clam"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+hamaguri clam,はまぐり,single,1,L3,0,,,"""hamaguri clam""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+jinenjo,ジネンジョ,single,1,L1,0,,340.0,jinenjo[tiab],,ジネンジョ,
+jinenjo,ジネンジョ,single,1,L2,0,0.0,,"jinenjo[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","jinenjo AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+jinenjo,ジネンジョ,single,1,L3,0,,,"jinenjo[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+jujube,なつめ,single,1,L1,1307,,13995.0,jujube[tiab],,なつめ,
+jujube,なつめ,single,1,L2,2,332.0,,"jujube[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","jujube AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+jujube,なつめ,single,1,L3,0,,,"jujube[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+ketchup,ケチャップ,single,1,L1,217,,147.0,ketchup[tiab],,ケチャップ,
+ketchup,ケチャップ,single,1,L2,0,136.0,,"ketchup[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","ketchup AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+ketchup,ケチャップ,single,1,L3,0,,,"ketchup[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+konjac,こんにゃく,single,1,L1,1648,,2533.0,konjac[tiab],,こんにゃく,
+konjac,こんにゃく,single,1,L2,2,415.0,,"konjac[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","konjac AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+konjac,こんにゃく,single,1,L3,0,,,"konjac[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+lentil,レンズ豆,single,1,L1,2623,,27.0,lentil[tiab],,レンズ豆,
+lentil,レンズ豆,single,1,L2,0,784.0,,"lentil[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","lentil AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+lentil,レンズ豆,single,1,L3,0,,,"lentil[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+mozuku seaweed,もずく,single,1,L1,0,,527.0,"""mozuku seaweed""[tiab]",,もずく,
+mozuku seaweed,もずく,single,1,L2,0,0.0,,"""mozuku seaweed""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""mozuku seaweed"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+mozuku seaweed,もずく,single,1,L3,0,,,"""mozuku seaweed""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+mung bean,緑豆,single,1,L1,2441,,302.0,"""mung bean""[tiab]",,緑豆,
+mung bean,緑豆,single,1,L2,1,327.0,,"""mung bean""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""mung bean"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+mung bean,緑豆,single,1,L3,0,,,"""mung bean""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+myoga,みょうが,single,1,L1,12,,942.0,myoga[tiab],,みょうが,
+myoga,みょうが,single,1,L2,0,38.0,,"myoga[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","myoga AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+myoga,みょうが,single,1,L3,0,,,"myoga[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+oatmeal,オートミール,single,1,L1,661,,137.0,oatmeal[tiab],,オートミール,
+oatmeal,オートミール,single,1,L2,0,715.0,,"oatmeal[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","oatmeal AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+oatmeal,オートミール,single,1,L3,0,,,"oatmeal[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+okara,おから,single,1,L1,437,,2627.0,okara[tiab],,おから,
+okara,おから,single,1,L2,0,168.0,,"okara[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","okara AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+okara,おから,single,1,L3,0,,,"okara[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+oolong tea,ウーロン茶,single,1,L1,743,,302.0,"""oolong tea""[tiab]",,ウーロン茶,
+oolong tea,ウーロン茶,single,1,L2,4,469.0,,"""oolong tea""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""oolong tea"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,1.0
+oolong tea,ウーロン茶,single,1,L3,1,,,"""oolong tea""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+oyster sauce,オイスターソース,single,1,L1,16,,21.0,"""oyster sauce""[tiab]",,オイスターソース,
+oyster sauce,オイスターソース,single,1,L2,0,6.0,,"""oyster sauce""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""oyster sauce"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+oyster sauce,オイスターソース,single,1,L3,0,,,"""oyster sauce""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+pasta,パスタ,single,1,L1,3334,,2045.0,pasta[tiab],,パスタ,
+pasta,パスタ,single,1,L2,5,1669.0,,"pasta[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","pasta AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,3.0
+pasta,パスタ,single,1,L3,2,,,"pasta[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+perilla,しそ,single,1,L1,1471,,142941.0,perilla[tiab],,しそ,
+perilla,しそ,single,1,L2,2,409.0,,"perilla[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","perilla AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+perilla,しそ,single,1,L3,0,,,"perilla[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+pine nut,松の実,single,1,L1,220,,59.0,"""pine nut""[tiab]",,松の実,
+pine nut,松の実,single,1,L2,1,88.0,,"""pine nut""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""pine nut"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+pine nut,松の実,single,1,L3,0,,,"""pine nut""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+pu-erh tea,プーアール茶,single,1,L1,355,,76.0,"""pu-erh tea""[tiab]",,プーアール茶,
+pu-erh tea,プーアール茶,single,1,L2,0,189.0,,"""pu-erh tea""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""pu-erh tea"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+pu-erh tea,プーアール茶,single,1,L3,0,,,"""pu-erh tea""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+quinoa,キヌア,single,1,L1,2527,,171.0,quinoa[tiab],,キヌア,
+quinoa,キヌア,single,1,L2,0,402.0,,"quinoa[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","quinoa AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+quinoa,キヌア,single,1,L3,0,,,"quinoa[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+radish sprouts,かいわれ大根,single,1,L1,111,,116.0,"""radish sprouts""[tiab]",,かいわれ大根,
+radish sprouts,かいわれ大根,single,1,L2,0,33.0,,"""radish sprouts""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""radish sprouts"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+radish sprouts,かいわれ大根,single,1,L3,0,,,"""radish sprouts""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+rapeseed flowers,菜の花,single,1,L1,10,,928.0,"""rapeseed flowers""[tiab]",,菜の花,
+rapeseed flowers,菜の花,single,1,L2,0,2.0,,"""rapeseed flowers""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""rapeseed flowers"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+rapeseed flowers,菜の花,single,1,L3,0,,,"""rapeseed flowers""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+rice cake,もち,single,1,L1,133,,377354.0,"""rice cake""[tiab]",,もち,
+rice cake,もち,single,1,L2,1,70.0,,"""rice cake""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""rice cake"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+rice cake,もち,single,1,L3,0,,,"""rice cake""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+rooibos tea,ルイボスティー,single,1,L1,155,,33.0,"""rooibos tea""[tiab]",,ルイボスティー,
+rooibos tea,ルイボスティー,single,1,L2,0,61.0,,"""rooibos tea""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""rooibos tea"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+rooibos tea,ルイボスティー,single,1,L3,0,,,"""rooibos tea""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+runner bean,花豆,single,1,L1,92,,58.0,"""runner bean""[tiab]",,花豆,
+runner bean,花豆,single,1,L2,0,21.0,,"""runner bean""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""runner bean"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+runner bean,花豆,single,1,L3,0,,,"""runner bean""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+sake lees,酒粕,single,1,L1,42,,535.0,"""sake lees""[tiab]",,酒粕,
+sake lees,酒粕,single,1,L2,0,11.0,,"""sake lees""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""sake lees"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+sake lees,酒粕,single,1,L3,0,,,"""sake lees""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+sesame oil,ごま油,single,1,L1,2312,,497.0,"""sesame oil""[tiab]",,ごま油,
+sesame oil,ごま油,single,1,L2,5,773.0,,"""sesame oil""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""sesame oil"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+sesame oil,ごま油,single,1,L3,0,,,"""sesame oil""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+shaoxing wine,紹興酒,single,1,L1,5,,58.0,"""shaoxing wine""[tiab]",,紹興酒,
+shaoxing wine,紹興酒,single,1,L2,0,1.0,,"""shaoxing wine""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""shaoxing wine"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+shaoxing wine,紹興酒,single,1,L3,0,,,"""shaoxing wine""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+shijimi clam,しじみ,single,1,L1,2,,3631.0,"""shijimi clam""[tiab]",,しじみ,
+shijimi clam,しじみ,single,1,L2,0,0.0,,"""shijimi clam""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""shijimi clam"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+shijimi clam,しじみ,single,1,L3,0,,,"""shijimi clam""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+shio koji,塩麹,single,1,L1,2,,125.0,"""shio koji""[tiab]",,塩麹,
+shio koji,塩麹,single,1,L2,0,0.0,,"""shio koji""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""shio koji"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+shio koji,塩麹,single,1,L3,0,,,"""shio koji""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+strawberry,いちご,single,1,L1,7250,,16755.0,strawberry[tiab],,いちご,
+strawberry,いちご,single,1,L2,1,2479.0,,"strawberry[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","strawberry AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+strawberry,いちご,single,1,L3,0,,,"strawberry[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+tempeh,テンペ,single,1,L1,256,,1989.0,tempeh[tiab],,テンペ,
+tempeh,テンペ,single,1,L2,0,183.0,,"tempeh[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","tempeh AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+tempeh,テンペ,single,1,L3,0,,,"tempeh[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+turnip,かぶ,single,1,L1,2392,,279999.0,turnip[tiab],,かぶ,
+turnip,かぶ,single,1,L2,1,456.0,,"turnip[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","turnip AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+turnip,かぶ,single,1,L3,0,,,"turnip[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+udon,うどん,single,1,L1,94,,5766.0,udon[tiab],,うどん,
+udon,うどん,single,1,L2,0,50.0,,"udon[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","udon AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+udon,うどん,single,1,L3,0,,,"udon[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+white bread,白パン,single,1,L1,972,,15.0,"""white bread""[tiab]",,白パン,
+white bread,白パン,single,1,L2,1,490.0,,"""white bread""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""white bread"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+white bread,白パン,single,1,L3,1,,,"""white bread""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+white sesame,白ゴマ,single,1,L1,46,,52.0,"""white sesame""[tiab]",,白ゴマ,
+white sesame,白ゴマ,single,1,L2,0,13.0,,"""white sesame""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""white sesame"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+white sesame,白ゴマ,single,1,L3,0,,,"""white sesame""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+white wine,白ワイン,single,1,L1,1280,,206.0,"""white wine""[tiab]",,白ワイン,
+white wine,白ワイン,single,1,L2,0,230.0,,"""white wine""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""white wine"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+white wine,白ワイン,single,1,L3,0,,,"""white wine""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+winter melon,冬瓜,single,1,L1,22,,77.0,"""winter melon""[tiab]",,冬瓜,
+winter melon,冬瓜,single,1,L2,0,14.0,,"""winter melon""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""winter melon"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+winter melon,冬瓜,single,1,L3,0,,,"""winter melon""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+yellowtail,ブリ,single,1,L1,521,,271903.0,yellowtail[tiab],,ブリ,
+yellowtail,ブリ,single,1,L2,0,308.0,,"yellowtail[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","yellowtail AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+yellowtail,ブリ,single,1,L3,0,,,"yellowtail[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+young bamboo,若竹,single,1,L1,28,,1321.0,"""young bamboo""[tiab]",,若竹,
+young bamboo,若竹,single,1,L2,0,6.0,,"""young bamboo""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","""young bamboo"" AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+young bamboo,若竹,single,1,L3,0,,,"""young bamboo""[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+yuba,ゆば,single,1,L1,56,,16440.0,yuba[tiab],,ゆば,
+yuba,ゆば,single,1,L2,0,155.0,,"yuba[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","yuba AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+yuba,ゆば,single,1,L3,0,,,"yuba[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+zucchini,ズッキーニ,single,1,L1,1093,,251.0,zucchini[tiab],,ズッキーニ,
+zucchini,ズッキーニ,single,1,L2,1,364.0,,"zucchini[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","zucchini AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+zucchini,ズッキーニ,single,1,L3,0,,,"zucchini[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+nagaimo,長いも,single,1,L1,5,,751.0,nagaimo[tiab],,長いも,
+nagaimo,長いも,single,1,L2,0,0.0,,"nagaimo[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","nagaimo AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+nagaimo,長いも,single,1,L3,0,,,"nagaimo[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,
+squid,イカ,single,1,L1,7935,,2260920.0,squid[tiab],,イカ,
+squid,イカ,single,1,L2,7,2486.0,,"squid[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab])","squid AND (thermogenesis OR ""body temperature"" OR ""peripheral circulation"" OR thermoregulation)",,0.0
+squid,イカ,single,1,L3,0,,,"squid[tiab] AND (thermogenesis[tiab] OR ""body temperature""[tiab] OR ""peripheral circulation""[tiab] OR thermoregulation[tiab]) AND ""randomized controlled trial""[pt]",,,

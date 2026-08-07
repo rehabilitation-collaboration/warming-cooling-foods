@@ -1,8 +1,61 @@
 pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 19027746,adzuki bean,exclude,exclude,False,exclude,name-only,
+10147716,agar,exclude,exclude,False,exclude,name-only,name-only
+10421852,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+1172771,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+15145589,agar,exclude,exclude,False,exclude,name-only,name-only
+15529188,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+17879213,agar,exclude,exclude,False,exclude,name-only,name-only
+18060477,agar,exclude,exclude,False,exclude,name-only,name-only
+19149092,agar,exclude,exclude,False,exclude,name-only,name-only
+191634,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+1940010,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+19541,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+19695903,agar,exclude,exclude,False,exclude,name-only,name-only
+19800646,agar,exclude,exclude,False,exclude,name-only,name-only
+19867630,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+21206616,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+21960744,agar,exclude,exclude,False,exclude,name-only,name-only
+22343300,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+223990,agar,exclude,exclude,False,exclude,name-only,name-only
+22909365,agar,exclude,exclude,False,exclude,name-only,name-only
+23872837,agar,include,include,False,include,"Human RCT: agar jelly ingestion; diet-induced thermogenesis (DIT) measured via indirect calorimetry (n=11, crossover)",
+23995486,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+24240080,agar,exclude,exclude,False,exclude,name-only,name-only
+24582218,agar,exclude,exclude,False,exclude,name-only,name-only
+25436947,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+25822422,agar,exclude,exclude,False,exclude,name-only,name-only
+25842542,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+26551056,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+27793832,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+28415519,agar,exclude,exclude,False,exclude,name-only,name-only
+28913868,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+29021723,agar,exclude,exclude,False,exclude,name-only,name-only
+29103486,agar,exclude,exclude,False,exclude,name-only,name-only
+29550013,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+29649508,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+29801654,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+30044542,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+30649673,agar,exclude,exclude,False,exclude,name-only,name-only
+31093520,agar,exclude,exclude,False,exclude,name-only,name-only
+3373515,agar,exclude,exclude,False,exclude,name-only,name-only
+35677314,agar,exclude,exclude,False,exclude,name-only,name-only
+35782140,agar,exclude,exclude,False,exclude,name-only,name-only
+36222693,agar,exclude,exclude,False,exclude,name-only,name-only
+37130151,agar,exclude,exclude,False,exclude,name-only,name-only;invitro
+38852487,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+39489509,agar,exclude,exclude,False,exclude,name-only,name-only
+40199350,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+41805999,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+5538844,agar,exclude,exclude,False,exclude,name-only,name-only
+7692210,agar,exclude,exclude,False,exclude,name-only,name-only
+8102792,agar,exclude,exclude,False,exclude,name-only,name-only
+8656607,agar,exclude,exclude,False,exclude,name-only,name-only;animal
+8796730,agar,exclude,exclude,False,exclude,name-only,name-only;animal
 27458352,almond,exclude,exclude,False,exclude,animal,
 33463488,almond,exclude,exclude,False,exclude,no-thermal,
 34220264,almond,exclude,exclude,False,exclude,animal,
+38999749,amaranth,exclude,exclude,False,exclude,animal,animal
 16081068,apple,exclude,exclude,False,exclude,animal,
 17439460,apple,exclude,exclude,False,exclude,animal,
 24342779,apple,exclude,exclude,False,exclude,animal,
@@ -20,6 +73,7 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 41840158,apple,exclude,exclude,False,exclude,name-only,
 7295379,apple,exclude,exclude,False,exclude,animal,
 9469739,apple,exclude,exclude,False,exclude,animal,
+36999721,asparagus,exclude,exclude,False,exclude,name-only,name-only
 1019753,banana,exclude,exclude,False,exclude,animal,
 27175507,banana,exclude,exclude,False,exclude,name-only,
 32853971,banana,exclude,exclude,False,exclude,name-only,
@@ -173,6 +227,7 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 23179202,bell pepper,include,exclude,True,exclude,"name-only: bell pepper is the non-pungent control arm against chilli, not the exposure of interest (§2 criterion 4)",
 18537696,bitter melon,exclude,exclude,False,exclude,name-only,
 22623391,bitter melon,exclude,exclude,False,exclude,animal,
+30415772,black sesame,exclude,exclude,False,exclude,animal,animal
 12231983,black soybean,exclude,exclude,False,exclude,invitro,
 16379571,black soybean,include,include,False,include,"human study: black soybean micropowder (6 g/day, 6 months) in secondary amenorrhea patients, basal body temperature (BBT) tracked as ovulation indicator vs untreated controls (borderline: BBT change reflects downstream ovulatory/hormonal status rather than a direct food-warming effect)",
 33059446,black soybean,exclude,exclude,False,exclude,animal,
@@ -190,6 +245,12 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 34485365,black tea,exclude,exclude,False,exclude,invitro,
 37764380,black tea,exclude,exclude,False,exclude,name-only,review
 39511670,black tea,exclude,exclude,False,exclude,name-only,
+11247835,bonito,exclude,exclude,False,exclude,animal,animal
+17945318,bonito,include,include,False,include,Human RCT: dried-bonito broth ingestion (31 healthy females); peripheral blood flow measured by laser Doppler,
+38782254,bonito,exclude,exclude,False,exclude,animal,animal
+22569347,broccoli,exclude,exclude,False,exclude,animal,animal
+31891502,broccoli,exclude,exclude,False,exclude,name-only,name-only
+39456373,broccoli,exclude,exclude,False,exclude,agri,agri;invitro
 4025193,brown sugar,exclude,exclude,False,exclude,animal,
 22886852,buckwheat,exclude,exclude,False,exclude,name-only,
 12803607,cabbage,exclude,exclude,False,exclude,species-mismatch,
@@ -236,6 +297,9 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 39230108,cheese,exclude,exclude,False,exclude,animal,
 6633961,cheese,exclude,exclude,False,exclude,animal,
 41138577,cherry,exclude,exclude,False,exclude,animal,
+28455441,chestnut,exclude,exclude,False,exclude,name-only,name-only;animal
+36235834,chestnut,exclude,exclude,False,exclude,name-only,name-only
+37685000,chestnut,exclude,exclude,False,exclude,livestock-heat,livestock-heat
 10653500,chicken,exclude,exclude,False,exclude,animal,
 11104709,chicken,exclude,exclude,False,exclude,animal,
 11128383,chicken,exclude,exclude,False,exclude,animal,
@@ -514,6 +578,7 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 9458922,chicken,exclude,exclude,False,exclude,livestock-heat,
 9657529,chicken,exclude,exclude,False,exclude,animal,
 9801153,chicken,exclude,exclude,False,exclude,animal,
+22285431,chickpea,exclude,exclude,False,exclude,name-only,name-only;animal
 10211048,chili pepper,include,include,False,include,human RCT measuring diet-induced thermogenesis after red pepper ingestion with high-fat/high-carb meals,
 11227803,chili pepper,include,include,False,include,human study measuring energy expenditure and SNS activity after capsaicin-containing meal,constituent
 11676017,chili pepper,include,include,False,include,human study measuring core body temperature and oxygen consumption after oral CH-19 Sweet red pepper,
@@ -716,6 +781,14 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 25193009,cucumber,exclude,exclude,False,exclude,animal,
 36620208,cucumber,exclude,exclude,False,exclude,name-only,
 40853416,cucumber,exclude,exclude,False,exclude,name-only,
+11104709,eel,exclude,exclude,False,exclude,animal,animal
+13303421,eel,exclude,exclude,False,exclude,animal,animal
+17082966,eel,exclude,exclude,False,exclude,animal,animal
+29487152,eel,exclude,exclude,False,exclude,animal,animal
+35445598,eel,exclude,exclude,False,exclude,name-only,name-only
+40408822,eel,exclude,exclude,False,exclude,animal,animal
+41418498,eel,exclude,exclude,False,exclude,animal,animal
+486014,eel,exclude,exclude,False,exclude,animal,animal
 10202104,egg,exclude,exclude,False,exclude,animal,
 10326110,egg,exclude,exclude,False,exclude,name-only,
 10396183,egg,exclude,exclude,False,exclude,animal,
@@ -962,6 +1035,8 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 9406775,egg,exclude,exclude,False,exclude,name-only,
 9639744,egg,exclude,exclude,False,exclude,name-only,
 970475,egg,exclude,exclude,False,exclude,animal,
+34444773,flaxseed oil,include,include,False,include,"Human RCT (crossover, n=23): flaxseed oil test meal vs other fat sources; diet-induced thermogenesis measured via postprandial metabolic rate",
+38039598,flaxseed oil,exclude,exclude,False,exclude,animal,animal
 10024610,garlic,exclude,exclude,False,exclude,animal,
 21918057,garlic,exclude,exclude,False,exclude,animal,
 24679773,garlic,exclude,exclude,False,exclude,name-only,
@@ -1012,6 +1087,7 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 41007640,ginger,exclude,exclude,False,exclude,animal,
 42271377,ginger,exclude,exclude,False,exclude,species-mismatch,species-mismatch;sensu-lato
 42308737,ginger,exclude,exclude,False,exclude,animal,
+35050566,glutinous rice,exclude,exclude,False,exclude,name-only,name-only
 17314686,grape,exclude,exclude,False,exclude,animal,
 20439553,grape,exclude,exclude,False,exclude,no-thermal,
 21439945,grape,exclude,exclude,False,exclude,animal,
@@ -1026,6 +1102,11 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 39771590,grape,exclude,exclude,False,exclude,invitro,
 40706860,grape,exclude,exclude,False,exclude,livestock-heat,
 42341055,grape,exclude,exclude,False,exclude,animal,
+16168968,grapefruit,exclude,exclude,False,exclude,animal,animal
+17175102,grapefruit,exclude,exclude,False,exclude,animal,animal
+17376592,grapefruit,exclude,exclude,False,exclude,animal,animal
+18514405,grapefruit,exclude,exclude,False,exclude,animal,animal
+25002406,grapefruit,exclude,exclude,False,exclude,animal,animal
 10584049,green tea,include,include,False,include,RCT: efficacy of green tea extract rich in catechin polyphenols and caffeine in increasing 24-h energy expenditure and fat oxidation in humans,constituent
 10702779,green tea,include,exclude,True,exclude,"animal: MeSH Animals/Rats (Dulloo 2000); the abstract states no species, so coder 2's uncertain-species hold was right",review
 11516225,green tea,exclude,exclude,False,exclude,name-only,
@@ -1166,6 +1247,8 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 8904764,honey,exclude,exclude,False,exclude,animal,
 9714464,honey,exclude,exclude,False,exclude,animal,
 40179544,horse meat,exclude,exclude,False,exclude,animal,
+2070449,jujube,exclude,exclude,False,exclude,animal,animal
+34685001,jujube,exclude,exclude,False,exclude,invitro,invitro
 25179904,kimchi,exclude,exclude,False,exclude,no-thermal,
 39239457,kimchi,exclude,exclude,False,exclude,invitro,
 27349510,kiwi,exclude,exclude,False,exclude,animal,
@@ -1173,6 +1256,8 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 17368475,kombu,exclude,exclude,False,exclude,name-only,
 26488493,kombu,exclude,exclude,False,exclude,name-only,
 34164130,kombu,exclude,exclude,False,exclude,name-only,
+37535173,konjac,exclude,exclude,False,exclude,animal,animal
+38970495,konjac,exclude,exclude,False,exclude,animal,animal
 1025839,lamb,exclude,exclude,False,exclude,animal,
 10355685,lamb,exclude,exclude,False,exclude,animal,
 10520135,lamb,exclude,exclude,False,exclude,animal,
@@ -1890,6 +1975,7 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 6469751,miso,exclude,exclude,False,exclude,name-only,
 6615699,miso,exclude,exclude,False,exclude,name-only,
 30814418,mugicha,include,include,False,include,human RCT: roasted barley extract ingestion prevents skin temperature decrease in cold conditions,
+12231983,mung bean,exclude,exclude,False,exclude,invitro,invitro
 39553243,natto,exclude,exclude,False,exclude,animal,
 16287251,octopus,exclude,exclude,False,exclude,name-only,
 31352387,octopus,exclude,exclude,False,exclude,name-only,
@@ -1899,6 +1985,10 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 36598579,octopus,exclude,exclude,False,exclude,name-only,
 30168574,onion,exclude,exclude,False,exclude,name-only,
 36790275,onion,exclude,exclude,False,exclude,animal,
+20142827,oolong tea,exclude,include,True,exclude,"name-only: review whose stated objective is obesity/weight-loss, thermogenesis only the proposed mechanism (§3)",name-only;review
+33260552,oolong tea,include,include,False,include,"Human RCT (crossover, n=12 males): subacute oolong tea ingestion; energy expenditure and fat oxidation measured via 24-h indirect calorimetry",
+35179170,oolong tea,exclude,exclude,False,exclude,animal,animal
+37744823,oolong tea,exclude,exclude,False,exclude,animal,animal
 10331848,orange,exclude,exclude,False,exclude,name-only,
 11556962,orange,exclude,exclude,False,exclude,not-ingestion,
 15895207,orange,exclude,exclude,False,exclude,animal,
@@ -1959,6 +2049,11 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 33810107,oyster,exclude,exclude,False,exclude,animal,
 39219677,oyster,exclude,exclude,False,exclude,animal,
 40023310,oyster,exclude,exclude,False,exclude,animal,
+26863235,pasta,include,include,False,include,Human pilot study (n=8): whole-grain vs refined-grain pasta meals; meal-induced thermogenesis and postprandial energy expenditure measured,
+30098403,pasta,include,include,False,include,Human RCT: cod/veal+wholegrain-pasta test meals; diet-induced thermogenesis measured; pasta's effect confounded with protein source (mixed intervention),confounded
+30744149,pasta,include,include,False,include,Human RCT: salmon+wholegrain-pasta test meal vs salmon+potato; diet-induced thermogenesis measured; pasta's effect confounded with protein source (mixed intervention),confounded
+31291451,pasta,exclude,exclude,False,exclude,no-thermal,no-thermal
+34273874,pasta,exclude,exclude,False,exclude,name-only,name-only
 19317164,peach,exclude,exclude,False,exclude,no-thermal,
 28586170,peach,exclude,exclude,False,exclude,animal,
 34887884,peach,exclude,exclude,False,exclude,name-only,
@@ -2029,7 +2124,10 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 42186269,pepper,include,exclude,True,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),review;constituent
 5498502,pepper,exclude,exclude,False,exclude,animal,
 9487017,pepper,exclude,exclude,False,exclude,name-only,
+33463488,perilla,exclude,exclude,False,exclude,name-only,name-only;no-thermal
+38893341,perilla,exclude,exclude,False,exclude,invitro,invitro
 12619669,persimmon,include,include,False,include,human trial: kaki ingestion lowers peripheral (foot/wrist) body temperature vs water/cookie control,
+35925894,pine nut,exclude,exclude,False,exclude,name-only,name-only;agri
 12265792,pineapple,exclude,exclude,False,exclude,name-only,
 25313936,pineapple,exclude,exclude,False,exclude,animal,
 16282623,pork,exclude,exclude,False,exclude,name-only,
@@ -2093,6 +2191,7 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 30336572,red wine,exclude,exclude,False,exclude,name-only,
 37110530,red wine,exclude,exclude,False,exclude,name-only,
 39598748,red wine,exclude,exclude,False,exclude,name-only,
+38476667,rice cake,exclude,exclude,False,exclude,name-only,name-only
 1998174,sake,exclude,exclude,False,exclude,name-only,
 21840131,sake,exclude,exclude,False,exclude,name-only,
 24211433,sake,exclude,exclude,False,exclude,name-only,
@@ -2397,6 +2496,11 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 30415772,sesame,exclude,exclude,False,exclude,animal,
 34652500,sesame,exclude,exclude,False,exclude,animal,
 8486914,sesame,exclude,exclude,False,exclude,animal,
+1126312,sesame oil,exclude,exclude,False,exclude,animal,animal
+19758570,sesame oil,exclude,exclude,False,exclude,animal,animal
+26830545,sesame oil,exclude,exclude,False,exclude,animal,animal
+34652500,sesame oil,exclude,exclude,False,exclude,animal,animal
+8486914,sesame oil,exclude,exclude,False,exclude,animal,animal
 10396183,shrimp,exclude,exclude,False,exclude,animal,
 15619571,shrimp,exclude,exclude,False,exclude,animal,
 30796582,shrimp,exclude,exclude,False,exclude,animal,
@@ -2475,6 +2579,14 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 1745900,spinach,exclude,exclude,True,exclude,"name-only: iron deficiency review, no thermal outcome indexed",
 22083897,spinach,exclude,exclude,False,exclude,animal,
 36626122,spinach,exclude,exclude,False,exclude,name-only,
+21373198,squid,exclude,exclude,False,exclude,name-only,name-only;animal
+30133086,squid,exclude,exclude,False,exclude,name-only,name-only
+30796915,squid,exclude,exclude,False,exclude,animal,animal
+31036806,squid,exclude,exclude,False,exclude,name-only,name-only
+32264399,squid,exclude,exclude,False,exclude,name-only,name-only
+34703062,squid,exclude,exclude,False,exclude,name-only,name-only;animal
+38124793,squid,exclude,exclude,False,exclude,name-only,name-only
+23607016,strawberry,exclude,exclude,False,exclude,name-only,name-only
 40431382,sweet potato,exclude,exclude,False,exclude,animal,
 30133249,tofu,exclude,exclude,False,exclude,name-only,
 31825421,tofu,exclude,exclude,False,exclude,animal,
@@ -2512,6 +2624,7 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 9310366,tuna,exclude,exclude,False,exclude,invitro,
 9317282,tuna,exclude,exclude,False,exclude,animal,
 9317376,tuna,exclude,exclude,False,exclude,animal,
+28309838,turnip,exclude,exclude,False,exclude,name-only,name-only;animal
 10720985,vinegar,exclude,exclude,False,exclude,name-only,
 15930480,vinegar,exclude,exclude,False,exclude,name-only,
 29399720,vinegar,exclude,exclude,False,exclude,livestock-heat,
@@ -2574,6 +2687,7 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 7502542,wheat,exclude,exclude,False,exclude,animal,
 8525647,wheat,exclude,exclude,False,exclude,animal,
 9511005,wheat,exclude,exclude,False,exclude,animal,
+24176228,white bread,exclude,exclude,False,exclude,name-only,name-only
 15447894,white rice,exclude,exclude,False,exclude,no-thermal,
 10451566,white sugar,exclude,exclude,False,exclude,invitro,
 10490784,white sugar,include,include,False,include,carbohydrate(sucrose)-induced thermogenesis measured before/after weight loss in obese adolescents,
@@ -2771,3 +2885,4 @@ pmid,food_key,coder1,coder2,adjudicated,final_label,reason,sublabels
 9852554,white sugar,exclude,exclude,False,exclude,name-only,
 9925348,white sugar,exclude,exclude,False,exclude,name-only,
 40020808,yam,exclude,exclude,False,exclude,not-ingestion,
+17686017,zucchini,exclude,exclude,False,exclude,name-only,name-only;agri

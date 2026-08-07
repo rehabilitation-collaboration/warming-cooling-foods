@@ -51,9 +51,14 @@ USER_AGENT = (
 REQUEST_TIMEOUT = 30  # seconds
 PUBMED_DELAY = 0.34   # keep under NCBI's 3 req/s ceiling (no API key)
 
-# n_sources threshold: core = independent belief established; sensitivity = 2.
+# n_sources thresholds. core = independent belief established (≥3);
+# sensitivity = 2; single = 1. Foods seen by a single source were originally
+# left unqueried, which restricted the belief-breadth range the correlation is
+# computed over (peer review #7). They are now queried too, so the analysis can
+# span every queryable food; ``scope`` keeps the tiers separable.
 CORE_MIN_SOURCES = 3
 SCOPE_MIN_SOURCES = 2
+SINGLE_MIN_SOURCES = 1
 
 
 def _get_json(url: str, params: dict) -> dict:
@@ -142,13 +147,30 @@ def representative_food_ja(claims: pd.DataFrame) -> dict[str, str]:
     return out
 
 
-def target_foods(claims: pd.DataFrame, sources: pd.DataFrame) -> pd.DataFrame:
-    """Foods to query for Axis B: all with n_sources ≥ 2 (core + sensitivity)."""
+def _scope_of(n_sources: int) -> str:
+    """Belief-breadth tier for a food: core (≥3) / sensitivity (2) / single (1)."""
+    if n_sources >= CORE_MIN_SOURCES:
+        return "core"
+    if n_sources >= SCOPE_MIN_SOURCES:
+        return "sensitivity"
+    return "single"
+
+
+def target_foods(
+    claims: pd.DataFrame,
+    sources: pd.DataFrame,
+    *,
+    min_sources: int = SINGLE_MIN_SOURCES,
+) -> pd.DataFrame:
+    """Foods to query for Axis B, tagged with their belief-breadth scope.
+
+    Defaults to every food with at least one source, so Axis B spans the whole
+    coded universe; pass ``min_sources=SCOPE_MIN_SOURCES`` to reproduce the
+    original core+sensitivity selection.
+    """
     a2 = aggregate_axis_a(claims, sources, max_tier=2)
-    tgt = a2.loc[a2["n_sources"] >= SCOPE_MIN_SOURCES, ["food_key", "n_sources"]].copy()
-    tgt["scope"] = tgt["n_sources"].apply(
-        lambda n: "core" if n >= CORE_MIN_SOURCES else "sensitivity"
-    )
+    tgt = a2.loc[a2["n_sources"] >= min_sources, ["food_key", "n_sources"]].copy()
+    tgt["scope"] = tgt["n_sources"].apply(_scope_of)
     return tgt.reset_index(drop=True)
 
 

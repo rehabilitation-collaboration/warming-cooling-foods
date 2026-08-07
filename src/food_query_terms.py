@@ -98,6 +98,12 @@ MESH: dict[str, str] = {
 
 # --- Composite labels that cannot be a single-food query ------------------
 # Recorded with reason instead of silently coercing into a misleading query.
+#
+# Two things disqualify a label: it names a *class* whose members are already
+# separate food keys here (querying both would count one study under two foods,
+# and attach it to beliefs Axis A recorded separately), or it names a
+# compositional/processing category rather than a food. The count of sub-keys
+# below is how many members of that class exist in claims.csv.
 EXCLUDE: dict[str, str] = {
     "red meat and fish": (
         "composite source label ('赤身の肉・魚'); not a single food — "
@@ -108,6 +114,28 @@ EXCLUDE: dict[str, str] = {
     ),
     "nuts": "category label (mixed tree nuts); no single unambiguous query term",
     "spices": "category label (mixed spices); no single unambiguous query term",
+    # Surfaced when the Axis B universe was widened to n_sources = 1 (D28):
+    # single-source labels were never queried before, so these were never
+    # screened against the rule above.
+    "seafood": "umbrella label ('魚介'); 15 of its members are separate food keys",
+    "shellfish": "umbrella label ('貝類'); 5 of its members are separate food keys",
+    "seaweed": "umbrella label ('海藻'); 7 of its members are separate food keys",
+    "whole grains": "umbrella label ('全粒穀物'); 7 of its members are separate food keys",
+    "yellow-green vegetables": (
+        "umbrella label ('緑黄色野菜'); 5 of its members are separate food keys"
+    ),
+    "vegetable oil": "umbrella label ('植物油'); 3 of its members are separate food keys",
+    "citrus": "umbrella label ('柑橘類'); orange and grapefruit are separate food keys",
+    "chinese tea": "umbrella label ('中国茶'); oolong and pu-erh tea are separate food keys",
+    "mushroom": "category label ('きのこ類', many species); no single unambiguous query term",
+    "mixed grains": "category label ('雑穀', unspecified minor grains)",
+    "mountain vegetables": "category label ('山菜', unspecified wild plants)",
+    "small fish": "category label ('小魚', unspecified whole small fish)",
+    "raw vegetables": "preparation-state category ('生野菜'), not a food",
+    "animal fat": "compositional category ('動物性脂肪'), not a food",
+    "fatty meat": "compositional category ('脂身'), not a food",
+    "chemical seasonings": "category label ('化学調味料'), not a food",
+    "food additives": "category label ('食品添加物'), not a food",
 }
 
 

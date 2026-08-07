@@ -87,12 +87,12 @@ def test_representative_food_ja_breaks_ties_by_sorted_order():
     assert em.representative_food_ja(claims)["x"] == "ア"
 
 
-# --- Target selection: n_sources >= 2, scope split at 3 -------------------
+# --- Target selection: every coded food, scope split at 3 and 2 -----------
 def _mini_frame():
     sources = pd.DataFrame(
         {"source_id": [f"s{i}" for i in range(4)], "tier": [1, 1, 1, 1]}
     )
-    # core3 seen by 3 sources; sens2 by 2; one1 by 1 (excluded).
+    # core3 seen by 3 sources; sens2 by 2; one1 by 1.
     rows = []
     for sid in ("s0", "s1", "s2"):
         rows.append({"food_en": "core3", "food_ja": "コア", "source_id": sid, "direction": "warm"})
@@ -103,12 +103,19 @@ def _mini_frame():
     return claims, sources
 
 
-def test_target_foods_includes_core_and_sensitivity_only():
+def test_target_foods_spans_every_coded_food():
     claims, sources = _mini_frame()
     tgt = em.target_foods(claims, sources)
     scopes = dict(zip(tgt["food_key"], tgt["scope"]))
+    assert scopes == {"core3": "core", "sens2": "sensitivity", "one1": "single"}
+
+
+def test_target_foods_min_sources_reproduces_the_core_sensitivity_cut():
+    claims, sources = _mini_frame()
+    tgt = em.target_foods(claims, sources, min_sources=em.SCOPE_MIN_SOURCES)
+    scopes = dict(zip(tgt["food_key"], tgt["scope"]))
     assert scopes == {"core3": "core", "sens2": "sensitivity"}
-    assert "one1" not in scopes  # n_sources == 1 dropped
+    assert "one1" not in scopes
 
 
 # --- Full collection over stubbed APIs ------------------------------------
@@ -135,8 +142,8 @@ def test_collect_counts_shapes_rows_and_places_aux_counts(monkeypatch, tmp_path)
     df, skipped, aux_missing = em.collect_counts(
         claims, sources, save_raw=True, reuse_cache=False, sleep=lambda s: slept.append(s)
     )
-    # 2 foods × 3 layers.
-    assert len(df) == 6
+    # 3 foods × 3 layers.
+    assert len(df) == 9
     assert skipped == []
     assert aux_missing == []
     l1 = df[df["layer"] == "L1"].iloc[0]
@@ -147,8 +154,8 @@ def test_collect_counts_shapes_rows_and_places_aux_counts(monkeypatch, tmp_path)
     assert l2["n_openalex"] == 500 and l2["n_cinii"] == ""
     assert l3["n_openalex"] == "" and l3["n_cinii"] == ""
     assert l1["n_pubmed"] == 5
-    # PubMed rate-limit sleep called once per layer per food (2×3).
-    assert len(slept) == 6
+    # PubMed rate-limit sleep called once per layer per food (3×3).
+    assert len(slept) == 9
     assert all(s == em.PUBMED_DELAY for s in slept)
 
 
@@ -175,7 +182,7 @@ def test_collect_counts_saves_raw_json(monkeypatch, tmp_path):
     em.collect_counts(claims, sources, save_raw=True, reuse_cache=False, sleep=lambda s: None)
     # Each food: 3 PubMed + 1 OpenAlex + 1 CiNii = 5 files.
     files = list(tmp_path.glob("*.json"))
-    assert len(files) == 2 * 5
+    assert len(files) == 3 * 5
 
 
 def test_openalex_failure_is_tolerated_pubmed_still_written(monkeypatch, tmp_path):
@@ -194,12 +201,12 @@ def test_openalex_failure_is_tolerated_pubmed_still_written(monkeypatch, tmp_pat
     df, skipped, aux_missing = em.collect_counts(
         claims, sources, save_raw=True, reuse_cache=False, sleep=lambda s: None
     )
-    assert len(df) == 6  # PubMed rows all present
+    assert len(df) == 9  # PubMed rows all present
     assert all(df[df["layer"] == "L1"]["n_pubmed"] == 7)
-    # OpenAlex blank, CiNii still filled, both foods flagged.
+    # OpenAlex blank, CiNii still filled, every food flagged.
     assert (df[df["layer"] == "L2"]["n_openalex"] == "").all()
     assert (df[df["layer"] == "L1"]["n_cinii"] == 70).all()
-    assert sorted(aux_missing) == ["openalex:core3", "openalex:sens2"]
+    assert sorted(aux_missing) == ["openalex:core3", "openalex:one1", "openalex:sens2"]
 
 
 def test_reuse_cache_reads_counts_without_calling_apis(monkeypatch, tmp_path):
@@ -207,7 +214,7 @@ def test_reuse_cache_reads_counts_without_calling_apis(monkeypatch, tmp_path):
     claims, sources = _mini_frame()
     monkeypatch.setattr(em, "QUERY_LOG_DIR", tmp_path)
     tmp_path.mkdir(exist_ok=True)
-    for food in ("core3", "sens2"):
+    for food in ("core3", "sens2", "one1"):
         for layer in ("L1", "L2", "L3"):
             em._save_raw("pubmed", food, layer, {"esearchresult": {"count": "9"}})
         em._save_raw("openalex", food, "L2", {"meta": {"count": 900}})
