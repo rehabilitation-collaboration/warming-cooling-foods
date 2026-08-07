@@ -73,6 +73,23 @@ GRADE/PRISMA risk-of-bias; it is construct-validity screening only). A short
 - `mechanism-only` — human-derived but ex vivo / biomarker only, no in vivo
   thermal outcome.
 
+### When the abstract does not state the subject species
+
+Some records name no subject species in the abstract (typically a
+Chinese-medicine or physiology paper whose methods sit only in the full text).
+**Do not infer the species from indirect cues** — acupoint names, clinical
+phrasing, or the journal's scope. Label the record `exclude` with the
+`uncertain-species` reason, which routes it to author adjudication regardless of
+whether the two coders agree (§5); the author settles it against the PubMed
+Humans/Animals MeSH headings, or the full text where the record carries no MeSH.
+
+Added 2026-08-07: ginger/29259648 ("The Effects of ... Dried Ginger Rhizome ...
+on Rectal and Skin Temperatures at Acupuncture Points") was hand-labelled
+`include` on the inference that its acupoint names (Dazhui, Zhongwan) implied
+human subjects. It carries no MeSH, and the PMC full text states 33 rabbits
+(IACUC BUCM-3-2015032502-1002) — so the correct label is `exclude` (`animal`).
+Coder 2 labelled it `animal`; the coder disagreement is what surfaced the error.
+
 ## 3. Boundary rules
 
 - **Isolated constituents** (capsaicin, caffeine, catechins, gingerols, menthol):
@@ -119,7 +136,11 @@ GRADE/PRISMA risk-of-bias; it is construct-validity screening only). A short
 Before any automated coding, the author (using an LLM in the main session,
 reading each title + abstract — disclosed in Methods) hand-labels a golden
 reference set to (a) pin the boundary rules on real records and (b) measure
-coder precision/recall. Foods where the include boundary actually lives are
+coder precision/recall. Where a record's abstract does not state the subject
+species, the gold label is set from the PubMed Humans/Animals MeSH headings, or
+from the full text when the record carries no MeSH — never from inference (§2).
+Every gold `include` was re-verified this way on 2026-08-07, which corrected one
+label (ginger/29259648). Foods where the include boundary actually lives are
 labelled in full; the near-uniform false-positive classes are labelled on a
 stratified sample large enough to estimate coder specificity:
 
@@ -154,14 +175,22 @@ reported in Methods.
   and adjudicated by the author, exactly as Axis A did — the κ denominator is the
   co-coded count, never inflated to the full record count (the GPT #4 lesson).
 - **Disagreements** are adjudicated by the author against title + abstract per
-  §2–§3; the adjudicated label is `final_label`.
+  §2–§3; the adjudicated label is `final_label`. Records either coder marked
+  `uncertain-species` are adjudicated too, **even when the coders agree**, since
+  agreement on an undeterminable species is not evidence about the species.
 - Divergence target: κ ≥ 0.60. If lower, refine §2–§3 definitions and re-code; if
   still low, the author hand-adjudicates every record (PLAN branch condition).
 
 ## 6. Output
 
 - `data/screening.csv` — `pmid, food_key, coder1, coder2, adjudicated,
-  final_label, reason, sublabels`. One row per (food_key, pmid).
+  final_label, reason, sublabels`. One row per (food_key, pmid). `coder1` /
+  `coder2` are the two independent labels; `adjudicated` is `True` on the rows
+  the author settled (divergences, coverage differences, and
+  `uncertain-species` records) and `False` where the coders agreed; `reason`
+  carries the author's adjudication rationale on those rows and the coders'
+  reason elsewhere; `sublabels` is the union of the sub-labels either coder
+  attached (`review`, `constituent`, `supradose`, `confounded`).
 - **L2′** = per food, count of `final_label == include`. Written to
   `pubmed_counts.csv` as an `L2_screened` column on the L2 layer rows.
 - Sensitivity variants recorded but not primary: L2′ excluding `review`, and

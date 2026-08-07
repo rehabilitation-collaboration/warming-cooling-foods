@@ -36,6 +36,10 @@ INCLUDE = "include"
 EXCLUDE = "exclude"
 LABELS = (INCLUDE, EXCLUDE)
 
+# Reason flag a coder writes when the abstract never states the subject species;
+# such rows go to the author even if both coders agree (protocol §2/§5).
+UNCERTAIN_SPECIES = "uncertain-species"
+
 L2_RECORDS_CSV = DATA_DIR / "l2_records.csv"
 SCREENING_CSV = DATA_DIR / "screening.csv"
 GOLDEN_CSV = DATA_DIR / "screening_golden.csv"
@@ -52,7 +56,7 @@ def _norm_label(value) -> str:
 
 
 def _coder_frame(records: list[dict] | pd.DataFrame, coder: str) -> pd.DataFrame:
-    """One coder's labels → columns [pmid, food_key, label_<coder>, reason_<coder>].
+    """One coder's labels → [pmid, food_key, label_/reason_/sublabels_<coder>].
 
     Keyed on (food_key, pmid): the same PMID can be an L2 hit for several foods
     (e.g. a study naming both ginger and chili), and the judgment can differ by
@@ -61,16 +65,25 @@ def _coder_frame(records: list[dict] | pd.DataFrame, coder: str) -> pd.DataFrame
     df = pd.DataFrame(records)
     if df.empty:
         return pd.DataFrame(
-            columns=["food_key", "pmid", f"label_{coder}", f"reason_{coder}"]
+            columns=[
+                "food_key", "pmid",
+                f"label_{coder}", f"reason_{coder}", f"sublabels_{coder}",
+            ]
         )
+
+    def _optional(col: str):
+        """Free-text column, absent for coders that did not supply it."""
+        if col not in df.columns:
+            return ""
+        return df[col].fillna("").astype(str).str.strip()
+
     out = pd.DataFrame(
         {
             "food_key": df["food_key"].astype(str).str.strip(),
             "pmid": df["pmid"].astype(str).str.strip(),
             f"label_{coder}": df["label"].map(_norm_label),
-            f"reason_{coder}": df.get("reason", "").astype(str).str.strip()
-            if "reason" in df.columns
-            else "",
+            f"reason_{coder}": _optional("reason"),
+            f"sublabels_{coder}": _optional("sublabels"),
         }
     )
     # A within-coder duplicate on the identity key is itself worth surfacing.
@@ -94,7 +107,10 @@ def reconcile(coder1, coder2) -> pd.DataFrame:
     df2 = _coder_frame(coder2, "c2")
     key = ["food_key", "pmid"]
     merged = df1.merge(df2, on=key, how="outer")
-    for c in ("label_c1", "label_c2", "reason_c1", "reason_c2"):
+    for c in (
+        "label_c1", "label_c2", "reason_c1", "reason_c2",
+        "sublabels_c1", "sublabels_c2",
+    ):
         if c not in merged.columns:
             merged[c] = ""
         merged[c] = merged[c].fillna("")
@@ -135,38 +151,101 @@ def cohen_kappa(recon: pd.DataFrame) -> dict:
     return {"kappa": float(kappa), "n_both": int(n), "po": float(po), "pe": float(pe)}
 
 
-def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame:
-    """Resolve every record to a ``final_label``.
+def _split_ruling(value) -> tuple[str, str]:
+    """A ruling is ``"include"`` or ``("include", "author's rationale")``."""
+    if isinstance(value, (tuple, list)):
+        label = value[0]
+        reason = value[1] if len(value) > 1 else ""
+    else:
+        label, reason = value, ""
+    return _norm_label(label), str(reason).strip()
 
-    - ``agree`` rows take the shared label.
-    - ``disagree`` / ``only_c1`` / ``only_c2`` rows require an author ruling in
-      ``rulings`` keyed by (food_key, pmid) → include/exclude. A missing ruling
-      for a non-agree row is a hard error (fail-loud: no silent default), so the
-      author cannot forget to settle a divergence.
+
+def _needs_ruling(row) -> bool:
+    """Rows the author must settle: divergences and undeterminable species.
+
+    Agreement on a record whose abstract never states the subject species is not
+    evidence about the species (protocol §2/§5) — ginger/29259648 read as human
+    from its acupoint names but is a 33-rabbit study — so an
+    ``uncertain-species`` flag from either coder goes to the author even when
+    both coders wrote the same label.
+    """
+    if row["status"] != "agree":
+        return True
+    flags = f"{row.get('reason_c1', '')} {row.get('reason_c2', '')}".lower()
+    return UNCERTAIN_SPECIES in flags
+
+
+def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame:
+    """Resolve every record to a ``final_label``, adding an ``adjudicated`` flag.
+
+    - Rows where both coders agree (and neither flagged ``uncertain-species``)
+      take the shared label.
+    - Every other row requires an author ruling in ``rulings`` keyed by
+      (food_key, pmid) → ``"include"`` or ``("include", "why")``. A missing
+      ruling is a hard error (fail-loud: no silent default), so the author
+      cannot forget to settle a divergence.
     """
     rulings = rulings or {}
     finals: list[str] = []
     reasons: list[str] = []
+    settled: list[bool] = []
     for _, r in recon.iterrows():
-        status = r["status"]
         key = (r["food_key"], r["pmid"])
-        if status == "agree":
-            finals.append(r["label_c1"])
-            reasons.append(r["reason_c1"] or r["reason_c2"])
-        else:
+        coder_reason = r["reason_c1"] or r["reason_c2"]
+        if _needs_ruling(r):
             if key not in rulings:
                 raise ValueError(
-                    f"unadjudicated {status} record needs a ruling: {key}"
+                    f"record needs an author ruling ({r['status']}): {key}"
                 )
-            ruling = _norm_label(rulings[key])
-            if ruling not in LABELS:
+            label, why = _split_ruling(rulings[key])
+            if label not in LABELS:
                 raise ValueError(f"invalid ruling for {key}: {rulings[key]!r}")
-            finals.append(ruling)
-            reasons.append(r["reason_c1"] or r["reason_c2"])
+            finals.append(label)
+            reasons.append(why or coder_reason)
+            settled.append(True)
+        else:
+            finals.append(r["label_c1"])
+            reasons.append(coder_reason)
+            settled.append(False)
     out = recon.copy()
     out["final_label"] = finals
     out["reason"] = reasons
+    out["adjudicated"] = settled
     return out
+
+
+def to_screening_csv(adjudicated: pd.DataFrame) -> pd.DataFrame:
+    """Adjudicated frame → the published ``screening.csv`` schema (protocol §6).
+
+    ``pmid, food_key, coder1, coder2, adjudicated, final_label, reason,
+    sublabels`` — one row per (food, pmid), where ``sublabels`` is the union of
+    the sub-labels either coder attached (``review``, ``constituent``,
+    ``supradose``, ``confounded``).
+    """
+
+    def _union(row) -> str:
+        parts: list[str] = []
+        for col in ("sublabels_c1", "sublabels_c2"):
+            for part in str(row.get(col, "") or "").split(";"):
+                part = part.strip()
+                if part and part not in parts:
+                    parts.append(part)
+        return ";".join(parts)
+
+    out = pd.DataFrame(
+        {
+            "pmid": adjudicated["pmid"],
+            "food_key": adjudicated["food_key"],
+            "coder1": adjudicated["label_c1"],
+            "coder2": adjudicated["label_c2"],
+            "adjudicated": adjudicated["adjudicated"],
+            "final_label": adjudicated["final_label"],
+            "reason": adjudicated["reason"],
+            "sublabels": adjudicated.apply(_union, axis=1),
+        }
+    )
+    return out.sort_values(["food_key", "pmid"]).reset_index(drop=True)
 
 
 def l2_screened(adjudicated: pd.DataFrame) -> pd.Series:
@@ -211,18 +290,29 @@ def golden_scores(coder: list[dict] | pd.DataFrame, golden: list[dict] | pd.Data
     }
 
 
-def attach_l2_screened(pubmed_counts: pd.DataFrame, l2s: pd.Series) -> pd.DataFrame:
+def attach_l2_screened(
+    pubmed_counts: pd.DataFrame,
+    l2s: pd.Series,
+    screened_foods=None,
+) -> pd.DataFrame:
     """Add an ``L2_screened`` column to the L2 layer rows of pubmed_counts.
 
-    Non-L2 rows get NaN. L2 rows get their L2′ (0 where a food has no included
-    records). Does not mutate the input.
+    Non-L2 rows get NaN. L2 rows get their L2′ (0 where a screened food has no
+    included records). Does not mutate the input.
+
+    ``screened_foods`` names the foods whose records have actually been coded.
+    Only those get the zero fill; a food outside the set keeps NaN, because
+    *not yet screened* is not the same claim as *zero on-construct studies* —
+    and that distinction is exactly what the headline "N foods with no direct
+    research" rests on. Defaults to None = every L2 food has been screened.
     """
     out = pubmed_counts.copy()
     is_l2 = out["layer"] == "L2"
-    mapped = out["food_key"].map(l2s.to_dict())
-    out["L2_screened"] = mapped.where(is_l2)
-    # L2 foods with zero includes should read 0, not NaN.
-    out.loc[is_l2 & out["L2_screened"].isna(), "L2_screened"] = 0
+    out["L2_screened"] = out["food_key"].map(l2s.to_dict()).where(is_l2)
+    fillable = is_l2 if screened_foods is None else (
+        is_l2 & out["food_key"].isin(set(screened_foods))
+    )
+    out.loc[fillable & out["L2_screened"].isna(), "L2_screened"] = 0
     return out
 
 
@@ -236,9 +326,9 @@ def summarize(recon: pd.DataFrame) -> None:
         f"\nCohen's kappa (on {k['n_both']} co-coded records): "
         f"{k['kappa']:.3f} (observed agreement {k['po']:.3f})"
     )
-    nonagree = recon[recon["status"] != "agree"]
-    if not nonagree.empty:
-        print(f"\n{len(nonagree)} records need adjudication.")
+    needs = recon[recon.apply(_needs_ruling, axis=1)]
+    if not needs.empty:
+        print(f"\n{len(needs)} records need adjudication.")
 
 
 if __name__ == "__main__":  # pragma: no cover - thin CLI

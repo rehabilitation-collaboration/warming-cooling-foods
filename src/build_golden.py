@@ -28,6 +28,14 @@ Boundary rules applied consistently across foods (documented in reasons):
 - name-only: the food/"salt" term is incidental — drug-salt dosage forms,
   "salt-inducible kinase", phase-change materials, urine colour, egg-white
   microbiology at "chicken body temperature", etc.
+- species verification (protocol §4, added 2026-08-07): where the abstract does
+  not state the subject species, the label is set from the PubMed
+  Humans/Animals MeSH headings, or from the full text when the record carries
+  no MeSH. This rule exists because ginger/29259648 was first labelled
+  ``include`` on the inference that its acupoint names implied human subjects;
+  the PMC full text states 33 rabbits (IACUC BUCM-3-2015032502-1002), so it is
+  ``exclude`` (animal). Coder 2 had flagged it as animal — the divergence is
+  what surfaced the error.
 """
 
 from __future__ import annotations
@@ -62,7 +70,7 @@ GINGER = {
     "30477855": ("exclude", "not-ingestion: ginger footbath, healthy subjects skin temp"),
     "30402121": ("include", "human: ginger beverage, palm skin temperature in cold-sensitive women (Z.officinale)"),
     "30168574": ("exclude", "name-only: broad anti-obesity spice mechanism review (cell/animal/human)"),
-    "29259648": ("include", "human: dried ginger rhizome oral, rectal/skin temp at acupuncture points (Z.officinale)"),
+    "29259648": ("exclude", "animal: 33 rabbits, rectal/acupoint skin temp (species stated only in full text, not the abstract)"),
     "29193411": ("exclude", "name-only: ginger anti-obesity/weight systematic review, objective is weight not thermal"),
     "28154330": ("exclude", "name-only: Ephedra analgesic paper, ginger only a TCM comparator"),
     "27831646": ("exclude", "animal: rabbits, HSP model, ginger in decoction"),

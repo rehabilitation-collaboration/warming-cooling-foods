@@ -110,6 +110,62 @@ def test_adjudicate_requires_ruling_for_divergence():
         sc.adjudicate(recon)  # no ruling → fail loud
     adj = sc.adjudicate(recon, rulings={("f", "1"): "exclude"})
     assert adj.iloc[0]["final_label"] == "exclude"
+    assert bool(adj.iloc[0]["adjudicated"]) is True
+
+
+def test_adjudicate_ruling_may_carry_the_authors_reason():
+    recon = sc.reconcile(
+        [{"food_key": "f", "pmid": "1", "label": "include", "reason": "human"}],
+        [{"food_key": "f", "pmid": "1", "label": "exclude", "reason": "animal"}],
+    )
+    adj = sc.adjudicate(recon, rulings={("f", "1"): ("exclude", "33 rabbits per full text")})
+    assert adj.iloc[0]["final_label"] == "exclude"
+    assert adj.iloc[0]["reason"] == "33 rabbits per full text"
+
+
+def test_uncertain_species_needs_a_ruling_even_when_coders_agree():
+    # Agreement on a species the abstract never states is not evidence about
+    # the species (protocol §2/§5) — it must reach the author.
+    agreed = [
+        {"food_key": "f", "pmid": "1", "label": "exclude", "reason": "uncertain-species"},
+        {"food_key": "f", "pmid": "2", "label": "exclude", "reason": "animal"},
+    ]
+    recon = sc.reconcile(agreed, agreed)
+    assert set(recon["status"]) == {"agree"}
+    with pytest.raises(ValueError):
+        sc.adjudicate(recon)
+    adj = sc.adjudicate(recon, rulings={("f", "1"): ("include", "MeSH: Humans")})
+    settled = {r.pmid: (r.final_label, bool(r.adjudicated)) for r in adj.itertuples()}
+    assert settled["1"] == ("include", True)
+    assert settled["2"] == ("exclude", False)  # plain agreement stays untouched
+
+
+# --- published screening.csv schema (protocol §6) -------------------------
+def test_to_screening_csv_matches_protocol_columns_and_merges_sublabels():
+    recon = sc.reconcile(
+        [{"food_key": "g", "pmid": "1", "label": "include", "reason": "human RCT",
+          "sublabels": "constituent"}],
+        [{"food_key": "g", "pmid": "1", "label": "include", "reason": "human",
+          "sublabels": "review;constituent"}],
+    )
+    out = sc.to_screening_csv(sc.adjudicate(recon))
+    assert list(out.columns) == [
+        "pmid", "food_key", "coder1", "coder2",
+        "adjudicated", "final_label", "reason", "sublabels",
+    ]
+    row = out.iloc[0]
+    assert row["coder1"] == "include" and row["coder2"] == "include"
+    assert row["final_label"] == "include"
+    assert row["sublabels"] == "constituent;review"  # union, no duplicates
+
+
+def test_to_screening_csv_leaves_sublabels_empty_when_coders_gave_none():
+    recon = sc.reconcile(
+        [{"food_key": "g", "pmid": "1", "label": "exclude", "reason": "animal"}],
+        [{"food_key": "g", "pmid": "1", "label": "exclude", "reason": "animal"}],
+    )
+    out = sc.to_screening_csv(sc.adjudicate(recon))
+    assert out.iloc[0]["sublabels"] == ""  # not the string "nan"
 
 
 # --- L2' aggregation ------------------------------------------------------
@@ -142,6 +198,24 @@ def test_attach_l2_screened_zero_for_all_excluded():
     assert g["L2_screened"] == 2
     assert c["L2_screened"] == 0          # L2 food, no includes → 0 not NaN
     assert math.isnan(l1["L2_screened"])  # non-L2 row → NaN
+
+
+def test_attach_l2_screened_leaves_unscreened_foods_missing():
+    # Partial screening: an unscreened food must not read 0, which would assert
+    # "no on-construct studies" about records nobody has looked at yet.
+    pc = pd.DataFrame(
+        {
+            "food_key": ["ginger", "chicken", "carrot"],
+            "layer": ["L2", "L2", "L2"],
+            "n_pubmed": [35, 278, 12],
+        }
+    )
+    l2s = pd.Series({"ginger": 2}, name="L2_screened")
+    out = sc.attach_l2_screened(pc, l2s, screened_foods=["ginger", "chicken"])
+    by_food = out.set_index("food_key")["L2_screened"]
+    assert by_food["ginger"] == 2
+    assert by_food["chicken"] == 0          # screened, nothing included
+    assert math.isnan(by_food["carrot"])    # not screened yet → unknown
 
 
 # --- golden precision/recall ---------------------------------------------
