@@ -180,10 +180,20 @@ reported in Methods.
 - Every record is coded **independently by two coders** into
   `{pmid, food_key, label, reason}`. Both coders are LLM agents run under the
   author's direction, and coder 2 is **not** a confirmer of coder 1: the two are
-  drawn from different model families so that they do not share a single
-  model's blind spots, and each agent is given only the protocol and its
-  assigned records — coder 1's labels, the golden set, and the reconciliation
-  code are all withheld.
+  different capability tiers of one vendor's model line, and each agent is given
+  only the protocol and its assigned records — coder 1's labels, the golden set,
+  and the reconciliation code are all withheld.
+- **What this pairing can and cannot support.** Two models from one vendor and
+  one release generation share pretraining data, tokenizer and alignment
+  methodology, so their errors should be expected to correlate. The resulting
+  kappa is a **within-lineage consistency** statistic: it bounds how stably this
+  family applies the protocol. It is *not* an independence-based reliability
+  estimate, it is not comparable to a kappa between human raters, and it is a
+  weaker design than the three-vendor arrangement of Hilkenmeier et al. (2026).
+  Do not describe the pair as "different model families" — that phrase is used
+  in the cited literature to mean different vendors, and by that standard all of
+  Claude is one family. Accuracy evidence comes from the golden set
+  (precision/recall against hand labels), not from coder agreement.
 
   | Batch | Records | Coder 1 | Coder 2 |
   |---|---|---|---|
@@ -193,7 +203,7 @@ reported in Methods.
 
   The model versions differ between batches because the screening ran across
   several working sessions as the available models changed; within every batch
-  the two coders are contemporaneous and cross-family. Kappa is computed over
+  the two coders are contemporaneous. Kappa is computed over
   all 2,887 co-coded records regardless of batch.
 - Codings are reconciled on the `pmid` key. **Cohen's κ is computed on the
   co-coded records** (both coders labelled), categories = {include, exclude}.
