@@ -178,8 +178,23 @@ reported in Methods.
 ## 5. Two independent coders + reconciliation
 
 - Every record is coded **independently by two coders** into
-  `{pmid, food_key, label, reason}`. Coder 2 is an independent LLM agent (model
-  and version disclosed in Methods; **not** a mere confirmer of coder 1).
+  `{pmid, food_key, label, reason}`. Both coders are LLM agents run under the
+  author's direction, and coder 2 is **not** a confirmer of coder 1: the two are
+  drawn from different model families so that they do not share a single
+  model's blind spots, and each agent is given only the protocol and its
+  assigned records — coder 1's labels, the golden set, and the reconciliation
+  code are all withheld.
+
+  | Batch | Records | Coder 1 | Coder 2 |
+  |---|---|---|---|
+  | Golden foods (chicken, ginger, coffee, chili pepper, salt) | 623 | `claude-sonnet-4-6` | `claude-opus-4-7` |
+  | Remaining 76 foods (8 bundles) | 2,149 | `claude-sonnet-5` | `claude-opus-5` |
+  | Universe extension (26 foods) | 115 | `claude-sonnet-5` | `claude-opus-5` |
+
+  The model versions differ between batches because the screening ran across
+  several working sessions as the available models changed; within every batch
+  the two coders are contemporaneous and cross-family. Kappa is computed over
+  all 2,887 co-coded records regardless of batch.
 - Codings are reconciled on the `pmid` key. **Cohen's κ is computed on the
   co-coded records** (both coders labelled), categories = {include, exclude}.
   Coverage differences (a pmid only one coder returned) are reported separately

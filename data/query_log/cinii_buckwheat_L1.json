@@ -1,0 +1,70 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%9D%E3%81%B0&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - そば 1 json",
+  "description": "CiNii Research all - そば 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%9D%E3%81%B0&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:35:30.526+09:00",
+  "opensearch:totalResults": 11637,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1971993809695216897",
+      "@type": "item",
+      "title": "諸国そばの本 : そばの里とうまい店250",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1971993809695216897"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1971993809695216897.json"
+      },
+      "dc:creator": [
+        "そば道楽の会"
+      ],
+      "dc:publisher": "JTB",
+      "dc:type": "Book",
+      "prism:publicationDate": "1999",
+      "description": "JTBキャンブックス, 食 3",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BA44764593"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "4533033776"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BA44764593#entity"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://dl.ndl.go.jp/pid/13986127"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BA44764593#entity"
+        },
+        {
+          "@id": "https://dl.ndl.go.jp/pid/13986127"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%81%E3%83%B3%E3%82%B2%E3%83%B3%E8%8F%9C&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - チンゲン菜 1 json",
+  "description": "CiNii Research all - チンゲン菜 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%81%E3%83%B3%E3%82%B2%E3%83%B3%E8%8F%9C&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:12:57.131+09:00",
+  "opensearch:totalResults": 14,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520573330930547584",
+      "@type": "item",
+      "title": "旬の野菜レシピ チンゲン菜",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520573330930547584"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520573330930547584.json"
+      },
+      "dc:creator": [
+        "池上 正子"
+      ],
+      "dc:publisher": "東京 : 日本共産党中央委員会 ; 1979-",
+      "dc:type": "Article",
+      "prism:publicationName": "女性のひろば",
+      "prism:issn": "03879429",
+      "prism:number": "344",
+      "prism:startingPage": "16",
+      "prism:endingPage": "20",
+      "prism:publicationDate": "2007-10",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "8933466"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/8933466"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I8933466"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40015625466"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/8933466"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I8933466"
+        }
+      ]
+    }
+  ]
+}

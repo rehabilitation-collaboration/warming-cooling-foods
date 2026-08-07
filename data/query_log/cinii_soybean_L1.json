@@ -1,0 +1,50 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%A4%A7%E8%B1%86&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 大豆 1 json",
+  "description": "CiNii Research all - 大豆 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%A4%A7%E8%B1%86&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:36:40.904+09:00",
+  "opensearch:totalResults": 22859,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1571417126342148096",
+      "@type": "item",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1571417126342148096"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1571417126342148096.json"
+      },
+      "dc:creator": [
+        "大豆生田"
+      ],
+      "dc:type": "Article",
+      "prism:publicationName": "カラーフォーラムJAPAN",
+      "prism:startingPage": "99",
+      "prism:endingPage": "102",
+      "prism:publicationDate": "1999",
+      "dc:identifier": [
+        {
+          "@type": "cir:NAID",
+          "@value": "20000342962"
+        }
+      ]
+    }
+  ]
+}

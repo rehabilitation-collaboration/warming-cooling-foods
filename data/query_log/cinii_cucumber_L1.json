@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%8D%E3%82%85%E3%81%86%E3%82%8A&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - きゅうり 1 json",
+  "description": "CiNii Research all - きゅうり 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%8D%E3%82%85%E3%81%86%E3%82%8A&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:32:36.066+09:00",
+  "opensearch:totalResults": 19216,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040000781982707072",
+      "@type": "item",
+      "title": "新たに発生したキュウリうどんこ病菌の発生実態および宿主拡大戦略に関する研究",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040000781982707072"
+      },
+      "dc:creator": [
+        "佐藤 幸生",
+        "高松 進"
+      ],
+      "dc:type": "Project",
+      "description": "2002年、神奈川県で、従来とは異なる菌(Oidium属Reticuloidium亜属菌;OR菌)によるキュウリうどんこ病の新発生が確認された(内田・宋、2003)。一方でOR菌による種々の植物のうどんこ病の新発生が相次いで報告されている。本研究は、1)キュウリ上のOR菌の発生実態調査と、2)キュウリと種々の植物上のOR菌との関係などを明らかにすることを目的に実施した。1発生実態:富山県、東京都および秋田県南部、新潟県で調査した結果、いずれの調査地でもOR菌によるうどんこ病が発生し、従来からのOidium属Fibroidium亜属菌(OF菌)によるうどんこ病に劣らず発生が広がっていることから、OR菌によるうどんこ病は、本邦ではすでに広く発生していることが示唆された。従来からのOF菌によると同程度に激発する例も認められ、防除を要することが明らかになった。発生品種は、湧泉、アンコール10、金星、インパクト、南極2号、京涼み、夏涼み、プロジェクトX、シルフィー、金沢太キュウリと節成千両の11品種に及んでいた。2種々の植物でのOR菌によるうどんこ病の新発生:2004年以降、従来とは異なるOR菌によるうどんこ病の新発生は、ヒマワリ、キクイモ、オミナエシ、ジニア、トレニア、スコパリア、カボチャ、カラスウリなど、4科8種の植物で確認した。3種々の植物上のOR菌の宿主範囲および遺伝子解析:トレニア以外のキュウリ、カボチャを含む9種類の植物(ヒマワリ、キクイモ、オミナエシ、ジニア、スコパリア、パンジー、メランポジュウム)上の菌は、いずれもキュウリに病原性を認めたが、キュウリとカボチャ上の菌は、キュウリ以外には病原性を認めなかった。東京都、新潟県、富山県で採集したキュウリ上のOR菌は、遺伝子解析の結果1つのクラスター属し、OR菌のグループ分け(Takamatsuら、2006)におけるIX群に属した。キク科植物上の菌は、III群に属した。パンジー、オミナエシ、トレニア、クジャクアスター上の菌はキュウリ上の菌と同じIX群に属した。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "18580046"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP18580046"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-18580046/"
+        }
+      ],
+      "dc:subject": [
+        "うどんこ病菌",
+        "キュウリ",
+        "発生実態",
+        "宿主範囲",
+        "遺伝子解析",
+        "新発生うどんこ病"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-18580046/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

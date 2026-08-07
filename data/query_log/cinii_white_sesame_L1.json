@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%99%BD%E3%82%B4%E3%83%9E&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 白ゴマ 1 json",
+  "description": "CiNii Research all - 白ゴマ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%99%BD%E3%82%B4%E3%83%9E&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:15:26.543+09:00",
+  "opensearch:totalResults": 52,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520290882529502848",
+      "@type": "item",
+      "title": "山田美妙の白ゴマ点",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520290882529502848"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520290882529502848.json"
+      },
+      "dc:creator": [
+        "岡崎 晃一"
+      ],
+      "dc:publisher": "鎌倉 : 解釈学会",
+      "dc:type": "Article",
+      "prism:publicationName": "解釈 / 解釈学会 編",
+      "prism:issn": "04496361",
+      "prism:volume": "52",
+      "prism:number": "5・6",
+      "prism:startingPage": "49",
+      "prism:endingPage": "54",
+      "prism:publicationDate": "2006",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "7995753"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/7995753"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I7995753"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40007346339"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/7995753"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I7995753"
+        }
+      ]
+    }
+  ]
+}

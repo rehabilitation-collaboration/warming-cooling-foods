@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%BB%E3%81%86%E3%82%8C%E3%82%93%E8%8D%89&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - ほうれん草 1 json",
+  "description": "CiNii Research all - ほうれん草 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%BB%E3%81%86%E3%82%8C%E3%82%93%E8%8D%89&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:34:54.346+09:00",
+  "opensearch:totalResults": 532,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040282256592451072",
+      "@type": "item",
+      "title": "野菜中のマグネシウムの利用性とそれにおよぼす因子に関する研究",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040282256592451072"
+      },
+      "dc:creator": [
+        "高橋 正侑",
+        "石井 浩子",
+        "菊永 茂司",
+        "今田 節子"
+      ],
+      "dc:type": "Project",
+      "description": "第3分担課題「Mgの利用性に関する因子の検索」\n実験内容1.Mgの吸収性とセルロース、ペクチン、シュウ酸レベルとの関連性 ゆで、炒めの操作でほうれん草中のミネラルやシュウ酸の分布状態と食物繊維の質や量に変化を生じるか否かを動物実験に代えて検討した。分析値(mg/g乾物)はRSP(Mg7.9,Ca7.8,Fe0.12,Zn0.18,Ox146,IDF32%,SDF13%,TDF38%,ペクチン119)、BSP(Mg4.3,Ca6.8,Fe0.10,Zn0.10,Ox119,IDF32%,SDF13%,TDF45%,ペクチン112)、FSP(Mg58,Ca4.7,Fe0.09,Zn0.06,Ox36,IDF27%,SDF12%,TDF39%,ペクチン63)であった。ミネラルとOxの分布状態を水溶性画分と不溶性画分に分けると、水溶性の割合(%)はRSP(Mg98,Ca2,Fe59,Zn47,Ox64)、BSP(Mg95,Ca16,Fe65,Zn77,Ox9)、FSP(Mg98,Ca6,Fe63,Zn42,Ox0)であった。水不溶性の割合(%)はRSP(Mg2,Ca98,Fe41,Zn53,Ox36)、BSP(Mg5,Ca84,Fe35,Zn23,Ox91)、FSP(Mg2,Ca98,Fe37,Zn58,Ox100)であった。ゆでるとMg46%,Ca13%、炒めるとMg27%、Ca40%が失われるが、残存するMgの可溶性の割合はいずれも95%以上であった。Caの可溶性の割合はゆで16%、炒め6%、炒めでCaは不溶化する。これらの結果は第2分担課題で得られた結果を裏付けるものであった。\n実験内容2-1.ほうれん草中のMgの吸収性とたん白質レベルとの関連性 たん白質レベル(Pr)を10,20,40%とした。Mgの吸収率(%)は、対照群のPr10で71,Pr20で72,Pr40で77と高たん白質レベルで高くなった。ほうれん草添加群のPr10で59,Pr20で71,Pr40で79と対照群よりもたん白質レベルに応じて著しく増加した。また、Caの吸収率(%)は対照群のPr10で73,Pr20で75,Pr40で69、ほうれん草添加群のPr10で58,Pr20で61,Pr40で31といずれの群で高たん白質レベルで低下したが、それの影響はほうれん草添加群で著しかった。以上の結果は骨中のCaとMg含量に反映した。\n実験内容2-2.ほうれん草中のMgの吸収性とCa,Pレベルとの関連性 飼料中のMg含量をすべての実験群で16.6m mol/kgとした。CaとPレベル(m mol/kg)は、標準Ca(MCa)103,高Ca(HCa)180,標準P(MP)112,高P(HP)165とし,MCaMP,MCaHP,HCaMP,HCaHPの4区とした。Mgの吸収率(%)は、対照群のMCaMP76,MCaHP66,HCaMP61,HCaHP51、ほうれん草添加群のMCaMP78,MCaHP72,HCaMP64,HCaHP61といずれの群でも高Caと高Pレベルで低下したが、その影響はほうれん草添加群で少なかった。また、Caの吸収率(%)は対照群のMCaMP77,MCaHP74,HCaMP54,HCaHP58、ほうれん草添加群のMCaMP71,MCaHP72,HCaMP39,HCaHP35といずれの群でも高Caレベルで低下したが、その影響はほうれん草添加群で著しかった。以上の結果は骨中のCa,Mg含量に影響を与えなかった。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "05680041"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP05680041"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-05680041/"
+        }
+      ],
+      "dc:subject": [
+        "ほうれん草",
+        "ミネラルの調理による損失",
+        "MgとCaのシュウ酸による不溶化",
+        "Mg欠乏ラット",
+        "ほうれん草中のMgとCaの吸収率",
+        "MgとCaの吸収率とシュウ酸",
+        "ほうれん草中のMgの吸収とCa,Pレベル",
+        "ほうれん草中のMgの吸収とたん白質レベル"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-05680041/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

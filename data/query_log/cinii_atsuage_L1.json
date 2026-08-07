@@ -1,0 +1,74 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%8E%9A%E6%8F%9A%E3%81%92&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 厚揚げ 1 json",
+  "description": "CiNii Research all - 厚揚げ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%8E%9A%E6%8F%9A%E3%81%92&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:37:06.99+09:00",
+  "opensearch:totalResults": 37,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520572358685893632",
+      "@type": "item",
+      "title": "11月 使いきりレシピ 厚揚げ",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520572358685893632"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520572358685893632.json"
+      },
+      "dc:creator": [
+        "重信 初江"
+      ],
+      "dc:publisher": "東京 : 女子栄養大学出版部",
+      "dc:type": "Article",
+      "prism:publicationName": "栄養と料理",
+      "prism:volume": "73",
+      "prism:number": "11",
+      "prism:startingPage": "201",
+      "prism:endingPage": "206",
+      "prism:publicationDate": "2007-11",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "026102881"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/026102881"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I026102881"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40020360783"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/026102881"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I026102881"
+        }
+      ]
+    }
+  ]
+}

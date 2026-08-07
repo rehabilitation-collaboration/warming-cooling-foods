@@ -1,0 +1,48 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E6%97%A5%E6%9C%AC%E9%85%92&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 日本酒 1 json",
+  "description": "CiNii Research all - 日本酒 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E6%97%A5%E6%9C%AC%E9%85%92&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:34:47.656+09:00",
+  "opensearch:totalResults": 4109,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1573668925308627200",
+      "@type": "item",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1573668925308627200"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1573668925308627200.json"
+      },
+      "dc:creator": [
+        "日本酒造組合中央会"
+      ],
+      "dc:type": "Article",
+      "prism:publicationName": "日本酒と料理の相性研究",
+      "prism:publicationDate": "1990",
+      "dc:identifier": [
+        {
+          "@type": "cir:NAID",
+          "@value": "10020245280"
+        }
+      ]
+    }
+  ]
+}

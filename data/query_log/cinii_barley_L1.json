@@ -1,0 +1,84 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%A4%A7%E9%BA%A6&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 大麦 1 json",
+  "description": "CiNii Research all - 大麦 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%A4%A7%E9%BA%A6&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:36:44.429+09:00",
+  "opensearch:totalResults": 4333,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520573330126472704",
+      "@type": "item",
+      "title": "もち性大麦粉の製パン特性",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520573330126472704"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520573330126472704.json"
+      },
+      "dc:creator": [
+        "嶋田 幸治"
+      ],
+      "dc:publisher": "国分寺 : エヌエフアイ",
+      "dc:type": "Article",
+      "prism:publicationName": "New food industry = ニューフードインダストリー",
+      "prism:issn": "05470277",
+      "prism:volume": "56",
+      "prism:number": "10",
+      "prism:startingPage": "33",
+      "prism:endingPage": "37",
+      "prism:publicationDate": "2014-10",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "025812503"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/025812503"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I025812503"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40020211358"
+        }
+      ],
+      "dc:subject": [
+        "大麦",
+        "大麦粉",
+        "もち性大麦粉",
+        "アメリカ産大麦",
+        "製パン",
+        "食物繊維",
+        "β-グルカン"
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/025812503"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I025812503"
+        }
+      ]
+    }
+  ]
+}

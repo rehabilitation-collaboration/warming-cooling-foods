@@ -116,6 +116,39 @@ carries the public provenance.
 
 ## 8. Inter-coder reliability (reproducibility)
 
+### Who the coders are
+
+Both coders are large language models running under the author's direction, not
+human raters. Recorded here because an agreement statistic means nothing without
+knowing what produced it:
+
+| Pass | Sources | Coder 1 | Coder 2 |
+|---|---|---|---|
+| Round 1 | 6 Tier-1 (yomeishu, esse, macaroni, oitr, kawashimaya, basefood) | `claude-opus-4-8`, reading the stored source text in the author's working session | `claude-sonnet-4-6`, separate agents |
+| Round 2 | 9 (prezo, jsfca, kracie + 6 Tier-2) | `claude-sonnet-4-6`, separate agents | `claude-sonnet-4-6`, separate agents |
+
+Each coder-2 agent received only the protocol and the stored source text, with
+coder 1's output withheld, and wrote its coding straight to its own file. The
+author fixed the protocol, adjudicated every disagreement and coverage
+difference, and verified the result against the source text.
+
+Adjudication proposals for the round-2 coverage differences were themselves
+produced by `claude-sonnet-4-6` agents and reviewed by the author against the
+stored text; that review overturned three of them (the `jsfca` トマト/スイカ/きゅうり
+rows, §3).
+
+**This bounds what the kappa below can mean.** In round 2 both coders are
+independent instances of the *same* model, so their agreement measures the
+stability of one model's reading, not the convergence of two independent
+judgments. It is an upper-bound-leaning reliability estimate and is not
+comparable to a kappa between human raters. The load-bearing reproducibility
+evidence for Axis A is not the kappa but `verify_claims.py`: every retained row
+is checked to occur verbatim in the stored source text, and every row carries
+its source, quotation and access date, so a reader can re-derive the coding
+from the published frame.
+
+### Procedure
+
 Each source is coded **independently by two coders** into the same schema. The
 two codings are reconciled on the (source, food, condition) key by
 `src/reconcile_coders.py`, which reports agreements, direction disagreements,
@@ -145,8 +178,9 @@ first-round dataset: 268 rows, all grounded, both coders in full agreement.
 
 **Second round (remaining 9 sources prezo/jsfca/kracie and Tier-2
 attaka_navi/onkatsu_note/karada_onkatsu/hiesyo_com/macrobiotic_rashinban/gveggie,
-2026-08-04):** Coder 1 (author, 236 records) and coder 2 (independent, 377
-records) coded the nine sources into the shared schema. Reconciliation on the
+2026-08-04):** Coder 1 (236 records) and coder 2 (377 records) coded the nine
+sources into the shared schema, both as independent `claude-sonnet-4-6` agents
+blinded to each other's output (see "Who the coders are" above). Reconciliation on the
 (source, food, condition) key gave Cohen's kappa = 1.000 on the 214 co-coded
 items (0 direction disagreements); grounding passed for every record of both
 coders. The 185 coverage differences (22 coder-1-only, 163 coder-2-only —

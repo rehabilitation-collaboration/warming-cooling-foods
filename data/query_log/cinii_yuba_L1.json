@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%86%E3%81%B0&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - ゆば 1 json",
+  "description": "CiNii Research all - ゆば 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%86%E3%81%B0&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:15:41.179+09:00",
+  "opensearch:totalResults": 16440,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1970023484809460397",
+      "@type": "item",
+      "title": "キューバニュース",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1970023484809460397"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1970023484809460397.json"
+      },
+      "dc:creator": [
+        "キューバ大使館(在日本)"
+      ],
+      "dc:publisher": "キューバ大使館",
+      "dc:type": "Book",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "AA12237975"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/AA12237975#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/AA12237975#entity"
+        }
+      ]
+    }
+  ]
+}

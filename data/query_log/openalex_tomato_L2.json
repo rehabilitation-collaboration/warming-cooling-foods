@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "count": 5125,
+    "db_response_time_ms": 91,
+    "page": 1,
+    "per_page": 1,
+    "groups_count": null,
+    "x_query": {
+      "oql": "works where full text has (\n    tomato\n    and (\n      stemmed \"body temperature\"\n      or stemmed \"peripheral circulation\"\n      or thermogenesis\n      or thermoregulation\n    )\n  )",
+      "oqo": {
+        "get_rows": "works",
+        "filter_rows": [
+          {
+            "column_id": "fulltext.search",
+            "value": "tomato",
+            "operator": "has"
+          },
+          {
+            "join": "or",
+            "filters": [
+              {
+                "column_id": "fulltext.search",
+                "value": "\"body temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"peripheral circulation\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "thermogenesis",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "thermoregulation",
+                "operator": "has"
+              }
+            ]
+          }
+        ]
+      },
+      "url": "/works?filter=fulltext.search:tomato,fulltext.search:%22body temperature%22|%22peripheral circulation%22|thermogenesis|thermoregulation&per_page=1"
+    },
+    "cost_usd": 0.001
+  },
+  "results": [
+    {
+      "id": "https://openalex.org/W2611486163"
+    }
+  ],
+  "group_by": []
+}

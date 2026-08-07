@@ -1,0 +1,69 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%AB%E3%82%A4%E3%83%9C%E3%82%B9%E3%83%86%E3%82%A3%E3%83%BC&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - ルイボスティー 1 json",
+  "description": "CiNii Research all - ルイボスティー 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%AB%E3%82%A4%E3%83%9C%E3%82%B9%E3%83%86%E3%82%A3%E3%83%BC&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:14:48.086+09:00",
+  "opensearch:totalResults": 33,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1970023484939443351",
+      "@type": "item",
+      "title": "ルイボスティーでアトピーを治す",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1970023484939443351"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1970023484939443351.json"
+      },
+      "dc:creator": [
+        "ルイボスティーとアトピー研究会"
+      ],
+      "dc:publisher": "アニマ2001",
+      "dc:type": "Book",
+      "prism:publicationDate": "1995",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BN14576111"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "4795234922"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BN14576111#entity"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://dl.ndl.go.jp/pid/13619891"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BN14576111#entity"
+        },
+        {
+          "@id": "https://dl.ndl.go.jp/pid/13619891"
+        }
+      ]
+    }
+  ]
+}

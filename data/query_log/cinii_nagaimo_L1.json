@@ -1,0 +1,71 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E9%95%B7%E3%81%84%E3%82%82&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 長いも 1 json",
+  "description": "CiNii Research all - 長いも 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E9%95%B7%E3%81%84%E3%82%82&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:15:48.703+09:00",
+  "opensearch:totalResults": 751,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1522543656098489600",
+      "@type": "item",
+      "title": "長月・夜長に吟ず : 題詠<長いもの>",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1522543656098489600"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1522543656098489600.json"
+      },
+      "dc:publisher": "東京 : 本阿弥書店",
+      "dc:type": "Article",
+      "prism:publicationName": "俳壇 / 本阿弥書店 [編]",
+      "prism:volume": "38",
+      "prism:number": "10",
+      "prism:startingPage": "69",
+      "prism:endingPage": "85",
+      "prism:publicationDate": "2021-09",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "031652225"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/031652225"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I031652225"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40022669560"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/031652225"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I031652225"
+        }
+      ]
+    }
+  ]
+}

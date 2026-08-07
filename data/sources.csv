@@ -1,16 +1,16 @@
 source_id,name,operator,operator_type,tier,url,robots_ok,accessed,notes
-yomeishu,養命酒製造 健康コラム,養命酒製造株式会社,corporate,1,https://www.yomeishu.co.jp/health/4264/,yes,,warm/cool ~40 items; explicit warm-vs-cool split
-esse,ESSEonline,扶桑社,publisher,1,https://esse-online.jp/articles/-/27271,yes,,category-based warm 30+/cool 30+
-macaroni,macaroni,株式会社トラストリッジ,media_corp,1,https://macaro-ni.jp/82842,yes,,cooking media; warm 15+/cool 15+
-oitr,いつでもオイテル,IBGメディア株式会社,media_corp,1,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,yes,,warming foods 20+
-kawashimaya,かわしま屋 Food for Well-being,株式会社かわしま屋,corporate,1,https://kawashima-ya.jp/contents/?p=123030,yes,,organic-food EC owned media; warm 20+/cool 10+
-basefood,BASE FOOD HEALTH MAGAZINE,ベースフード株式会社,corporate,1,https://basefood.co.jp/magazine/column/46436/,yes,,food maker owned media; warm 25+/cool 10+
-prezo,PREZO,株式会社アクセスジャパン,media_corp,1,https://prezo.jp/column/6371,yes,,gourmet media; warm 20+/cool 10+
-jsfca,JSFCA 日本安全食料料理協会,JSFCA,association,1,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,yes,,macrobiotic yin/yang 10+/10+
-kracie,クラシエ Kampoful Life,クラシエ株式会社,corporate,1,https://www.kracie.co.jp/kampo/kampofullife/body/?p=16093,unknown,,coffee=cool confirmed here; robots.txt 404
-attaka_navi,あったかナビ,個人 (arita_danbo),individual,2,https://danbo-hikaku.com/warm-food-guide/,yes,,personal blog; warm 20+/cool 15+
-onkatsu_note,温活ノート,個人 (nukumori-mama),individual,2,https://onkatsu-note.com/cold-remedy-foods/,yes,,personal blog; warm 15+/cool 10+
-karada_onkatsu,からだ温活日和,個人 (元サロンオーナー),individual,2,https://karada-onkatsu.com/onkatsu-food,unknown,,personal blog; robots.txt not retrievable
-hiesyo_com,冷え症.com,個人,individual,2,https://hiesyokaizen.com/%e4%bd%93%e3%82%92%e5%86%b7%e3%82%84%e3%81%99%e9%a3%9f%e3%81%b9%e7%89%a9-%e6%b8%a9%e3%82%81%e3%82%8b%e9%a3%9f%e3%81%b9%e7%89%a9-%ef%bd%9e%e3%83%9e%e3%82%af%e3%83%ad%e3%83%93%e3%82%aa%e3%83%86%e3%82%a3%e3%83%83%e3%82%af/,yes,,macrobiotic yin/yang list (URL corrected 2026-08-03 D9; former landing-page URL had no per-food list)
-macrobiotic_rashinban,マクロビオティック羅針盤,遠藤氏 (個人・専門家),individual,2,https://www.m-biotics.com/macrobiotic-q/riron/2-2shokumotu.html,yes,,yin/yang 15+/15+
-gveggie,G-veggie,はりまや佳子 (個人・料理研究家),individual,2,https://www.g-veggie.com/post/i-1-c,yes,,seasonal yin/yang 10+/10+
+yomeishu,養命酒製造 健康コラム,養命酒製造株式会社,corporate,1,https://www.yomeishu.co.jp/health/4264/,yes,2026-08-03,warm/cool ~40 items; explicit warm-vs-cool split
+esse,ESSEonline,扶桑社,publisher,1,https://esse-online.jp/articles/-/27271,yes,2026-08-03,category-based warm 30+/cool 30+
+macaroni,macaroni,株式会社トラストリッジ,media_corp,1,https://macaro-ni.jp/82842,yes,2026-08-03,cooking media; warm 15+/cool 15+
+oitr,いつでもオイテル,IBGメディア株式会社,media_corp,1,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,yes,2026-08-03,warming foods 20+
+kawashimaya,かわしま屋 Food for Well-being,株式会社かわしま屋,corporate,1,https://kawashima-ya.jp/contents/?p=123030,yes,2026-08-03,organic-food EC owned media; warm 20+/cool 10+
+basefood,BASE FOOD HEALTH MAGAZINE,ベースフード株式会社,corporate,1,https://basefood.co.jp/magazine/column/46436/,yes,2026-08-03,food maker owned media; warm 25+/cool 10+
+prezo,PREZO,株式会社アクセスジャパン,media_corp,1,https://prezo.jp/column/6371,yes,2026-08-03,gourmet media; warm 20+/cool 10+
+jsfca,JSFCA 日本安全食料料理協会,JSFCA,association,1,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,yes,2026-08-03,macrobiotic yin/yang 10+/10+
+kracie,クラシエ Kampoful Life,クラシエ株式会社,corporate,1,https://www.kracie.co.jp/kampo/kampofullife/body/?p=16093,unknown,2026-08-03,coffee=cool confirmed here; robots.txt 404
+attaka_navi,あったかナビ,個人 (arita_danbo),individual,2,https://danbo-hikaku.com/warm-food-guide/,yes,2026-08-03,personal blog; warm 20+/cool 15+
+onkatsu_note,温活ノート,個人 (nukumori-mama),individual,2,https://onkatsu-note.com/cold-remedy-foods/,yes,2026-08-03,personal blog; warm 15+/cool 10+
+karada_onkatsu,からだ温活日和,個人 (元サロンオーナー),individual,2,https://karada-onkatsu.com/onkatsu-food,unknown,2026-08-03,personal blog; robots.txt not retrievable
+hiesyo_com,冷え症.com,個人,individual,2,https://hiesyokaizen.com/%e4%bd%93%e3%82%92%e5%86%b7%e3%82%84%e3%81%99%e9%a3%9f%e3%81%b9%e7%89%a9-%e6%b8%a9%e3%82%81%e3%82%8b%e9%a3%9f%e3%81%b9%e7%89%a9-%ef%bd%9e%e3%83%9e%e3%82%af%e3%83%ad%e3%83%93%e3%82%aa%e3%83%86%e3%82%a3%e3%83%83%e3%82%af/,yes,2026-08-04,macrobiotic yin/yang list (URL corrected 2026-08-03 D9; former landing-page URL had no per-food list)
+macrobiotic_rashinban,マクロビオティック羅針盤,遠藤氏 (個人・専門家),individual,2,https://www.m-biotics.com/macrobiotic-q/riron/2-2shokumotu.html,yes,2026-08-03,yin/yang 15+/15+
+gveggie,G-veggie,はりまや佳子 (個人・料理研究家),individual,2,https://www.g-veggie.com/post/i-1-c,yes,2026-08-03,seasonal yin/yang 10+/10+

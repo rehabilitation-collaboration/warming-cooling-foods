@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%8B%E3%81%B6&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - かぶ 1 json",
+  "description": "CiNii Research all - かぶ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%8B%E3%81%B6&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:15:16.547+09:00",
+  "opensearch:totalResults": 279999,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040282256706145920",
+      "@type": "item",
+      "title": "わが国に生息するカブリダニ類の発生生態と天敵資材としての有効利用に関する研究",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040282256706145920"
+      },
+      "dc:creator": [
+        "天野 洋",
+        "高藤 晃雄"
+      ],
+      "dc:type": "Project",
+      "description": "3年間で実施された本課題の成果は、わが国の土着方カブリダニ相の発生実態が明確になったことである。従来の知見が少ない地域を取り上げ、まず平成11年度は北海道東部と鹿児島を中心に、平成12年度は東北地方、紀伊半島、石垣島を、最終年度の13年度には信越地方と中四国を中心に採集調査が行われた。また、これと平行して静岡県の茶園を平成12-13年度にかけて、栽培形態とカブリダニ相の関係から調査した。\nこれらの調査結果は以下の通りに要約された(数値は全て雌成虫数)。\n1.北海道東部からは5種62頭のカブリダニが採集され、ケナガカブリダニが最多であった。\n2.鹿児島県(主としてチャ園と周縁)では6種53頭が採集され、ケナガカブリダニやオキナワカブリダニが多く採集された。\n3.精力的な調査が実施された東北地方からは6県から18種903頭が採集され、ケナガカブリダニ、フツウカブリダニ、キタカブリダニ、ケブトカブリダニ、トウヨウカブリダニなどが多く採取された。寄主植物としては、クズとヤマグワからそれぞれ13種、11種のカブリダニが採集された。\n4.紀伊半島からは7種52頭が、石垣島(竹富島を含む)では16種111頭(雄も含む)が採取され、後者には新種と日本発記録種が含まれた。\n5,静岡県のチャ園の調査からは6種347頭が採集された。優占種の構成には、各園の栽培及び害虫管理方式が影響し、慣行防除園ではケナガカブリダニが、無農薬園ではニセラーゴカブリダニが増えた。\n6.信越地方と周辺地域では21種978頭が採集され、イチレツカブリダニが最も多かったが、これは本種の特異的寄主であるホオノキからの採集例が多いためであった。\n7.中四国からは21種857頭が34種の寄主植物から採集され、ケブトカブリダニ、ケナガカブリダニ、コウズケカブリダニ、ニセラーゴカブリダニが個体数の上位を占めた。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "11660043"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP11660043"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-11660043/"
+        }
+      ],
+      "dc:subject": [
+        "カブリダニ",
+        "天敵",
+        "ハダニ",
+        "発生生態",
+        "天敵資材",
+        "地理的分布"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-11660043/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

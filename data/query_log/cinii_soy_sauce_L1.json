@@ -1,0 +1,64 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E9%86%A4%E6%B2%B9&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 醤油 1 json",
+  "description": "CiNii Research all - 醤油 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E9%86%A4%E6%B2%B9&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:34:51.168+09:00",
+  "opensearch:totalResults": 11567,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040000782188567680",
+      "@type": "item",
+      "title": "岡山県児島郡における醤油醸造業の展開と京阪神市場",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040000782188567680"
+      },
+      "dc:creator": [
+        "前田 昌義"
+      ],
+      "dc:type": "Project",
+      "description": "醤油醸造業史の研究は、最大産地の千葉県の研究が中心で、他産地の研究は少ない。そこで、私は主産地の一つの岡山県児島郡の醤油醸造業を研究し、近代の醤油醸造業史の全体構造を明らかにしたいと考えた。この数年の私の研究で、岡山県醤油醸造業史の概略、岡山県の醤油醸造家から見た大正中期の京阪神市場での各県醤油の対抗状況についてはある程度明らかにできたと考える。そこで、引き続き児島郡の醤油醸造家の尾崎聖治家文書の収集・分析を進めるとともに、京阪神市場で岡山県醤油のライバルであった小豆島の丸金醤油等の史料を収集・分析することで、京阪神市場での各県醤油の対抗状況をより明らかにしたいと考えた。幸いに今年度所蔵先のご厚意で、丸金醤油・小豆島醤油醸造組合の史料を一部閲覧・収集でき、小豆島の醤油醸造家から見た大正～昭和期の京阪神市場の状況を一部検討することができた。それによる小豆島の醤油醸造家から見た大正～昭和期の京阪神市場の状況は、小豆島醤油と千葉県醤油の対抗、小豆島醤油内での対抗を軸としているように見える。これは小豆島醤油が中心市場とした大阪・神戸において、岡山県醤油の勢力が大正期までに衰えていたことを示している。今後は、尾崎聖治家文書・丸金醤油・小豆島醤油醸造組合等の史料をさらに収集・分析して、京阪神市場での各県醤油の対抗状況をより明らかにし、近代の醤油醸造業史の全体構造をより明らかにしたいと考える。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "23912001"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP23912001"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-23912001/"
+        }
+      ],
+      "dc:subject": [
+        "醤油醸造業史",
+        "岡山県醤油醸造業",
+        "京阪神市場"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-23912001/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

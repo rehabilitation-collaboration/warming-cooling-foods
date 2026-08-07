@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%A1%E3%83%AD%E3%83%B3&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - メロン 1 json",
+  "description": "CiNii Research all - メロン 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%A1%E3%83%AD%E3%83%B3&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:33:53.702+09:00",
+  "opensearch:totalResults": 5258,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1971993809823252524",
+      "@type": "item",
+      "title": "夏の方舟",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1971993809823252524"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1971993809823252524.json"
+      },
+      "dc:creator": [
+        "海猫沢, めろん"
+      ],
+      "dc:publisher": "KADOKAWA",
+      "dc:type": "Book",
+      "prism:publicationDate": "2016",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BB22034980"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "9784041028292"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BB22034980#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BB22034980#entity"
+        }
+      ]
+    }
+  ]
+}

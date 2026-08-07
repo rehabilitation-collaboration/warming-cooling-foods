@@ -1,0 +1,69 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%A2%E3%83%BC%E3%83%A2%E3%83%B3%E3%83%89&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - アーモンド 1 json",
+  "description": "CiNii Research all - アーモンド 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%A2%E3%83%BC%E3%83%A2%E3%83%B3%E3%83%89&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:37:00.677+09:00",
+  "opensearch:totalResults": 1943,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1971149384831373582",
+      "@type": "item",
+      "title": "ANIMAtronic : ああもんど画集",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1971149384831373582"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1971149384831373582.json"
+      },
+      "dc:creator": [
+        "ああもんど"
+      ],
+      "dc:publisher": "玄光社",
+      "dc:type": "Book",
+      "prism:publicationDate": "2024",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BD08102225"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "9784768319178"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BD08102225#entity"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kinoden.kinokuniya.co.jp/user/bookdetail/p/KP00107352"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BD08102225#entity"
+        },
+        {
+          "@id": "https://kinoden.kinokuniya.co.jp/user/bookdetail/p/KP00107352"
+        }
+      ]
+    }
+  ]
+}

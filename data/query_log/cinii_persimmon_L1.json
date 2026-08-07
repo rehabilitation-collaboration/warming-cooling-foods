@@ -1,0 +1,54 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E6%9F%BF&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 柿 1 json",
+  "description": "CiNii Research all - 柿 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E6%9F%BF&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:35:38.898+09:00",
+  "opensearch:totalResults": 51701,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1390009224951834624",
+      "@type": "item",
+      "title": "渋柿 (873)",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1390009224951834624"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1390009224951834624.json"
+      },
+      "dc:creator": [
+        "渋柿社"
+      ],
+      "dc:publisher": "渋柿社",
+      "dc:type": "Article",
+      "prism:startingPage": "-",
+      "prism:publicationDate": "1987-01",
+      "dc:identifier": [
+        {
+          "@type": "cir:DOI",
+          "@value": "10.11501/6071949"
+        },
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "000000010347"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%99%BD%E7%A0%82%E7%B3%96&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 白砂糖 1 json",
+  "description": "CiNii Research all - 白砂糖 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%99%BD%E7%A0%82%E7%B3%96&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:33:06.103+09:00",
+  "opensearch:totalResults": 87,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520572358099857024",
+      "@type": "item",
+      "title": "荒尾美代『江戸時代の白砂糖生産法』",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520572358099857024"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520572358099857024.json"
+      },
+      "dc:publisher": "津 : 化学史学会",
+      "dc:type": "Article",
+      "prism:publicationName": "化学史研究 : the journal of the Japanese Society for the History of Chemistry / 化学史学会 編",
+      "prism:issn": "03869512",
+      "prism:volume": "45",
+      "prism:number": "4",
+      "prism:startingPage": "205",
+      "prism:endingPage": "207",
+      "prism:publicationDate": "2018",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "029409390"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/029409390"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I029409390"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40021760967"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/029409390"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I029409390"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%84%E3%82%93%E3%81%92%E3%82%93%E8%B1%86&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - いんげん豆 1 json",
+  "description": "CiNii Research all - いんげん豆 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%84%E3%82%93%E3%81%92%E3%82%93%E8%B1%86&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:37:45.111+09:00",
+  "opensearch:totalResults": 137,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520572359438205184",
+      "@type": "item",
+      "title": "いんげん豆の貯蔵条件がいんげん豆の品質および調理特性におよぼす影響について",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520572359438205184"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520572359438205184.json"
+      },
+      "dc:creator": [
+        "中里 トシ子"
+      ],
+      "dc:publisher": "東京 : 日本家政学会",
+      "dc:type": "Article",
+      "prism:publicationName": "家政学雑誌 = Journal of home economics of Japan / 日本家政学会 編",
+      "prism:issn": "04499069",
+      "prism:volume": "37",
+      "prism:number": "1",
+      "prism:startingPage": "p17",
+      "prism:endingPage": "23",
+      "prism:publicationDate": "1986-01",
+      "description": "記事分類: その他の工学--生活科学",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "3071016"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/3071016"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I3071016"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40000474383"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/3071016"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I3071016"
+        }
+      ]
+    }
+  ]
+}

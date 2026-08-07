@@ -1,0 +1,50 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%9E%E3%83%B3%E3%82%B4%E3%83%BC&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - マンゴー 1 json",
+  "description": "CiNii Research all - マンゴー 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%9E%E3%83%B3%E3%82%B4%E3%83%BC&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:32:59.478+09:00",
+  "opensearch:totalResults": 2854,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1570009750233969664",
+      "@type": "item",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1570009750233969664"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1570009750233969664.json"
+      },
+      "dc:creator": [
+        "シリル マンゴー"
+      ],
+      "dc:publisher": "本の友社",
+      "dc:type": "Article",
+      "prism:publicationName": "図説世界建築史, ビザンチン建築",
+      "prism:volume": "5",
+      "prism:publicationDate": "1999",
+      "dc:identifier": [
+        {
+          "@type": "cir:NAID",
+          "@value": "10012066213"
+        }
+      ]
+    }
+  ]
+}

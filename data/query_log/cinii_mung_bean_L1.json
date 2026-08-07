@@ -1,0 +1,97 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%B7%91%E8%B1%86&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 緑豆 1 json",
+  "description": "CiNii Research all - 緑豆 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%B7%91%E8%B1%86&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:13:58.113+09:00",
+  "opensearch:totalResults": 302,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1523669554804415488",
+      "@type": "item",
+      "title": "緑豆もやしの栽培に關する研究(第4報) : 緑豆發芽時のビタミンC並にグルタチオンの消長について",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1523669554804415488"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1523669554804415488.json"
+      },
+      "dc:creator": [
+        "郷 千枝子"
+      ],
+      "dc:publisher": "[吹田] : 日本醗酵工学会",
+      "dc:type": "Article",
+      "prism:publicationName": "醗酵工学雑誌 = Journal of fermentation technology",
+      "prism:issn": "03675963",
+      "prism:volume": "28",
+      "prism:number": "3",
+      "prism:startingPage": "110",
+      "prism:endingPage": "116",
+      "prism:publicationDate": "1950-03",
+      "description": "コレクション : 国立国会図書館デジタルコレクション > 電子書籍・電子雑誌 > 学術機関 > 学協会",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "10090223"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/10090223"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I10090223"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://dl.ndl.go.jp/pid/10546377"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "110002849663"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/digimeta/10546377"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://dl.ndl.go.jp/info:ndljp/pid/10546377"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/10090223"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I10090223"
+        },
+        {
+          "@id": "https://dl.ndl.go.jp/pid/10546377"
+        },
+        {
+          "@id": "http://id.ndl.go.jp/digimeta/10546377"
+        },
+        {
+          "@id": "http://dl.ndl.go.jp/info:ndljp/pid/10546377"
+        }
+      ]
+    }
+  ]
+}

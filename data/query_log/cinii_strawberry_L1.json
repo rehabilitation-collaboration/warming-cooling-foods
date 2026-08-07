@@ -1,0 +1,73 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%84%E3%81%A1%E3%81%94&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - いちご 1 json",
+  "description": "CiNii Research all - いちご 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%84%E3%81%A1%E3%81%94&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:15:10.23+09:00",
+  "opensearch:totalResults": 16755,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040000782359331840",
+      "@type": "item",
+      "title": "ヘビイチゴ属の種分化と進化",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040000782359331840"
+      },
+      "dc:creator": [
+        "鳴橋 直弘"
+      ],
+      "dc:type": "Project",
+      "description": "1.ヘビイチゴ属4分類群の詳細な外部及び内部形態の比較研究により、ヘビイチゴとヤブヘビイチゴは形態上差が見られ、7倍体と8倍体の雑種はそれらの中間か、又はヤブヘビイチゴに似ていた。\n2.ヘビイチゴ属4分類群につき、それらの染色体の核型と花粉母細胞の減数分裂を調べたところ、ヘビイチゴとヤブヘビイチゴは異なるゲノムをもつことが判明した。また、7倍体と8倍体はそれらの雑種であることが解った。\n3.種子の発芽実験では、ヘビイチゴとヤブヘビイチゴ両種とも光と変温が効果的であった。また、ヘビイチゴのほうが、より光が発芽に必要な条件と考えられた。\n4.ヘビイチゴにはネクタ-ガイドが無く、ヤブヘビイチゴにはネクタ-ガイドがあった。これらの花に来る訪花昆虫にも少しの差が見られた。\n栄養繁殖による個体群の維持機構にも少しの差が見られ、7倍体と8倍体はヤブヘビイチゴに似ていた。\n5.本州中部におけるヘビイチゴ属の倍数体の地理学的分布調査では、福井県と佐渡を中心に雑種の7倍体と8倍体が多く分布し、太平洋側に少ないという地理的勾配があることが判明した。\n6.結論と今後の研究計画:ヘビイチゴとヤブヘビイチゴは同種であるという学者や全く分類学的に区別する必要が無いという学者がいるが、この研究からこの両種は別種であると結論された。また、フラボノイド成分の分析は方法を改良し、行う予定である。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "62480014"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP62480014"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-62480014/"
+        }
+      ],
+      "dc:subject": [
+        "ヘビイチゴ",
+        "ヤブヘビイチゴ",
+        "ヘビイチゴ属",
+        "核型",
+        "倍数体",
+        "植物地理",
+        "ネクタ-ガイド",
+        "栄養繁殖",
+        "ネクターガイド",
+        "種子発芽",
+        "雑種",
+        "訪花昆虫"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-62480014/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

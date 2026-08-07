@@ -1,0 +1,76 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%81%E3%83%BC%E3%82%BA&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - チーズ 1 json",
+  "description": "CiNii Research all - チーズ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%81%E3%83%BC%E3%82%BA&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:37:28.06+09:00",
+  "opensearch:totalResults": 101980,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1970304959883179040",
+      "@type": "item",
+      "title": "佐伯チズの和美人の本",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1970304959883179040"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1970304959883179040.json"
+      },
+      "dc:creator": [
+        "佐伯, チズ"
+      ],
+      "dc:publisher": "東京書籍",
+      "dc:type": "Book",
+      "prism:publicationDate": "2010",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BB03740004"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "9784487804764"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BB03740004#entity"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://elib.maruzen.co.jp/elib/html/BookDetail/Id/3000095447"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kinoden.kinokuniya.co.jp/user/bookdetail/p/KP00048783"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BB03740004#entity"
+        },
+        {
+          "@id": "https://elib.maruzen.co.jp/elib/html/BookDetail/Id/3000095447"
+        },
+        {
+          "@id": "https://kinoden.kinokuniya.co.jp/user/bookdetail/p/KP00048783"
+        }
+      ]
+    }
+  ]
+}

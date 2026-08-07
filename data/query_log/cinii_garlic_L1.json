@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%AB%E3%82%93%E3%81%AB%E3%81%8F&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - にんにく 1 json",
+  "description": "CiNii Research all - にんにく 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%AB%E3%82%93%E3%81%AB%E3%81%8F&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:33:47.902+09:00",
+  "opensearch:totalResults": 2034,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1970867909856296612",
+      "@type": "item",
+      "title": "にんにく料理のトリセツ",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1970867909856296612"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1970867909856296612.json"
+      },
+      "dc:creator": [
+        "にんにくバル ザ・ガーリック"
+      ],
+      "dc:publisher": "幻冬舎コミックス",
+      "dc:type": "Book",
+      "prism:publicationDate": "2024",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BD11011445"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "9784344855137"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BD11011445#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BD11011445#entity"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%B4%E3%83%BC%E3%83%A4&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - ゴーヤ 1 json",
+  "description": "CiNii Research all - ゴーヤ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%B4%E3%83%BC%E3%83%A4&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:37:17.305+09:00",
+  "opensearch:totalResults": 65198,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040000781832738176",
+      "@type": "item",
+      "title": "農民を主人公にしたサゴヤシの商品作物化への挑戦とサゴヤシ研究拠点の創設",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040000781832738176"
+      },
+      "dc:creator": [
+        "遅澤 克也",
+        "江原 宏",
+        "山本 由徳",
+        "嶋村 鉄也",
+        "吉富 博之",
+        "Marlisa Ayu Trisia",
+        "Dorothea Agnes Rampisela",
+        "Dwi Ratna",
+        "M. Ilyas",
+        "Askar",
+        "Akmal",
+        "Andi Meteragakusuma Patiware"
+      ],
+      "dc:type": "Project",
+      "description": "創設されたサゴヤシ研究拠点の栽培実験地では、2016年時点で27年生（49株、50×50ｍ）、6年生（2ha、105株）、2年生（1ha、96株）のサゴヤシ個体の生葉の改質を中心とした生育調査を継続して実施し、優良苗の選抜を開始している。また、ルウ地方の地方政府や緑化事業を手掛ける企業からの大量な苗の要請に対応するために、実生苗の生産に着手している。この実生苗の生産は開花期のサゴヤシ７個体の生育観察のために櫓（竹製のタワー）３基を設置し、開花・結実の調査を伴って開始している。これらの成果は今年の６月に開催されるサゴヤシ学会で公表する予定。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "15H05145"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP15H05145"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-15H05145/"
+        }
+      ],
+      "dc:subject": [
+        "熱帯農業",
+        "サゴヤシ",
+        "実生苗の生産",
+        "サゴヤシの葉の生育",
+        "産学地連携",
+        "東部インドネシア",
+        "サゴヤシの育苗",
+        "sago palm",
+        "local development",
+        "seeding selection",
+        "sago palm cultivation",
+        "EPI",
+        "育苗センター",
+        "地方政府との連携",
+        "サゴヤシの栽培化",
+        "Community Base",
+        "Oso",
+        "サゴヤシの栽培実験"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-15H05145/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

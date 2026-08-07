@@ -1,0 +1,73 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%A2%E3%83%9E%E3%83%A9%E3%83%B3%E3%82%B5%E3%82%B9&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - アマランサス 1 json",
+  "description": "CiNii Research all - アマランサス 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%A2%E3%83%9E%E3%83%A9%E3%83%B3%E3%82%B5%E3%82%B9&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:12:30.056+09:00",
+  "opensearch:totalResults": 277,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1521417756099126784",
+      "@type": "item",
+      "title": "グローカル化するアマランサスとキノア",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1521417756099126784"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1521417756099126784.json"
+      },
+      "dc:creator": [
+        "小西 洋太郎"
+      ],
+      "dc:publisher": "東京 : 日本特産農作物種苗協会",
+      "dc:type": "Article",
+      "prism:publicationName": "特産種苗",
+      "prism:number": "8",
+      "prism:startingPage": "2",
+      "prism:endingPage": "4",
+      "prism:publicationDate": "2010-08",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "10843113"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/10843113"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I10843113"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40017325659"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/10843113"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I10843113"
+        }
+      ]
+    }
+  ]
+}

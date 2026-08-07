@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E8%8F%9C%E3%81%AE%E8%8A%B1&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 菜の花 1 json",
+  "description": "CiNii Research all - 菜の花 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E8%8F%9C%E3%81%AE%E8%8A%B1&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:14:39.532+09:00",
+  "opensearch:totalResults": 928,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1970304959787998361",
+      "@type": "item",
+      "title": "菜の花",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1970304959787998361"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1970304959787998361.json"
+      },
+      "dc:creator": [
+        "菜の花編集部"
+      ],
+      "dc:publisher": "菜の花俳句会",
+      "dc:type": "Book",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "AA11770559"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/AA11770559#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/AA11770559#entity"
+        }
+      ]
+    }
+  ]
+}

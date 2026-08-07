@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%A6%E3%83%BC%E3%83%AD%E3%83%B3%E8%8C%B6&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - ウーロン茶 1 json",
+  "description": "CiNii Research all - ウーロン茶 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%A6%E3%83%BC%E3%83%AD%E3%83%B3%E8%8C%B6&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:14:11.787+09:00",
+  "opensearch:totalResults": 302,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040282256673723904",
+      "@type": "item",
+      "title": "ウーロン茶抽出物に含まれる抗う蝕物質の検出と同定",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040282256673723904"
+      },
+      "dc:creator": [
+        "大嶋 隆"
+      ],
+      "dc:type": "Project",
+      "description": "ミュータンスレンサ球菌のう蝕誘発能に及ぼすウーロン茶抽出物の抑制作用をin vitroの実験系で調べ,下記の結果を得た.\n1. ウーロン茶抽出物はミュータンスレンサ球菌の増殖速度を抑制する傾向を示し,培地中に生成される酸濃度は,ウーロン茶抽出物非添加培地の場合に比べて明らかに低かった.しかし,ウーロン茶抽出物には明瞭な抗菌作用は認められず,ウーロン茶抽出物を精製したウーロン茶ポリフェノールにもこの作用は認められなかった.\n2. ミュータンスレンサ球菌をウーロン茶抽出物で処理すると,ミュータンスレンサ球菌の菌体疎水性が明瞭に低下した.この作用はウーロン茶抽出物よりもウーロン茶ポリフェノールで顕著であった.\n3. ウーロン茶抽出物はミュータンスレンサ球菌の唾液被覆ハイドロキシアパタイトへの吸着を阻害した.この作用はウーロン茶抽出物よりもウーロン茶ポリフェノールで顕著であった.\n以上の結果は,ウーロン茶抽出物の抗う蝕作用が,ウーロン茶ポリフェノールによる菌体疎水性低下とグルコシルトランスフェラーゼによるグルカン合成の阻害によってミュータンスレンサ球菌の歯面への付着とプラーク形成を抑制することにより,さらにウーロン茶抽出物に含まれるミュータンスレンサ球菌の増殖速度を抑制する物質の酸産生抑制作用によってより明瞭なものになることを示唆している.",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "09672102"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP09672102"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-09672102/"
+        }
+      ],
+      "dc:subject": [
+        "歯牙う蝕",
+        "ミュータンスレンサ球菌",
+        "ポリフェノール",
+        "ウーロン茶",
+        "グルコシルトランスフェラーゼ",
+        "酵素阻害剤",
+        "ウ-ロン茶"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-09672102/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

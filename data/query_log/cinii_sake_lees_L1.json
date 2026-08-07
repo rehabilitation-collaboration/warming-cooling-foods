@@ -1,0 +1,56 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E9%85%92%E7%B2%95&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 酒粕 1 json",
+  "description": "CiNii Research all - 酒粕 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E9%85%92%E7%B2%95&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:14:54.093+09:00",
+  "opensearch:totalResults": 535,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/2120307889872065408",
+      "@type": "item",
+      "title": "酒粕含有機能性成分と高付加価値化に関する研究",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/2120307889872065408"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/2120307889872065408.json"
+      },
+      "dc:creator": [
+        "藤井, 力"
+      ],
+      "dc:type": "OtherWorks",
+      "dc:identifier": [
+        {
+          "@type": "cir:URI",
+          "@value": "https://hdl.handle.net/10270/5542"
+        }
+      ],
+      "dc:subject": [
+        "酒粕需要促進",
+        "酒粕は体によい"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://hdl.handle.net/10270/5542"
+        }
+      ]
+    }
+  ]
+}

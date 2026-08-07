@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%A2%E3%82%BB%E3%83%AD%E3%83%A9&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - アセロラ 1 json",
+  "description": "CiNii Research all - アセロラ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%A2%E3%82%BB%E3%83%AD%E3%83%A9&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:12:23.524+09:00",
+  "opensearch:totalResults": 101,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1521699230125971200",
+      "@type": "item",
+      "title": "熱帯・亜熱帯果樹生産の新技術(18)アセロラ",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1521699230125971200"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1521699230125971200.json"
+      },
+      "dc:creator": [
+        "石畑 清武"
+      ],
+      "dc:publisher": "東京 : 養賢堂",
+      "dc:type": "Article",
+      "prism:publicationName": "農業および園芸 / 養賢堂 [編]",
+      "prism:issn": "03695247",
+      "prism:volume": "76",
+      "prism:number": "6",
+      "prism:startingPage": "715",
+      "prism:endingPage": "721",
+      "prism:publicationDate": "2001-06",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "5772408"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/5772408"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I5772408"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40003100767"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/5772408"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I5772408"
+        }
+      ]
+    }
+  ]
+}

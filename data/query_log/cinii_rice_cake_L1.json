@@ -1,0 +1,63 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%82%E3%81%A1&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - もち 1 json",
+  "description": "CiNii Research all - もち 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%82%E3%81%A1&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:14:43.606+09:00",
+  "opensearch:totalResults": 377354,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1970023484952529949",
+      "@type": "item",
+      "title": "ゲイバーのもちぎさん",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1970023484952529949"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1970023484952529949.json"
+      },
+      "dc:creator": [
+        "もちぎ"
+      ],
+      "dc:publisher": "講談社",
+      "dc:type": "Book",
+      "prism:publicationDate": "2021",
+      "description": "KC Palcy",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BC04942737"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "9784065221365"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BC04942737#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BC04942737#entity"
+        }
+      ]
+    }
+  ]
+}

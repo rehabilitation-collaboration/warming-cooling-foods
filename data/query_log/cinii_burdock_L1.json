@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%94%E3%81%BC%E3%81%86&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - ごぼう 1 json",
+  "description": "CiNii Research all - ごぼう 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%94%E3%81%BC%E3%81%86&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:32:46.126+09:00",
+  "opensearch:totalResults": 2098,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040282257347706112",
+      "@type": "item",
+      "title": "食物繊維の構造、性質の比較研究",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040282257347706112"
+      },
+      "dc:creator": [
+        "渡辺 敏幸"
+      ],
+      "dc:type": "Project",
+      "description": "1.ゴボウおよびヤマゴボウの炭水化物組成の比較 ゴボウとヤマゴボウ(ゴボウアザミ)の脱脂粉末を試料として炭水化物組成を比較した。試料の炭水化物(多糖)を分画し、各画分の糖組成の分析、メチル化分析の結果、ゴボウ、ヤマゴボウの基本的な多糖の成分は殆んど同じであった。ゴボウもヤマゴボウも貯蔵多糖としてフルクタンを含んでいた。ゴボウ、ヤマゴボウの細胞壁はペクチン質(中性糖が結合したラムノガラクツロナン)、ヘミセルロ-ス(アラビナン、キシラン、ガラクタン、アラビノガラクタン、キシログルカン)とセルロ-スの比がそれぞれ53.6:8.0:38.4と55.8:7.2:37.0であった。フルクタンと細胞壁多糖の比はおおよそゴボウが47:53、ヤマゴボウが66:34であった。\n2.ゴボウから酸性キシランの分離、同定 ゴボウの細胞壁多糖の化学構造を調べるために、脱脂したゴボウ粉末の多糖を熱水(ペクチン質I,PS-I)、0.5%しゅう酸アンモニウム(ペクチン質II,PSーII)、4%水酸化カリウム(ヘミセルロ-スI,HC-I)および24%水酸化カリウム(ヘミセルロ-スII,HC-II)で抽出して8つの画分に分画した。HC-IIは酢酸で中和して沈殿する画分(HC-IIA)と上清画分(HC-IIB)に分画した。各画分の構成単糖のモル比からHC-IIB画分にキシランの存在が示唆された。HC-IIB画分を精製し、精製HC-IIB-1をDEAE-Sephadex A-25(酢酸型)クロマトグラフィ-に供し、得られた3つの主なピ-クのうち、最後に溶出したピ-ク(HC-IIB-1-C)をメチル化分析と部分水解することにより、ゴボウ中に存在するキシランの構造を推定した。ゴボウのキシランは、主鎖はキシロピラノ-ス残基がβ-(1→4)結合した直鎖状の構造で、そのうち約8.3%に4-0-メチル-α-D-グルコピラノシルウロン酸残基が2の位置で側鎖として結合しているものと考えられる。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "63580048"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP63580048"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-63580048/"
+        }
+      ],
+      "dc:subject": [
+        "ゴボウ",
+        "ヤマゴボウ(ゴボウアザミ)",
+        "食物繊維",
+        "細胞壁多糖",
+        "酸性キシラン",
+        "フルクタン",
+        "ヤマゴボウの植物繊維"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-63580048/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

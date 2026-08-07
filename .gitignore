@@ -22,12 +22,16 @@ data/adjudicate/
 data/round2_adopted.json
 data/round2_claims_block.txt
 
-# Axis B raw API responses (audit trail; pubmed_counts.csv is the public output)
-data/query_log/
+# Axis B raw API responses. The count responses (L1/L2/L3 PubMed, OpenAlex,
+# CiNii) ARE published: they pin every reported count to the query snapshot and
+# carry no third-party content. Only the efetch record dumps are withheld, since
+# those are full PubMed titles and abstracts; they are regenerable with
+# fetch_l2_records.py, and every PMID in them appears in screening.csv.
+data/query_log/*_L2_records.json
 
 # Axis B L2 raw records (full PubMed titles+abstracts, not redistributed;
-# regenerable via fetch_l2_records.py, provenance in query_log). The public
-# outputs are screening_golden.csv (titles only) and screening.csv.
+# regenerable via fetch_l2_records.py). The public outputs are
+# screening_golden.csv (titles only) and screening.csv.
 data/l2_records.csv
 
 # L2 screening intermediates (per-coder record dumps + per-coder CSVs, mirrors

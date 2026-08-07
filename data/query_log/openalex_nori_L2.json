@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "count": 4819,
+    "db_response_time_ms": 166,
+    "page": 1,
+    "per_page": 1,
+    "groups_count": null,
+    "x_query": {
+      "oql": "works where full text has (\n    (Porphyra or laver or nori)\n    and (\n      stemmed \"body temperature\"\n      or stemmed \"peripheral circulation\"\n      or thermogenesis\n      or thermoregulation\n    )\n  )",
+      "oqo": {
+        "get_rows": "works",
+        "filter_rows": [
+          {
+            "join": "or",
+            "filters": [
+              {
+                "column_id": "fulltext.search",
+                "value": "Porphyra",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "laver",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "nori",
+                "operator": "has"
+              }
+            ]
+          },
+          {
+            "join": "or",
+            "filters": [
+              {
+                "column_id": "fulltext.search",
+                "value": "\"body temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"peripheral circulation\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "thermogenesis",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "thermoregulation",
+                "operator": "has"
+              }
+            ]
+          }
+        ]
+      },
+      "url": "/works?filter=fulltext.search:Porphyra|laver|nori,fulltext.search:%22body temperature%22|%22peripheral circulation%22|thermogenesis|thermoregulation&per_page=1"
+    },
+    "cost_usd": 0.001
+  },
+  "results": [
+    {
+      "id": "https://openalex.org/W3019705932"
+    }
+  ],
+  "group_by": []
+}

@@ -1,0 +1,82 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%86%AC%E7%93%9C&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 冬瓜 1 json",
+  "description": "CiNii Research all - 冬瓜 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%86%AC%E7%93%9C&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:15:32.339+09:00",
+  "opensearch:totalResults": 77,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520290885408926976",
+      "@type": "item",
+      "title": "最近の冬瓜と真空調理による冬瓜の物性について",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520290885408926976"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520290885408926976.json"
+      },
+      "dc:creator": [
+        "榊原 住枝",
+        "寺田 景子"
+      ],
+      "dc:publisher": "岡崎 : 愛知学泉大学 ; 2003-2018",
+      "dc:type": "Article",
+      "prism:publicationName": "愛知学泉大学・短期大学紀要 = Review of Aichi Gakusen University and College",
+      "prism:issn": "13490567",
+      "prism:number": "38",
+      "prism:startingPage": "19",
+      "prism:endingPage": "24",
+      "prism:publicationDate": "2003-12",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "6906519"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/6906519"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I6906519"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40006157954"
+        }
+      ],
+      "dc:subject": [
+        "wax gourd",
+        "未熟冬瓜",
+        "mo kwa",
+        "vacuum cooking",
+        "physical properties"
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/6906519"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I6906519"
+        }
+      ]
+    }
+  ]
+}

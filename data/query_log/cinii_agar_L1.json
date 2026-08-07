@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%AF%92%E5%A4%A9&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 寒天 1 json",
+  "description": "CiNii Research all - 寒天 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%AF%92%E5%A4%A9&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:12:26.751+09:00",
+  "opensearch:totalResults": 7283,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1050023870181444352",
+      "@type": "item",
+      "title": "寒天レンズの透明度について",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1050023870181444352"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1050023870181444352.json"
+      },
+      "dc:creator": [
+        "長沢, 千達",
+        "水品, 陽子"
+      ],
+      "dc:type": "Article",
+      "prism:publicationName": "福島大学教育実践研究紀要",
+      "prism:issn": "0287-1769",
+      "prism:volume": "12",
+      "prism:startingPage": "9",
+      "prism:endingPage": "14",
+      "prism:publicationDate": "1987-11-20",
+      "dc:identifier": [
+        {
+          "@type": "cir:URI",
+          "@value": "https://hdl.handle.net/10270/3358"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "120001940988"
+        }
+      ],
+      "dc:subject": [
+        "寒天レンズ",
+        "寒天",
+        "透明度",
+        "レンズ"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://hdl.handle.net/10270/3358"
+        },
+        {
+          "@id": "http://hdl.handle.net/10270/3358"
+        }
+      ]
+    }
+  ]
+}

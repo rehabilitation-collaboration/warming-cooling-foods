@@ -1,0 +1,85 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%B9%B2%E3%81%97%E6%9F%BF&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 干し柿 1 json",
+  "description": "CiNii Research all - 干し柿 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%B9%B2%E3%81%97%E6%9F%BF&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:12:13.238+09:00",
+  "opensearch:totalResults": 155,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1390001288081946240",
+      "@type": "item",
+      "title": "美味な「干し柿」と各地の生産方法（その１）",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1390001288081946240"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1390001288081946240.json"
+      },
+      "dc:creator": [
+        "林 節男"
+      ],
+      "dc:publisher": "美味技術学会",
+      "dc:type": "Article",
+      "prism:publicationName": "美味技術学会誌",
+      "prism:issn": "21867224",
+      "prism:volume": "11",
+      "prism:number": "1",
+      "prism:startingPage": "64",
+      "prism:endingPage": "69",
+      "prism:publicationDate": "2012-04-30",
+      "dc:identifier": [
+        {
+          "@type": "cir:DOI",
+          "@value": "10.11274/bimi.11.1_64"
+        },
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "024898376"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/024898376"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I024898376"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40019810358"
+        }
+      ],
+      "dc:subject": [
+        "干し柿",
+        "干し柿生産",
+        "脱渋",
+        "柿の歴史"
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/024898376"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I024898376"
+        }
+      ]
+    }
+  ]
+}

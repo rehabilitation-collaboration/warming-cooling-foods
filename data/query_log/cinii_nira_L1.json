@@ -1,0 +1,70 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%AB%E3%82%89&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - にら 1 json",
+  "description": "CiNii Research all - にら 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%AB%E3%82%89&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:35:12.295+09:00",
+  "opensearch:totalResults": 21933,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520578934879961472",
+      "@type": "item",
+      "title": "バーニラ バニラ バーニラ",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520578934879961472"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520578934879961472.json"
+      },
+      "dc:creator": [
+        "本谷 有希子"
+      ],
+      "dc:publisher": "東京 : 新潮社",
+      "dc:type": "Article",
+      "prism:publicationName": "新潮",
+      "prism:volume": "120",
+      "prism:number": "10",
+      "prism:startingPage": "89",
+      "prism:endingPage": "103",
+      "prism:publicationDate": "2023-10",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "033038772"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/033038772"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I033038772"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/033038772"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I033038772"
+        }
+      ]
+    }
+  ]
+}

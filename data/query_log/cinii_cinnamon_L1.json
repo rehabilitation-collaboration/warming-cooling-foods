@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%B7%E3%83%8A%E3%83%A2%E3%83%B3&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - シナモン 1 json",
+  "description": "CiNii Research all - シナモン 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%B7%E3%83%8A%E3%83%A2%E3%83%B3&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:34:06.425+09:00",
+  "opensearch:totalResults": 244,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1970304959820512689",
+      "@type": "item",
+      "title": "'80s少女漫画ふろくコレクション",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1970304959820512689"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1970304959820512689.json"
+      },
+      "dc:creator": [
+        "ゆかしなもん"
+      ],
+      "dc:publisher": "グラフィック社",
+      "dc:type": "Book",
+      "prism:publicationDate": "2019",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BB29379244"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "9784766132762"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BB29379244#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BB29379244#entity"
+        }
+      ]
+    }
+  ]
+}

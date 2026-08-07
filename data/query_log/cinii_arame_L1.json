@@ -1,0 +1,74 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%82%E3%82%89%E3%82%81&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - あらめ 1 json",
+  "description": "CiNii Research all - あらめ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%82%E3%82%89%E3%82%81&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:12:36.804+09:00",
+  "opensearch:totalResults": 694,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520290885272927744",
+      "@type": "item",
+      "title": "アラメーダ駅とアラメーダ橋--橋と地下駅を光が行き交う",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520290885272927744"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520290885272927744.json"
+      },
+      "dc:publisher": "東京 : 日経BP",
+      "dc:type": "Article",
+      "prism:publicationName": "日経アーキテクチュア = Nikkei architecture",
+      "prism:issn": "03850870",
+      "prism:number": "559",
+      "prism:startingPage": "170",
+      "prism:endingPage": "172",
+      "prism:publicationDate": "1996-08-26",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "4020645"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/4020645"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I4020645"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40004106563"
+        }
+      ],
+      "dc:subject": [
+        "スペイン"
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/4020645"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I4020645"
+        }
+      ]
+    }
+  ]
+}

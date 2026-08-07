@@ -1,0 +1,66 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E9%AB%98%E9%87%8E%E8%B1%86%E8%85%90&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 高野豆腐 1 json",
+  "description": "CiNii Research all - 高野豆腐 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E9%AB%98%E9%87%8E%E8%B1%86%E8%85%90&count=1&format=json"
+  },
+  "dc:date": "2026-08-07T17:13:26.514+09:00",
+  "opensearch:totalResults": 77,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1390574334754011904",
+      "@type": "item",
+      "title": "多可郡の高野豆腐",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1390574334754011904"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1390574334754011904.json"
+      },
+      "dc:creator": [
+        "脇坂,俊夫"
+      ],
+      "dc:publisher": "兵庫県",
+      "dc:type": "Article",
+      "prism:publicationName": "兵庫県の歴史",
+      "prism:volume": "13",
+      "prism:startingPage": "56",
+      "prism:endingPage": "62",
+      "prism:publicationDate": "1975-07-31",
+      "dc:identifier": [
+        {
+          "@type": "cir:DOI",
+          "@value": "10.24484/sitereports.128044-112513"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://sitereports.nabunken.go.jp/article/112513"
+        }
+      ],
+      "dc:subject": [
+        "高野豆腐",
+        "脇坂俊夫"
+      ],
+      "dc:source": [
+        {
+          "@id": "http://sitereports.nabunken.go.jp/article/112513"
+        }
+      ]
+    }
+  ]
+}

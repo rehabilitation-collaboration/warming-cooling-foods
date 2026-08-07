@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%AC%E3%83%90%E3%83%BC&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - レバー 1 json",
+  "description": "CiNii Research all - レバー 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%AC%E3%83%90%E3%83%BC&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:38:11.419+09:00",
+  "opensearch:totalResults": 224415,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1971149384800427787",
+      "@type": "item",
+      "title": "エレベーター革命",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1971149384800427787"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1971149384800427787.json"
+      },
+      "dc:creator": [
+        "エレバイザー"
+      ],
+      "dc:publisher": "文芸社",
+      "dc:type": "Book",
+      "prism:publicationDate": "2004",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BA70513138"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "4835581911"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BA70513138#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BA70513138#entity"
+        }
+      ]
+    }
+  ]
+}

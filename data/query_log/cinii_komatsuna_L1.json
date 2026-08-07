@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%B0%8F%E6%9D%BE%E8%8F%9C&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 小松菜 1 json",
+  "description": "CiNii Research all - 小松菜 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%B0%8F%E6%9D%BE%E8%8F%9C&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:36:52.273+09:00",
+  "opensearch:totalResults": 212,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1522262181148731136",
+      "@type": "item",
+      "title": "Top Interview 林遣都×小松菜奈 : 表紙の人",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1522262181148731136"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1522262181148731136.json"
+      },
+      "dc:creator": [
+        "林 遣都",
+        "小松 菜奈",
+        "大正谷 成晴"
+      ],
+      "dc:publisher": "東京 : 厚生問題研究会 ; 2003-",
+      "dc:type": "Article",
+      "prism:publicationName": "厚生労働 : policy & information / 厚生問題研究会 編",
+      "prism:issn": "13487256",
+      "prism:startingPage": "3",
+      "prism:endingPage": "6",
+      "prism:publicationDate": "2021-11",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "031867426"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/031867426"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I031867426"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40022770069"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/031867426"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I031867426"
+        }
+      ]
+    }
+  ]
+}

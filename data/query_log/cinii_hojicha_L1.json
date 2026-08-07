@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%BB%E3%81%86%E3%81%98%E8%8C%B6&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - ほうじ茶 1 json",
+  "description": "CiNii Research all - ほうじ茶 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%BB%E3%81%86%E3%81%98%E8%8C%B6&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:34:17.337+09:00",
+  "opensearch:totalResults": 120,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040282256980580480",
+      "@type": "item",
+      "title": "メイラード反応が創出するほうじ茶の機能性解明",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040282256980580480"
+      },
+      "dc:creator": [
+        "笹木 哲也"
+      ],
+      "dc:type": "Project",
+      "description": "緑茶を焙煎したほうじ茶は豊かな香りを持つ日本を代表するお茶であるが、その研究報告は少なく、機能性についても充分に解明されていない。そこで、本研究では、ほうじ茶の焙煎時に生じるメイラード反応に着目し、その反応生成物である香気成分とメラノイジンの機能性解明を試みた。その結果、ほうじ茶のおいしさ形成に重要な香気成分がピラジン類であることを特定し、そのピラジン類がリラックス効果を示すことを明らかにした。また、メラノイジンを含む高分子画分をほうじ茶から抽出し、その高分子画分の抗酸化性は焙煎が深くなるほど上昇することを明らかにした。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "18K14430"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP18K14430"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-18K14430/"
+        }
+      ],
+      "dc:subject": [
+        "ほうじ茶",
+        "香気成分",
+        "メイラード反応",
+        "メラノイジン",
+        "GC/MS",
+        "官能評価",
+        "機能性"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-18K14430/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ]
+}

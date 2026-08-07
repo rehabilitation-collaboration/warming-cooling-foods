@@ -1,0 +1,72 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%91%E3%82%A4%E3%83%8A%E3%83%83%E3%83%97%E3%83%AB&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - パイナップル 1 json",
+  "description": "CiNii Research all - パイナップル 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%91%E3%82%A4%E3%83%8A%E3%83%83%E3%83%97%E3%83%AB&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:33:29.879+09:00",
+  "opensearch:totalResults": 631,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1521417756181491968",
+      "@type": "item",
+      "title": "パイナップルを食べよう",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1521417756181491968"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1521417756181491968.json"
+      },
+      "dc:publisher": "東京 : 自由民主党",
+      "dc:type": "Article",
+      "prism:publicationName": "りぶる = Libre / 自由民主党 編",
+      "prism:issn": "02864517",
+      "prism:volume": "40",
+      "prism:number": "8",
+      "prism:startingPage": "68",
+      "prism:endingPage": "71",
+      "prism:publicationDate": "2021-08",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "031620554"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/031620554"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I031620554"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40022654038"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/031620554"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I031620554"
+        }
+      ]
+    }
+  ]
+}

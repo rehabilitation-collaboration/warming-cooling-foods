@@ -1,0 +1,67 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%B0%8F%E9%BA%A6&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 小麦 1 json",
+  "description": "CiNii Research all - 小麦 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%B0%8F%E9%BA%A6&count=1&format=json"
+  },
+  "dc:date": "2026-08-06T15:45:13.719+09:00",
+  "opensearch:totalResults": 15112,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1570291228304403200",
+      "@type": "item",
+      "title": "小麦品質の地域的変動に関する研究",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1570291228304403200"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1570291228304403200.json"
+      },
+      "dc:creator": [
+        "小麦品質研究班"
+      ],
+      "dc:publisher": "農林水産省農事試験場",
+      "dc:type": "Article",
+      "prism:publicationName": "農事試験場研究資料",
+      "prism:number": "4",
+      "prism:startingPage": "1",
+      "prism:endingPage": "108",
+      "prism:publicationDate": "1981-10",
+      "dc:identifier": [
+        {
+          "@type": "cir:NAID",
+          "@value": "220000122746"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://agriknowledge.affrc.go.jp/RN/2010823540"
+        }
+      ],
+      "dc:subject": [
+        "小麦品質",
+        "地域的変動",
+        "研究"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://agriknowledge.affrc.go.jp/RN/2010823540"
+        }
+      ]
+    }
+  ]
+}
