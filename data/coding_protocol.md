@@ -196,3 +196,29 @@ duplicate records created when coder-1 and coder-2 codings collapsed to the same
 (food, direction, season) key, the second round added 381 rows. Combined frozen
 dataset: 649 rows across 15 sources, all grounded, both coders in full agreement
 on direction (kappa = 1.000).
+
+**Extraction agreement, stated separately (added 2026-08-08).** The kappa above
+covers the *direction* assigned to items both coders extracted. It is not a
+reliability estimate for extraction itself, and extraction is where the coders
+actually diverged: in round 2, coder 1 returned 236 records and coder 2 returned
+377, agreeing on 214, which is a Jaccard index of 0.54. Every coverage difference
+was resolved by the author against the source text rather than by any agreement
+statistic, so the reproducibility evidence for Axis A is the verbatim grounding
+check (`verify_claims.py`), not the kappa.
+
+**Two food keys corrected after this reconciliation ran (added 2026-08-08).**
+The reconciliation counts recorded above are the values as executed on
+2026-08-04. Two food-key operations were applied afterwards, during RB-5
+pre-processing, both documented as D29 in the project handoff:
+
+- `azuki bean` was merged into `adzuki bean` (the same food under two keys; the
+  synonym was already registered in `food_query_terms.SYNONYMS`).
+- 干し柿 was split out of `persimmon` into `dried persimmon`, because two sources
+  had filed it under `persimmon` while a third kept it separate, which had put
+  the same source on both the warm and the cool side of one key.
+
+Re-running the same reconciliation against the frozen `claims.csv` therefore
+returns **218 co-coded items and 177 coverage differences in round 2** (rather
+than 214 and 185), with direction agreement unchanged at **kappa = 1.000**. The
+manuscript reports both figures and says why they differ; a reader reproducing
+the reconciliation from the published data will obtain the 218/177 pair.

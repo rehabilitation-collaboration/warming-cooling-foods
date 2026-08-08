@@ -18,6 +18,11 @@ coding of García-Hernández et al. (2023).
 `data/l2_records.csv` — one row per (food_key, pmid): title, abstract, journal,
 pubtypes. 2,772 records across 81 foods (2026-08-07 fetch; record count equals
 the esearch hit count for every food, 0 mismatch vs `pubmed_counts.csv` L2).
+
+**Extended after the food universe was widened (see §5):** the universe extension
+added 115 records across 26 further foods, so the screened set as reported is
+**2,887 records across 107 foods** (2,772 + 115 = 2,887; 81 + 26 = 107). The κ in
+§5 and every count in the manuscript are computed over that full 2,887.
 This is the complete L2 hit set; screening covers **all** queryable foods'
 records (not the GPT minimum of zero-count + top-count foods).
 
