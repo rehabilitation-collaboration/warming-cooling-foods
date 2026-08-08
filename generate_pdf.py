@@ -57,8 +57,15 @@ sup { font-size: 0.75em; }
 table {
     border-collapse: collapse; width: 100%; margin: 10pt 0;
     font-size: 9pt;
-    page-break-inside: avoid;
+    /* Not "avoid": a table taller than one page cannot honour it, and when it
+       cannot, the caption above is left stranded on the previous page (Table 4
+       did exactly that). Breaking between rows instead keeps the caption with
+       the start of its table and repeats the header on each continuation. */
+    page-break-inside: auto;
 }
+thead { display: table-header-group; }
+tfoot { display: table-footer-group; }
+tr { page-break-inside: avoid; }
 th, td {
     border: 1px solid #999; padding: 3pt 5pt; text-align: left;
 }

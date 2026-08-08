@@ -183,6 +183,38 @@ def test_l2_screened_counts_includes_per_food():
     assert "chicken" not in l2s.index  # all excluded → not in the include tally
 
 
+def test_l2_screened_can_drop_a_sublabel_class():
+    adj = pd.DataFrame(
+        {
+            "food_key": ["coffee", "coffee", "coffee", "green tea"],
+            "pmid": ["1", "2", "3", "4"],
+            "final_label": ["include"] * 4,
+            "sublabels": ["constituent", "", "review;constituent", "review"],
+        }
+    )
+    assert sc.l2_screened(adj)["coffee"] == 3
+    # Whole-food reading: only the record with no constituent sub-label survives.
+    assert sc.l2_screened(adj, exclude_sublabels=("constituent",))["coffee"] == 1
+    # Primary-report reading: the ";"-joined record is dropped by its review token.
+    assert sc.l2_screened(adj, exclude_sublabels=("review",))["coffee"] == 2
+    # A food whose only study is dropped leaves the tally entirely.
+    assert "green tea" not in sc.l2_screened(adj, exclude_sublabels=("review",)).index
+
+
+def test_l2_screened_treats_a_missing_sublabel_as_no_sublabel():
+    # Most included records carry no sub-label at all; those must never be
+    # dropped by a narrower definition.
+    adj = pd.DataFrame(
+        {
+            "food_key": ["ginger", "ginger"],
+            "pmid": ["1", "2"],
+            "final_label": ["include", "include"],
+            "sublabels": [None, "constituent"],
+        }
+    )
+    assert sc.l2_screened(adj, exclude_sublabels=("constituent",))["ginger"] == 1
+
+
 def test_attach_l2_screened_zero_for_all_excluded():
     pc = pd.DataFrame(
         {

@@ -253,9 +253,23 @@ def to_screening_csv(adjudicated: pd.DataFrame) -> pd.DataFrame:
     return out.sort_values(["food_key", "pmid"]).reset_index(drop=True)
 
 
-def l2_screened(adjudicated: pd.DataFrame) -> pd.Series:
-    """Per-food L2′ = count of final_label == include. Indexed by food_key."""
+def l2_screened(
+    adjudicated: pd.DataFrame, *, exclude_sublabels: tuple[str, ...] = ()
+) -> pd.Series:
+    """Per-food L2′ = count of final_label == include. Indexed by food_key.
+
+    ``exclude_sublabels`` drops included records carrying any of the named
+    sub-labels, so a narrower reading of "on-construct study" can be counted
+    with the same definition: ``("constituent",)`` keeps only studies of the
+    food itself rather than its principal dietary constituent, and
+    ``("review",)`` keeps only primary reports. Sub-labels are matched on the
+    whole token, not as substrings, because they are stored ``;``-joined.
+    """
     inc = adjudicated[adjudicated["final_label"] == INCLUDE]
+    if exclude_sublabels:
+        wanted = set(exclude_sublabels)
+        tokens = inc["sublabels"].fillna("").astype(str).str.split(";")
+        inc = inc[~tokens.apply(lambda subs: bool(wanted & {s.strip() for s in subs}))]
     return (
         inc.groupby("food_key").size().rename("L2_screened").sort_index()
     )

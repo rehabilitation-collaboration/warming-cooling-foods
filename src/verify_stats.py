@@ -21,13 +21,32 @@ Run: python3 -m src.verify_stats  (from the project root)
 from __future__ import annotations
 
 import numpy as np
+import pandas as pd
 from scipy import stats
 
 from .analysis import MEASURE, _read_counts, bottom_right_foods, prepare_scatter_data
 from .claim_mapping import load_claims, load_sources
 from .definitions import COOL, TIER_INDIVIDUAL, TIER_ORG, WARM
 from .evidence_mapping import CORE_MIN_SOURCES
-from .gap_models import count_negbin, prepare_model_frame, presence_logit, spearman_with_ci
+from .gap_models import (
+    count_negbin,
+    predictor_vif,
+    prepare_model_frame,
+    presence_logit,
+    spearman_with_ci,
+)
+from .screening import SCREENING_CSV, l2_screened
+
+# Narrower readings of "an on-construct study", each dropping one class of
+# record the primary count keeps. Both classes are defensible for "has this
+# claim been examined at all" and both are arguable, so the primary model is
+# refit without each rather than the choice being asserted.
+DEFINITION_SENSITIVITY = (
+    ("as reported (all includes)", ()),
+    ("whole food only (drop constituent)", ("constituent",)),
+    ("primary reports only (drop review)", ("review",)),
+    ("whole food + primary only", ("constituent", "review")),
+)
 
 RULE = "=" * 72
 THIN = "-" * 72
@@ -92,6 +111,12 @@ def main() -> None:
     print_ = _print_logit
     print_("adjusted for log(L1+1)", presence_logit(frame))
     print_("unadjusted", presence_logit(frame, adjust_l1=False))
+    # Collinearity read off the fit's own design matrix. The rank correlation
+    # printed below is the reported association between the predictors; it is
+    # not what a VIF is computed from, so the two are printed separately.
+    vif = predictor_vif(frame)
+    print(f"[Collinearity] Pearson r(n_sources, log(L1+1)) = {vif['pearson_r']:+.4f}   "
+          + "   ".join(f"VIF[{k}]={v:.3f}" for k, v in vif["vif"].items()))
     print(THIN)
 
     # --- Alongside: rank correlations -------------------------------------
@@ -183,6 +208,36 @@ def main() -> None:
     # Tier 1+2 re-derives belief breadth over 15 sources instead of 9 and adds
     # the foods only individual bloggers mention, so refitting the primary model
     # there shows the source frame is not carrying the result.
+    # --- Definition sensitivity: narrower readings of "on-construct" -------
+    # L2′ as reported counts studies of a food's principal dietary constituent
+    # (caffeine for coffee, capsaicin for chili pepper) and reviews of human
+    # thermal-ingestion evidence alongside primary reports. Each is defensible
+    # for "has this claim been examined at all" and each is arguable, so the
+    # primary model is refit without each rather than the choice being asserted.
+    print("[Definition sensitivity] primary model refit under narrower L2' definitions")
+    screening = pd.read_csv(SCREENING_CSV)
+    measured = df["l2_screened"].notna()
+    for label, excl in DEFINITION_SENSITIVITY:
+        narrowed = l2_screened(screening, exclude_sublabels=excl)
+        d = df.copy()
+        # A narrower definition removes records; it does not turn a food that
+        # was never screened into a zero, so unmeasured foods stay missing.
+        d["l2_screened"] = d["food_key"].map(narrowed).fillna(0).where(measured)
+        f = prepare_model_frame(d)
+        res = presence_logit(f)
+        z = int((f["has_study"] == 0).sum())
+        print(f"  {label:36s} L2'={int(f['l2_screened'].sum()):3d}  "
+              f"with study={int(f['has_study'].sum()):3d}  "
+              f"zero={z:3d} ({100 * z / len(f):.1f}%)")
+        if res.get("converged"):
+            t, v = res["terms"]["n_sources"], res["terms"]["log_l1"]
+            print(f"{'':4s}n_sources OR={t['or']:.3f} [{t['or_lo']:.3f}, {t['or_hi']:.3f}] "
+                  f"p={t['p']:.4f}    log_l1 OR={v['or']:.3f} "
+                  f"[{v['or_lo']:.3f}, {v['or_hi']:.3f}] p={v['p']:.4f}")
+        else:
+            print(f"{'':4s}model did not converge")
+    print(RULE)
+
     print("[Frame sensitivity] primary model refit under each source frame")
     counts = _read_counts()
     for label, mt in (("Tier1 (primary)", TIER_ORG), ("Tier1+2 (sens.)", TIER_INDIVIDUAL)):

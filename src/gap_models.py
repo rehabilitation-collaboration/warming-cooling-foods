@@ -111,6 +111,30 @@ def presence_logit(frame: pd.DataFrame, *, adjust_l1: bool = True) -> dict:
     }
 
 
+def predictor_vif(frame: pd.DataFrame) -> dict:
+    """Collinearity diagnostic for the primary model's two predictors.
+
+    Each predictor is regressed on the other and VIF = 1/(1 - R²), which is the
+    definition. A rank correlation between the predictors does not give one:
+    Spearman's rho measures monotone association, so squaring it is not the R²
+    of the linear fit the VIF is built from. The Pearson correlation actually
+    entering that fit is returned beside it.
+    """
+    import statsmodels.api as sm
+    from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+    cols = ["n_sources", "log_l1"]
+    X = sm.add_constant(frame[cols].astype(float), has_constant="add")
+    values = X.to_numpy()
+    vif = {
+        name: float(variance_inflation_factor(values, i))
+        for i, name in enumerate(X.columns)
+        if name != "const"
+    }
+    r = float(np.corrcoef(X["n_sources"], X["log_l1"])[0, 1])
+    return {"vif": vif, "pearson_r": r}
+
+
 def presence_logit_curve(
     frame: pd.DataFrame,
     l1_quantiles: tuple[float, ...] = (0.25, 0.5, 0.75),

@@ -93,6 +93,28 @@ def test_presence_logit_reports_failure_instead_of_raising():
     assert res["converged"] is False or res["terms"]["n_sources"]["p"] > 0.05
 
 
+# --- Collinearity diagnostic ----------------------------------------------
+def test_predictor_vif_is_one_for_an_orthogonal_design():
+    # Belief breadth and literature volume crossed evenly: no shared variance,
+    # so each predictor's VIF is exactly 1.
+    frame = gm.prepare_model_frame(_frame([1, 1, 9, 9], [0, 1, 0, 1], l1=[10, 10_000, 10, 10_000]))
+    res = gm.predictor_vif(frame)
+    assert res["pearson_r"] == pytest.approx(0.0, abs=1e-12)
+    assert res["vif"]["n_sources"] == pytest.approx(1.0, abs=1e-9)
+    assert res["vif"]["log_l1"] == pytest.approx(1.0, abs=1e-9)
+
+
+def test_predictor_vif_rises_when_the_predictors_track_each_other():
+    # A VIF must come from the linear fit between predictors. Squaring a rank
+    # correlation cannot produce this: the ranks here are perfectly monotonic in
+    # both frames, yet only the near-linear one carries a large VIF.
+    frame = gm.prepare_model_frame(_frame([1, 3, 6, 9], [0, 1, 0, 1], l1=[10, 100, 1_000, 10_000]))
+    res = gm.predictor_vif(frame)
+    assert res["pearson_r"] > 0.99
+    assert res["vif"]["n_sources"] > 5
+    assert res["vif"]["n_sources"] == pytest.approx(res["vif"]["log_l1"])
+
+
 # --- Sensitivity model ----------------------------------------------------
 def test_count_negbin_flags_overdispersion_and_fits():
     rng = np.random.default_rng(11)
