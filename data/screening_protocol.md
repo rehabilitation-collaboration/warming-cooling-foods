@@ -20,9 +20,32 @@ pubtypes. 2,772 records across 81 foods (2026-08-07 fetch; record count equals
 the esearch hit count for every food, 0 mismatch vs `pubmed_counts.csv` L2).
 
 **Extended after the food universe was widened (see §5):** the universe extension
-added 115 records across 26 further foods, so the screened set as reported is
-**2,887 records across 107 foods** (2,772 + 115 = 2,887; 81 + 26 = 107). The κ in
-§5 and every count in the manuscript are computed over that full 2,887.
+added 115 records across 26 further foods, so the screened set was
+**2,887 records across 107 foods** (2,772 + 115 = 2,887; 81 + 26 = 107).
+
+**Extended again by the recall rebuild (2026-08-08, third review round).** The
+effect vocabulary was four terms while §2 condition 3 accepted a far wider
+outcome set, so the query was narrower than its own inclusion rule and could not
+measure absence — demonstrably, since Fagundes 2021 (PMID 33487261), a
+randomised crossover trial of ginger measuring TEF, indirect calorimetry and
+axillary temperature, was retrieved by none of the four. The vocabulary was
+widened to 22 terms in one-to-one correspondence with the outcome classes §2.3
+accepts, and L2 was refetched for all 175 queryable foods:
+
+| | records | foods |
+|---|---|---|
+| four-term query (2026-08-07) | 2,887 | 107 |
+| 22-term query (2026-08-08) | **12,437** | **138** |
+
+The 22 terms are an OR-superset of the original four, verified against the
+records rather than the counts: every one of the 2,887 already-judged
+(food_key, pmid) pairs is still retrieved, none was lost, and the delta is
+**9,550 new pairs across 134 foods**. Those 9,550 are coded by two fresh coders
+under this same protocol; the 2,887 existing judgments are reused verbatim,
+because re-coding a record already judged would put two labels on one
+(food_key, pmid) key. The κ in §5 and every count in the manuscript are computed
+over the full 12,437.
+
 This is the complete L2 hit set; screening covers **all** queryable foods'
 records (not the GPT minimum of zero-count + top-count foods).
 
@@ -131,6 +154,37 @@ this is expected to be rare.
   rule above: an *isolated constituent of the food's own species* is `include`
   (constituent); a *different species in the same family* is `exclude`
   (species-mismatch).
+- **Sibling processed forms of one species** (added 2026-08-08 during the recall
+  rebuild, when the widened query put green-tea trials into `black tea`'s
+  candidate set): where two food_keys are *sibling* processed forms — neither is
+  a food-form of the other, they are alternative treatments of the same raw
+  material — a study of one is `exclude` (`species-mismatch`, naming the form)
+  under the other. This covers the *Camellia sinensis* keys `green tea`,
+  `black tea`, `oolong tea`, `pu-erh tea`, `hojicha`.
+  (Rationale: these are not merely distinct food_keys, they carry **opposite**
+  lay attributions — in `claims.csv`, green tea is cool 5/5 while black tea is
+  warm 6/7 and hojicha warm 5/6 — so crediting a green-tea trial to black tea
+  would attach evidence to the opposite claim, not just double-count it. The
+  rule is already implicit in the existing ledger: green tea/16366740, a
+  black-tea-extract supplement trial, is `include` under `black tea` and
+  `species-mismatch` under `green tea`. It is stated here because the four-term
+  query rarely produced cross-form candidates and the 22-term query does. It is
+  the same logic as `pepper` (*Piper nigrum*) versus `chili pepper` /
+  `bell pepper` (*Capsicum*), which are separate keys for the same reason.)
+  Where a record genuinely studies more than one form, or is a review whose
+  stated objective covers several, it is `include` under each form it actually
+  examines — as green tea/16580033 and black tea/16580033 already are.
+- **This is NOT a rule about base and derived forms.** Where one food_key is a
+  food-form *of* another, §2 condition 2 ("the food, a food-form of it, or its
+  principal dietary constituent") governs and the study counts for both. Worked
+  example: `mugicha` (roasted-barley infusion) is a food-form of `barley`, so
+  the roasted-barley-extract skin-temperature trials count under both keys —
+  as barley/30814418 and mugicha/30814418 already do. Sibling forms exclude each
+  other; a derived form does not exclude its base. The two cases are separated
+  here because the widened query surfaced both at once and they pull opposite
+  ways. (Consequence to keep in view: a handful of records are therefore counted
+  under two foods. This is a deliberate consequence of §2.2, not an error, but it
+  means L2′ across foods is not a partition of the record set.)
 - **Reviews / meta-analyses of human thermal-ingestion evidence**: `include`
   with `review` sub-label (counted, but flagged so a primary-only sensitivity
   count is possible — avoids double-counting concerns). A review is on-construct
@@ -205,11 +259,15 @@ reported in Methods.
   | Golden foods (chicken, ginger, coffee, chili pepper, salt) | 623 | `claude-sonnet-4-6` | `claude-opus-4-7` |
   | Remaining 76 foods (8 bundles) | 2,149 | `claude-sonnet-5` | `claude-opus-5` |
   | Universe extension (26 foods) | 115 | `claude-sonnet-5` | `claude-opus-5` |
+  | Recall rebuild — records the 22-term query added (134 foods, 24 bundles) | 9,550 | `claude-sonnet-5` | `claude-opus-5` |
 
   The model versions differ between batches because the screening ran across
   several working sessions as the available models changed; within every batch
-  the two coders are contemporaneous. Kappa is computed over
-  all 2,887 co-coded records regardless of batch.
+  the two coders are contemporaneous. The recall-rebuild batch deliberately
+  reuses the same two tiers as the batches that carry most of the existing
+  judgments, so the widened record set is judged by the same instrument as the
+  set it extends. Kappa is computed over all co-coded records regardless of
+  batch.
 - Codings are reconciled on the `pmid` key. **Cohen's κ is computed on the
   co-coded records** (both coders labelled), categories = {include, exclude}.
   Coverage differences (a pmid only one coder returned) are reported separately
