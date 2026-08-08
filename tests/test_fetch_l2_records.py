@@ -7,7 +7,10 @@ are skipped, and the cache-first path avoids the network. All network access is
 stubbed via ``_get_json`` / ``_get_xml`` — fully offline.
 """
 
+import json
+
 import pandas as pd
+import pytest
 
 from src import fetch_l2_records as fr
 
@@ -157,18 +160,28 @@ def test_collect_skips_composite_and_flattens_records(monkeypatch, tmp_path):
     assert df.iloc[0]["scope"] == "core"
 
 
-def test_collect_is_cache_first(monkeypatch, tmp_path):
+_CACHED_REC = {"pmid": "999", "title": "cached", "abstract": "a", "journal": "j", "pubtypes": ""}
+
+
+def _cache_setup(monkeypatch, tmp_path, payload):
+    """Point the collector at one cache file holding ``payload``."""
     _tiny_inputs(monkeypatch)
     monkeypatch.setattr(fr, "is_queryable", lambda f: f != "spices")
     monkeypatch.setattr(fr, "QUERY_LOG_DIR", tmp_path)
     cache = tmp_path / "chicken.json"
     monkeypatch.setattr(fr, "_records_raw_path", lambda f: cache)
-    pd.DataFrame(
-        [{"pmid": "999", "title": "cached", "abstract": "a", "journal": "j", "pubtypes": ""}]
-    ).to_json(cache, orient="records")
+    cache.write_text(json.dumps(payload), encoding="utf-8")
+    return cache
+
+
+def test_collect_is_cache_first_when_the_query_matches(monkeypatch, tmp_path):
+    _cache_setup(monkeypatch, tmp_path, {
+        "_query": fr.pubmed_query("chicken", "L2"),
+        "records": [_CACHED_REC],
+    })
 
     def boom(*a, **k):
-        raise AssertionError("network must not be hit when cache exists")
+        raise AssertionError("network must not be hit when the cached query matches")
     monkeypatch.setattr(fr, "_get_json", boom)
     monkeypatch.setattr(fr, "_get_xml", boom)
 
@@ -177,3 +190,54 @@ def test_collect_is_cache_first(monkeypatch, tmp_path):
         sleep=lambda s: None,
     )
     assert list(df["pmid"]) == ["999"]
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        pytest.param({"_query": "chicken[tiab] AND thermogenesis[tiab]",
+                      "records": [_CACHED_REC]}, id="different-query"),
+        pytest.param([_CACHED_REC], id="legacy-untagged-list"),
+    ],
+)
+def test_collect_refetches_when_the_cache_was_built_by_another_query(
+    monkeypatch, tmp_path, payload
+):
+    """A stale record set must never be reused after the query widens.
+
+    This is the failure mode that has no error to notice: the collector would
+    finish cleanly and leave the record count exactly where it was, so the
+    screening input would silently stay narrower than the query it claims.
+    """
+    _cache_setup(monkeypatch, tmp_path, payload)
+    monkeypatch.setattr(
+        fr, "_get_json", lambda url, params: {"esearchresult": {"idlist": ["111", "222"]}}
+    )
+    monkeypatch.setattr(fr, "_get_xml", lambda url, params: _XML)
+
+    df, _ = fr.collect_l2_records(
+        pd.DataFrame(), pd.DataFrame(), save_raw=False, reuse_cache=True,
+        sleep=lambda s: None,
+    )
+    assert list(df["pmid"]) == ["111", "222", "333"]  # refetched, not the cached 999
+
+
+def test_collect_writes_the_query_into_the_cache(monkeypatch, tmp_path):
+    # Without this the next run cannot tell what the cache was built from.
+    _tiny_inputs(monkeypatch)
+    monkeypatch.setattr(fr, "is_queryable", lambda f: f != "spices")
+    monkeypatch.setattr(fr, "QUERY_LOG_DIR", tmp_path)
+    cache = tmp_path / "chicken.json"
+    monkeypatch.setattr(fr, "_records_raw_path", lambda f: cache)
+    monkeypatch.setattr(
+        fr, "_get_json", lambda url, params: {"esearchresult": {"idlist": ["111"]}}
+    )
+    monkeypatch.setattr(fr, "_get_xml", lambda url, params: _XML)
+
+    fr.collect_l2_records(
+        pd.DataFrame(), pd.DataFrame(), save_raw=True, reuse_cache=False,
+        sleep=lambda s: None,
+    )
+    written = json.loads(cache.read_text())
+    assert written["_query"] == fr.pubmed_query("chicken", "L2")
+    assert isinstance(written["records"], list)

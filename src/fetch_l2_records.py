@@ -25,6 +25,7 @@ monkeypatch them and run fully offline, mirroring ``evidence_mapping.py``.
 
 from __future__ import annotations
 
+import json
 import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -165,6 +166,30 @@ def _records_raw_path(food_key: str) -> Path:
     return QUERY_LOG_DIR / f"pubmed_{_slug(food_key)}_L2_records.json"
 
 
+def _cached_records(path: Path, query: str) -> list[dict] | None:
+    """Read cached efetch records back, or None to force a refetch.
+
+    Returns None unless the cache records the query that produced it *and* that
+    query matches. Two things differ from the count cache in
+    ``evidence_mapping``. The payload is wrapped as
+    ``{"_query": ..., "records": [...]}`` rather than a bare list, so the tag
+    has somewhere to live. And an untagged legacy file is **not** honoured here:
+    these records are the screening input, and screening a record set fetched
+    under a narrower query is precisely the silent failure this guard exists to
+    stop — it would finish without error and leave the count unchanged.
+    """
+    if not path.exists():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return None
+    if not isinstance(data, dict) or data.get("_query") != query:
+        return None
+    records = data.get("records")
+    return records if isinstance(records, list) else None
+
+
 def collect_l2_records(
     claims: pd.DataFrame,
     sources: pd.DataFrame,
@@ -193,16 +218,16 @@ def collect_l2_records(
             continue
 
         cache = _records_raw_path(food)
-        if reuse_cache and cache.exists():
-            recs = pd.read_json(cache, orient="records").to_dict("records")
-        else:
-            query = pubmed_query(food, "L2")
+        query = pubmed_query(food, "L2")
+        recs = _cached_records(cache, query) if reuse_cache else None
+        if recs is None:
             pmids, _ = esearch_pmids(query)
             sleep(PUBMED_DELAY)
             recs = efetch_records(pmids, sleep=sleep)
             if save_raw:
-                pd.DataFrame(recs).to_json(
-                    cache, orient="records", force_ascii=False, indent=2
+                cache.write_text(
+                    json.dumps({"_query": query, "records": recs}, ensure_ascii=False, indent=2),
+                    encoding="utf-8",
                 )
 
         for r in recs:
