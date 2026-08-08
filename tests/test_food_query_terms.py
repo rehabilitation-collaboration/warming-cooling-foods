@@ -17,15 +17,36 @@ from src.food_query_terms import (
 )
 
 
-def test_effect_vocab_is_the_four_frozen_terms():
-    # Frozen at four after the 2026-08-04 hit-count check (cold-sensitivity terms
-    # were rejected as crop-agronomy noise). Guards against silent re-expansion.
-    assert EFFECT_TERMS == (
-        "thermogenesis",
-        "body temperature",
-        "peripheral circulation",
-        "thermoregulation",
-    )
+def test_effect_vocab_covers_every_accepted_outcome_class():
+    """The query has to be at least as wide as the screen it feeds.
+
+    Widened from four terms to twenty-two on 2026-08-08. The four-term set was
+    narrower than `screening_protocol.md` §2 condition 3, so a study could be
+    absent for never having been offered the criterion it met — demonstrated by
+    Fagundes 2021, a ginger crossover trial measuring TEF, indirect calorimetry
+    and axillary temperature, which none of the four terms retrieve. This test
+    pins one term per accepted outcome class so the vocabulary cannot silently
+    narrow back below the inclusion rule.
+    """
+    assert len(EFFECT_TERMS) == 22
+    assert len(set(EFFECT_TERMS)) == 22, "duplicate effect term"
+    for required in (
+        "body temperature", "core temperature", "skin temperature",
+        "tympanic temperature", "axillary temperature",   # §2.3 temperature sites
+        "thermogenesis", "thermic effect",                 # §2.3 thermogenesis/TEF
+        "energy expenditure",                              # §2.3 EE in thermogenic context
+        "peripheral circulation", "blood flow", "microcirculation",
+        "thermoregulation", "cold tolerance",
+        "thermal sensation", "cold sensitivity",           # §2.3 subjective
+    ):
+        assert required in EFFECT_TERMS, f"{required!r} dropped from the effect vocabulary"
+
+
+def test_effect_vocab_retains_the_terms_that_recover_the_known_miss():
+    # Fagundes 2021 is retrieved only via these two. Losing either reopens the
+    # false negative the 2026-08-08 widening exists to close.
+    assert "axillary temperature" in EFFECT_TERMS
+    assert "energy expenditure" in EFFECT_TERMS
 
 
 def test_plain_food_uses_bare_name_only():

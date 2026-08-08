@@ -4,6 +4,7 @@
     "version": "0.3"
   },
   "esearchresult": {
-    "count": "2"
-  }
+    "count": "3"
+  },
+  "_query": "(hijiki[tiab] OR \"Sargassum fusiforme\"[tiab]) AND (\"body temperature\"[tiab] OR \"core temperature\"[tiab] OR \"skin temperature\"[tiab] OR \"tympanic temperature\"[tiab] OR \"axillary temperature\"[tiab] OR \"rectal temperature\"[tiab] OR \"oral temperature\"[tiab] OR thermogenesis[tiab] OR \"thermic effect\"[tiab] OR \"heat production\"[tiab] OR \"energy expenditure\"[tiab] OR \"metabolic rate\"[tiab] OR \"peripheral circulation\"[tiab] OR \"blood flow\"[tiab] OR microcirculation[tiab] OR thermoregulation[tiab] OR \"cold tolerance\"[tiab] OR \"cold exposure\"[tiab] OR \"thermal sensation\"[tiab] OR \"thermal comfort\"[tiab] OR \"cold sensitivity\"[tiab] OR \"cold hypersensitivity\"[tiab])"
 }

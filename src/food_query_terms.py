@@ -26,22 +26,59 @@ unit-testable. The actual API calls live in ``evidence_mapping.py``.
 from __future__ import annotations
 
 # --- Effect vocabulary (Axis B, Layer 2) ---------------------------------
-# The "in the claimed context" filter, frozen after a one-off PubMed hit-count
-# sanity check (PLAN Phase 2). These four PLAN-fixed terms are the whole set.
+# The "in the claimed context" filter. One term per outcome the screening
+# protocol will accept, because the two have to be the same width.
 #
-# We tested adding "cold sensitivity" / "cold intolerance" to capture the 冷え性
-# framing of Japanese 温活 belief, but rejected them: on PubMed those terms pull
-# in plant low-temperature-tolerance agronomy (e.g. tomato +10 hits, all "cold
-# tolerance / chilling tolerance" crop-physiology papers — verified 2026-08-04),
-# which is noise for a human-thermal-effect count. Meanwhile the human 冷え性
-# terms they were meant to rescue ("cold hypersensitivity" / "cold extremities")
-# returned 0 hits for ginger outside the four core terms — i.e. nothing real was
-# being missed. Net: adding them only injects crop-agronomy noise. Kept at four.
+# They were not, until 2026-08-08. The set was four terms (thermogenesis, body
+# temperature, peripheral circulation, thermoregulation) chosen to keep the
+# candidate pool clean, while `screening_protocol.md` §2 condition 3 accepts a
+# much wider outcome set — tympanic and axillary temperature, thermic effect of
+# food, energy expenditure in a thermogenic context, blood flow and
+# microcirculation, cold tolerance, subjective thermal sensation. A query
+# narrower than its own inclusion rule cannot measure absence: a study can only
+# be excluded on a criterion it was never given the chance to meet. This is not
+# hypothetical — Fagundes 2021 (PMID 33487261), a randomised crossover trial of
+# ginger measuring TEF, indirect calorimetry and axillary temperature, is
+# retrieved by "axillary temperature" and "energy expenditure" and by none of
+# the original four (verified 2026-08-08).
+#
+# The earlier argument for staying at four was that "cold tolerance"-type terms
+# inject crop-agronomy noise. That is real and measured — "cold tolerance" alone
+# returns 156 tomato hits, essentially all plant chilling physiology — but it is
+# an argument about precision, and this design screens every candidate record by
+# hand-fixed criteria. Recall is what a query has to buy; precision is what the
+# screen is for. Noise costs screening effort, a missed study costs the outcome.
+#
+# Grouped by the protocol condition each term serves.
 EFFECT_TERMS: tuple[str, ...] = (
-    "thermogenesis",
+    # §2.3 — core / peripheral / skin / tympanic / axillary body temperature
     "body temperature",
+    "core temperature",
+    "skin temperature",
+    "tympanic temperature",
+    "axillary temperature",
+    "rectal temperature",
+    "oral temperature",
+    # §2.3 — thermogenesis, diet-induced thermogenesis, thermic effect of food
+    "thermogenesis",
+    "thermic effect",
+    "heat production",
+    # §2.3 — resting/postprandial energy expenditure in a thermogenic context
+    "energy expenditure",
+    "metabolic rate",
+    # §2.3 — peripheral circulation / blood flow / microcirculation
     "peripheral circulation",
+    "blood flow",
+    "microcirculation",
+    # §2.3 — thermoregulation / cold tolerance / cold-induced responses
     "thermoregulation",
+    "cold tolerance",
+    "cold exposure",
+    # §2.3 — subjective thermal sensation, cold sensitivity (冷え)
+    "thermal sensation",
+    "thermal comfort",
+    "cold sensitivity",
+    "cold hypersensitivity",
 )
 
 # --- Per-food synonym overrides ------------------------------------------

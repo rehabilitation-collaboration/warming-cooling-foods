@@ -49,7 +49,11 @@ USER_AGENT = (
     f"contact: {CONTACT_EMAIL})"
 )
 REQUEST_TIMEOUT = 30  # seconds
-PUBMED_DELAY = 0.34   # keep under NCBI's 3 req/s ceiling (no API key)
+# NCBI allows 3 req/s without an API key. 0.34 s sits at 2.94 req/s, which is
+# under the ceiling on paper and trips it in practice on a long unbroken run —
+# a rate-limited reply omits `count` and the parse dies mid-collection. The
+# margin is worth more than the minutes: this runs once per query change.
+PUBMED_DELAY = 0.5
 
 # n_sources thresholds. core = independent belief established (≥3);
 # sensitivity = 2; single = 1. Foods seen by a single source were originally
@@ -183,23 +187,45 @@ def _raw_path(api: str, food_key: str, layer: str):
     return QUERY_LOG_DIR / f"{api}_{_slug(food_key)}_{layer}.json"
 
 
-def _save_raw(api: str, food_key: str, layer: str, data: dict) -> None:
+def _save_raw(api: str, food_key: str, layer: str, data: dict, query: str | None = None) -> None:
+    """Persist a raw API response, tagged with the query that produced it.
+
+    The tag is what makes the cache safe to reuse. The filename is keyed on
+    (api, food, layer) only, so without it a changed query silently reads back
+    the previous query's count — which is exactly what happened when the effect
+    vocabulary was widened on 2026-08-08.
+    """
+    payload = dict(data)
+    if query is not None:
+        payload["_query"] = query
     _raw_path(api, food_key, layer).write_text(
-        json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+        json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
 
-def _cached_count(api: str, food_key: str, layer: str, parse) -> int | None:
-    """Read a count back from a saved query_log JSON, or None if absent/unreadable.
+def _cached_count(
+    api: str, food_key: str, layer: str, parse, query: str | None = None
+) -> int | None:
+    """Read a count back from a saved query_log JSON, or None to force a refetch.
 
     Lets a re-run reuse already-fetched counts instead of re-hitting the APIs —
     both for idempotence and to avoid re-spending OpenAlex's small daily quota.
+
+    Returns None when the cached response was produced by a *different* query,
+    so changing the query invalidates its own cache. Files written before this
+    tagging existed carry no ``_query`` and are still honoured: dropping them
+    would force a full refetch of layers whose query has not changed, and the
+    one layer that did change is being refetched deliberately.
     """
     path = _raw_path(api, food_key, layer)
     if not path.exists():
         return None
     try:
-        return parse(json.loads(path.read_text(encoding="utf-8")))
+        data = json.loads(path.read_text(encoding="utf-8"))
+        cached_query = data.get("_query") if isinstance(data, dict) else None
+        if query is not None and cached_query is not None and cached_query != query:
+            return None
+        return parse(data)
     except (ValueError, KeyError, OSError):
         return None
 
@@ -249,24 +275,32 @@ def collect_counts(
         pubmed: dict[str, tuple[int, str]] = {}
         for layer in ("L1", "L2", "L3"):
             q = pubmed_query(food, layer, with_mesh=with_mesh)
-            cached = _cached_count("pubmed", food, layer, _parse_pubmed) if reuse_cache else None
+            cached = (
+                _cached_count("pubmed", food, layer, _parse_pubmed, query=q)
+                if reuse_cache
+                else None
+            )
             if cached is not None:
                 pubmed[layer] = (cached, q)
                 continue
             n, raw = pubmed_count(q)
             if save_raw:
-                _save_raw("pubmed", food, layer, raw)
+                _save_raw("pubmed", food, layer, raw, query=q)
             pubmed[layer] = (n, q)
             sleep(PUBMED_DELAY)
 
         # OpenAlex (auxiliary, L2-equivalent full-text) — tolerate failures.
         oa_q = openalex_query(food, with_mesh=with_mesh)
-        oa_n: int | str = _cached_count("openalex", food, "L2", _parse_openalex) if reuse_cache else None
+        oa_n: int | str = (
+            _cached_count("openalex", food, "L2", _parse_openalex, query=oa_q)
+            if reuse_cache
+            else None
+        )
         if oa_n is None:
             try:
                 oa_n, oa_raw = openalex_count(oa_q)
                 if save_raw:
-                    _save_raw("openalex", food, "L2", oa_raw)
+                    _save_raw("openalex", food, "L2", oa_raw, query=oa_q)
             except (requests.RequestException, ValueError, KeyError):
                 oa_n = ""
                 aux_missing.append(f"openalex:{food}")
@@ -276,12 +310,16 @@ def collect_counts(
         ci_n: int | str = ""
         ci_q = food_ja
         if food_ja:
-            ci_n = _cached_count("cinii", food, "L1", _parse_cinii) if reuse_cache else None
+            ci_n = (
+                _cached_count("cinii", food, "L1", _parse_cinii, query=ci_q)
+                if reuse_cache
+                else None
+            )
             if ci_n is None:
                 try:
                     ci_n, ci_raw = cinii_count(ci_q, appid)
                     if save_raw:
-                        _save_raw("cinii", food, "L1", ci_raw)
+                        _save_raw("cinii", food, "L1", ci_raw, query=ci_q)
                 except (requests.RequestException, ValueError, KeyError):
                     ci_n = ""
                     aux_missing.append(f"cinii:{food}")
