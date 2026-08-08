@@ -83,6 +83,42 @@ GRADE/PRISMA risk-of-bias; it is construct-validity screening only). A short
 4. **The outcome is attributable to the food/constituent** (single-arm or
    controlled; the food is the exposure of interest).
 
+#### What condition 3 does and does not reach (clarified 2026-08-08)
+
+The widened query multiplied the number of records where a *vascular* or an
+*energy-expenditure* measurement exists but is not a thermal readout, and the two
+coders drew the line differently: 148 of the 174 divergences in the recall-rebuild
+batch turn on this one question. The wording above already settles it — these
+three notes make explicit what "peripheral", "extremity" and "reported in a
+thermogenesis or body-warming context" were doing, and no outcome class is added
+or removed by them.
+
+- **Vascular bed.** "Peripheral circulation / blood flow / microcirculation /
+  extremity warming" reaches the **skin and the limbs** — cutaneous perfusion,
+  skin blood flow, forearm / calf / hand / foot flow, skin microcirculation,
+  extremity rewarming. It does **not** reach organ-specific perfusion measured
+  for a non-thermal purpose: cerebral, coronary, renal, hepatic, retinal or
+  ocular, and sublingual flow are `no-thermal`. (Rationale: Axis A's claim is that
+  the body feels warm or cold, and skin and extremity perfusion is that
+  sensation's substrate; cerebral or renal perfusion is not. Without this line any
+  vascular-function trial of any food becomes an include and L2′ fills with
+  endothelial-function literature that the folk claim never addressed.)
+- **Energy expenditure.** EE / RMR / BMR qualifies only where the paper frames it
+  as thermogenesis, diet-induced thermogenesis, thermic effect of food or the
+  food's thermogenic effect. EE appearing as a covariate, as the denominator of an
+  exercise energy balance, as a body-composition or weight-loss endpoint, or as a
+  frailty criterion is `no-thermal`.
+- **Reactivity probes.** A pharmacological endothelial probe — acetylcholine,
+  sodium nitroprusside, methacholine or insulin-stimulated limb flow, or
+  flow-mediated dilatation — read in a hypertension or endothelial-function
+  framing is an endothelial endpoint, not a thermal one: `no-thermal`. **Local
+  thermal hyperaemia** (the skin's perfusion response to local heating) is thermal
+  by construction and qualifies.
+
+Because coders who *agree* on a wrong include are never routed to adjudication
+(§5), these three notes were also applied as a single sweep across every include
+in the ledger, not only across the divergences.
+
 ### EXCLUDE — any one triggers exclusion
 
 - `animal` — non-human subjects (poultry, rodents, livestock, fish, companion

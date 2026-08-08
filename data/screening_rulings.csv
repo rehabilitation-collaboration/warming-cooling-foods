@@ -1,0 +1,125 @@
+food_key,pmid,final_label,rationale,batch
+almond,41691115,exclude,no-thermal: cerebral blood flow (pCASL MRI) is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+apple,1973329,exclude,no-thermal: apple juice is one component of a mixed carbohydrate test meal with no apple-specific readout (§3 whole-diet rule),2026-08-08 recall rebuild
+apple,32731478,exclude,"no-thermal: cerebral blood flow, and the apple extract is one of several botanicals in the drink is outside the peripheral/extremity scope of §2.3",2026-08-08 recall rebuild
+beef,12197993,exclude,"no-thermal: resting energy expenditure is a body-composition outcome of a resistive-training trial, not read as a thermogenic effect of beef (§2.3 energy-expenditure qualifier)",2026-08-08 recall rebuild
+beef,36307956,exclude,"no-thermal: resting energy expenditure is read as metabolic adaptation during weight-loss maintenance, not as a thermogenic effect of beef (§2.3 energy-expenditure qualifier)",2026-08-08 recall rebuild
+beef,3963200,exclude,no-thermal: renal plasma and renal blood flow is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+beer,29501558,exclude,"name-only: sensory-acceptability study; biometrics index liking, and no thermal MeSH is indexed",2026-08-07
+bell pepper,23179202,exclude,"name-only: bell pepper is the non-pungent control arm against chilli, not the exposure of interest (§2 criterion 4)",2026-08-07
+brown rice,41528201,exclude,"name-only: brown rice is the control arm against anthocyanin-rich black rice, not the exposure of interest (§2 criterion 4)",2026-08-08 recall rebuild
+brown sugar,32804018,exclude,"animal: MeSH Animals/Rats; the outcome is metabolic endotoxemia, with no thermal readout",2026-08-08 recall rebuild
+cabbage,12343033,exclude,name-only: title-only iodine-deficiency review; no thermal outcome indexed,2026-08-08 recall rebuild
+chicken,11676025,include,"human adults, oral chicken essence tablets vs skim-milk-protein control: resting energy expenditure raised with the thermogenic effect sustained over an hour (MeSH Humans/Adult/Administration, Oral/Basal Metabolism/Thermogenesis; species settled on MeSH, abstract states none)",2026-08-08 recall rebuild
+chili pepper,17151481,include,"human repeated intake of the non-pungent Capsicum annuum cultivar CH-19 Sweet: energy expenditure enhanced as with pungent red pepper, with the sympathetic response measured after ingestion; capsinoids stand in for capsaicin (§3 constituent rule). Body weight and fat are the stated objective, so a primary-only sensitivity count may wish to drop it",2026-08-08 recall rebuild
+chili pepper,33789250,include,"review-subject: stated objective is the effect on energy metabolism (§3 review rule), human evidence",2026-08-07
+chili pepper,40092148,exclude,"name-only: broad cold-weather military nutrition review, red pepper not the subject",2026-08-07
+cinnamon,32980484,exclude,animal: MeSH Animals/Mice; abstract states no species,2026-08-07
+cinnamon,33388379,exclude,animal: MeSH Animals/Mice/Rats; abstract states no species,2026-08-07
+cocoa,16794461,exclude,no-thermal: the fMRI BOLD response with pilot cerebral blood flow is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+cocoa,16794462,exclude,"no-thermal: title-only comment on cerebral blood flow, which is outside the peripheral/extremity scope of §2.3",2026-08-08 recall rebuild
+cocoa,18728792,exclude,no-thermal: cerebral blood flow velocity (transcranial Doppler) is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+cocoa,20587424,exclude,no-thermal: brain blood flow; the paper is a TCD-versus-MRI method comparison is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+cocoa,23925758,exclude,no-thermal: neurovascular coupling in a cerebral artery is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+cocoa,26042037,exclude,no-thermal: cerebral blood flow among cardiovascular outcomes is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+cocoa,26047963,exclude,no-thermal: cerebral perfusion (arterial spin labelling) is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+cocoa,27849355,exclude,no-thermal: prefrontal cerebral oxygenation is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+cocoa,40647204,exclude,"no-thermal: common carotid artery flow, a conduit to the brain rather than a skin or limb bed is outside the peripheral/extremity scope of §2.3",2026-08-08 recall rebuild
+coffee,10666980,exclude,no-thermal: middle cerebral artery velocity is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,12051309,exclude,no-thermal: middle cerebral artery velocity is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,15674743,exclude,no-thermal: myocardial blood flow is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,16242134,exclude,"no-thermal: maternal, placental and fetal blood flow is outside the peripheral/extremity scope of §2.3",2026-08-08 recall rebuild
+coffee,16412869,exclude,no-thermal: myocardial blood flow and flow reserve is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,17094121,exclude,no-thermal: resting cerebral perfusion is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,19479069,exclude,no-thermal: myocardial blood flow and perfusion reserve is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,20583359,exclude,"name-only: consumer question-and-answer item on coffee and migraine, no study and no thermal outcome",2026-08-08 recall rebuild
+coffee,23486295,exclude,no-thermal: regional cerebral blood flow is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,23764265,exclude,"no-thermal: exercise myocardial blood flow, which the review takes as its objective is outside the peripheral/extremity scope of §2.3",2026-08-08 recall rebuild
+coffee,26919845,exclude,no-thermal: middle cerebral artery velocity and cerebral autoregulation is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,27653024,exclude,no-thermal: retinal vessel calibre is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,28526782,exclude,no-thermal: middle cerebral artery velocity and cerebrovascular conductance is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,29528697,exclude,"no-thermal: editorial reading energy expenditure as an explanation for mortality, not as a thermogenic outcome (§2.3 energy-expenditure qualifier)",2026-08-08 recall rebuild
+coffee,30275380,exclude,"no-thermal: cerebral blood flow, from self-reported intake rather than an administered dose is outside the peripheral/extremity scope of §2.3",2026-08-08 recall rebuild
+coffee,30488978,exclude,no-thermal: cerebral circulation and blood arrival times in one subject is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,32494265,exclude,no-thermal: fetal renal artery flow is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,32731478,exclude,"no-thermal: cerebral blood flow, and the coffee-berry extract is one of several botanicals in the drink is outside the peripheral/extremity scope of §2.3",2026-08-08 recall rebuild
+coffee,33362252,exclude,no-thermal: sublingual microcirculation; the paper is a reproducibility study of the measuring system is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,33735377,exclude,no-thermal: choroidal circulation is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,35754146,exclude,no-thermal: cerebral blood flow and blood-brain-barrier water permeability is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,36198039,exclude,no-thermal: macular and optic nerve head microcirculation is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,36451130,exclude,no-thermal: retinal capillary perfusion is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,39519525,exclude,"name-only: bibliometric mapping of the caffeine-in-heat literature, not thermal-ingestion evidence",2026-08-07
+coffee,39862363,exclude,no-thermal: cerebral blood flow and blood-brain-barrier water exchange is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,40451152,exclude,"no-thermal: the outcome is time to water-immersion skin wrinkling, an autonomic and eccrine readout; the water temperatures are the stimulus, not an effect of the caffeine",2026-08-08 recall rebuild
+coffee,41690354,exclude,no-thermal: retinal and choroidal microcirculation is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+coffee,42365534,exclude,no-thermal: superior mesenteric artery and portal vein flow is outside the peripheral/extremity scope of §2.3,2026-08-08 recall rebuild
+corn,23941499,exclude,"name-only: high-fructose sweeteners are an industrial isomerisation product, not a food-form of corn (cf. corn oil/starch)",2026-08-07
+corn,39779022,exclude,animal: MeSH Animals; abstract states no species,2026-08-08 recall rebuild
+egg,12346325,exclude,"name-only: title-only RU-486 item, unrelated to egg ingestion",2026-08-08 recall rebuild
+egg,35876899,exclude,"no-thermal: egg-white lysozyme fibril hydrogel; no thermal outcome, so the record fails condition 3 whatever the species",2026-08-08 recall rebuild
+egg,6552612,exclude,"name-only: midwifery forum piece, no thermal MeSH indexed",2026-08-07
+ginger,29259648,exclude,animal: 33 rabbits per PMC full text (IACUC BUCM-3-2015032502-1002); abstract states no species,2026-08-07
+ginger,33789250,include,"review-subject: stated objective is the effect on energy metabolism (§3 review rule), human evidence",2026-08-07
+ginger,3570866,include,"human adults, dietary ginger and metabolic rate (MeSH Humans/Adult/Condiments/Diet/Body Temperature Regulation/Metabolism, all major); no abstract, so settled on MeSH and title per §2",2026-08-08 recall rebuild
+ginger,39259072,exclude,"no-thermal: ginger RCT in COVID-19 outpatients, outcomes are viral clearance and symptoms",2026-08-07
+ginger,40092148,exclude,"name-only: broad cold-weather military nutrition review, ginger not the subject",2026-08-07
+green tea,10702779,exclude,"animal: MeSH Animals/Rats (Dulloo 2000); the abstract states no species, so coder 2's uncertain-species hold was right",2026-08-07
+green tea,11924761,exclude,"name-only: review whose stated objective is obesity/weight-loss, thermogenesis only a listed mechanism (§3)",2026-08-07
+green tea,13678386,include,"healthy Japanese women, crossover of oolong tea vs green tea vs water with energy expenditure by indirect calorimetry: green tea is one of the administered arms and its energy expenditure was measured, so §3 counts it under this form as well as under oolong tea",2026-08-08 recall rebuild
+green tea,20156466,exclude,"name-only: review whose stated objective is obesity/weight-loss, thermogenesis only a listed mechanism (§3)",2026-08-07
+green tea,26421678,exclude,"name-only: review whose stated objective is obesity/weight-loss, thermogenesis only a listed mechanism (§3)",2026-08-07
+green tea,37450930,exclude,"name-only: review whose stated objective is obesity/weight-loss, thermogenesis only a listed mechanism (§3)",2026-08-07
+kombu,14583417,exclude,no-thermal: basal metabolic rate is read as a thyroid-function endpoint rather than in a thermogenesis context (§2.3 energy-expenditure qualifier); the supplement is also a generic kelp whose species is not established as Laminaria,2026-08-08 recall rebuild
+milk,14115557,exclude,"name-only: body temperature is the febrile response to measles vaccine, not a thermal effect of the milk",2026-08-07
+milk,14314552,exclude,"name-only: brain temperature and arousal, unrelated to milk ingestion",2026-08-07
+milk,1658697,exclude,animal: MeSH Animals; the record is a fungal-phytase phosphorus-bioavailability study,2026-08-08 recall rebuild
+milk,19868175,exclude,"no-thermal: serum and lymph ferment titres after a milk meal, no thermal outcome measured",2026-08-08 recall rebuild
+milk,2428285,exclude,"name-only: review of low-birthweight infant care, no thermal outcome indexed",2026-08-07
+milk,3478916,exclude,"name-only: neonatal care service report, no thermal outcome indexed",2026-08-07
+milk,38486985,exclude,"name-only: commentary on mammary beige-adipocyte biology, not milk ingestion",2026-08-07
+milk,4002723,exclude,"no-thermal: neonatal feeding RCT on drinking behaviour/weight; body temperature is routine monitoring, no thermal MeSH",2026-08-07
+milk,6135402,exclude,"animal: MeSH Animals/Goats, and the route is intramammary infusion rather than ingestion",2026-08-08 recall rebuild
+milk,9653858,exclude,"name-only: knowledge-attitude-practice survey of pregnant women, no thermal outcome",2026-08-08 recall rebuild
+oolong tea,20142827,exclude,"name-only: review whose stated objective is obesity/weight-loss, thermogenesis only the proposed mechanism (§3)",2026-08-07
+orange,1885267,exclude,"name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",2026-08-07
+orange,26856274,exclude,"species-mismatch: the thermogenic agent reviewed is bitter orange (Citrus aurantium/p-synephrine), not sweet orange",2026-08-07
+orange,34409177,exclude,"name-only: review whose stated objective is obesity/weight-loss, thermogenesis only a listed mechanism (§3)",2026-08-07
+orange,7816004,exclude,"name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",2026-08-07
+pepper,10211048,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,11227803,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,11676017,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,17341828,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,20925950,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,21093467,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,23179202,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,23844093,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,24100669,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,24267043,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,33063385,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,33789250,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,38571755,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,3957721,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+pepper,42186269,exclude,species-mismatch: Capsicum study; `pepper` is Piper nigrum and chili/bell pepper are separate food_keys (§3),2026-08-07
+rapeseed oil,11756059,exclude,"name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",2026-08-07
+rapeseed oil,12775122,exclude,"name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",2026-08-07
+rapeseed oil,14718746,exclude,"name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",2026-08-07
+rapeseed oil,27430386,exclude,"name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",2026-08-07
+red wine,16614284,exclude,"no-thermal: coronary microcirculation, which is outside the peripheral/extremity scope of §2.3",2026-08-08 recall rebuild
+salt,12343033,exclude,name-only: title-only iodine-deficiency review; no thermal outcome indexed,2026-08-08 recall rebuild
+salt,14284848,exclude,"name-only: title-only item on mercurial diuretics and oedema, salt is not the exposure",2026-08-08 recall rebuild
+salt,23253191,include,"human RCT, 10 cyclists: oral sodium+water, forearm skin blood flow and sweat rate measured [constituent]",2026-08-07
+salt,25729305,include,"human, 11 endurance athletes: oral sodium supplementation, thermoregulation indices [constituent]",2026-08-07
+salt,28381536,exclude,name-only: one-line commentary; salt is named but nothing thermal about intake is studied,2026-08-08 recall rebuild
+salt,32965747,exclude,"name-only: title-only comment on low-salt diet and renal safety, no thermal outcome",2026-08-08 recall rebuild
+salt,3349990,exclude,"name-only: the exposure of interest is forced water intake (phase II is water alone), not salt (§2 criterion 4)",2026-08-07
+salt,34499623,exclude,"name-only: the match is the ketone-salt chemical form, not dietary salt (§2 criterion 4)",2026-08-08 recall rebuild
+salt,34731601,exclude,animal: MeSH Animals/Rats; acute salt loading and hypothalamic neurovascular coupling,2026-08-08 recall rebuild
+soybean,12775122,exclude,"name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",2026-08-07
+spinach,1745900,exclude,"name-only: iron deficiency review, no thermal outcome indexed",2026-08-07
+squid,18344261,exclude,"name-only: 'squid axon' is a metaphor for a perfused capillary, not the food",2026-08-08 recall rebuild
+wakame,11365014,exclude,"uncertain-species: seaweed-extract product notice; no MeSH, no species, no study design stated",2026-08-07
+white sugar,14195693,exclude,animal: MeSH Dogs; adrenaline-induced submaxillary permeability,2026-08-08 recall rebuild
+white sugar,27406334,exclude,"animal: tail-flick latency and tail-skin temperature are measures only a tailed animal has, so the species is settled by the method rather than inferred; no MeSH and the abstract states none",2026-08-08 recall rebuild
+white sugar,32804018,exclude,"animal: MeSH Animals/Rats; the outcome is metabolic endotoxemia, with no thermal readout",2026-08-08 recall rebuild
+white sugar,36745510,exclude,"no-thermal: the exposure is a whole obesogenic diet, with no sugar-specific thermal readout (§3 whole-diet rule)",2026-08-07
+white sugar,8508195,exclude,"name-only: the food is the comparator/vehicle arm, not the exposure of interest (§2 criterion 4)",2026-08-07

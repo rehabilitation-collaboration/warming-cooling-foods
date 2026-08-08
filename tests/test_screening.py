@@ -270,3 +270,47 @@ def test_golden_scores_precision_recall():
     assert s["precision"] == 0.5
     assert s["recall"] == 0.5
     assert s["accuracy"] == 0.5
+
+
+# --- author ruling ledger -------------------------------------------------
+# The rulings moved out of a dict literal into data/screening_rulings.csv when
+# the recall rebuild pushed their count from 56 to 266. What matters is that the
+# file reads back in the shape adjudicate() expects, and that a duplicated key
+# fails loudly: two rulings for one record means one was never applied, and which
+# one won would depend on row order.
+def _rulings_csv(tmp_path, rows):
+    import pandas as pd
+    path = tmp_path / "screening_rulings.csv"
+    pd.DataFrame(rows).to_csv(path, index=False)
+    return path
+
+
+def test_load_rulings_reads_the_shape_adjudicate_expects(tmp_path, monkeypatch):
+    from src import build_screening as bs
+    monkeypatch.setattr(bs, "RULINGS_CSV", _rulings_csv(tmp_path, [
+        {"food_key": "chili pepper", "pmid": "1", "final_label": "include",
+         "rationale": "human RCT, capsaicin", "batch": "t"},
+        {"food_key": "salt", "pmid": "2", "final_label": "exclude",
+         "rationale": "name-only", "batch": "t"},
+    ]))
+    got = bs.load_rulings()
+    assert got[("chili pepper", "1")] == ("include", "human RCT, capsaicin")
+    assert got[("salt", "2")] == ("exclude", "name-only")
+
+
+def test_load_rulings_rejects_a_duplicated_record_key(tmp_path, monkeypatch):
+    from src import build_screening as bs
+    monkeypatch.setattr(bs, "RULINGS_CSV", _rulings_csv(tmp_path, [
+        {"food_key": "salt", "pmid": "2", "final_label": "exclude",
+         "rationale": "name-only", "batch": "t"},
+        {"food_key": "salt", "pmid": "2", "final_label": "include",
+         "rationale": "changed my mind", "batch": "t"},
+    ]))
+    with pytest.raises(ValueError, match="duplicated"):
+        bs.load_rulings()
+
+
+def test_load_rulings_is_empty_when_the_ledger_does_not_exist(tmp_path, monkeypatch):
+    from src import build_screening as bs
+    monkeypatch.setattr(bs, "RULINGS_CSV", tmp_path / "absent.csv")
+    assert bs.load_rulings() == {}
