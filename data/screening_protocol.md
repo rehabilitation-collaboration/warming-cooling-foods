@@ -116,8 +116,15 @@ or removed by them.
   by construction and qualifies.
 
 Because coders who *agree* on a wrong include are never routed to adjudication
-(§5), these three notes were also applied as a single sweep across every include
-in the ledger, not only across the divergences.
+(§5), these three notes have to be applied as a single sweep across every include
+in the ledger, not only across the divergences. **That sweep is outstanding at the
+time of writing**, and it is a precondition for the counts in this study: the
+coding pass ran before these notes were written down, so agreed includes such as
+black tea/23486295 (regional cerebral blood flow by ASL-MRI), black tea/33934371
+(retinal microvascular density by OCT-A), egg/38703228 (cerebral blood flow for a
+cognitive assessment) and beer/10589240 (optic-nerve-head microcirculation) are
+still labelled `include` although the vascular-bed note excludes them. No L2′
+figure derived from this ledger is final until the sweep has run.
 
 ### EXCLUDE — any one triggers exclusion
 
