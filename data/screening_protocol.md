@@ -117,14 +117,32 @@ or removed by them.
 
 Because coders who *agree* on a wrong include are never routed to adjudication
 (§5), these three notes have to be applied as a single sweep across every include
-in the ledger, not only across the divergences. **That sweep is outstanding at the
-time of writing**, and it is a precondition for the counts in this study: the
-coding pass ran before these notes were written down, so agreed includes such as
-black tea/23486295 (regional cerebral blood flow by ASL-MRI), black tea/33934371
-(retinal microvascular density by OCT-A), egg/38703228 (cerebral blood flow for a
-cognitive assessment) and beer/10589240 (optic-nerve-head microcirculation) are
-still labelled `include` although the vascular-bed note excludes them. No L2′
-figure derived from this ledger is final until the sweep has run.
+in the ledger, not only across the divergences: the coding pass (15:54–16:51 on
+2026-08-08) ran before these notes were written down (17:27), so agreed includes
+could not have been judged against them.
+
+**That sweep ran on 2026-08-08, after the 210 divergence and information-gap
+rulings were complete.** All 380 agreed includes were re-read against each
+record's own title and abstract in `l2_records.csv` — not against the coders'
+reason text. **115 of the 380 are `exclude` under §2.3**, and 11 that a keyword
+pass had flagged are confirmed `include`. Both sets are filed in
+`data/screening_rulings.csv` under the batch `2026-08-08 §2.3 sweep`, so every
+override is auditable, and `adjudicate()` reports these rows as `adjudicated`
+in `screening.csv` rather than overriding them silently. The four agreed
+includes named as violations before the sweep — black tea/23486295 (regional
+cerebral blood flow by ASL-MRI), black tea/33934371 (retinal microvascular
+density by OCT-A), egg/38703228 (cerebral blood flow for a cognitive
+assessment) and beer/10589240 (optic-nerve-head microcirculation) — are all now
+`exclude`. Where a record measures local thermal hyperaemia the sweep keeps it:
+chicken/41901102 and milk/27180680 are `include` on that basis.
+
+The largest class the sweep removed is the endothelial-function trial
+(flow-mediated dilation, acetylcholine or sodium-nitroprusside iontophoresis,
+post-occlusive reactive hyperaemia): 103 of the 115 exclusions carry the
+`no-thermal` code and cocoa alone lost 23 records. That is the outcome the
+vascular-bed and reactivity-probe notes exist to produce — without them L2′
+would have been dominated by vascular-function literature the folk claim never
+addressed.
 
 ### EXCLUDE — any one triggers exclusion
 
@@ -329,8 +347,9 @@ reported in Methods.
 - `data/screening.csv` — `pmid, food_key, coder1, coder2, adjudicated,
   final_label, reason, sublabels`. One row per (food_key, pmid). `coder1` /
   `coder2` are the two independent labels; `adjudicated` is `True` on the rows
-  the author settled (divergences, coverage differences, and
-  `uncertain-species` records) and `False` where the coders agreed; `reason`
+  the author settled — divergences, coverage differences, `uncertain-species`
+  records, and the agreed includes the §2.3 sweep overrode — and `False` where
+  the coders agreed and no ruling was filed; `reason`
   carries the author's adjudication rationale on those rows and the coders'
   reason elsewhere; `sublabels` is the union of the sub-labels either coder
   attached (`review`, `constituent`, `supradose`, `confounded`).
