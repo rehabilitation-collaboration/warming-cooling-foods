@@ -185,11 +185,17 @@ def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame
     """Resolve every record to a ``final_label``, adding an ``adjudicated`` flag.
 
     - Rows where both coders agree (and neither flagged ``uncertain-species``)
-      take the shared label.
+      take the shared label, *unless* the author filed a ruling on that key.
     - Every other row requires an author ruling in ``rulings`` keyed by
       (food_key, pmid) → ``"include"`` or ``("include", "why")``. A missing
       ruling is a hard error (fail-loud: no silent default), so the author
       cannot forget to settle a divergence.
+    - A ruling on an *agreed* row overrides the shared label. This is what
+      carries the §2.3 sweep: coders who agree on a wrong include are never
+      routed to adjudication, and the coding pass ran before §2.3 was written
+      down, so agreed includes have to be correctable without re-coding the
+      batch. Overridden rows also report ``adjudicated=True``, so the override
+      is visible in ``screening.csv`` rather than silent.
     """
     rulings = rulings or {}
     finals: list[str] = []
@@ -198,7 +204,7 @@ def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame
     for _, r in recon.iterrows():
         key = (r["food_key"], r["pmid"])
         coder_reason = r["reason_c1"] or r["reason_c2"]
-        if _needs_ruling(r):
+        if _needs_ruling(r) or key in rulings:
             if key not in rulings:
                 raise ValueError(
                     f"record needs an author ruling ({r['status']}): {key}"

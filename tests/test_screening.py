@@ -123,6 +123,30 @@ def test_adjudicate_ruling_may_carry_the_authors_reason():
     assert adj.iloc[0]["reason"] == "33 rabbits per full text"
 
 
+def test_a_ruling_overrides_an_agreed_label():
+    # The §2.3 sweep depends on this: coders who agree on a wrong include are
+    # never routed to adjudication, and the coding pass ran before §2.3 was
+    # written down, so agreed includes must be correctable from the ledger.
+    agreed = [
+        {"food_key": "f", "pmid": "1", "label": "include", "reason": "skin blood flow"},
+        {"food_key": "f", "pmid": "2", "label": "include", "reason": "skin blood flow"},
+    ]
+    recon = sc.reconcile(agreed, agreed)
+    assert set(recon["status"]) == {"agree"}
+    adj = sc.adjudicate(recon, rulings={("f", "1"): ("exclude", "no-thermal: retinal bed")})
+    got = {r.pmid: (r.final_label, r.reason, bool(r.adjudicated)) for r in adj.itertuples()}
+    assert got["1"] == ("exclude", "no-thermal: retinal bed", True)
+    # an agreed row with no ruling is left exactly as the coders left it
+    assert got["2"] == ("include", "skin blood flow", False)
+
+
+def test_overriding_an_agreed_label_still_validates_the_ruling():
+    agreed = [{"food_key": "f", "pmid": "1", "label": "include"}]
+    recon = sc.reconcile(agreed, agreed)
+    with pytest.raises(ValueError):
+        sc.adjudicate(recon, rulings={("f", "1"): "maybe"})
+
+
 @pytest.mark.parametrize("flag", ["uncertain-species", "no-abstract"])
 def test_information_gap_flags_need_a_ruling_even_when_coders_agree(flag):
     # Agreement reached on what a record does not say is not evidence about it
