@@ -222,3 +222,133 @@ returns **218 co-coded items and 177 coverage differences in round 2** (rather
 than 214 and 185), with direction agreement unchanged at **kappa = 1.000**. The
 manuscript reports both figures and says why they differ; a reader reproducing
 the reconciliation from the published data will obtain the 218/177 pair.
+
+## 9. Candidate ledger — recording what was read and not coded
+
+Added 2026-08-09. Sections 1–8 fix how a kept attribution is coded. They do not
+record what was read and dropped, and that asymmetry is what this section
+closes.
+
+### 9.1 Why the ledger exists
+
+Axis B keeps both sides of its judgment: `screening.csv` carries 292 includes
+*and* 12,145 exclusions, each with a reason code, so a reader can check the
+exclusions rather than take them on trust. Axis A kept only the 649 kept rows.
+`verify_claims.py` shows that each of those rows is real — every `food_ja`
+occurs verbatim in its cited source — but no artefact shows that nothing was
+missed, and the two are different claims.
+
+The gap is not hypothetical. Re-reading kawashimaya's table found that its third
+category, 冷たい食べ物 (アイスクリーム / かき氷 / サラダ / そうめん / 冷やし中華),
+produced no rows at all, while the two categories beside it — 夏野菜 (6 items)
+and 南国の果物 (5 items) — were coded completely. Under §9.4 those five are
+`serving-temperature` exclusions, so the coders' outcome was very likely
+correct; the point is that nothing in the published data distinguished "judged
+and excluded" from "not seen". The ledger records the judgment either way.
+
+### 9.2 Enumerating candidates
+
+Candidates are enumerated by `src/extract_candidates.py` from the structure the
+sources use to present foods — delimiter-separated lists, `category：item` lines,
+one-item-per-line blocks under a thermal heading, and running text. The
+enumeration uses **no food dictionary**. Searching the sources with the
+vocabulary already in `claims.csv` would be self-referential: a food that no
+source had ever been credited with could not be found that way, which is exactly
+the failure the ledger exists to detect.
+
+A candidate is a **span, not a resolved food name**. Japanese running text
+offers no reliable token boundary for foods written in kana — じゃがいも ends in
+the particle も, たけのこ contains の — so the extractor emits overlapping
+granularities (the clause-level span and the particle-level token) and leaves
+naming to the coder, which is what §3 already asks of one. A coarse span is
+still judgeable; a food that never became a span is not.
+
+**Recall is measured, not assumed** (`src/verify_candidate_recall.py`). The
+reference set is the 649 rows already coded: each is a known-correct answer,
+because §7's grounding check confirms its label occurs verbatim in its source.
+Every one of the 649 is surfaced by the enumeration (covered-recall 1.0000;
+1.0000 on Tier 1 alone), 89.5% of them as an exact token. The first
+implementation reached only 0.9106, and the four blind spots that measurement
+exposed — a thermal vocabulary carrying 体を温 but not 体を冷, a heading test
+that rejected 体を温める肉・魚 over its interpunct, a heading consumed rather
+than read so that ビールや炭酸系カクテルは体を冷やしやすい yielded nothing, and
+inline emphasis splitting a sentence across lines — are each kept as a
+regression test.
+
+This is a necessary condition, not a sufficient one: recall against the coded
+rows cannot speak for foods no coder ever recorded. A second check that does not
+depend on `claims.csv` is therefore reported alongside it — of the 3,852
+body-text lines across the frame, **every line containing thermal vocabulary
+produces at least one candidate** (0 uncovered). Since §3 forbids coding a
+direction the source does not state, a line that attributes a direction must
+carry that vocabulary, so no attributing line goes unexamined.
+
+### 9.3 Decision
+
+Each candidate gets `include` or `exclude` with a reason code. `include` means
+the span carries an attribution to be coded under §2–§4; the coder also returns
+the `food_ja`, `food_en` and `direction` for it, so the ledger's include rows
+regenerate `claims.csv` (§9.7).
+
+### 9.4 Exclusion reason codes
+
+Every code below is grounded in a rule or an adjudication this protocol already
+records. None is introduced for this ledger alone.
+
+| Code | Meaning | Basis |
+|---|---|---|
+| `serving-temperature` | The source is describing how cold or hot the item is served, not the nature attributed to the food (アイスクリーム, 冷やし中華, 白湯). | §3, final bullet: Kracie's 冷たい飲み物 "refers to serving temperature, not the food's nature — do not conflate the two"; §8 round 2 dropped kracie 白湯/生姜湯 as prepared beverages rather than a food's nature. |
+| `no-direction` | A food is named but the source assigns it no direction — nutrient illustrations, recipe notes, substitute recommendations. | §3: "Do not infer a direction the source does not state." §8 round 1 dropped basefood てんさい糖/はちみつ/玄米/そば, and round 2 attaka_navi 黒糖 and karada_onkatsu はちみつ/玄米, on exactly this ground. |
+| `not-verbatim` | The span is not a form the source actually presents (a coder's paraphrase or generalisation). | §8 round 2 dropped hiesyo_com アジ/サケ, present only as アジの開き/塩サケ; §7 requires the verbatim label. |
+| `not-food` | The span names something that is not a food: a colour, a shape, a nutrient, a cooking method, a body state. Sources use these to explain how to *tell* warm from cool (「色は赤、黒、黄色…が温活食材」). | §2: the unit of coding is a (food, source) pair. |
+| `navigation` | Page furniture — related-article links, tags, rankings, author blurbs, site chrome. | §1: the frame is each source's per-food warm/cool list, not the page around it. |
+| `fragment` | An extraction artefact: a partial word or clause that is not a token the source presents as an item. | Follows from §9.2 — overlapping granularities are emitted deliberately, so their residue is dropped here, on the record, rather than by a silent filter. |
+| `duplicate` | The same (food, source, direction) is already carried by another span on the same line or block. | §2: one row per (food, source) pair; §8 round 2 removed eight within-source duplicates on the same principle. |
+
+### 9.5 Category and umbrella labels are included, not excluded
+
+Sources attribute directions to classes as well as to foods — 葉物野菜, 香辛料,
+ナッツ類, 海藻, 赤身魚. **These are `include`.** The source did make the
+attribution, and dropping it from the ledger would misdescribe the source.
+
+Whether such a label can carry an Axis B measurement is a separate question,
+already settled elsewhere and deliberately not duplicated here: 21 composite
+labels are marked non-queryable in `food_query_terms.EXCLUDE` (project decision
+D30) because no single-food query can represent them, which is why the analysis
+frame is 175 foods rather than 196. Re-deciding that at the ledger stage would
+create a second list of categories that could drift from the first. The ledger
+instead attaches a `category` sub-label, so a reader can move between the two
+without either being authoritative over the other.
+
+### 9.6 Two coders, kappa, adjudication
+
+The ledger is coded by **two independent coders**, as Axis B's records are, using
+the same two tiers of one model line (`claude-sonnet-5` and `claude-opus-5`) so
+that both axes are judged by the same instrument. Each coder receives this
+protocol and its assigned candidates only; the other coder's labels, the
+existing `claims.csv` and the reconciliation code are withheld.
+
+This pairing measures within-lineage consistency, not independence, and the
+caveat recorded in `screening_protocol.md` §5 applies here unchanged.
+
+One thing does change relative to §8. The kappa reported there is a *direction*
+statistic computed on items both coders had already extracted; extraction itself
+diverged badly (Jaccard 0.54), and the coverage differences were settled by the
+author one at a time. Because both coders now judge the *same* enumerated
+candidate set, extraction is no longer a source of divergence, and kappa is
+computed over the include/exclude decision across all candidates. Divergences,
+and any candidate either coder flags as uncertain, are adjudicated by the author
+against the source text and recorded with the ruling, as in
+`screening_protocol.md` §5.
+
+### 9.7 Output
+
+`data/claims_ledger.csv` — `source_id, line_no, candidate, paths, coder1,
+coder2, adjudicated, final_label, reason, sublabels, food_ja, food_en,
+direction, quote`. One row per (source_id, candidate). It is committed, so the
+exclusions are auditable in the same way Axis B's are.
+
+`claims.csv` is **generated from this ledger's include rows** rather than
+maintained beside it, so there is one record of the coding rather than two that
+can disagree. The migration is verified to be lossless against the frozen 649-row
+file, and any difference is a Route D judgment that is itself in the ledger.
