@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "341"
+  },
+  "_query": "apricot[tiab] AND humans[mh]"
+}

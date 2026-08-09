@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "5183"
+  },
+  "_query": "beer[tiab] AND humans[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "2"
+  },
+  "_query": "(nukazuke[tiab] OR \"rice bran pickles\"[tiab]) AND humans[mh]"
+}

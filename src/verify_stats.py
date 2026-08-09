@@ -17,6 +17,8 @@ PLAN Phase RB-5 before any estimate was computed:
 - framing sensitivity: belief breadth recounted within each attribution
   vocabulary — stated bodily effect, five-natures/yin-yang, plain warm/cool
   label — and the primary model refit on each, since Axis A pools all three.
+- covariate sensitivity: the same model under two narrower L1 definitions, and a
+  leave-one-food-out refit, since log(L1 + 1) is what the result rests on.
 
 Run: python3 -m src.verify_stats  (from the project root)
 """
@@ -28,12 +30,14 @@ import pandas as pd
 from scipy import stats
 
 from . import claim_framing
+from .alt_l1 import ALT_L1_FILTERS, load_alt_l1
 from .analysis import MEASURE, _read_counts, bottom_right_foods, prepare_scatter_data
 from .claim_mapping import load_claims, load_sources
 from .definitions import COOL, TIER_INDIVIDUAL, TIER_ORG, WARM
 from .evidence_mapping import CORE_MIN_SOURCES
 from .gap_models import (
     count_negbin,
+    leave_one_food_out,
     predictor_vif,
     prepare_model_frame,
     presence_logit,
@@ -302,6 +306,54 @@ def main() -> None:
                 line += (f"    log_l1 OR={v['or']:.3f} "
                          f"[{v['or_lo']:.3f}, {v['or_hi']:.3f}] p={v['p']:.4g}")
             print(line)
+    print(RULE)
+
+    # --- Covariate sensitivity: alternative readings of L1 ------------------
+    # log(L1 + 1) is what carries the primary model, and L1 is a bare title and
+    # abstract count of the food name, so what it contains varies by food. Two
+    # narrower L1s are refit here; see src/alt_l1.py for how they are built.
+    alt = load_alt_l1()
+    if alt is None:
+        print("[Covariate sensitivity] alt_l1_counts.csv absent — run python3 -m src.alt_l1")
+    else:
+        print("[Covariate sensitivity] primary model refit under narrower L1 definitions")
+        merged = df.merge(alt, on="food_key", how="left")
+        missing = int(merged[list(ALT_L1_FILTERS)].isna().any(axis=1).sum())
+        if missing:
+            raise ValueError(f"{missing} foods in the frame have no alternative L1 count")
+        for label, col in [("L1 as reported", "l1")] + [(f"L1 | {v}", v) for v in ALT_L1_FILTERS]:
+            d = merged.copy()
+            d["l1"] = d[col]
+            f = prepare_model_frame(d)
+            res = presence_logit(f)
+            share = "" if col == "l1" else (
+                f"  median share of L1={float((merged[col] / merged['l1']).median()):.3f}")
+            print(f"  {label:20s} total={int(merged[col].sum()):>9,}{share}")
+            if not res.get("converged"):
+                print(f"{'':4s}model did not converge")
+                continue
+            t, v = res["terms"]["n_sources"], res["terms"]["log_l1"]
+            print(f"{'':4s}n_sources OR={t['or']:.3f} [{t['or_lo']:.3f}, {t['or_hi']:.3f}] "
+                  f"p={t['p']:.4f}    log_l1 OR={v['or']:.3f} "
+                  f"[{v['or_lo']:.3f}, {v['or_hi']:.3f}] p={v['p']:.4g}")
+    print(RULE)
+
+    # --- Influence: can one food carry the coverage estimate? ---------------
+    print("[Leave-one-food-out] primary model refit with each food removed in turn")
+    loo = leave_one_food_out(frame)
+    base_or = presence_logit(frame)["terms"]["n_sources"]["or"]
+    failed = int((~loo["converged"]).sum())
+    print(f"  refits={len(loo)}  did not converge={failed}  "
+          f"full-frame OR={base_or:.3f}")
+    print(f"  OR range across refits: {loo['or'].min():.3f} to {loo['or'].max():.3f}   "
+          f"p range: {loo['p'].min():.4f} to {loo['p'].max():.4f}   "
+          f"refits reaching p<0.05: {int((loo['p'] < 0.05).sum())}")
+    widest = loo.reindex((loo["or"] - base_or).abs().sort_values(ascending=False).index)
+    print("  largest shifts (and the highest-L1 foods, which is what prompted the check):")
+    named = pd.concat([widest.head(4), loo.nlargest(4, "l1")]).drop_duplicates("omitted")
+    for _, r in named.iterrows():
+        print(f"    omit {r['omitted']:14s} L1={int(r['l1']):>7,} L2'={int(r['l2_screened']):3d}  "
+              f"OR={r['or']:.3f} (delta {r['or'] - base_or:+.3f})  p={r['p']:.4f}")
 
 
 if __name__ == "__main__":

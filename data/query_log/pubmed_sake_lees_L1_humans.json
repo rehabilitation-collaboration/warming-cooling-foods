@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "6"
+  },
+  "_query": "\"sake lees\"[tiab] AND humans[mh]"
+}

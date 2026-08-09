@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "11"
+  },
+  "_query": "(amazake[tiab] OR \"fermented rice drink\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

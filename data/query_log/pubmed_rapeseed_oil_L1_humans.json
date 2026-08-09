@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "385"
+  },
+  "_query": "\"rapeseed oil\"[tiab] AND humans[mh]"
+}

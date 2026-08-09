@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "93"
+  },
+  "_query": "zucchini[tiab] AND humans[mh]"
+}

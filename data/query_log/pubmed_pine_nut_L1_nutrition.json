@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "149"
+  },
+  "_query": "\"pine nut\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

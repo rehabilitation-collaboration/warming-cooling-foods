@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1961"
+  },
+  "_query": "(\"black soybean\"[tiab] OR \"black soybeans\"[tiab] OR \"Glycine max\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

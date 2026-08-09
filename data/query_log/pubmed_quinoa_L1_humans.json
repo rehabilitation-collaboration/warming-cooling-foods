@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "324"
+  },
+  "_query": "quinoa[tiab] AND humans[mh]"
+}

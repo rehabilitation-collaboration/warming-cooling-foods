@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "464"
+  },
+  "_query": "pumpkin[tiab] AND humans[mh]"
+}

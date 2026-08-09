@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "3279"
+  },
+  "_query": "\"red wine\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

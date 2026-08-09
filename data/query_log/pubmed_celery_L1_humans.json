@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "546"
+  },
+  "_query": "celery[tiab] AND humans[mh]"
+}

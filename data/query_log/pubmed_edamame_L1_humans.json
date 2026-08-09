@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "25"
+  },
+  "_query": "(edamame[tiab] OR \"green soybean\"[tiab]) AND humans[mh]"
+}

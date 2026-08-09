@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "831"
+  },
+  "_query": "vinegar[tiab] AND humans[mh]"
+}

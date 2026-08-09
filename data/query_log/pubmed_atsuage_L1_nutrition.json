@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "10"
+  },
+  "_query": "(atsuage[tiab] OR \"deep-fried tofu\"[tiab] OR \"fried bean curd\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "791"
+  },
+  "_query": "\"white bread\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

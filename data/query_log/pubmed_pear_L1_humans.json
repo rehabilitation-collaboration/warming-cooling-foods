@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "998"
+  },
+  "_query": "pear[tiab] AND humans[mh]"
+}

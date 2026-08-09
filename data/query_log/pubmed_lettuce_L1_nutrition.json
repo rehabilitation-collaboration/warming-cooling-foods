@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "2444"
+  },
+  "_query": "lettuce[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

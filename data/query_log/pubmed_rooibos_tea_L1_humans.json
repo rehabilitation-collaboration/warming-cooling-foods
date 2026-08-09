@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "39"
+  },
+  "_query": "\"rooibos tea\"[tiab] AND humans[mh]"
+}

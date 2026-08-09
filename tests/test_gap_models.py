@@ -184,3 +184,45 @@ def test_presence_logit_curve_separates_levels_when_l1_drives_the_outcome():
     # Flat in breadth: the spread within a level is far smaller than between.
     within = curve.groupby("l1_quantile")["p"].agg(lambda s: s.max() - s.min()).max()
     assert within < (by_q[0.75] - by_q[0.25])
+
+
+# --- Leave-one-food-out influence ----------------------------------------
+def test_leave_one_out_refits_once_per_food_and_names_the_omitted_one():
+    # Outcomes are drawn from a logistic model rather than set by a threshold on
+    # n_sources: a deterministic rule separates the design perfectly and every
+    # refit would fail, which would test nothing.
+    rng = np.random.default_rng(0)
+    n_sources = rng.integers(1, 9, 40)
+    l1 = rng.integers(100, 50_000, 40)
+    p = 1 / (1 + np.exp(-(-2 + 0.4 * n_sources)))
+    l2 = (rng.random(40) < p).astype(int) * 2
+    out = gm.leave_one_food_out(gm.prepare_model_frame(_frame(n_sources, l2, l1=l1)))
+    assert len(out) == 40
+    assert set(out["omitted"]) == {f"f{i}" for i in range(40)}
+    assert out["converged"].all()
+
+
+def test_leave_one_out_surfaces_the_food_that_carries_the_estimate():
+    # One food sits alone at the top of the breadth range and has a study, while
+    # the rest are narrow-belief and mixed. Dropping it must move the odds ratio
+    # further than dropping any of the interchangeable rest — that is the whole
+    # point of running the check on a frame this small.
+    n_sources = [1, 1, 2, 2, 3, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 2, 1, 3] + [9]
+    l2 = [0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0] + [4]
+    frame = gm.prepare_model_frame(_frame(n_sources, l2, l1=[1000] * 19))
+    out = gm.leave_one_food_out(frame)
+    base = gm.presence_logit(frame)["terms"]["n_sources"]["or"]
+    shifts = (out.set_index("omitted")["or"] - base).abs()
+    assert shifts.idxmax() == "f18"
+
+
+def test_leave_one_out_keeps_a_failed_refit_instead_of_dropping_the_row():
+    # Perfect separation is the realistic failure here. The row has to survive
+    # with NaN estimates, or a frame where half the refits break would report a
+    # reassuringly narrow range over only the half that converged.
+    frame = gm.prepare_model_frame(_frame([1, 2, 8, 9], [0, 0, 3, 5], l1=[1000] * 4))
+    out = gm.leave_one_food_out(frame)
+    assert len(out) == 4
+    assert set(out.columns) >= {"omitted", "or", "p", "converged", "l1", "l2_screened"}
+    assert not out["converged"].any()  # the fixture is separated on purpose
+    assert out.loc[~out["converged"], ["or", "p"]].isna().all().all()

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "45"
+  },
+  "_query": "\"beet sugar\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

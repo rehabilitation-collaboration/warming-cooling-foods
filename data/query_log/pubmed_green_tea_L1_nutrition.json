@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "8049"
+  },
+  "_query": "(\"green tea\"[tiab] OR \"Camellia sinensis\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

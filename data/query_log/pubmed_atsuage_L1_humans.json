@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "9"
+  },
+  "_query": "(atsuage[tiab] OR \"deep-fried tofu\"[tiab] OR \"fried bean curd\"[tiab]) AND humans[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "433"
+  },
+  "_query": "(miso[tiab] OR \"fermented soybean paste\"[tiab]) AND humans[mh]"
+}

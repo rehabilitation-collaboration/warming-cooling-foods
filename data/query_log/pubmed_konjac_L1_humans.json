@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "261"
+  },
+  "_query": "konjac[tiab] AND humans[mh]"
+}

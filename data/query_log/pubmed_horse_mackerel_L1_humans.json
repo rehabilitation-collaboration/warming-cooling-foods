@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "40"
+  },
+  "_query": "\"horse mackerel\"[tiab] AND humans[mh]"
+}

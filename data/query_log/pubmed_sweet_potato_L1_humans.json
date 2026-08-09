@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "505"
+  },
+  "_query": "(\"sweet potato\"[tiab] OR \"Ipomoea batatas\"[tiab]) AND humans[mh]"
+}

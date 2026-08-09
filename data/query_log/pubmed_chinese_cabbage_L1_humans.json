@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "164"
+  },
+  "_query": "(\"chinese cabbage\"[tiab] OR \"napa cabbage\"[tiab]) AND humans[mh]"
+}

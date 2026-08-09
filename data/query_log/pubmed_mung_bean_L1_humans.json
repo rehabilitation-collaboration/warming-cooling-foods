@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "225"
+  },
+  "_query": "\"mung bean\"[tiab] AND humans[mh]"
+}

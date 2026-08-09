@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "140"
+  },
+  "_query": "taro[tiab] AND humans[mh]"
+}

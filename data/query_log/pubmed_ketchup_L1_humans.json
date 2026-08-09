@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "84"
+  },
+  "_query": "ketchup[tiab] AND humans[mh]"
+}

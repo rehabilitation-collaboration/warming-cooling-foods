@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "10"
+  },
+  "_query": "(sansho[tiab] OR \"Japanese pepper\"[tiab] OR \"sansho pepper\"[tiab]) AND humans[mh]"
+}

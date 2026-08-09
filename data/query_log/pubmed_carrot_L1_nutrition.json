@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1753"
+  },
+  "_query": "carrot[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

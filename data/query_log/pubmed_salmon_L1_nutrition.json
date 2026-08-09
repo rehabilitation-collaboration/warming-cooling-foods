@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "2552"
+  },
+  "_query": "salmon[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

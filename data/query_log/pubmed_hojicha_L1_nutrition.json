@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "18"
+  },
+  "_query": "(hojicha[tiab] OR \"roasted green tea\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

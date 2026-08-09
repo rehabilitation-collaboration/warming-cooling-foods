@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "709"
+  },
+  "_query": "watermelon[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

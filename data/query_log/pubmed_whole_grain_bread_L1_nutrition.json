@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "163"
+  },
+  "_query": "\"whole grain bread\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

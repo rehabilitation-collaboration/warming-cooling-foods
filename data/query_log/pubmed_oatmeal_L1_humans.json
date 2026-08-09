@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "339"
+  },
+  "_query": "oatmeal[tiab] AND humans[mh]"
+}

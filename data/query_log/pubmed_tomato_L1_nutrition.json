@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "7828"
+  },
+  "_query": "tomato[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

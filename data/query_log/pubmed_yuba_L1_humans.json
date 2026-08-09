@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "12"
+  },
+  "_query": "yuba[tiab] AND humans[mh]"
+}

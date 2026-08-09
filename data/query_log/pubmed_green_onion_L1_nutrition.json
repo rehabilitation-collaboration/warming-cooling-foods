@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "144"
+  },
+  "_query": "(\"green onion\"[tiab] OR scallion[tiab] OR \"spring onion\"[tiab] OR \"Welsh onion\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

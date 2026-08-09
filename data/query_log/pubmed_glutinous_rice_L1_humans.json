@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "60"
+  },
+  "_query": "\"glutinous rice\"[tiab] AND humans[mh]"
+}

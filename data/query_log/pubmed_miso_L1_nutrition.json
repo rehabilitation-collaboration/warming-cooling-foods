@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "340"
+  },
+  "_query": "(miso[tiab] OR \"fermented soybean paste\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

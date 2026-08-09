@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1145"
+  },
+  "_query": "squid[tiab] AND humans[mh]"
+}

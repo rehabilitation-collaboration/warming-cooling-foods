@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "865"
+  },
+  "_query": "\"rapeseed oil\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "5974"
+  },
+  "_query": "(\"green tea\"[tiab] OR \"Camellia sinensis\"[tiab]) AND humans[mh]"
+}

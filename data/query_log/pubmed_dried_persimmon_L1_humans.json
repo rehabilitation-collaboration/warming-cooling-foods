@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "4"
+  },
+  "_query": "\"dried persimmon\"[tiab] AND humans[mh]"
+}

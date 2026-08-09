@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "11928"
+  },
+  "_query": "coffee[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

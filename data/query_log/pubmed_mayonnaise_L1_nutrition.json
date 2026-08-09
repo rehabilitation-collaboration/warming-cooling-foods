@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "338"
+  },
+  "_query": "mayonnaise[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

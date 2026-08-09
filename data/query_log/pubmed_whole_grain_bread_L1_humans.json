@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "159"
+  },
+  "_query": "\"whole grain bread\"[tiab] AND humans[mh]"
+}

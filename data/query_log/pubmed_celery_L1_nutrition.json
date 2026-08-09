@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "638"
+  },
+  "_query": "celery[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

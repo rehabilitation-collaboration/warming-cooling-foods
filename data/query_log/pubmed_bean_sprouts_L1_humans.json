@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "66"
+  },
+  "_query": "\"bean sprouts\"[tiab] AND humans[mh]"
+}

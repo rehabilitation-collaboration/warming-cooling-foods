@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "5393"
+  },
+  "_query": "corn[tiab] AND humans[mh]"
+}

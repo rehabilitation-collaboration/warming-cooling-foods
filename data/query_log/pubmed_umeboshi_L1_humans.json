@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "51"
+  },
+  "_query": "(umeboshi[tiab] OR \"pickled plum\"[tiab] OR \"Japanese apricot\"[tiab]) AND humans[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "6299"
+  },
+  "_query": "apple[tiab] AND humans[mh]"
+}

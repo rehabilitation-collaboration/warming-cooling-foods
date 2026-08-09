@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "79"
+  },
+  "_query": "(nira[tiab] OR \"garlic chive\"[tiab] OR \"Chinese chive\"[tiab]) AND humans[mh]"
+}

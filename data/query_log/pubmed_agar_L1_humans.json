@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "27437"
+  },
+  "_query": "agar[tiab] AND humans[mh]"
+}

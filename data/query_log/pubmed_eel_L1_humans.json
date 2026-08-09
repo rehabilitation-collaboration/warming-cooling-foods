@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "775"
+  },
+  "_query": "eel[tiab] AND humans[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "455"
+  },
+  "_query": "(\"brown rice\"[tiab] OR \"whole grain rice\"[tiab]) AND humans[mh]"
+}

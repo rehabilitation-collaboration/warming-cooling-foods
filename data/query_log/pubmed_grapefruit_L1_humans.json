@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1139"
+  },
+  "_query": "grapefruit[tiab] AND humans[mh]"
+}

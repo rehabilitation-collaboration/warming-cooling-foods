@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "180"
+  },
+  "_query": "(nori[tiab] OR laver[tiab] OR Porphyra[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

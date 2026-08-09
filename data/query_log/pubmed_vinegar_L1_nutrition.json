@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "838"
+  },
+  "_query": "vinegar[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

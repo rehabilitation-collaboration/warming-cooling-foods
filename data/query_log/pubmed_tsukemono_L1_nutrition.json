@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "16"
+  },
+  "_query": "(tsukemono[tiab] OR \"Japanese pickles\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

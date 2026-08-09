@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "425"
+  },
+  "_query": "(\"chili pepper\"[tiab] OR \"hot pepper\"[tiab] OR \"red pepper\"[tiab]) AND humans[mh]"
+}

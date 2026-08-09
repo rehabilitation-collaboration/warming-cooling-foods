@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "59"
+  },
+  "_query": "(\"adzuki bean\"[tiab] OR \"azuki bean\"[tiab] OR \"Vigna angularis\"[tiab]) AND humans[mh]"
+}

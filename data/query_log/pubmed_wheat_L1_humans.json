@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "12197"
+  },
+  "_query": "wheat[tiab] AND humans[mh]"
+}

@@ -111,6 +111,35 @@ def presence_logit(frame: pd.DataFrame, *, adjust_l1: bool = True) -> dict:
     }
 
 
+def leave_one_food_out(frame: pd.DataFrame, *, term: str = "n_sources") -> pd.DataFrame:
+    """Refit the primary model once per food, each time with that food removed.
+
+    An influence check for a frame small enough that one food could carry the
+    estimate: milk, salt and chicken sit two orders of magnitude above the median
+    in L1, so an odds ratio that only holds while one of them is in the frame is
+    not a result. Returns one row per omitted food with the refitted odds ratio
+    and p-value for ``term``, plus its own L1 and L2′ so a large shift can be
+    read against the food that caused it. Non-converged refits are kept with NaN
+    estimates rather than dropped, so the caller counts them.
+    """
+    rows = []
+    for food in frame["food_key"]:
+        reduced = frame[frame["food_key"] != food]
+        res = presence_logit(reduced)
+        t = res["terms"][term] if res.get("converged") else None
+        rows.append(
+            {
+                "omitted": food,
+                "l1": int(frame.loc[frame["food_key"] == food, "l1"].iloc[0]),
+                "l2_screened": int(frame.loc[frame["food_key"] == food, "l2_screened"].iloc[0]),
+                "or": float(t["or"]) if t else float("nan"),
+                "p": float(t["p"]) if t else float("nan"),
+                "converged": bool(res.get("converged")),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def predictor_vif(frame: pd.DataFrame) -> dict:
     """Collinearity diagnostic for the primary model's two predictors.
 

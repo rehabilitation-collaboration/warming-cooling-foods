@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "58"
+  },
+  "_query": "(hijiki[tiab] OR \"Sargassum fusiforme\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

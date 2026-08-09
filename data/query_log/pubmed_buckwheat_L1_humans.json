@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "533"
+  },
+  "_query": "buckwheat[tiab] AND humans[mh]"
+}

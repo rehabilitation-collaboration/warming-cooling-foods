@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1741"
+  },
+  "_query": "pasta[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

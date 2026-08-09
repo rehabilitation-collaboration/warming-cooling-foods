@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "973"
+  },
+  "_query": "chickpea[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

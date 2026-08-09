@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1939"
+  },
+  "_query": "barley[tiab] AND humans[mh]"
+}

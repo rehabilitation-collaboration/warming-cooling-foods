@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "469"
+  },
+  "_query": "(\"black soybean\"[tiab] OR \"black soybeans\"[tiab] OR \"Glycine max\"[tiab]) AND humans[mh]"
+}

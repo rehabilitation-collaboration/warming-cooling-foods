@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "79"
+  },
+  "_query": "\"white fish\"[tiab] AND humans[mh]"
+}

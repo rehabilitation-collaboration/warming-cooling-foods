@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "41"
+  },
+  "_query": "\"bamboo shoot\"[tiab] AND humans[mh]"
+}

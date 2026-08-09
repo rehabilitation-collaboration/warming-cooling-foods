@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "2"
+  },
+  "_query": "\"rapeseed flowers\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

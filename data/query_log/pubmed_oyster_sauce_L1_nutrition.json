@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "7"
+  },
+  "_query": "\"oyster sauce\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

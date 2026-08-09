@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1"
+  },
+  "_query": "\"young bamboo\"[tiab] AND humans[mh]"
+}

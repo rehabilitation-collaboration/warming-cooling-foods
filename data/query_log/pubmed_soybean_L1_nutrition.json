@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "19553"
+  },
+  "_query": "soybean[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

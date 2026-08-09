@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "148"
+  },
+  "_query": "jujube[tiab] AND humans[mh]"
+}

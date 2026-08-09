@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1659"
+  },
+  "_query": "cocoa[tiab] AND humans[mh]"
+}

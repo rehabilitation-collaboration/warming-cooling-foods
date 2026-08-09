@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1185"
+  },
+  "_query": "cabbage[tiab] AND humans[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "292"
+  },
+  "_query": "kimchi[tiab] AND humans[mh]"
+}

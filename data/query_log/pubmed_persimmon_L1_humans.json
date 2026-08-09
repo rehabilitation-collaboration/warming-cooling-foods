@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "218"
+  },
+  "_query": "persimmon[tiab] AND humans[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "15463"
+  },
+  "_query": "beef[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

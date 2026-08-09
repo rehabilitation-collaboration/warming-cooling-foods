@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "176"
+  },
+  "_query": "\"bitter melon\"[tiab] AND humans[mh]"
+}

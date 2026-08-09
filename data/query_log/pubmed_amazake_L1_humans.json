@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "8"
+  },
+  "_query": "(amazake[tiab] OR \"fermented rice drink\"[tiab]) AND humans[mh]"
+}

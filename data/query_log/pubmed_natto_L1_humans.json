@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "415"
+  },
+  "_query": "(natto[tiab] OR \"fermented soybean\"[tiab] OR \"fermented soybeans\"[tiab]) AND humans[mh]"
+}

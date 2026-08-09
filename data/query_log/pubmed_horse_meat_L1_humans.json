@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "78"
+  },
+  "_query": "\"horse meat\"[tiab] AND humans[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "72038"
+  },
+  "_query": "milk[tiab] AND humans[mh]"
+}

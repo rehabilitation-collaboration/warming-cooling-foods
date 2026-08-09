@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "82"
+  },
+  "_query": "(hijiki[tiab] OR \"Sargassum fusiforme\"[tiab]) AND humans[mh]"
+}

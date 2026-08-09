@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "717"
+  },
+  "_query": "\"white bread\"[tiab] AND humans[mh]"
+}

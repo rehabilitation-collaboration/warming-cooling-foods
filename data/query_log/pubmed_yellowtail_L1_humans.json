@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "29"
+  },
+  "_query": "yellowtail[tiab] AND humans[mh]"
+}

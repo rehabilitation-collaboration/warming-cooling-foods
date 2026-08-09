@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "22"
+  },
+  "_query": "\"sake lees\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

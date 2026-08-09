@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "3625"
+  },
+  "_query": "potato[tiab] AND humans[mh]"
+}

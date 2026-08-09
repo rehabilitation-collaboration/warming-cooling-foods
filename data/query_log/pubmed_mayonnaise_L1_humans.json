@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "256"
+  },
+  "_query": "mayonnaise[tiab] AND humans[mh]"
+}

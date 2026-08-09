@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "16600"
+  },
+  "_query": "(\"white sugar\"[tiab] OR sucrose[tiab] OR \"refined sugar\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "269"
+  },
+  "_query": "zucchini[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

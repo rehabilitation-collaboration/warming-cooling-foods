@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "61"
+  },
+  "_query": "\"lotus root\"[tiab] AND humans[mh]"
+}

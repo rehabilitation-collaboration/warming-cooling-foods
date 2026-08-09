@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "736"
+  },
+  "_query": "(\"white rice\"[tiab] OR \"polished rice\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

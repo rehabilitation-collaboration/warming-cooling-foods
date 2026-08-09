@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "25"
+  },
+  "_query": "(komatsuna[tiab] OR \"Japanese mustard spinach\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

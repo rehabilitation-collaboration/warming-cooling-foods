@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "437"
+  },
+  "_query": "kiwi[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

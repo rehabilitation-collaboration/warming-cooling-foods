@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "0"
+  },
+  "_query": "\"hamaguri clam\"[tiab] AND humans[mh]"
+}

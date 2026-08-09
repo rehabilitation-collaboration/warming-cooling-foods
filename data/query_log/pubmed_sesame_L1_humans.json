@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1214"
+  },
+  "_query": "sesame[tiab] AND humans[mh]"
+}

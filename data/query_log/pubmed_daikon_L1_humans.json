@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "42"
+  },
+  "_query": "(daikon[tiab] OR \"Japanese radish\"[tiab] OR \"white radish\"[tiab]) AND humans[mh]"
+}

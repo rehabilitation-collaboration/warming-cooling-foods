@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "368"
+  },
+  "_query": "asparagus[tiab] AND humans[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "5246"
+  },
+  "_query": "beer[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

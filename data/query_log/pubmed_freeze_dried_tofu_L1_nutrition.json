@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "5"
+  },
+  "_query": "\"freeze-dried tofu\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "765"
+  },
+  "_query": "quinoa[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

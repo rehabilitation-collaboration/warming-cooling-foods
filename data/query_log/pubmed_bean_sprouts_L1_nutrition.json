@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "110"
+  },
+  "_query": "\"bean sprouts\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

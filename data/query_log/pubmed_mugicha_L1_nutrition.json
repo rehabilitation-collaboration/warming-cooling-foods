@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "26"
+  },
+  "_query": "(mugicha[tiab] OR \"barley tea\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

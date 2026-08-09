@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "677"
+  },
+  "_query": "lentil[tiab] AND humans[mh]"
+}

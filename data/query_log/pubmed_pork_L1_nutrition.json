@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "7849"
+  },
+  "_query": "pork[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

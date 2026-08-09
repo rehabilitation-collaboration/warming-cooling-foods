@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "679"
+  },
+  "_query": "lentil[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

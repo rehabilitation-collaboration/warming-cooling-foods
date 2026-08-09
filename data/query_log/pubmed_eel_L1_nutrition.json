@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "352"
+  },
+  "_query": "eel[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

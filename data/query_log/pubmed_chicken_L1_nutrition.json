@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "15656"
+  },
+  "_query": "chicken[tiab] AND \"diet, food, and nutrition\"[mh]"
+}
