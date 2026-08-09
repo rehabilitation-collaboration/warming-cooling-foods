@@ -1,0 +1,187 @@
+{
+  "source_id": "gveggie",
+  "foods": [
+    {
+      "food_ja": "麦類",
+      "direction": "cool",
+      "line_no": 45,
+      "quote": "春夏向きの食べ物 / 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス（春夏＝「陰性の食べ物」、陰性＝冷やす力のある食べ物）"
+    },
+    {
+      "food_ja": "とうもろこし",
+      "direction": "cool",
+      "line_no": 45,
+      "quote": "春夏向きの食べ物 / 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス（春夏＝「陰性の食べ物」、陰性＝冷やす力のある食べ物）"
+    },
+    {
+      "food_ja": "キヌア",
+      "direction": "cool",
+      "line_no": 45,
+      "quote": "春夏向きの食べ物 / 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "アマランサス",
+      "direction": "cool",
+      "line_no": 45,
+      "quote": "春夏向きの食べ物 / 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "レンズ豆",
+      "direction": "cool",
+      "line_no": 46,
+      "quote": "春夏向きの食べ物 / 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "大きい豆",
+      "direction": "cool",
+      "line_no": 46,
+      "quote": "春夏向きの食べ物 / 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "いんげん豆",
+      "direction": "cool",
+      "line_no": 46,
+      "quote": "春夏向きの食べ物 / 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "花豆",
+      "direction": "cool",
+      "line_no": 46,
+      "quote": "春夏向きの食べ物 / 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "納豆",
+      "direction": "cool",
+      "line_no": 47,
+      "quote": "春夏向きの食べ物 / 豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "テンペ",
+      "direction": "cool",
+      "line_no": 47,
+      "quote": "春夏向きの食べ物 / 豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "ゆば",
+      "direction": "cool",
+      "line_no": 47,
+      "quote": "春夏向きの食べ物 / 豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "豆腐（冷たい）",
+      "direction": "cool",
+      "line_no": 47,
+      "quote": "春夏向きの食べ物 / 豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）（春夏＝「陰性の食べ物」。condition: 冷たい／秋冬側に豆腐（温かい）あり）"
+    },
+    {
+      "food_ja": "わかめ",
+      "direction": "cool",
+      "line_no": 48,
+      "quote": "春夏向きの食べ物 / 海藻 ： わかめ・のり・寒天（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "のり",
+      "direction": "cool",
+      "line_no": 48,
+      "quote": "春夏向きの食べ物 / 海藻 ： わかめ・のり・寒天（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "寒天",
+      "direction": "cool",
+      "line_no": 48,
+      "quote": "春夏向きの食べ物 / 海藻 ： わかめ・のり・寒天（春夏＝「陰性の食べ物」）"
+    },
+    {
+      "food_ja": "雑穀",
+      "direction": "warm",
+      "line_no": 50,
+      "quote": "秋冬向きの食べ物 / 穀　物　：　雑穀・もち米・玄米・もち・そば（秋冬＝「陽性の食べ物」、陽性＝体を暖める力のある食べ物）"
+    },
+    {
+      "food_ja": "もち米",
+      "direction": "warm",
+      "line_no": 50,
+      "quote": "秋冬向きの食べ物 / 穀　物　：　雑穀・もち米・玄米・もち・そば（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "玄米",
+      "direction": "warm",
+      "line_no": 50,
+      "quote": "秋冬向きの食べ物 / 穀　物　：　雑穀・もち米・玄米・もち・そば（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "もち",
+      "direction": "warm",
+      "line_no": 50,
+      "quote": "秋冬向きの食べ物 / 穀　物　：　雑穀・もち米・玄米・もち・そば（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "そば",
+      "direction": "warm",
+      "line_no": 50,
+      "quote": "秋冬向きの食べ物 / 穀　物　：　雑穀・もち米・玄米・もち・そば（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "ひよこ豆",
+      "direction": "warm",
+      "line_no": 51,
+      "quote": "秋冬向きの食べ物 / 豆　類　：　ひよこ豆・大豆・小豆・黒豆（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "大豆",
+      "direction": "warm",
+      "line_no": 51,
+      "quote": "秋冬向きの食べ物 / 豆　類　：　ひよこ豆・大豆・小豆・黒豆（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "小豆",
+      "direction": "warm",
+      "line_no": 51,
+      "quote": "秋冬向きの食べ物 / 豆　類　：　ひよこ豆・大豆・小豆・黒豆（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "黒豆",
+      "direction": "warm",
+      "line_no": 51,
+      "quote": "秋冬向きの食べ物 / 豆　類　：　ひよこ豆・大豆・小豆・黒豆（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "豆腐（温かい）",
+      "direction": "warm",
+      "line_no": 52,
+      "quote": "秋冬向きの食べ物 / 豆の加工品　：　豆腐（温かい）・おから・高野豆腐（秋冬＝「陽性の食べ物」。condition: 温かい／春夏側に豆腐（冷たい）あり）"
+    },
+    {
+      "food_ja": "おから",
+      "direction": "warm",
+      "line_no": 52,
+      "quote": "秋冬向きの食べ物 / 豆の加工品　：　豆腐（温かい）・おから・高野豆腐（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "高野豆腐",
+      "direction": "warm",
+      "line_no": 52,
+      "quote": "秋冬向きの食べ物 / 豆の加工品　：　豆腐（温かい）・おから・高野豆腐（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "あらめ",
+      "direction": "warm",
+      "line_no": 53,
+      "quote": "秋冬向きの食べ物 / 海藻：　あらめ・　ひじき　・　昆布（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "ひじき",
+      "direction": "warm",
+      "line_no": 53,
+      "quote": "秋冬向きの食べ物 / 海藻：　あらめ・　ひじき　・　昆布（秋冬＝「陽性の食べ物」）"
+    },
+    {
+      "food_ja": "昆布",
+      "direction": "warm",
+      "line_no": 53,
+      "quote": "秋冬向きの食べ物 / 海藻：　あらめ・　ひじき　・　昆布（秋冬＝「陽性の食べ物」）"
+    }
+  ],
+  "serving_temperature_items": [],
+  "notes": "Source is a macrobiotic (陰陽) page from G-veggie. It contains exactly one concrete food list, structured as 春夏向きの食べ物 (L44-48) vs 秋冬向きの食べ物 (L49-53). The direction mapping is stated by the source itself, not inferred by the coder: L21 defines 陰性の食べ物 = 冷やす力のある / 陽性の食べ物 = 体を暖める力のある, and L39-43 states 「春夏の気温が上昇するシーズンには『陰性の食べ物』、秋冬の気温が下降するシーズンには『陽性の食べ物』で料理をすること」. So 春夏向き list = 陰性 = cool, 秋冬向き list = 陽性 = warm. L26-31 (陰性の特徴: からだを冷やし、ゆるめる力がある) and L33-38 (陽性の特徴: からだを温め、引き締める力がある) reinforce this. 15 cool + 15 warm = 30 foods; no neutral attributions anywhere in the source.\n\nJUDGMENT CALLS / FLAGS:\n(1) 豆腐 is split by serving state: 豆腐（冷たい）under 春夏/陰性 (L47) and 豆腐（温かい）under 秋冬/陽性 (L52). I treated this as a §3 condition split (analogous to raw vs cooked ginger) rather than a 「冷たい飲み物」-type serving-temperature item, because 豆腐 is a real food and the source assigns each state a yin/yang nature via the list it sits in. Verbatim forms with full-width parentheses used. If the adjudicator prefers, these two rows could instead be demoted to serving_temperature_items.\n(2) Group headers 穀物 / 豆類 / 豆の加工品 / 海藻 were NOT coded as umbrella categories, because each of the four appears in BOTH the 春夏 and the 秋冬 list (L45-48 vs L50-53). They are grouping row labels within a two-sided layout, not category-level attributions — coding 海藻 as both warm and cool would be a contradiction the source does not make. This differs from sources that assign a direction to a category itself.\n(3) 「大きい豆（いんげん豆・花豆など）」(L46) coded as three rows: the umbrella 大きい豆 plus the two named examples いんげん豆 and 花豆, all cool.\n(4) Nothing else in the page carries a direction. The rest is a 陰陽五行 season↔organ table (L62-68, organs not foods), teacher/school boilerplate (L70-85), and unrelated recipe-article teasers (L86-105) mentioning 大根/にんじん/ビーツ/バナナ/大豆ミート with no warm/cool attribution — ビーツ is only called 根菜 with nutrition claims, not a nature. No FAQ block, no captions with attributions.\n(5) No serving-temperature items of the 「冷たい飲み物」 type appear in this source."
+}

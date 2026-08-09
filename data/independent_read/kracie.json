@@ -1,0 +1,148 @@
+{
+  "source_id": "kracie",
+  "foods": [
+    {
+      "food_ja": "玉ねぎ",
+      "direction": "warm",
+      "line_no": 289,
+      "quote": "体を温めるもの／野菜: 「玉ねぎ、人参、等の根菜類、」"
+    },
+    {
+      "food_ja": "人参",
+      "direction": "warm",
+      "line_no": 289,
+      "quote": "体を温めるもの／野菜: 「玉ねぎ、人参、等の根菜類、」"
+    },
+    {
+      "food_ja": "根菜類",
+      "direction": "warm",
+      "line_no": 289,
+      "quote": "体を温めるもの／野菜: 「玉ねぎ、人参、等の根菜類、」（カテゴリラベル）"
+    },
+    {
+      "food_ja": "冬野菜",
+      "direction": "warm",
+      "line_no": 290,
+      "quote": "体を温めるもの／野菜: 「冬野菜、加熱した生姜」（カテゴリラベル）"
+    },
+    {
+      "food_ja": "加熱した生姜",
+      "direction": "warm",
+      "line_no": 290,
+      "quote": "体を温めるもの／野菜: 「冬野菜、加熱した生姜」（condition: 加熱＝cooked）"
+    },
+    {
+      "food_ja": "りんご",
+      "direction": "warm",
+      "line_no": 294,
+      "quote": "体を温めるもの／フルーツ: 「りんご、桃等」"
+    },
+    {
+      "food_ja": "桃",
+      "direction": "warm",
+      "line_no": 294,
+      "quote": "体を温めるもの／フルーツ: 「りんご、桃等」"
+    },
+    {
+      "food_ja": "寒い地方で採れるフルーツ",
+      "direction": "warm",
+      "line_no": 295,
+      "quote": "体を温めるもの／フルーツ: 「寒い地方で採れるフルーツ」（カテゴリラベル）"
+    },
+    {
+      "food_ja": "紅茶",
+      "direction": "warm",
+      "line_no": 298,
+      "quote": "体を温めるもの／飲み物: 「白湯、生姜湯、紅茶、ほうじ茶等」"
+    },
+    {
+      "food_ja": "ほうじ茶",
+      "direction": "warm",
+      "line_no": 298,
+      "quote": "体を温めるもの／飲み物: 「白湯、生姜湯、紅茶、ほうじ茶等」"
+    },
+    {
+      "food_ja": "発酵食品",
+      "direction": "warm",
+      "line_no": 303,
+      "quote": "見出し「発酵食品で腸を温めよう！」／本文「発酵食品に含まれる善玉菌は腸内環境を整え、カラダを温める作用があります。」（表外・散文）"
+    },
+    {
+      "food_ja": "レタス",
+      "direction": "cool",
+      "line_no": 291,
+      "quote": "体を冷やすもの／野菜: 「レタス、トマト、ナス、」"
+    },
+    {
+      "food_ja": "トマト",
+      "direction": "cool",
+      "line_no": 291,
+      "quote": "体を冷やすもの／野菜: 「レタス、トマト、ナス、」"
+    },
+    {
+      "food_ja": "ナス",
+      "direction": "cool",
+      "line_no": 291,
+      "quote": "体を冷やすもの／野菜: 「レタス、トマト、ナス、」"
+    },
+    {
+      "food_ja": "きゅうり",
+      "direction": "cool",
+      "line_no": 292,
+      "quote": "体を冷やすもの／野菜: 「きゅうり等の水分の多い夏野菜」"
+    },
+    {
+      "food_ja": "水分の多い夏野菜",
+      "direction": "cool",
+      "line_no": 292,
+      "quote": "体を冷やすもの／野菜: 「きゅうり等の水分の多い夏野菜」（カテゴリラベル）"
+    },
+    {
+      "food_ja": "バナナ",
+      "direction": "cool",
+      "line_no": 296,
+      "quote": "体を冷やすもの／フルーツ: 「バナナ、スイカ等の南国フルーツ」"
+    },
+    {
+      "food_ja": "スイカ",
+      "direction": "cool",
+      "line_no": 296,
+      "quote": "体を冷やすもの／フルーツ: 「バナナ、スイカ等の南国フルーツ」"
+    },
+    {
+      "food_ja": "南国フルーツ",
+      "direction": "cool",
+      "line_no": 296,
+      "quote": "体を冷やすもの／フルーツ: 「バナナ、スイカ等の南国フルーツ」（カテゴリラベル）"
+    },
+    {
+      "food_ja": "コーヒー",
+      "direction": "cool",
+      "line_no": 300,
+      "quote": "体を冷やすもの／飲み物: 「コーヒー、牛乳、緑茶等」"
+    },
+    {
+      "food_ja": "牛乳",
+      "direction": "cool",
+      "line_no": 300,
+      "quote": "体を冷やすもの／飲み物: 「コーヒー、牛乳、緑茶等」"
+    },
+    {
+      "food_ja": "緑茶",
+      "direction": "cool",
+      "line_no": 300,
+      "quote": "体を冷やすもの／飲み物: 「コーヒー、牛乳、緑茶等」"
+    }
+  ],
+  "serving_temperature_items": [
+    {
+      "item_ja": "温かい飲み物",
+      "line_no": 299
+    },
+    {
+      "item_ja": "冷たい飲み物",
+      "line_no": 301
+    }
+  ],
+  "notes": "Table structure (lines 286-301, flattened from a 2-column table): header row 体を温めるもの (286) / 体を冷やすもの (287); three row headers 野菜 (288), フルーツ (293), 飲み物 (297). Each warm-column cell is immediately followed by the matching cool-column cell, so the reading order is warm-cell, cool-cell per row. Row headers 野菜/フルーツ/飲み物 are structural (one per row, spanning BOTH columns) and are NOT coded as foods with a direction. Serving-temperature items: 冷たい飲み物 (301, protocol's named example; also appears in prose at 285 「温活では、冷たい飲み物やカラダを冷やす食べ物は避けるようにしましょう。」) and its symmetric counterpart 温かい飲み物 (299), which sits at the end of the warm 飲み物 cell and likewise denotes serving temperature, not a food's nature — both excluded from foods. EXCLUDED per §8 precedent: 白湯 and 生姜湯 (line 298, warm 飲み物 cell) as prepared beverages rather than a food's nature; 黒糖 and はちみつ (line 319, recipe note 「甘味が欲しい場合は黒糖やはちみつを加えてもOK」) as a substitute/optional-addition recommendation with no nature attribution. Coffee is coded cool strictly on the 体を冷やすもの column header (§3 final bullet). 発酵食品 (302-303) is coded warm from running prose outside the table (「カラダを温める作用があります」), the only direction-assigning statement on the page outside the two-column table. Recipes (306-320) 「にんじんりんごジュース」 and 「辛さ際立つ生姜紅茶」 name にんじん/りんご/生姜/紅茶 but assign no nature there; にんじん appears as 人参 in the table (coded), 生姜 only as 加熱した生姜. The long tag list (lines 22-186) includes food-ish tags (クコの実, サンザシ, なつめ, スーパーフード, ヨクイニン) with no direction attached — not coded. No neutral direction is stated anywhere on the page."
+}

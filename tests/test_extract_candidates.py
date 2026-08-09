@@ -74,6 +74,36 @@ class TestStructuralBlindSpots:
         assert "赤身魚（まぐろなど）" in got
         assert "赤身魚" in got
 
+    def test_the_label_side_of_a_labelled_list_is_itself_a_candidate(self):
+        # kawashimaya: 肉類 / 魚類 / 大豆製品 carry the attribution and are
+        # codeable categories under coding_protocol.md 9.5, but only the
+        # right-hand side was being split. Found by the independent read.
+        got = candidates("たんぱく質が多い食材\n肉類：鶏肉、牛肉、豚肉、羊肉")
+        assert "肉類" in got
+        assert {"鶏肉", "牛肉"} <= set(got)
+
+    def test_prose_inside_a_thermal_block_is_read_even_with_no_thermal_word(self):
+        # kawashimaya: the heading supplies the direction and a plain sentence
+        # several lines below supplies the food. Also found by the independent read.
+        text = "たんぱく質が多い食材は…温活に効果的です。\n卵\n脂身の少ない赤身肉や、赤身の魚を選ぶとよいでしょう。"
+        got = candidates(text)
+        assert any("赤身肉" in c for c in got)
+
+    def test_an_interpunct_inside_a_compound_term_does_not_destroy_it(self):
+        # karada_onkatsu: ・ joins 加熱 and 乾燥 into one modifier here rather
+        # than separating two items, so the split forms lose the term the
+        # source actually names. Found by the independent read.
+        got = candidates("体を温める効果が高い形\n🔥 加熱・乾燥しょうが（ショウガオール）")
+        assert any("加熱・乾燥しょうが" in c for c in got)
+
+    def test_a_food_broken_across_a_line_break_is_rejoined(self):
+        # macrobiotic_rashinban: get_text("\n") breaks at every inline tag, so
+        # 夏野菜 is split as "…代表的な夏野" / "菜に". Nothing line-based can see
+        # it — including an independent reader held to the verbatim rule, which
+        # is why this class had to be closed on structure rather than evidence.
+        got = candidates("陰性になります\n他、代表的な夏野\n菜に\nナスやトマト")
+        assert any("夏野菜" in c for c in got)
+
     def test_kana_food_ending_in_a_particle_survives_as_a_span(self):
         # じゃがいも ends in も, so particle splitting alone destroys it; the
         # clause-level span is what keeps it visible.

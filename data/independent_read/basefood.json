@@ -1,0 +1,317 @@
+{
+  "source_id": "basefood",
+  "foods": [
+    {
+      "food_ja": "根菜類",
+      "direction": "warm",
+      "line_no": 72,
+      "quote": "地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。（見出し「血流を整え内側から温める根菜類」L71）"
+    },
+    {
+      "food_ja": "ニンジン",
+      "direction": "warm",
+      "line_no": 73,
+      "quote": "ニンジン（L73、見出し「血流を整え内側から温める根菜類」L71 / 親見出し「効率的に体を温めるおすすめの食べ物一覧」L66 配下の箇条書き）"
+    },
+    {
+      "food_ja": "カボチャ",
+      "direction": "warm",
+      "line_no": 75,
+      "quote": "カボチャ：ビタミンEが豊富で、末梢血管の働きを助ける（L75-76、見出し「血流を整え内側から温める根菜類」L71 配下の箇条書き）"
+    },
+    {
+      "food_ja": "ゴボウ",
+      "direction": "warm",
+      "line_no": 77,
+      "quote": "ゴボウ、れんこん（L77、見出し「血流を整え内側から温める根菜類」L71 配下の箇条書き）"
+    },
+    {
+      "food_ja": "れんこん",
+      "direction": "warm",
+      "line_no": 77,
+      "quote": "ゴボウ、れんこん（L77、見出し「血流を整え内側から温める根菜類」L71 配下の箇条書き）"
+    },
+    {
+      "food_ja": "ジャガイモ",
+      "direction": "warm",
+      "line_no": 79,
+      "quote": "ジャガイモ、サトイモ（L79、見出し「血流を整え内側から温める根菜類」L71 配下の箇条書き）"
+    },
+    {
+      "food_ja": "サトイモ",
+      "direction": "warm",
+      "line_no": 79,
+      "quote": "ジャガイモ、サトイモ（L79、見出し「血流を整え内側から温める根菜類」L71 配下の箇条書き）"
+    },
+    {
+      "food_ja": "冬が旬の野菜",
+      "direction": "warm",
+      "line_no": 81,
+      "quote": "冬が旬の野菜は体を温める効果が期待できるものが多いため、意識的に選びましょう。"
+    },
+    {
+      "food_ja": "発酵食品",
+      "direction": "warm",
+      "line_no": 82,
+      "quote": "健やかな毎日を支える発酵食品（L82。親見出し「【最強の温活食材】効率的に体を温めるおすすめの食べ物一覧」L66 配下の4区分の1つ。まとめでも「根菜や発酵食品、スパイスを組みあわせた食事は、巡りを整え体温維持に役立ちます」L252）"
+    },
+    {
+      "food_ja": "味噌",
+      "direction": "warm",
+      "line_no": 84,
+      "quote": "味噌（L84、発酵食品セクション）／「発酵食品である味噌は体温維持に役立ち」L242"
+    },
+    {
+      "food_ja": "赤味噌",
+      "direction": "warm",
+      "line_no": 85,
+      "quote": "：熟成期間の長い赤味噌はとくに温活に適している"
+    },
+    {
+      "food_ja": "納豆",
+      "direction": "warm",
+      "line_no": 86,
+      "quote": "納豆（L86、見出し「健やかな毎日を支える発酵食品」L82 配下／親見出し「効率的に体を温めるおすすめの食べ物一覧」L66）"
+    },
+    {
+      "food_ja": "キムチ",
+      "direction": "warm",
+      "line_no": 88,
+      "quote": "キムチ：唐辛子の辛み成分であるカプサイシンは発汗作用が期待でき、血行促進をサポート（L88-89）"
+    },
+    {
+      "food_ja": "たんぱく質",
+      "direction": "warm",
+      "line_no": 92,
+      "quote": "熱を生み出す源となるたんぱく質（L92）／「たんぱく質は食事誘発性熱産生を高める栄養素であり、体を内側から温める働きがあります」L251"
+    },
+    {
+      "food_ja": "肉類",
+      "direction": "warm",
+      "line_no": 94,
+      "quote": "肉類（牛肉、鶏肉、豚肉など）（L94、見出し「熱を生み出す源となるたんぱく質」L92 配下）"
+    },
+    {
+      "food_ja": "牛肉",
+      "direction": "warm",
+      "line_no": 94,
+      "quote": "肉類（牛肉、鶏肉、豚肉など）（L94、見出し「熱を生み出す源となるたんぱく質」L92 配下）"
+    },
+    {
+      "food_ja": "鶏肉",
+      "direction": "warm",
+      "line_no": 94,
+      "quote": "肉類（牛肉、鶏肉、豚肉など）（L94、見出し「熱を生み出す源となるたんぱく質」L92 配下）"
+    },
+    {
+      "food_ja": "豚肉",
+      "direction": "warm",
+      "line_no": 94,
+      "quote": "肉類（牛肉、鶏肉、豚肉など）（L94）／「豚肉はたんぱく質とビタミンB1を含み、温活に役立つ食べ物」L123"
+    },
+    {
+      "food_ja": "魚類",
+      "direction": "warm",
+      "line_no": 96,
+      "quote": "魚類（鮭、マグロ、カツオなど）（L96、見出し「熱を生み出す源となるたんぱく質」L92 配下）"
+    },
+    {
+      "food_ja": "鮭",
+      "direction": "warm",
+      "line_no": 96,
+      "quote": "魚類（鮭、マグロ、カツオなど）（L96）／「鮭の豊富なたんぱく質が体の熱産生を支え」L233"
+    },
+    {
+      "food_ja": "マグロ",
+      "direction": "warm",
+      "line_no": 96,
+      "quote": "魚類（鮭、マグロ、カツオなど）（L96、見出し「熱を生み出す源となるたんぱく質」L92 配下）"
+    },
+    {
+      "food_ja": "カツオ",
+      "direction": "warm",
+      "line_no": 96,
+      "quote": "魚類（鮭、マグロ、カツオなど）（L96、見出し「熱を生み出す源となるたんぱく質」L92 配下）"
+    },
+    {
+      "food_ja": "卵",
+      "direction": "warm",
+      "line_no": 98,
+      "quote": "卵、大豆製品（L98、見出し「熱を生み出す源となるたんぱく質」L92 配下）"
+    },
+    {
+      "food_ja": "大豆製品",
+      "direction": "warm",
+      "line_no": 98,
+      "quote": "卵、大豆製品（L98、見出し「熱を生み出す源となるたんぱく質」L92 配下）"
+    },
+    {
+      "food_ja": "スパイス",
+      "direction": "warm",
+      "line_no": 104,
+      "quote": "スパイスや薬味は温活と相性のよい食材です。（見出し「巡りをサポートするスパイス・薬味」L103）"
+    },
+    {
+      "food_ja": "薬味",
+      "direction": "warm",
+      "line_no": 104,
+      "quote": "スパイスや薬味は温活と相性のよい食材です。（見出し「巡りをサポートするスパイス・薬味」L103）"
+    },
+    {
+      "food_ja": "生姜",
+      "direction": "warm",
+      "line_no": 105,
+      "quote": "生姜：生の生姜に含まれるジンゲロールは、加熱によって成分が変化し、体の深部から温まりやすくなる（L105-106）"
+    },
+    {
+      "food_ja": "唐辛子",
+      "direction": "warm",
+      "line_no": 107,
+      "quote": "唐辛子：辛味成分のカプサイシンは発汗や一時的な体温上昇を促し、巡りを高める（L107-108）"
+    },
+    {
+      "food_ja": "シナモン",
+      "direction": "warm",
+      "line_no": 109,
+      "quote": "シナモン：飲み物や料理に取り入れやすく、日常的な温活をサポート（L109-110、見出し「巡りをサポートするスパイス・薬味」L103 配下）"
+    },
+    {
+      "food_ja": "ニンニク",
+      "direction": "warm",
+      "line_no": 111,
+      "quote": "ニンニク、ネギ（L111、見出し「巡りをサポートするスパイス・薬味」L103 配下）"
+    },
+    {
+      "food_ja": "ネギ",
+      "direction": "warm",
+      "line_no": 111,
+      "quote": "ニンニク、ネギ（L111、見出し「巡りをサポートするスパイス・薬味」L103 配下）"
+    },
+    {
+      "food_ja": "リンゴ",
+      "direction": "warm",
+      "line_no": 154,
+      "quote": "リンゴやブドウ、プルーンなど、冬が旬のもの（L154）が体を冷やしにくく温活中にもおすすめです。（L155）"
+    },
+    {
+      "food_ja": "ブドウ",
+      "direction": "warm",
+      "line_no": 154,
+      "quote": "リンゴやブドウ、プルーンなど、冬が旬のもの（L154）が体を冷やしにくく温活中にもおすすめです。（L155）"
+    },
+    {
+      "food_ja": "プルーン",
+      "direction": "warm",
+      "line_no": 154,
+      "quote": "リンゴやブドウ、プルーンなど、冬が旬のもの（L154）が体を冷やしにくく温活中にもおすすめです。（L155）"
+    },
+    {
+      "food_ja": "ドライフルーツ",
+      "direction": "warm",
+      "line_no": 156,
+      "quote": "またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。"
+    },
+    {
+      "food_ja": "バナナ",
+      "direction": "cool",
+      "line_no": 156,
+      "quote": "バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。"
+    },
+    {
+      "food_ja": "マンゴー",
+      "direction": "cool",
+      "line_no": 156,
+      "quote": "バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。"
+    },
+    {
+      "food_ja": "パイナップル",
+      "direction": "cool",
+      "line_no": 156,
+      "quote": "バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。"
+    },
+    {
+      "food_ja": "南国系フルーツ",
+      "direction": "cool",
+      "line_no": 156,
+      "quote": "バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。"
+    },
+    {
+      "food_ja": "ほうじ茶",
+      "direction": "warm",
+      "line_no": 159,
+      "quote": "温活向きの飲み物には、ほうじ茶や紅茶、ウーロン茶、ココア、生姜湯などがあります。"
+    },
+    {
+      "food_ja": "紅茶",
+      "direction": "warm",
+      "line_no": 160,
+      "quote": "とくに紅茶やウーロン茶のような発酵茶は体を温めやすい性質があります。（L160-161）／「温活向きの飲み物には、ほうじ茶や紅茶、ウーロン茶、ココア…」L159"
+    },
+    {
+      "food_ja": "ウーロン茶",
+      "direction": "warm",
+      "line_no": 160,
+      "quote": "とくに紅茶やウーロン茶のような発酵茶は体を温めやすい性質があります。（L160-161）"
+    },
+    {
+      "food_ja": "発酵茶",
+      "direction": "warm",
+      "line_no": 160,
+      "quote": "とくに紅茶やウーロン茶のような発酵茶は体を温めやすい性質があります。（L160-161）"
+    },
+    {
+      "food_ja": "ココア",
+      "direction": "warm",
+      "line_no": 159,
+      "quote": "温活向きの飲み物には、ほうじ茶や紅茶、ウーロン茶、ココア、生姜湯などがあります。"
+    },
+    {
+      "food_ja": "コーヒー",
+      "direction": "cool",
+      "line_no": 162,
+      "quote": "温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため…"
+    },
+    {
+      "food_ja": "緑茶",
+      "direction": "cool",
+      "line_no": 162,
+      "quote": "温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため…"
+    },
+    {
+      "food_ja": "麦茶",
+      "direction": "cool",
+      "line_no": 162,
+      "quote": "温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため…"
+    },
+    {
+      "food_ja": "白砂糖",
+      "direction": "cool",
+      "line_no": 171,
+      "quote": "とくに白砂糖は血糖値の急激な上昇を招きやすく、その後の変動によって自律神経が乱れやすくなり、冷えを感じやすくなる場合があります。"
+    },
+    {
+      "food_ja": "生野菜",
+      "direction": "cool",
+      "line_no": 178,
+      "quote": "生野菜を過剰に摂る習慣も、水分量の多さから体温低下を招きやすくなるため、加熱調理を取り入れる工夫が…"
+    },
+    {
+      "food_ja": "香辛料",
+      "direction": "warm",
+      "line_no": 242,
+      "quote": "さらに生姜や唐辛子などの香辛料を加えると、体の内側から温まりやすくなります。"
+    }
+  ],
+  "serving_temperature_items": [
+    { "item_ja": "氷入りの飲み物", "line_no": 175 },
+    { "item_ja": "温かい飲み物", "line_no": 218 },
+    { "item_ja": "ホットココア", "line_no": 236 },
+    { "item_ja": "温かい飲み物", "line_no": 234 },
+    { "item_ja": "冷たいおかずや麺類", "line_no": 243 },
+    { "item_ja": "温かい汁物", "line_no": 243 },
+    { "item_ja": "冷やしうどん", "line_no": 247 },
+    { "item_ja": "温かいうどん", "line_no": 247 },
+    { "item_ja": "冷たい飲食物", "line_no": 252 }
+  ],
+  "notes": "SOURCE STRUCTURE. The article is a 温活 (warming-practice) listicle. Its warming attributions come mainly from list membership under the explicit heading 「【最強の温活食材】効率的に体を温めるおすすめの食べ物一覧」 (L66), which has four sub-sections: 根菜類 (L71) / 発酵食品 (L82) / たんぱく質 (L92) / スパイス・薬味 (L103). Items in those bullet lists are coded warm on the heading, per the two-column/column-header logic of §3. Cooling attributions are all in running prose (L156 fruit, L162 drinks, L171 白砂糖, L178 生野菜).\n\nTHE 陽/陰 TABLE (L137-151) YIELDS NO CODABLE FOOD. The table 「体を温めやすい食材（陽）｜体を冷やしやすい食材（陰）」 has row headers 色 / 産地 / 形状 / 水分量 — these are ATTRIBUTE row headers, not foods, and they appear identically on both the warm and the cool side, so per the rules they are structural row headers and are not coded. The cells contain descriptors (赤、オレンジ、黒、黄 / 青、白、緑 / 寒い地域 / 暑い地域 / 丸いもの / 長いもの / 水分が少なく… / 水分が多く…), not food names. The only food-ish token in the table is 「（根菜）」 inside the warm 形状 cell (L147); it duplicates 根菜類 already coded from L72, so no separate row was created.\n\nHEDGED / NEGATED-COOL ATTRIBUTIONS — FLAGGED FOR ADJUDICATION. Four rows are coded warm on a NEGATED cooling statement rather than a positive warming statement: リンゴ / ブドウ / プルーン (L154-155, 「体を冷やしにくく温活中にもおすすめです」) and ドライフルーツ (L156, 「生の果物に比べて体を冷やしにくい特徴があります」). The source never says these warm the body; it says they cool it LESS. They differ from the §8 substitute-recommendation case in that a temperature-nature claim IS made, so they were coded, but an adjudicator may prefer neutral or exclusion. ドライフルーツ's claim is explicitly comparative against 「生の果物」; 生の果物 is NOT coded because the source only makes it the comparison baseline and never states its direction.\n\nEXCLUDED PER §8 (substitute recommendation, no nature attribution). L172-173: てんさい糖, はちみつ, 全粒粉, 玄米, そば are recommended only as replacements for 白砂糖 / 精製小麦粉 on a vitamin-mineral rationale, with no warming/cooling nature stated. 玄米 recurs at L233 (「玄米のビタミンB群がエネルギー代謝をサポート」) — again metabolic, not thermal. Not coded. (Note 白砂糖 itself IS coded cool, because L171 states 「冷えを感じやすくなる」.) Also excluded: 精製された白い食品 / 精製小麦粉 (L170-173, no direction stated).\n\nEXCLUDED PER §8 (prepared beverages / dishes, not a food's nature). 生姜湯 (L159, L236), 白湯 (L236), ホットココア (L236 — prepared AND hot), 味噌汁 (L90, L241), 豚汁 and おでん (L231, recommended as コンビニ温活メニュー but no nature attribution — they are hot prepared dishes), スパイスの効いた料理 (L241). Plain ココア (L159) IS coded warm because it sits verbatim in the 「温活向きの飲み物」 enumeration alongside the teas, parallel to how coffee/tea are treated as foods elsewhere in the frame; if the adjudicator treats cocoa as a prepared beverage it should be dropped.\n\nOTHER NON-ATTRIBUTIONS DELIBERATELY NOT CODED. たんぱく質 IS coded warm (L92 heading 「熱を生み出す源となるたんぱく質」 + L251 「体を内側から温める働きがあります」) even though it is a macronutrient rather than a food — flagged in case the study excludes nutrient labels; 糖質 (L60) and 脂質 (L62) appear only in the DIT percentage table with no thermal-nature claim and are NOT coded. ゆで卵 and 冷奴 (L99) are listed only for convenience (「調理の手間が少なく」), not direction — not coded (冷奴 is a chilled dish appearing inside the warming protein section, which would be contradictory to code). オリーブオイル / アマニ油 (L128) are recommended for fat-soluble-vitamin absorption, no direction — not coded. 刺身 vs 焼き魚 / 煮魚 (L247) is a cooking-method recommendation, not a nature attribution — not coded. おにぎり / お弁当 (L232) are microwave-reheating advice = serving temperature. BASE FOOD product names (ベースブレッド, BASE YAKISOBA, BASE RAMEN, BASE Cookies, BASE Pound Cake, BASE Pancake Mix) are advertising with nutrient claims only, no warm/cool nature — not coded.\n\nCONDITION SPLITS. 生姜 (L105-106) says raw ginger's gingerol changes on heating so the body warms from deeper within, i.e. the source implies heated ginger is stronger — but it never assigns raw ginger a COOLING direction, so only one warm row is recorded (no raw/cooked split). バナナ (L157) has 「焼きバナナのように加熱して取り入れる方法もおすすめです」 — a preparation workaround, not a second direction; バナナ stays a single cool row.\n\nNO NEUTRAL ROWS. The source never uses 平 / 中庸 / どちらでもない."
+}

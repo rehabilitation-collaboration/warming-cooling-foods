@@ -1,0 +1,306 @@
+{
+  "source_id": "karada_onkatsu",
+  "foods": [
+    {
+      "food_ja": "葉物",
+      "direction": "cool",
+      "line_no": 24,
+      "quote": "「❄️ 体を冷やしやすい食材の特徴」(L23) 直下: 「地面の上で育つもの（葉物・夏野菜）」(L24) — umbrella label"
+    },
+    {
+      "food_ja": "夏野菜",
+      "direction": "cool",
+      "line_no": 24,
+      "quote": "「地面の上で育つもの（葉物・夏野菜）」(L24, 冷やしやすい食材の特徴) / 「夏野菜（トマト・きゅうり・なす）」「夏が旬の野菜は体を冷やす性質」(L110-111)"
+    },
+    {
+      "food_ja": "白砂糖",
+      "direction": "cool",
+      "line_no": 28,
+      "quote": "「白砂糖・精白されたもの」(L28, 体を冷やしやすい食材の特徴) / 「白砂糖（体を冷やす）」(L99) / 「白砂糖・白米・精白食品…精白・加工されたものは体を冷やしやすい」(L108-109)"
+    },
+    {
+      "food_ja": "大根",
+      "direction": "cool",
+      "line_no": 29,
+      "quote": "「※ 例外もあります。大根は根菜ですが水分が多く冷やしやすい性質を持ちます。」(L29) — 明示された例外"
+    },
+    {
+      "food_ja": "しょうが",
+      "direction": "warm",
+      "line_no": 30,
+      "quote": "「2. しょうが｜温活食材の王様」(L30) / 「しょうがの温め効果」(L32) / 「根菜・しょうが・発酵食品」= 温め3本柱 (L14)"
+    },
+    {
+      "food_ja": "生しょうが",
+      "direction": "warm",
+      "line_no": 37,
+      "quote": "「🌱 生しょうが（ジンゲロール）／体の表面をすぐに温める一時的な効果。…温め持続力はやや低め。」(L37-38) — condition: raw"
+    },
+    {
+      "food_ja": "加熱・乾燥しょうが",
+      "direction": "warm",
+      "line_no": 39,
+      "quote": "「🔥 加熱・乾燥しょうが（ショウガオール）／…体の芯から持続的に温める効果が高まる。」(L39-40) — condition: heated/dried"
+    },
+    {
+      "food_ja": "根菜類",
+      "direction": "warm",
+      "line_no": 49,
+      "quote": "「土の中で育つ根菜類は、東洋医学で体を温める食材の代表格です。」(L49) — umbrella label"
+    },
+    {
+      "food_ja": "いも類",
+      "direction": "warm",
+      "line_no": 51,
+      "quote": "「体を温める根菜・いも類」(L51, セクション3見出し) / 「土の中・地下で育つもの（根菜・いも類）」(L18, 温めやすい食材の特徴) — umbrella label"
+    },
+    {
+      "food_ja": "にんじん",
+      "direction": "warm",
+      "line_no": 53,
+      "quote": "「体を温める根菜・いも類」(L51) 直下リスト: 「にんじん／…加熱するとより温め効果が高まりやすくなります。」(L53-54)"
+    },
+    {
+      "food_ja": "ごぼう",
+      "direction": "warm",
+      "line_no": 55,
+      "quote": "「体を温める根菜・いも類」(L51) 直下リスト: 「ごぼう／…血行促進作用があるとされています。」(L55-56)"
+    },
+    {
+      "food_ja": "さつまいも",
+      "direction": "warm",
+      "line_no": 57,
+      "quote": "「体を温める根菜・いも類」(L51) 直下リスト: 「さつまいも」(L57)"
+    },
+    {
+      "food_ja": "れんこん",
+      "direction": "warm",
+      "line_no": 59,
+      "quote": "「れんこん／血行促進・体を温める作用があるとされる食材。」(L59-60)"
+    },
+    {
+      "food_ja": "かぼちゃ",
+      "direction": "warm",
+      "line_no": 61,
+      "quote": "「体を温める根菜・いも類」(L51) 直下リスト: 「かぼちゃ／…血行促進に関わる栄養素が多い温活向き食材。」(L61-62)"
+    },
+    {
+      "food_ja": "にんにく",
+      "direction": "warm",
+      "line_no": 63,
+      "quote": "「にんにく・たまねぎ／地下鱗茎類。硫化アリルが血行を促進し体を温める作用があるとされています。」(L63-64)"
+    },
+    {
+      "food_ja": "たまねぎ",
+      "direction": "warm",
+      "line_no": 63,
+      "quote": "「にんにく・たまねぎ／地下鱗茎類。硫化アリルが血行を促進し体を温める作用があるとされています。」(L63-64)"
+    },
+    {
+      "food_ja": "発酵食品",
+      "direction": "warm",
+      "line_no": 71,
+      "quote": "「体を温める発酵食品」(L71) / 「発酵によって食材の「冷やす性質」が「温める性質」に変化するとされています」(L69) — umbrella label"
+    },
+    {
+      "food_ja": "味噌",
+      "direction": "warm",
+      "line_no": 73,
+      "quote": "「体を温める発酵食品」(L71) 直下: 「味噌／…朝の味噌汁は体温を上げる最高の習慣。」(L73-74)"
+    },
+    {
+      "food_ja": "納豆",
+      "direction": "warm",
+      "line_no": 75,
+      "quote": "「納豆／豆腐（体を冷やす）が発酵して体を温める性質に変化。」(L75-76) / 「豆腐は冷やすが、納豆は温める」(L125)"
+    },
+    {
+      "food_ja": "豆腐",
+      "direction": "cool",
+      "line_no": 76,
+      "quote": "「豆腐（体を冷やす）が発酵して体を温める性質に変化。」(L76) / 「豆腐は冷やすが、納豆は温める。」(L125)"
+    },
+    {
+      "food_ja": "甘酒",
+      "direction": "warm",
+      "line_no": 77,
+      "quote": "「体を温める発酵食品」(L71) 直下: 「甘酒」(L77) / 「しょうが湯・甘酒・紅茶（体を温める）」(L104, 温め飲み物)"
+    },
+    {
+      "food_ja": "ぬか漬け",
+      "direction": "warm",
+      "line_no": 79,
+      "quote": "「体を温める発酵食品」(L71) 直下: 「ぬか漬け・キムチ」(L79)"
+    },
+    {
+      "food_ja": "キムチ",
+      "direction": "warm",
+      "line_no": 79,
+      "quote": "「体を温める発酵食品」(L71) 直下: 「ぬか漬け・キムチ／…キムチの唐辛子は血行を促進する効果も。」(L79-80)"
+    },
+    {
+      "food_ja": "唐辛子",
+      "direction": "warm",
+      "line_no": 90,
+      "quote": "「5. その他の温め食材」(L84)「料理にプラスするだけで温め効果アップ」(L87) 直下: 「唐辛子・七味／カプサイシンが血行を促進。」(L90-91)"
+    },
+    {
+      "food_ja": "七味",
+      "direction": "warm",
+      "line_no": 90,
+      "quote": "「5. その他の温め食材」(L84) 直下: 「唐辛子・七味／カプサイシンが血行を促進。」(L90-91) / 「しょうが・ネギ・七味を加えるだけで温め効果がアップ」(L102)"
+    },
+    {
+      "food_ja": "シナモン",
+      "direction": "warm",
+      "line_no": 92,
+      "quote": "「シナモン／血行を促進し体を温める効果が高いとされるスパイス。」(L92-93)"
+    },
+    {
+      "food_ja": "ネギ",
+      "direction": "warm",
+      "line_no": 94,
+      "quote": "「ネギ・にら／薬味として毎日使いやすい。体を温め、免疫アップにも関わる食材。」(L94-95)"
+    },
+    {
+      "food_ja": "にら",
+      "direction": "warm",
+      "line_no": 94,
+      "quote": "「ネギ・にら／薬味として毎日使いやすい。体を温め、免疫アップにも関わる食材。」(L94-95)"
+    },
+    {
+      "food_ja": "羊肉",
+      "direction": "warm",
+      "line_no": 96,
+      "quote": "「羊肉・鶏肉／体を温める性質の肉類。特に羊肉は温め効果が高いとされています。」(L96-97)"
+    },
+    {
+      "food_ja": "鶏肉",
+      "direction": "warm",
+      "line_no": 96,
+      "quote": "「羊肉・鶏肉／体を温める性質の肉類。」(L96-97)"
+    },
+    {
+      "food_ja": "よもぎ茶",
+      "direction": "warm",
+      "line_no": 104,
+      "quote": "「温め飲み物」(L103):「よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです。」(L104)"
+    },
+    {
+      "food_ja": "ほうじ茶",
+      "direction": "warm",
+      "line_no": 104,
+      "quote": "「温め飲み物」(L103):「よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）」(L104)"
+    },
+    {
+      "food_ja": "ルイボスティー",
+      "direction": "warm",
+      "line_no": 104,
+      "quote": "「温め飲み物」(L103):「よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）」(L104)"
+    },
+    {
+      "food_ja": "紅茶",
+      "direction": "warm",
+      "line_no": 104,
+      "quote": "「…甘酒・紅茶（体を温める）が特におすすめです。」(L104)"
+    },
+    {
+      "food_ja": "緑茶",
+      "direction": "cool",
+      "line_no": 104,
+      "quote": "「一方、緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされている」(L104) / 「緑茶・麦茶の飲みすぎ／…東洋医学では体を冷やす性質とされています。」(L118-119)"
+    },
+    {
+      "food_ja": "麦茶",
+      "direction": "cool",
+      "line_no": 104,
+      "quote": "「一方、緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされている」(L104) / 「緑茶・麦茶の飲みすぎ／…体を冷やす性質とされています。」(L118-119)"
+    },
+    {
+      "food_ja": "コーヒー",
+      "direction": "cool",
+      "line_no": 104,
+      "quote": "「一方、緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされているため」(L104)"
+    },
+    {
+      "food_ja": "白米",
+      "direction": "cool",
+      "line_no": 108,
+      "quote": "「⚠️ 摂りすぎに注意したい冷やしやすい食材」(L107):「白砂糖・白米・精白食品／精白・加工されたものは体を冷やしやすい。」(L108-109)"
+    },
+    {
+      "food_ja": "精白食品",
+      "direction": "cool",
+      "line_no": 108,
+      "quote": "「白砂糖・白米・精白食品／精白・加工されたものは体を冷やしやすい。」(L108-109) — umbrella label"
+    },
+    {
+      "food_ja": "トマト",
+      "direction": "cool",
+      "line_no": 110,
+      "quote": "「夏野菜（トマト・きゅうり・なす）／夏が旬の野菜は体を冷やす性質。」(L110-111)"
+    },
+    {
+      "food_ja": "きゅうり",
+      "direction": "cool",
+      "line_no": 110,
+      "quote": "「夏野菜（トマト・きゅうり・なす）／夏が旬の野菜は体を冷やす性質。」(L110-111)"
+    },
+    {
+      "food_ja": "なす",
+      "direction": "cool",
+      "line_no": 110,
+      "quote": "「夏野菜（トマト・きゅうり・なす）／夏が旬の野菜は体を冷やす性質。」(L110-111)"
+    },
+    {
+      "food_ja": "バナナ",
+      "direction": "cool",
+      "line_no": 112,
+      "quote": "「バナナ・スイカ・メロン／南国の果物は体を冷やしやすいとされています。」(L112-113)"
+    },
+    {
+      "food_ja": "スイカ",
+      "direction": "cool",
+      "line_no": 112,
+      "quote": "「バナナ・スイカ・メロン／南国の果物は体を冷やしやすいとされています。」(L112-113)"
+    },
+    {
+      "food_ja": "メロン",
+      "direction": "cool",
+      "line_no": 112,
+      "quote": "「バナナ・スイカ・メロン／南国の果物は体を冷やしやすいとされています。」(L112-113)"
+    },
+    {
+      "food_ja": "南国の果物",
+      "direction": "cool",
+      "line_no": 113,
+      "quote": "「南国の果物は体を冷やしやすいとされています。」(L113) — umbrella label"
+    },
+    {
+      "food_ja": "牛乳",
+      "direction": "cool",
+      "line_no": 114,
+      "quote": "「牛乳・白豆腐／発酵前の乳製品・豆腐は冷やしやすい性質。」(L114-115) / 「牛乳は冷やすが、ヨーグルトは中性〜温め寄りに変化します。」(L125)"
+    },
+    {
+      "food_ja": "白豆腐",
+      "direction": "cool",
+      "line_no": 114,
+      "quote": "「牛乳・白豆腐／発酵前の乳製品・豆腐は冷やしやすい性質。」(L114-115) — 豆腐(L76)と同一食品の別表記"
+    },
+    {
+      "food_ja": "ヨーグルト",
+      "direction": "neutral",
+      "line_no": 125,
+      "quote": "「牛乳は冷やすが、ヨーグルトは中性〜温め寄りに変化します。」(L125) — 「中性〜温め寄り」= neutral〜warm の幅を持つ記述"
+    }
+  ],
+  "serving_temperature_items": [
+    {
+      "item_ja": "朝の冷たいスムージー",
+      "line_no": 116
+    }
+  ],
+  "notes": "49 foods coded (29 warm / 19 cool / 1 neutral).\n\n[EXCLUDED — §8 substitute-recommendation precedent]\n- 黒砂糖・はちみつ (L98-99): 「白砂糖（体を冷やす）の代わりに使える天然甘味料」— framed only as substitutes for white sugar, no nature attribution of their own. TENSION FLAGGED: they sit inside the block headed 「5. その他の温め食材」(L84) / 「料理にプラスするだけで温め効果アップ」(L87), so a strict §3 column-header reading would make both warm. §8 explicitly names karada_onkatsu はちみつ as a dropped substitute row, so I followed §8 and dropped both. If the author instead applies the header rule, 黒砂糖 and はちみつ should be added as warm (L98).\n- 玄米 (L109): 「黒砂糖・玄米に切り替えるだけで変わります」— substitute recommendation only, no nature stated (matches the §8 karada_onkatsu 玄米 precedent).\n\n[EXCLUDED — prepared beverage, §8 白湯/生姜湯 precedent]\n- しょうが湯 (L104, also L99): listed among 温め飲み物 but it is a prepared drink, not a food's nature.\n- 白湯 (L42, L46, L129): a vehicle for ginger powder; no direction attributed to it anywhere.\n- しょうが紅茶 (L42): prepared drink, no separate attribution.\n- 生姜パウダー（乾燥しょうが）(L45-46): PR/ad block for a product; same item as 加熱・乾燥しょうが (already coded, L39).\n\n[EXCLUDED — no direction stated]\n- 醤油 (L127): appears only as 「サラダのドレッシングに醤油や味噌を使う」 in a combining tip; a warming nature is implied by context but never stated. 味噌 is coded warm from L73 instead.\n- 乳製品 (L115, as 「発酵前の乳製品」) and 肉類 (L96, as 「体を温める性質の肉類」) and 地下鱗茎類 (L64): treated as descriptive qualifiers of the specific items listed rather than standalone umbrella labels; the concrete items (牛乳 / 羊肉・鶏肉 / にんにく・たまねぎ) are coded.\n\n[STRUCTURAL ROW HEADERS] None found. No label appears identically under both the warming and the cooling side of this source.\n\n[CONDITION SPLITS]\n- しょうが: source splits 生しょうが (L37-38, surface/temporary warming) vs 加熱・乾燥しょうが (L39-40, deep/sustained warming). BOTH are warm — this is not a warm/cool split. Coded as three rows (しょうが, 生しょうが, 加熱・乾燥しょうが) since all three labels are verbatim and each carries its own warming statement; collapse to one ginger key if the author prefers.\n- 豆腐→納豆 and 牛乳→ヨーグルト: the source states fermentation flips the direction (L76, L125). Coded as separate foods, not as conditions.\n\n[DUPLICATE FOOD KEYS to watch at aggregation]\n- 豆腐 (L76, cool) and 白豆腐 (L114, cool) are the same food under two verbatim labels; both coded because both appear verbatim.\n- 甘酒 appears under both the fermented-foods warm block (L77) and the 温め飲み物 line (L104) — same direction, coded once.\n- 緑茶/麦茶 appear at L104 and again at L118-119 — same direction (cool), coded once each.\n- 白砂糖 appears at L28, L99, L108 — cool in all three, coded once.\n\n[AMBIGUITY FLAGGED — needs author adjudication]\n- ヨーグルト (L125): the source says 「中性〜温め寄りに変化します」. Per §3 中性≈中庸→neutral, but 「温め寄り」 leans warm. Coded neutral to avoid over-reading; a defensible alternative is warm. This is the only non-binary attribution in the source.\n- 甘酒 (L77-78): the item text is 「温めて飲むことで温活ドリンクに」 which is serving-temperature language, but the block header is 「体を温める発酵食品」(L71) and L104 lists it plainly among 温め飲み物, so it is coded warm on the header per §3 rather than moved to serving_temperature_items.\n\n[QUESTION-STYLE HEADINGS] None in this source; all headings are declarative.\n\n[SERVING TEMPERATURE]\n- 朝の冷たいスムージー (L116-117, repeated L135): 「体温が最も低い朝に冷たいものを飲むのは特に冷えにつながりやすいです」— about the drink being cold, not about a smoothie's intrinsic nature. Also L127 mentions スムージー with no direction.\n- Adjacent serving-temperature advice that does NOT change a coding: バナナ・スイカ・メロンに「常温で食べるのがベター」(L113) and 緑茶・麦茶・コーヒーに「温かくして少量に」(L104) — those foods already carry explicit nature attributions (cool), so they stay in foods."
+}

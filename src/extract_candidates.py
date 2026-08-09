@@ -193,22 +193,46 @@ def extract_source(source_id: str, text: str) -> pd.DataFrame:
                     }
                 )
 
+        in_scope = line_no - heading_line <= MAX_SCOPE_LINES
+
         # Running text can carry an attribution on a line that is also a list
         # ("人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」"), so the
         # prose path runs in addition to the structural ones, not instead.
-        if in_thermal_context(line_no - 1):
+        # It also runs on plain sentences inside an open thermal block, where
+        # the block's heading supplies the direction and the sentence supplies
+        # the food ("脂身の少ない赤身肉や、赤身の魚を選ぶと…").
+        if in_thermal_context(line_no - 1) or in_scope:
             emit("prose", _split_prose(line))
+            # The unsplit line is its own granularity: ・ joins a compound as
+            # often as it separates items ("加熱・乾燥しょうが"), so splitting on
+            # it alone can destroy the very term the source names.
+            emit("line", [t for t in _variants(line) if _is_item(t)])
+
+            # extract_text.py inherits the page's own line breaks, and some
+            # pages break mid-phrase ("他、代表的な夏野" / "菜に"), which puts a
+            # food beyond the reach of anything line-based. Neither the
+            # enumeration nor an independent reader working under the verbatim
+            # rule can see those, so this class is closed structurally rather
+            # than on measured evidence.
+            nxt = lines[line_no] if line_no < len(lines) else ""
+            if nxt and not SENTENCE_END.search(line[-1]) and not DELIM.search(line[-1]):
+                emit("wrapped", _split_prose(line + nxt))
 
         if LABEL_SEP.search(line):
-            payload = LABEL_SEP.split(line, maxsplit=1)[1]
-            emit("labeled", _split_items(payload))
+            label, payload = LABEL_SEP.split(line, maxsplit=1)[:2]
+            items = _split_items(payload)
+            # The label side can be an attributed category in its own right
+            # ("肉類：鶏肉、牛肉…"), which §9.5 of coding_protocol.md codes rather
+            # than drops, so it has to reach the ledger as its own candidate.
+            if _is_item(label.strip()):
+                items = [label.strip(), *items]
+            emit("labeled", items)
             continue
 
         if len(DELIM.findall(line)) >= 1:
             emit("list", _split_items(line))
             continue
 
-        in_scope = line_no - heading_line <= MAX_SCOPE_LINES
         if in_scope and not SENTENCE_END.search(line):
             items = [t for t in _variants(line) if _is_item(t)]
             items.extend(_paren_inner(line))

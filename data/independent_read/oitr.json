@@ -1,0 +1,382 @@
+{
+  "source_id": "oitr",
+  "foods": [
+    {
+      "food_ja": "根菜",
+      "direction": "warm",
+      "line_no": 67,
+      "quote": "土の中で育つ根菜は体を温めるとされる"
+    },
+    {
+      "food_ja": "冬野菜",
+      "direction": "warm",
+      "line_no": 191,
+      "quote": "「寒い地域・季節に育つもの（根菜・冬野菜）は温め」"
+    },
+    {
+      "food_ja": "にんじん",
+      "direction": "warm",
+      "line_no": 66,
+      "quote": "根菜・冬野菜 / にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根（体を温める食材一覧 表）"
+    },
+    {
+      "food_ja": "ごぼう",
+      "direction": "warm",
+      "line_no": 66,
+      "quote": "にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根（体を温める食材一覧 表）"
+    },
+    {
+      "food_ja": "れんこん",
+      "direction": "warm",
+      "line_no": 66,
+      "quote": "にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根（体を温める食材一覧 表）"
+    },
+    {
+      "food_ja": "かぼちゃ",
+      "direction": "warm",
+      "line_no": 66,
+      "quote": "にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根（体を温める食材一覧 表）"
+    },
+    {
+      "food_ja": "さつまいも",
+      "direction": "warm",
+      "line_no": 66,
+      "quote": "にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根（体を温める食材一覧 表）"
+    },
+    {
+      "food_ja": "大根",
+      "direction": "warm",
+      "line_no": 66,
+      "quote": "にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根（体を温める食材一覧 表）"
+    },
+    {
+      "food_ja": "薬味",
+      "direction": "warm",
+      "line_no": 193,
+      "quote": "体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です"
+    },
+    {
+      "food_ja": "香味野菜",
+      "direction": "warm",
+      "line_no": 68,
+      "quote": "薬味・香味野菜（体を温める食材一覧（カテゴリ別）表のカテゴリ行）"
+    },
+    {
+      "food_ja": "生姜",
+      "direction": "warm",
+      "line_no": 89,
+      "quote": "生姜に含まれるジンゲロール（生の状態）とショウガオール（加熱・乾燥後）は体を内側からぽかぽかに温める働きが期待されています"
+    },
+    {
+      "food_ja": "にんにく",
+      "direction": "warm",
+      "line_no": 69,
+      "quote": "生姜・にんにく・ねぎ・玉ねぎ・にら・みょうが（体を温める食材一覧 表・薬味・香味野菜）"
+    },
+    {
+      "food_ja": "ねぎ",
+      "direction": "warm",
+      "line_no": 69,
+      "quote": "生姜・にんにく・ねぎ・玉ねぎ・にら・みょうが（体を温める食材一覧 表・薬味・香味野菜）"
+    },
+    {
+      "food_ja": "玉ねぎ",
+      "direction": "warm",
+      "line_no": 69,
+      "quote": "生姜・にんにく・ねぎ・玉ねぎ・にら・みょうが（体を温める食材一覧 表・薬味・香味野菜）"
+    },
+    {
+      "food_ja": "にら",
+      "direction": "warm",
+      "line_no": 69,
+      "quote": "生姜・にんにく・ねぎ・玉ねぎ・にら・みょうが（体を温める食材一覧 表・薬味・香味野菜）"
+    },
+    {
+      "food_ja": "みょうが",
+      "direction": "warm",
+      "line_no": 69,
+      "quote": "生姜・にんにく・ねぎ・玉ねぎ・にら・みょうが（体を温める食材一覧 表・薬味・香味野菜）"
+    },
+    {
+      "food_ja": "発酵食品",
+      "direction": "warm",
+      "line_no": 191,
+      "quote": "また「色が濃い・辛い・発酵している」食材は体を温めやすいとされています（表カテゴリ「発酵食品」も体を温める食材一覧内）"
+    },
+    {
+      "food_ja": "味噌",
+      "direction": "warm",
+      "line_no": 72,
+      "quote": "味噌・納豆・甘酒・キムチ・ぬか漬け・塩麹（体を温める食材一覧 表・発酵食品）"
+    },
+    {
+      "food_ja": "納豆",
+      "direction": "warm",
+      "line_no": 72,
+      "quote": "味噌・納豆・甘酒・キムチ・ぬか漬け・塩麹（体を温める食材一覧 表・発酵食品）"
+    },
+    {
+      "food_ja": "甘酒",
+      "direction": "warm",
+      "line_no": 72,
+      "quote": "味噌・納豆・甘酒・キムチ・ぬか漬け・塩麹（体を温める食材一覧 表・発酵食品）"
+    },
+    {
+      "food_ja": "キムチ",
+      "direction": "warm",
+      "line_no": 72,
+      "quote": "味噌・納豆・甘酒・キムチ・ぬか漬け・塩麹（体を温める食材一覧 表・発酵食品）"
+    },
+    {
+      "food_ja": "ぬか漬け",
+      "direction": "warm",
+      "line_no": 72,
+      "quote": "味噌・納豆・甘酒・キムチ・ぬか漬け・塩麹（体を温める食材一覧 表・発酵食品）"
+    },
+    {
+      "food_ja": "塩麹",
+      "direction": "warm",
+      "line_no": 72,
+      "quote": "味噌・納豆・甘酒・キムチ・ぬか漬け・塩麹（体を温める食材一覧 表・発酵食品）"
+    },
+    {
+      "food_ja": "スパイス",
+      "direction": "warm",
+      "line_no": 193,
+      "quote": "体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です"
+    },
+    {
+      "food_ja": "シナモン",
+      "direction": "warm",
+      "line_no": 99,
+      "quote": "シナモンは香りで満足感が得やすく、体を温める食材として親しまれており"
+    },
+    {
+      "food_ja": "唐辛子",
+      "direction": "warm",
+      "line_no": 98,
+      "quote": "唐辛子に含まれるカプサイシンは、体を内側からアクティブに温める働きが注目されており"
+    },
+    {
+      "food_ja": "こしょう",
+      "direction": "warm",
+      "line_no": 75,
+      "quote": "シナモン・唐辛子・こしょう・カレー粉・山椒・ごま（体を温める食材一覧 表・スパイス・調味料）"
+    },
+    {
+      "food_ja": "カレー粉",
+      "direction": "warm",
+      "line_no": 75,
+      "quote": "シナモン・唐辛子・こしょう・カレー粉・山椒・ごま（体を温める食材一覧 表・スパイス・調味料）"
+    },
+    {
+      "food_ja": "山椒",
+      "direction": "warm",
+      "line_no": 75,
+      "quote": "シナモン・唐辛子・こしょう・カレー粉・山椒・ごま（体を温める食材一覧 表・スパイス・調味料）"
+    },
+    {
+      "food_ja": "ごま",
+      "direction": "warm",
+      "line_no": 75,
+      "quote": "シナモン・唐辛子・こしょう・カレー粉・山椒・ごま（体を温める食材一覧 表・スパイス・調味料）"
+    },
+    {
+      "food_ja": "たんぱく質",
+      "direction": "warm",
+      "line_no": 193,
+      "quote": "体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です"
+    },
+    {
+      "food_ja": "鶏肉",
+      "direction": "warm",
+      "line_no": 78,
+      "quote": "鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）（体を温める食材一覧 表・たんぱく質）"
+    },
+    {
+      "food_ja": "豚肉",
+      "direction": "warm",
+      "line_no": 78,
+      "quote": "鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）（体を温める食材一覧 表・たんぱく質）"
+    },
+    {
+      "food_ja": "サバ",
+      "direction": "warm",
+      "line_no": 78,
+      "quote": "鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）（体を温める食材一覧 表・たんぱく質）"
+    },
+    {
+      "food_ja": "イワシ",
+      "direction": "warm",
+      "line_no": 78,
+      "quote": "鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）（体を温める食材一覧 表・たんぱく質）"
+    },
+    {
+      "food_ja": "卵",
+      "direction": "warm",
+      "line_no": 78,
+      "quote": "鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）（体を温める食材一覧 表・たんぱく質）"
+    },
+    {
+      "food_ja": "大豆製品",
+      "direction": "warm",
+      "line_no": 78,
+      "quote": "鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）（体を温める食材一覧 表・たんぱく質）"
+    },
+    {
+      "food_ja": "豆腐",
+      "direction": "warm",
+      "line_no": 78,
+      "quote": "鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）（体を温める食材一覧 表・たんぱく質）"
+    },
+    {
+      "food_ja": "青魚",
+      "direction": "warm",
+      "line_no": 193,
+      "quote": "体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です"
+    },
+    {
+      "food_ja": "ナッツ",
+      "direction": "warm",
+      "line_no": 80,
+      "quote": "寒冷地の果物・ナッツ / りんご・ぶどう・なつめ・くるみ・アーモンド・黒ごま（体を温める食材一覧 表）※L82「寒い地域で育つ果物・種実類は体を温めるとされる」"
+    },
+    {
+      "food_ja": "りんご",
+      "direction": "warm",
+      "line_no": 81,
+      "quote": "りんご・ぶどう・なつめ・くるみ・アーモンド・黒ごま（体を温める食材一覧 表・寒冷地の果物・ナッツ）"
+    },
+    {
+      "food_ja": "ぶどう",
+      "direction": "warm",
+      "line_no": 81,
+      "quote": "りんご・ぶどう・なつめ・くるみ・アーモンド・黒ごま（体を温める食材一覧 表・寒冷地の果物・ナッツ）"
+    },
+    {
+      "food_ja": "なつめ",
+      "direction": "warm",
+      "line_no": 81,
+      "quote": "りんご・ぶどう・なつめ・くるみ・アーモンド・黒ごま（体を温める食材一覧 表・寒冷地の果物・ナッツ）"
+    },
+    {
+      "food_ja": "くるみ",
+      "direction": "warm",
+      "line_no": 81,
+      "quote": "りんご・ぶどう・なつめ・くるみ・アーモンド・黒ごま（体を温める食材一覧 表・寒冷地の果物・ナッツ）"
+    },
+    {
+      "food_ja": "アーモンド",
+      "direction": "warm",
+      "line_no": 81,
+      "quote": "りんご・ぶどう・なつめ・くるみ・アーモンド・黒ごま（体を温める食材一覧 表・寒冷地の果物・ナッツ）"
+    },
+    {
+      "food_ja": "黒ごま",
+      "direction": "warm",
+      "line_no": 81,
+      "quote": "りんご・ぶどう・なつめ・くるみ・アーモンド・黒ごま（体を温める食材一覧 表・寒冷地の果物・ナッツ）"
+    },
+    {
+      "food_ja": "夏野菜",
+      "direction": "cool",
+      "line_no": 151,
+      "quote": "❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）※L152「暑い地域・季節に育つ野菜は体を冷やす傾向がある」"
+    },
+    {
+      "food_ja": "トマト",
+      "direction": "cool",
+      "line_no": 151,
+      "quote": "❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）（体を冷やしやすい食材）"
+    },
+    {
+      "food_ja": "きゅうり",
+      "direction": "cool",
+      "line_no": 151,
+      "quote": "❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）（体を冷やしやすい食材）"
+    },
+    {
+      "food_ja": "なす",
+      "direction": "cool",
+      "line_no": 151,
+      "quote": "❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）（体を冷やしやすい食材）"
+    },
+    {
+      "food_ja": "ゴーヤ",
+      "direction": "cool",
+      "line_no": 151,
+      "quote": "❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）（体を冷やしやすい食材）"
+    },
+    {
+      "food_ja": "南国の果物",
+      "direction": "cool",
+      "line_no": 153,
+      "quote": "❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）※L154「温かい地域の果物は陰性食品に分類される」"
+    },
+    {
+      "food_ja": "バナナ",
+      "direction": "cool",
+      "line_no": 153,
+      "quote": "❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）（体を冷やしやすい食材）"
+    },
+    {
+      "food_ja": "マンゴー",
+      "direction": "cool",
+      "line_no": 153,
+      "quote": "❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）（体を冷やしやすい食材）"
+    },
+    {
+      "food_ja": "パイナップル",
+      "direction": "cool",
+      "line_no": 153,
+      "quote": "❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）（体を冷やしやすい食材）"
+    },
+    {
+      "food_ja": "キウイ",
+      "direction": "cool",
+      "line_no": 153,
+      "quote": "❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）（体を冷やしやすい食材）"
+    },
+    {
+      "food_ja": "白砂糖",
+      "direction": "cool",
+      "line_no": 157,
+      "quote": "⚠️ 体を冷やしやすい食材——温活中は控えめに / ❄️ 白砂糖・精製食品"
+    },
+    {
+      "food_ja": "精製食品",
+      "direction": "cool",
+      "line_no": 157,
+      "quote": "⚠️ 体を冷やしやすい食材——温活中は控えめに / ❄️ 白砂糖・精製食品"
+    },
+    {
+      "food_ja": "アイス",
+      "direction": "cool",
+      "line_no": 155,
+      "quote": "⚠️ 体を冷やしやすい食材——温活中は控えめに / ❄️ 冷たい飲み物・アイス → 胃腸を直接冷やして消化機能・腸内環境に影響する"
+    }
+  ],
+  "serving_temperature_items": [
+    {
+      "item_ja": "冷たい飲み物",
+      "line_no": 155
+    },
+    {
+      "item_ja": "冷たい飲み物",
+      "line_no": 189
+    },
+    {
+      "item_ja": "冷たいもの",
+      "line_no": 189
+    },
+    {
+      "item_ja": "冷たい飲み物",
+      "line_no": 191
+    },
+    {
+      "item_ja": "冷たい状態",
+      "line_no": 182
+    }
+  ],
+  "notes": "Source is a 温活 (warming-lifestyle) article. Warming attributions come from (a) the 6-row category table at L62-82 headed 体を温める食材一覧（カテゴリ別） with L59 stating 体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます, (b) the per-category prose sections L84-105, and (c) the summary line L193. Cooling attributions come from the ⚠️ 体を冷やしやすい食材 box at L150-159 (with L154 explicitly using 陰性食品) and the FAQ at L191.\n\nCategory/umbrella labels coded per instruction: 根菜, 冬野菜, 薬味, 香味野菜, 発酵食品, スパイス, たんぱく質, ナッツ, 青魚, 夏野菜, 南国の果物. Note たんぱく質 is a nutrient word used as a table category inside the warming list — flagged in case the study wants nutrient-categories excluded.\n\nFLAGGED / judgment calls:\n1. アイス (L155) coded cool as a named food under the 体を冷やしやすい食材 header, but it sits in the same bullet as 冷たい飲み物 and its stated mechanism is 胃腸を直接冷やす (serving temperature). Reasonable to reclassify as a serving-temperature item at adjudication.\n2. 白砂糖・精製食品 (L157) coded cool from the box header only; the explanatory arrow talks about blood-sugar swings affecting 血行・体温調節, not a 五性 nature.\n3. NOT coded — prepared beverages/products per §8 precedent: 白湯 and 生姜湯 (L184), 生姜入りドリンク (L173, described as 手軽な体温め飲み物), and the convenience-store product forms at L163-172 (ゆで卵, サラダチキン, カップ味噌汁, 即席スープ, サバ缶, いわし缶, ミックスナッツ) which are product forms of already-coded foods under the header コンビニで手に入る温活食材・メニュー.\n4. NOT coded — nutrient-source recommendation lists with no nature attribution: レバー/ほうれん草/小松菜/あさり/ひじき as iron (L116, L137), アボカド as vitamin E (L130, L140), バナナ/ほうれん草/じゃがいも as potassium (L133, L143), パプリカ/ブロッコリー/レモン as vitamin C (L118, L135), きのこ/海藻 as 食物繊維 (L146). Note バナナ appears in one of these warming-context lists (L133) yet is explicitly coded cool at L153 — confirming these nutrient lists are not nature attributions.\n5. NOT coded — 紅茶・コーヒー・ヨーグルト (L99) mentioned only as vehicles for sprinkling cinnamon; ジンジャーエール (L173) explicitly excluded by the source.\n6. No neutral (平/中庸) attributions anywhere in this source."
+}
