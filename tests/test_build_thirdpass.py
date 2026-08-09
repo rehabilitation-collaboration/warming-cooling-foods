@@ -94,10 +94,34 @@ def test_attach_rulings_records_the_authors_verdict_and_reason(monkeypatch):
 
 
 def test_published_ledger_matches_the_shipped_batches():
-    # Guards the number the manuscript reports: 419 records, 5 flagged, 0 overturned.
+    # Guards the numbers the manuscript reports for the 2026-08-09 pass over the
+    # 22-term core-zero set: 388 records across 23 foods, 6 flagged, 1 overturned.
+    # The earlier pass (419 records, 28 foods, 5 flagged, 0 overturned) covered the
+    # four-term zero set, which the widened vocabulary replaced.
     df = bt.attach_rulings(bt.load_verdicts())
-    assert len(df) == 419
+    assert len(df) == 388
+    assert df["food_key"].nunique() == 23
     flagged = df[df["third_verdict"] != "exclude-agreed"]
-    assert len(flagged) == 5
-    assert (flagged["author_ruling"] == "exclude").all()
-    assert df["food_key"].nunique() == 28
+    assert len(flagged) == 6
+    # Every flagged record must carry a ruling; attach_rulings raises otherwise,
+    # but assert it here so a silently-blank ruling cannot pass as adjudicated.
+    assert (flagged["author_ruling"] != "").all()
+    overturned = flagged[flagged["author_ruling"] == "include"]
+    assert list(overturned["pmid"]) == ["36558358"]
+
+
+def test_the_overturned_record_reaches_the_screening_ledger_as_an_include():
+    # The third pass only records a verdict; the label that moves L2' lives in
+    # screening_rulings.csv. If the two ever disagree, the published ledger says
+    # a record was overturned while the count still treats it as excluded.
+    import pandas as pd
+
+    from src.screening import SCREENING_CSV
+
+    rulings = pd.read_csv(bt.DATA_DIR / "screening_rulings.csv", dtype=str)
+    row = rulings[(rulings["food_key"] == "watermelon") & (rulings["pmid"] == "36558358")]
+    assert len(row) == 1 and row["final_label"].iloc[0] == "include"
+
+    ledger = pd.read_csv(SCREENING_CSV, dtype=str)
+    final = ledger[(ledger["food_key"] == "watermelon") & (ledger["pmid"] == "36558358")]
+    assert len(final) == 1 and final["final_label"].iloc[0] == "include"

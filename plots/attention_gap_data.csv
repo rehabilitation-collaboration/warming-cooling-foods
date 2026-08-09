@@ -10,10 +10,10 @@ burdock,ごぼう,0,241.0,0.0,323,warm,7,core,7,0.0,True
 eggplant,なす,13,420.0,0.0,2072,cool,7,core,7,0.0,True
 mango,マンゴー,14,1705.0,0.0,3627,cool,7,core,7,0.0,True
 apple,りんご,176,10535.0,1.0,23770,warm,7,core,7,0.3010299956639812,False
-watermelon,スイカ,31,716.0,0.0,3146,cool,6,core,6,0.0,True
 green onion,ねぎ,1,142.0,0.0,401,warm,6,core,6,0.0,True
 pineapple,パイナップル,10,841.0,0.0,2494,cool,6,core,6,0.0,True
 melon,メロン,35,1307.0,0.0,3898,cool,6,core,6,0.0,True
+watermelon,スイカ,31,716.0,1.0,3146,cool,6,core,6,0.3010299956639812,False
 grape,ぶどう,121,5207.0,2.0,17722,warm,6,core,6,0.47712125471966244,False
 chicken,鶏肉,702,26267.0,5.0,94310,warm,6,core,6,0.7781512503836436,False
 chili pepper,唐辛子,50,1748.0,17.0,1943,warm,6,core,6,1.255272505103306,False

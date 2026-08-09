@@ -52,3 +52,6 @@ ssrn-submission.html
 # via verify_refs.py; the public reference list lives in manuscript.md)
 output/reference_verification.md
 output/reference_verification.json
+
+# Tier1 目視 audit の作業シート (内部作業物)
+AUDIT-tier1-checklist.md

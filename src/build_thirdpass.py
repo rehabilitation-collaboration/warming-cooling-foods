@@ -73,7 +73,65 @@ AUTHOR_RULINGS: dict[tuple[str, str], tuple[str, str]] = {
         "exclude",
         "Report on a natural family planning programme. 'Pineapple plantation' locates the site "
         "and 'basal body temperature' names a contraceptive method; neither is an ingestion or "
-        "a thermal outcome. Name-only match.",
+        "a thermal outcome. Name-only match. (Flagged again by the 2026-08-09 pass, which could "
+        "not see this ruling; the record reaches l2_records.csv without an abstract because the "
+        "fetcher reads Abstract/AbstractText only and this 1981 record carries its text in "
+        "OtherAbstract. The ruling is unchanged and was made against the full PubMed record.)",
+    ),
+    # --- 2026-08-09 pass over the 22-term core-zero set (388 records) ---------
+    ("watermelon", "36558358"): (
+        "include",
+        "The one overturned exclusion. Randomised double-blind crossover, 12 healthy women, "
+        "acute oral ingestion of 90 g wild watermelon extract juice, with blood flow in the "
+        "posterior tibial artery significantly increased against placebo at 30/60/90 min supine. "
+        "All four conditions hold on the abstract's own text, and the bed is an extremity one, "
+        "which 2.3 lists among those peripheral circulation reaches and whose rationale calls the "
+        "substrate of felt warmth. This record had been excluded by the 2026-08-08 author sweep "
+        "citing the reactivity-probe rule, but none of that rule's named triggers is present: no "
+        "occlusion, no pharmacological probe, no flow-mediated dilatation. Of the 39 limb- or "
+        "skin-bed records that sweep excluded, every other one carries an organ or skeletal-muscle "
+        "bed or a named probe, so restoring this one removes an inconsistency rather than making "
+        "one. The paper frames itself on arterial stiffness and nitric oxide rather than warmth, "
+        "but 2.3 makes the bed and the probe decisive, and rewriting that rule once it is known "
+        "which record it decides is the failure this protocol exists to prevent.",
+    ),
+    ("watermelon", "36839167"): (
+        "exclude",
+        "Watermelon-juice crossover with indirect calorimetry during an oral glucose challenge. "
+        "The primary endpoint is heart-rate variability, the calorimetry is described as 'the "
+        "metabolic response to the OGC' with no thermogenesis, diet-induced thermogenesis or "
+        "thermic-effect language anywhere, and the energy-expenditure result was null. MeSH "
+        "indexes Heart Rate, Glucose and Cardiovascular Diseases and no thermal heading. That is "
+        "the 2.3 energy-expenditure carve-out as written.",
+    ),
+    ("onion", "27087901"): (
+        "exclude",
+        "Twelve-week randomised placebo-controlled trial of quercetin-rich onion peel extract. "
+        "Resting energy expenditure is measured, but the stated objective is the anti-obesity "
+        "effect and body composition, the keywords are overweight, body fat percent and obesity, "
+        "and no thermogenic framing appears. Two grounds, either sufficient: 2.3 makes energy "
+        "expenditure inside a body-composition trial no-thermal, and the REE rise occurred in the "
+        "placebo arm as well (p = 0.003) so no thermal outcome is attributable to the exposure.",
+    ),
+    ("pumpkin", "41695112"): (
+        "exclude",
+        "Acute crossover in 15 adults of whey against a pea, brown-rice and pumpkin-seed protein "
+        "blend, with postprandial energy expenditure over 3 h. Pumpkin seed is one of three "
+        "protein sources in the blend and no pumpkin-specific readout is reported, so condition 4 "
+        "fails, and the outcomes are framed as postprandial metabolism and appetite alongside "
+        "insulin, GLP-1 and NEFA with no thermogenesis language, so 2.3 excludes the energy "
+        "expenditure independently. The same record is excluded under brown rice on the same "
+        "grounds.",
+    ),
+    ("tuna", "15603203"): (
+        "exclude",
+        "Randomised double-blind crossover in 10 healthy women with oral liquid histamine, "
+        "measuring skin temperature and flush. Conditions 1, 3 and 4 hold for the agent actually "
+        "ingested, but tuna was not ingested and histamine is not tuna's principal dietary "
+        "constituent: the abstract lists it across cheese, sausages, sauerkraut, tuna, tomatoes "
+        "and alcoholic beverages, and MeSH indexes Histamine with no fish heading. Crediting it "
+        "would attach one study to six unrelated food keys, which is not what the constituent "
+        "rule is for.",
     ),
 }
 
