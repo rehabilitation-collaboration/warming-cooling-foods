@@ -87,6 +87,24 @@ def load_coder(coder: str) -> pd.DataFrame:
     return pd.concat([pd.read_csv(f, dtype=str) for f in files], ignore_index=True)
 
 
+def exclusion_breakdown(ledger: pd.DataFrame) -> pd.DataFrame:
+    """Counts of excluded records by reason class, largest first.
+
+    The ``reason`` field carries a class followed by optional free text
+    ("animal: mice", "species-mismatch: Capsicum annuum, not Piper nigrum"), so
+    the class is the part before the first colon. Table 2 of the manuscript
+    reports these counts and cites this module for them, which it could not do
+    while the aggregation lived in a one-off script.
+    """
+    excluded = ledger[ledger["final_label"] == "exclude"]
+    cls = excluded["reason"].fillna("").str.split(":").str[0].str.strip()
+    counts = cls.value_counts()
+    return pd.DataFrame(
+        {"reason": counts.index, "n": counts.to_numpy(),
+         "pct": (100 * counts / len(excluded)).round(1).to_numpy()}
+    )
+
+
 def main() -> None:
     c1 = load_coder("c1")
     c2 = load_coder("c2")
@@ -139,6 +157,15 @@ def main() -> None:
         n_raw = int(raw["n_pubmed"].iloc[0]) if len(raw) else -1
         print(f"  {food:14s} L2 {n_raw:4d} → L2' {int(l2s.get(food, 0)):3d}")
     print(f"  ... and {len(screened) - len(nonzero)} foods with L2' = 0")
+
+    breakdown = exclusion_breakdown(out)
+    total_excluded = int(breakdown["n"].sum())
+    print(f"\nexclusion reasons (n = {total_excluded}):")
+    for _, r in breakdown.iterrows():
+        print(f"  {r['reason']:20s} {int(r['n']):6d}  {r['pct']:5.1f}%")
+    animalish = breakdown[breakdown["reason"].isin(["animal", "livestock-heat"])]["n"].sum()
+    print(f"  animal + livestock-heat = {int(animalish)} "
+          f"({100 * animalish / total_excluded:.1f}%)")
 
 
 if __name__ == "__main__":

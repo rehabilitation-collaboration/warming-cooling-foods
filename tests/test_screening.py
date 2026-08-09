@@ -338,3 +338,26 @@ def test_load_rulings_is_empty_when_the_ledger_does_not_exist(tmp_path, monkeypa
     from src import build_screening as bs
     monkeypatch.setattr(bs, "RULINGS_CSV", tmp_path / "absent.csv")
     assert bs.load_rulings() == {}
+
+def test_exclusion_breakdown_classes_on_the_prefix_not_the_free_text():
+    # The reason field is "class: free text" ("animal: mice"), and Table 2 counts
+    # classes. Splitting on the wrong side silently reports one class per phrasing.
+    import pandas as pd
+
+    from src.build_screening import exclusion_breakdown
+
+    ledger = pd.DataFrame(
+        [
+            {"final_label": "exclude", "reason": "animal"},
+            {"final_label": "exclude", "reason": "animal: mice"},
+            {"final_label": "exclude", "reason": "animal: rats "},
+            {"final_label": "exclude", "reason": "agri"},
+            {"final_label": "include", "reason": ""},
+        ]
+    )
+    out = exclusion_breakdown(ledger).set_index("reason")
+    assert int(out.loc["animal", "n"]) == 3
+    assert int(out.loc["agri", "n"]) == 1
+    # Includes must not enter the denominator.
+    assert int(out["n"].sum()) == 4
+    assert float(out.loc["animal", "pct"]) == 75.0

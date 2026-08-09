@@ -125,7 +125,13 @@ could not have been judged against them.
 rulings were complete.** All 380 agreed includes were re-read against each
 record's own title and abstract in `l2_records.csv` — not against the coders'
 reason text. **115 of the 380 are `exclude` under §2.3**, and 11 that a keyword
-pass had flagged are confirmed `include`. Both sets are filed in
+pass had flagged are confirmed `include`. One of the 115 was restored on
+2026-08-09 after the adversarial third pass challenged it — watermelon/36558358,
+excluded here by citing the reactivity-probe rule although the record contains
+no occlusion, no pharmacological probe and no flow-mediated dilatation, and
+whose bed (posterior tibial artery) is one this section names as in scope. That
+row now carries the batch `2026-08-09 third pass`, so the sweep stands at 114
+exclusions and 12 confirmations. Both sets are filed in
 `data/screening_rulings.csv` under the batch `2026-08-08 §2.3 sweep`, so every
 override is auditable, and `adjudicate()` reports these rows as `adjudicated`
 in `screening.csv` rather than overriding them silently. The four agreed
