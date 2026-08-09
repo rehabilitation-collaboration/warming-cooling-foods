@@ -14,6 +14,9 @@ PLAN Phase RB-5 before any estimate was computed:
   after a Poisson over-dispersion check.
 - descriptive: zero-research rates overall, by belief tier and by lay direction,
   plus the widest-belief zero-research foods behind the figure.
+- framing sensitivity: belief breadth recounted within each attribution
+  vocabulary — stated bodily effect, five-natures/yin-yang, plain warm/cool
+  label — and the primary model refit on each, since Axis A pools all three.
 
 Run: python3 -m src.verify_stats  (from the project root)
 """
@@ -24,6 +27,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
+from . import claim_framing
 from .analysis import MEASURE, _read_counts, bottom_right_foods, prepare_scatter_data
 from .claim_mapping import load_claims, load_sources
 from .definitions import COOL, TIER_INDIVIDUAL, TIER_ORG, WARM
@@ -203,11 +207,6 @@ def main() -> None:
                   f"({r['direction']})")
     print(RULE)
 
-    # --- Frame sensitivity: Tier1 (primary) vs Tier1+2 --------------------
-    # The primary frame is Tier 1 per coding_protocol.md §1. Widening it to
-    # Tier 1+2 re-derives belief breadth over 15 sources instead of 9 and adds
-    # the foods only individual bloggers mention, so refitting the primary model
-    # there shows the source frame is not carrying the result.
     # --- Definition sensitivity: narrower readings of "on-construct" -------
     # L2′ as reported counts studies of a food's principal dietary constituent
     # (caffeine for coffee, capsaicin for chili pepper) and reviews of human
@@ -238,6 +237,11 @@ def main() -> None:
             print(f"{'':4s}model did not converge")
     print(RULE)
 
+    # --- Frame sensitivity: Tier1 (primary) vs Tier1+2 --------------------
+    # The primary frame is Tier 1 per coding_protocol.md §1. Widening it to
+    # Tier 1+2 re-derives belief breadth over 15 sources instead of 9 and adds
+    # the foods only individual bloggers mention, so refitting the primary model
+    # there shows the source frame is not carrying the result.
     print("[Frame sensitivity] primary model refit under each source frame")
     counts = _read_counts()
     for label, mt in (("Tier1 (primary)", TIER_ORG), ("Tier1+2 (sens.)", TIER_INDIVIDUAL)):
@@ -252,6 +256,52 @@ def main() -> None:
                   f"[{t['or_lo']:.3f}, {t['or_hi']:.3f}] p={t['p']:.4f}")
         else:
             print(f"{head}  model did not converge")
+    print(RULE)
+
+    # --- Framing sensitivity: what kind of attribution is being counted ----
+    # Axis A pools a stated bodily effect, a five-natures/yin-yang
+    # classification, and a bare warm/cool food label into one warm/cool
+    # variable, while Axis B measures a physiological outcome. The identity of
+    # those constructs is assumed, not shown, so belief breadth is recounted
+    # within each vocabulary and the primary model refit on each.
+    tier1 = claims[claims["source_id"].isin(set(sources.loc[sources["tier"] <= TIER_ORG, "source_id"]))]
+    tagged = claim_framing.classify_claims(tier1)
+    print("[Framing] how each Tier-1 source words the attribution (per quote)")
+    print(claim_framing.framing_counts(tier1).to_string(index=False))
+    print(f"  Tier-1 quotes={len(tagged)}  physio={int(tagged['is_physio'].sum())}  "
+          f"tcm={int(tagged['is_tcm'].sum())}  "
+          f"both={int((tagged['is_physio'] & tagged['is_tcm']).sum())}  "
+          f"label={int(tagged['is_label'].sum())}  "
+          f"context={int(tagged['is_context'].sum())}")
+    print(THIN)
+    print("[Framing sensitivity] primary model refit within each attribution vocabulary")
+    for framing in claim_framing.FRAMINGS:
+        d = claim_framing.framed_model_frame(claims, sources, counts, framing)
+        f = prepare_model_frame(d)
+        events = int(f["has_study"].sum())
+        z = len(f) - events
+        print(f"  {framing:8s} n={len(f):3d}  with study={events:3d}  "
+              f"zero={z:3d} ({100 * z / len(f):.1f}%)  "
+              f"breadth range={int(f['n_sources'].min())}-{int(f['n_sources'].max())}  "
+              f"foods outside this framing={len(d.attrs['outside_framing'])}")
+        # Fit rule fixed before any of these models was run: ten events per
+        # predictor, two predictors. Below it the frame is described, not fitted.
+        if events < claim_framing.MIN_EVENTS_TO_FIT:
+            print(f"{'':4s}not fitted — {events} events < {claim_framing.MIN_EVENTS_TO_FIT}")
+            continue
+        for tag, adj in (("adjusted  ", True), ("unadjusted", False)):
+            res = presence_logit(f, adjust_l1=adj)
+            if not res.get("converged"):
+                print(f"{'':4s}{tag} did not converge")
+                continue
+            t = res["terms"]["n_sources"]
+            line = (f"{'':4s}{tag} n_sources OR={t['or']:.3f} "
+                    f"[{t['or_lo']:.3f}, {t['or_hi']:.3f}] p={t['p']:.4f}")
+            if adj:
+                v = res["terms"]["log_l1"]
+                line += (f"    log_l1 OR={v['or']:.3f} "
+                         f"[{v['or_lo']:.3f}, {v['or_hi']:.3f}] p={v['p']:.4g}")
+            print(line)
 
 
 if __name__ == "__main__":
