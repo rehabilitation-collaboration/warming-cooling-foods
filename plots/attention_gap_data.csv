@@ -1,147 +1,147 @@
 food_key,food_ja,l2_raw,n_openalex,l2_screened,l1,direction,n_sources,scope,x,y,is_zero
-banana,バナナ,5,3346.0,1.0,7842,cool,9,core,9,0.3010299956639812,False
-carrot,にんじん,0,2391.0,0.0,5702,warm,8,core,8,0.0,True
-tomato,トマト,6,5125.0,0.0,38050,cool,8,core,8,0.0,True
-cucumber,きゅうり,4,1938.0,0.0,12174,cool,8,core,8,0.0,True
-pumpkin,かぼちゃ,2,921.0,0.0,2631,warm,8,core,8,0.0,True
-ginger,しょうが,35,3172.0,7.0,5730,warm,8,core,8,0.9030899869919435,False
-miso,味噌,4,407.0,0.0,1158,warm,7,core,7,0.0,True
+banana,バナナ,47,3346.0,2.0,7842,cool,9,core,9,0.47712125471966244,False
+carrot,にんじん,12,2391.0,0.0,5702,warm,8,core,8,0.0,True
+cucumber,きゅうり,67,1938.0,0.0,12174,cool,8,core,8,0.0,True
+pumpkin,かぼちゃ,15,921.0,0.0,2631,warm,8,core,8,0.0,True
+tomato,トマト,200,5125.0,1.0,38050,cool,8,core,8,0.3010299956639812,False
+ginger,しょうが,70,3172.0,12.0,5730,warm,8,core,8,1.1139433523068367,False
+miso,味噌,15,407.0,0.0,1158,warm,7,core,7,0.0,True
 burdock,ごぼう,0,241.0,0.0,323,warm,7,core,7,0.0,True
-eggplant,なす,0,420.0,0.0,2072,cool,7,core,7,0.0,True
-mango,マンゴー,5,1705.0,0.0,3627,cool,7,core,7,0.0,True
-apple,りんご,17,10535.0,0.0,23770,warm,7,core,7,0.0,True
-chicken,鶏肉,278,26267.0,0.0,94310,warm,6,core,6,0.0,True
-watermelon,スイカ,4,716.0,0.0,3146,cool,6,core,6,0.0,True
-green onion,ねぎ,0,142.0,0.0,401,warm,6,core,6,0.0,True
-pineapple,パイナップル,2,841.0,0.0,2494,cool,6,core,6,0.0,True
-grape,ぶどう,14,5207.0,0.0,17722,warm,6,core,6,0.0,True
-melon,メロン,5,1307.0,0.0,3898,cool,6,core,6,0.0,True
-chili pepper,唐辛子,30,1748.0,12.0,1943,warm,6,core,6,1.1139433523068367,False
-white sugar,白砂糖,195,27093.0,17.0,85454,cool,6,core,6,1.255272505103306,False
-lotus root,れんこん,0,66.0,0.0,270,warm,5,core,5,0.0,True
-natto,納豆,1,499.0,0.0,1685,warm,5,core,5,0.0,True
-tofu,豆腐,2,545.0,0.0,1188,cool,5,core,5,0.0,True
-pork,豚肉,34,4720.0,1.0,15733,warm,5,core,5,0.3010299956639812,False
-black tea,紅茶,9,1948.0,2.0,7286,warm,5,core,5,0.47712125471966244,False
-white rice,白米,1,392.0,0.0,1514,cool,4,core,4,0.0,True
+eggplant,なす,13,420.0,0.0,2072,cool,7,core,7,0.0,True
+mango,マンゴー,14,1705.0,0.0,3627,cool,7,core,7,0.0,True
+apple,りんご,176,10535.0,1.0,23770,warm,7,core,7,0.3010299956639812,False
+watermelon,スイカ,31,716.0,0.0,3146,cool,6,core,6,0.0,True
+green onion,ねぎ,1,142.0,0.0,401,warm,6,core,6,0.0,True
+pineapple,パイナップル,10,841.0,0.0,2494,cool,6,core,6,0.0,True
+melon,メロン,35,1307.0,0.0,3898,cool,6,core,6,0.0,True
+grape,ぶどう,121,5207.0,2.0,17722,warm,6,core,6,0.47712125471966244,False
+chicken,鶏肉,702,26267.0,5.0,94310,warm,6,core,6,0.7781512503836436,False
+chili pepper,唐辛子,50,1748.0,17.0,1943,warm,6,core,6,1.255272505103306,False
+white sugar,白砂糖,812,27093.0,37.0,85454,cool,6,core,6,1.5797835966168101,False
+tofu,豆腐,3,545.0,0.0,1188,cool,5,core,5,0.0,True
+lotus root,れんこん,5,66.0,1.0,270,warm,5,core,5,0.3010299956639812,False
+natto,納豆,9,499.0,2.0,1685,warm,5,core,5,0.47712125471966244,False
+pork,豚肉,95,4720.0,3.0,15733,warm,5,core,5,0.6020599913279624,False
+black tea,紅茶,104,1948.0,3.0,7286,warm,5,core,5,0.6020599913279624,False
+white rice,白米,3,392.0,0.0,1514,cool,4,core,4,0.0,True
 daikon,大根,0,69.0,0.0,245,contested,4,core,4,0.0,True
-brown rice,玄米,0,478.0,0.0,2040,warm,4,core,4,0.0,True
-kimchi,キムチ,2,725.0,0.0,1180,warm,4,core,4,0.0,True
-onion,たまねぎ,2,2900.0,0.0,7727,warm,4,core,4,0.0,True
-cherry,さくらんぼ,1,6558.0,0.0,7209,warm,4,core,4,0.0,True
-lettuce,レタス,3,1446.0,0.0,8839,cool,4,core,4,0.0,True
-tuna,マグロ,28,3101.0,0.0,3715,warm,4,core,4,0.0,True
-garlic,にんにく,15,3015.0,1.0,8789,warm,4,core,4,0.3010299956639812,False
-cinnamon,シナモン,15,2105.0,1.0,4123,warm,4,core,4,0.3010299956639812,False
-beef,牛肉,119,12550.0,2.0,36245,warm,4,core,4,0.47712125471966244,False
-egg,卵,246,40821.0,2.0,104764,warm,4,core,4,0.47712125471966244,False
-coffee,コーヒー,24,9780.0,7.0,23286,cool,4,core,4,0.9030899869919435,False
-green tea,緑茶,62,4652.0,17.0,15476,cool,4,core,4,1.255272505103306,False
-sweet potato,さつまいも,1,1142.0,0.0,3941,warm,3,core,3,0.0,True
-hojicha,ほうじ茶,0,9.0,0.0,29,warm,3,core,3,0.0,True
-chinese cabbage,白菜,2,165.0,0.0,2115,cool,3,core,3,0.0,True
-sake,日本酒,7,7559.0,0.0,5244,warm,3,core,3,0.0,True
-soy sauce,醤油,0,247.0,0.0,1264,warm,3,core,3,0.0,True
-spinach,ほうれん草,3,1541.0,0.0,9863,cool,3,core,3,0.0,True
-vinegar,酢,5,1432.0,0.0,3419,cool,3,core,3,0.0,True
-prune,プルーン,1,1695.0,0.0,1957,warm,3,core,3,0.0,True
-buckwheat,そば,1,613.0,0.0,2799,warm,3,core,3,0.0,True
-cocoa,ココア,16,2346.0,0.0,4859,warm,3,core,3,0.0,True
-kiwi,キウイ,2,760.0,0.0,1195,cool,3,core,3,0.0,True
-salmon,鮭,34,11618.0,1.0,20092,warm,3,core,3,0.3010299956639812,False
-milk,牛乳,586,46955.0,6.0,171272,cool,3,core,3,0.8450980400142568,False
-lamb,羊肉,107,16083.0,0.0,13804,warm,2,sensitivity,2,0.0,True
-nira,にら,0,116.0,0.0,375,warm,2,sensitivity,2,0.0,True
-sansho,山椒,0,29.0,0.0,40,warm,2,sensitivity,2,0.0,True
-wakame,わかめ,4,763.0,0.0,1806,cool,2,sensitivity,2,0.0,True
-beer,ビール,10,10261.0,0.0,11785,cool,2,sensitivity,2,0.0,True
-brown sugar,黒砂糖,1,161.0,0.0,215,warm,2,sensitivity,2,0.0,True
-cabbage,キャベツ,30,2145.0,0.0,8054,cool,2,sensitivity,2,0.0,True
+brown rice,玄米,5,478.0,0.0,2040,warm,4,core,4,0.0,True
+kimchi,キムチ,6,725.0,0.0,1180,warm,4,core,4,0.0,True
+onion,たまねぎ,30,2900.0,0.0,7727,warm,4,core,4,0.0,True
+tuna,マグロ,76,3101.0,0.0,3715,warm,4,core,4,0.0,True
+cherry,さくらんぼ,46,6558.0,1.0,7209,warm,4,core,4,0.3010299956639812,False
+lettuce,レタス,17,1446.0,1.0,8839,cool,4,core,4,0.3010299956639812,False
+beef,牛肉,461,12550.0,3.0,36245,warm,4,core,4,0.6020599913279624,False
+cinnamon,シナモン,33,2105.0,3.0,4123,warm,4,core,4,0.6020599913279624,False
+egg,卵,778,40821.0,3.0,104764,warm,4,core,4,0.6020599913279624,False
+garlic,にんにく,67,3015.0,7.0,8789,warm,4,core,4,0.9030899869919435,False
+coffee,コーヒー,165,9780.0,30.0,23286,cool,4,core,4,1.4913616938342726,False
+green tea,緑茶,256,4652.0,46.0,15476,cool,4,core,4,1.6720978579357175,False
+sweet potato,さつまいも,15,1142.0,0.0,3941,warm,3,core,3,0.0,True
+hojicha,ほうじ茶,1,9.0,0.0,29,warm,3,core,3,0.0,True
+chinese cabbage,白菜,11,165.0,0.0,2115,cool,3,core,3,0.0,True
+soy sauce,醤油,2,247.0,0.0,1264,warm,3,core,3,0.0,True
+prune,プルーン,10,1695.0,0.0,1957,warm,3,core,3,0.0,True
+buckwheat,そば,7,613.0,0.0,2799,warm,3,core,3,0.0,True
+kiwi,キウイ,6,760.0,0.0,1195,cool,3,core,3,0.0,True
+salmon,鮭,191,11618.0,1.0,20092,warm,3,core,3,0.3010299956639812,False
+sake,日本酒,32,7559.0,1.0,5244,warm,3,core,3,0.3010299956639812,False
+spinach,ほうれん草,20,1541.0,1.0,9863,cool,3,core,3,0.3010299956639812,False
+vinegar,酢,19,1432.0,1.0,3419,cool,3,core,3,0.3010299956639812,False
+cocoa,ココア,97,2346.0,6.0,4859,warm,3,core,3,0.8450980400142568,False
+milk,牛乳,1932,46955.0,17.0,171272,cool,3,core,3,1.255272505103306,False
+lamb,羊肉,620,16083.0,0.0,13804,warm,2,sensitivity,2,0.0,True
+nira,にら,1,116.0,0.0,375,warm,2,sensitivity,2,0.0,True
+sansho,山椒,2,29.0,0.0,40,warm,2,sensitivity,2,0.0,True
+wakame,わかめ,22,763.0,0.0,1806,cool,2,sensitivity,2,0.0,True
+brown sugar,黒砂糖,2,161.0,0.0,215,warm,2,sensitivity,2,0.0,True
+cabbage,キャベツ,56,2145.0,0.0,8054,cool,2,sensitivity,2,0.0,True
 horse mackerel,あじ,0,111.0,0.0,224,warm,2,sensitivity,2,0.0,True
-peach,桃,4,2029.0,0.0,6043,warm,2,sensitivity,2,0.0,True
-red wine,赤ワイン,4,1650.0,0.0,5114,warm,2,sensitivity,2,0.0,True
-octopus,タコ,6,1219.0,0.0,3597,contested,2,sensitivity,2,0.0,True
+peach,桃,41,2029.0,0.0,6043,warm,2,sensitivity,2,0.0,True
+octopus,タコ,42,1219.0,0.0,3597,contested,2,sensitivity,2,0.0,True
 komatsuna,小松菜,0,13.0,0.0,91,contested,2,sensitivity,2,0.0,True
-almond,アーモンド,3,2746.0,0.0,3958,warm,2,sensitivity,2,0.0,True
-bitter melon,ゴーヤ,2,220.0,0.0,509,cool,2,sensitivity,2,0.0,True
+bitter melon,ゴーヤ,8,220.0,0.0,509,cool,2,sensitivity,2,0.0,True
 horse meat,馬肉,1,107.0,0.0,245,cool,2,sensitivity,2,0.0,True
-mackerel,サバ,5,1200.0,0.0,1749,warm,2,sensitivity,2,0.0,True
-mandarin orange,みかん,0,65.0,0.0,126,warm,2,sensitivity,2,0.0,True
-sardine,イワシ,0,928.0,0.0,919,warm,2,sensitivity,2,0.0,True
-white fish,白身の魚,0,101.0,0.0,185,cool,2,sensitivity,2,0.0,True
-bell pepper,パプリカ,1,268.0,0.0,627,contested,2,sensitivity,2,0.0,True
-wheat,小麦,46,12449.0,0.0,85471,contested,2,sensitivity,2,0.0,True
-persimmon,柿,1,283.0,1.0,1045,cool,2,sensitivity,2,0.3010299956639812,False
-mayonnaise,マヨネーズ,1,280.0,1.0,716,cool,2,sensitivity,2,0.3010299956639812,False
-orange,オレンジ,50,27274.0,1.0,44647,warm,2,sensitivity,2,0.3010299956639812,False
-potato,じゃがいも,12,6364.0,2.0,32736,warm,2,sensitivity,2,0.47712125471966244,False
-pepper,黒胡椒,63,6459.0,2.0,11730,warm,2,sensitivity,2,0.47712125471966244,False
-rapeseed oil,なたね油,8,546.0,2.0,1896,contested,2,sensitivity,2,0.47712125471966244,False
-barley,大麦,16,4720.0,3.0,23481,contested,2,sensitivity,2,0.6020599913279624,False
-umeboshi,梅干し,0,36.0,0.0,165,warm,1,single,1,0.0,True
-hijiki,ひじき,2,101.0,0.0,306,cool,1,single,1,0.0,True
+mackerel,サバ,20,1200.0,0.0,1749,warm,2,sensitivity,2,0.0,True
+mandarin orange,みかん,1,65.0,0.0,126,warm,2,sensitivity,2,0.0,True
+sardine,イワシ,6,928.0,0.0,919,warm,2,sensitivity,2,0.0,True
+white fish,白身の魚,1,101.0,0.0,185,cool,2,sensitivity,2,0.0,True
+bell pepper,パプリカ,4,268.0,0.0,627,contested,2,sensitivity,2,0.0,True
+persimmon,柿,5,283.0,1.0,1045,cool,2,sensitivity,2,0.3010299956639812,False
+mayonnaise,マヨネーズ,5,280.0,1.0,716,cool,2,sensitivity,2,0.3010299956639812,False
+almond,アーモンド,15,2746.0,1.0,3958,warm,2,sensitivity,2,0.3010299956639812,False
+pepper,黒胡椒,144,6459.0,2.0,11730,warm,2,sensitivity,2,0.47712125471966244,False
+rapeseed oil,なたね油,14,546.0,2.0,1896,contested,2,sensitivity,2,0.47712125471966244,False
+wheat,小麦,330,12449.0,2.0,85471,contested,2,sensitivity,2,0.47712125471966244,False
+red wine,赤ワイン,54,1650.0,3.0,5114,warm,2,sensitivity,2,0.6020599913279624,False
+beer,ビール,66,10261.0,4.0,11785,cool,2,sensitivity,2,0.6989700043360189,False
+orange,オレンジ,262,27274.0,4.0,44647,warm,2,sensitivity,2,0.6989700043360189,False
+potato,じゃがいも,112,6364.0,5.0,32736,warm,2,sensitivity,2,0.7781512503836436,False
+barley,大麦,101,4720.0,6.0,23481,contested,2,sensitivity,2,0.8450980400142568,False
+umeboshi,梅干し,2,36.0,0.0,165,warm,1,single,1,0.0,True
+hijiki,ひじき,3,101.0,0.0,306,cool,1,single,1,0.0,True
 amazake,甘酒,0,4.0,0.0,24,warm,1,single,1,0.0,True
 nori,のり,0,4819.0,0.0,1198,cool,1,single,1,0.0,True
 nukazuke,ぬか漬け,0,2.0,0.0,11,warm,1,single,1,0.0,True
-pear,梨,3,3499.0,0.0,6016,cool,1,single,1,0.0,True
-soybean,大豆,68,10205.0,0.0,53423,neutral,1,single,1,0.0,True
+pear,梨,28,3499.0,0.0,6016,cool,1,single,1,0.0,True
 dried persimmon,干し柿,0,4.0,0.0,32,warm,1,single,1,0.0,True
 asari clam,あさり,0,0.0,0.0,5,cool,1,single,1,0.0,True
 atsuage,厚揚げ,0,4.0,0.0,12,warm,1,single,1,0.0,True
-celery,セロリ,1,686.0,0.0,1795,cool,1,single,1,0.0,True
-cheese,チーズ,12,5093.0,0.0,16123,warm,1,single,1,0.0,True
-crab,カニ,24,4671.0,0.0,13990,cool,1,single,1,0.0,True
-edamame,いんげん豆,0,45.0,0.0,116,cool,1,single,1,0.0,True
-oyster,牡蠣,10,2329.0,0.0,8919,cool,1,single,1,0.0,True
-pork liver,レバー,0,81.0,0.0,257,warm,1,single,1,0.0,True
-sesame,ごま,7,1702.0,0.0,5128,warm,1,single,1,0.0,True
-shrimp,エビ,7,3818.0,0.0,17962,warm,1,single,1,0.0,True
+celery,セロリ,15,686.0,0.0,1795,cool,1,single,1,0.0,True
+crab,カニ,100,4671.0,0.0,13990,cool,1,single,1,0.0,True
+edamame,いんげん豆,1,45.0,0.0,116,cool,1,single,1,0.0,True
+oyster,牡蠣,45,2329.0,0.0,8919,cool,1,single,1,0.0,True
+pork liver,レバー,3,81.0,0.0,257,warm,1,single,1,0.0,True
+sesame,ごま,33,1702.0,0.0,5128,warm,1,single,1,0.0,True
+shrimp,エビ,60,3818.0,0.0,17962,warm,1,single,1,0.0,True
 tsukemono,たくあん,0,9.0,0.0,27,warm,1,single,1,0.0,True
-walnut,くるみ,3,1823.0,0.0,4061,warm,1,single,1,0.0,True
-whole grain bread,全粒粉の天然酵母パン,0,134.0,0.0,191,warm,1,single,1,0.0,True
-yam,山芋,1,2181.0,0.0,1886,warm,1,single,1,0.0,True
-duck meat,鴨,0,121.0,0.0,300,cool,1,single,1,0.0,True
-taro,サトイモ,0,481.0,0.0,669,warm,1,single,1,0.0,True
-acerola,アセロラ,0,110.0,0.0,240,warm,1,single,1,0.0,True
-apricot,あんず,0,658.0,0.0,1779,warm,1,single,1,0.0,True
-asparagus,アスパラガス,1,670.0,0.0,1672,cool,1,single,1,0.0,True
+walnut,くるみ,27,1823.0,0.0,4061,warm,1,single,1,0.0,True
+yam,山芋,12,2181.0,0.0,1886,warm,1,single,1,0.0,True
+duck meat,鴨,1,121.0,0.0,300,cool,1,single,1,0.0,True
+taro,サトイモ,1,481.0,0.0,669,warm,1,single,1,0.0,True
+acerola,アセロラ,1,110.0,0.0,240,warm,1,single,1,0.0,True
+apricot,あんず,5,658.0,0.0,1779,warm,1,single,1,0.0,True
+asparagus,アスパラガス,8,670.0,0.0,1672,cool,1,single,1,0.0,True
 bean sprouts,モヤシ,0,86.0,0.0,327,cool,1,single,1,0.0,True
-beet sugar,てんさい糖,0,52.0,0.0,123,warm,1,single,1,0.0,True
+beet sugar,てんさい糖,1,52.0,0.0,123,warm,1,single,1,0.0,True
 black sesame,黒ごま,1,24.0,0.0,79,warm,1,single,1,0.0,True
 bok choy,チンゲン菜,0,42.0,0.0,116,cool,1,single,1,0.0,True
-broccoli,ブロッコリー,3,1445.0,0.0,3594,warm,1,single,1,0.0,True
+broccoli,ブロッコリー,7,1445.0,0.0,3594,warm,1,single,1,0.0,True
 curry powder,カレー粉,0,48.0,0.0,95,warm,1,single,1,0.0,True
 dried daikon,切り干し大根,0,0.0,0.0,0,warm,1,single,1,0.0,True
-eel,うなぎ,8,3118.0,0.0,6021,warm,1,single,1,0.0,True
-grapefruit,グレープフルーツ,5,1054.0,0.0,2645,cool,1,single,1,0.0,True
+eel,うなぎ,59,3118.0,0.0,6021,warm,1,single,1,0.0,True
 hamaguri clam,はまぐり,0,0.0,0.0,0,cool,1,single,1,0.0,True
-jujube,なつめ,2,332.0,0.0,1307,warm,1,single,1,0.0,True
-ketchup,ケチャップ,0,136.0,0.0,217,cool,1,single,1,0.0,True
-konjac,こんにゃく,2,415.0,0.0,1648,cool,1,single,1,0.0,True
+jujube,なつめ,9,332.0,0.0,1307,warm,1,single,1,0.0,True
+ketchup,ケチャップ,1,136.0,0.0,217,cool,1,single,1,0.0,True
+konjac,こんにゃく,5,415.0,0.0,1648,cool,1,single,1,0.0,True
 mozuku seaweed,もずく,0,0.0,0.0,0,cool,1,single,1,0.0,True
-mung bean,緑豆,1,327.0,0.0,2441,cool,1,single,1,0.0,True
+mung bean,緑豆,5,327.0,0.0,2441,cool,1,single,1,0.0,True
 myoga,みょうが,0,38.0,0.0,12,warm,1,single,1,0.0,True
-oatmeal,オートミール,0,715.0,0.0,661,cool,1,single,1,0.0,True
+oatmeal,オートミール,4,715.0,0.0,661,cool,1,single,1,0.0,True
 oyster sauce,オイスターソース,0,6.0,0.0,16,cool,1,single,1,0.0,True
-pu-erh tea,プーアール茶,0,189.0,0.0,355,warm,1,single,1,0.0,True
+pu-erh tea,プーアール茶,2,189.0,0.0,355,warm,1,single,1,0.0,True
 radish sprouts,かいわれ大根,0,33.0,0.0,111,cool,1,single,1,0.0,True
 rapeseed flowers,菜の花,0,2.0,0.0,10,cool,1,single,1,0.0,True
-rooibos tea,ルイボスティー,0,61.0,0.0,155,warm,1,single,1,0.0,True
-sesame oil,ごま油,5,773.0,0.0,2312,cool,1,single,1,0.0,True
+rooibos tea,ルイボスティー,1,61.0,0.0,155,warm,1,single,1,0.0,True
+sesame oil,ごま油,25,773.0,0.0,2312,cool,1,single,1,0.0,True
 shijimi clam,しじみ,0,0.0,0.0,2,cool,1,single,1,0.0,True
 shio koji,塩麹,0,0.0,0.0,2,warm,1,single,1,0.0,True
-strawberry,いちご,1,2479.0,0.0,7250,cool,1,single,1,0.0,True
+strawberry,いちご,27,2479.0,0.0,7250,cool,1,single,1,0.0,True
 udon,うどん,0,50.0,0.0,94,cool,1,single,1,0.0,True
-white bread,白パン,1,490.0,0.0,972,cool,1,single,1,0.0,True
 white sesame,白ゴマ,0,13.0,0.0,46,cool,1,single,1,0.0,True
-white wine,白ワイン,0,230.0,0.0,1280,cool,1,single,1,0.0,True
+white wine,白ワイン,4,230.0,0.0,1280,cool,1,single,1,0.0,True
 winter melon,冬瓜,0,14.0,0.0,22,cool,1,single,1,0.0,True
-young bamboo,若竹,0,6.0,0.0,28,cool,1,single,1,0.0,True
-zucchini,ズッキーニ,1,364.0,0.0,1093,cool,1,single,1,0.0,True
-honey,はちみつ,75,8170.0,1.0,19345,warm,1,single,1,0.3010299956639812,False
-mugicha,麦茶,1,21.0,1.0,37,cool,1,single,1,0.3010299956639812,False
-bonito,カツオ,3,572.0,1.0,363,warm,1,single,1,0.3010299956639812,False
-flaxseed oil,あまに油,2,473.0,1.0,1042,warm,1,single,1,0.3010299956639812,False
-oolong tea,ウーロン茶,4,469.0,1.0,743,warm,1,single,1,0.3010299956639812,False
-pasta,パスタ,5,1669.0,3.0,3334,cool,1,single,1,0.6020599913279624,False
-salt,塩,256,44423.0,5.0,201716,warm,1,single,1,0.7781512503836436,False
+young bamboo,若竹,1,6.0,0.0,28,cool,1,single,1,0.0,True
+zucchini,ズッキーニ,8,364.0,0.0,1093,cool,1,single,1,0.0,True
+honey,はちみつ,126,8170.0,1.0,19345,warm,1,single,1,0.3010299956639812,False
+whole grain bread,全粒粉の天然酵母パン,3,134.0,1.0,191,warm,1,single,1,0.3010299956639812,False
+white bread,白パン,8,490.0,1.0,972,cool,1,single,1,0.3010299956639812,False
+soybean,大豆,301,10205.0,2.0,53423,neutral,1,single,1,0.47712125471966244,False
+grapefruit,グレープフルーツ,26,1054.0,2.0,2645,cool,1,single,1,0.47712125471966244,False
+cheese,チーズ,50,5093.0,3.0,16123,warm,1,single,1,0.6020599913279624,False
+mugicha,麦茶,3,21.0,3.0,37,cool,1,single,1,0.6020599913279624,False
+bonito,カツオ,10,572.0,3.0,363,warm,1,single,1,0.6020599913279624,False
+flaxseed oil,あまに油,12,473.0,3.0,1042,warm,1,single,1,0.6020599913279624,False
+oolong tea,ウーロン茶,9,469.0,3.0,743,warm,1,single,1,0.6020599913279624,False
+pasta,パスタ,28,1669.0,4.0,3334,cool,1,single,1,0.6989700043360189,False
+salt,塩,1806,44423.0,19.0,201716,warm,1,single,1,1.3010299956639813,False
