@@ -38,6 +38,15 @@ data/l2_records.csv
 # the Axis A coder-JSON policy). Only the reconciled screening.csv is public.
 data/screening_work/
 
+# Axis A ledger intermediates (Route D). candidates.csv carries source body text
+# in its heading/line columns, and the batch files embed each source's full text
+# so a coder can judge a span in context; neither column set is part of the
+# published ledger schema (coding_protocol.md §9.7). Both are regenerable from
+# data/sources_raw/ via extract_candidates.py + dump_ledger_batches.py. The
+# public artefact is data/claims_ledger.csv.
+data/candidates.csv
+data/ledger_work/
+
 # Internal development docs (excluded from public repository)
 PLAN.md
 PLAN-DEVIATIONS.md

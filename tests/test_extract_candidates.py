@@ -7,6 +7,7 @@ the parser did not surface any of them.
 """
 
 import pandas as pd
+import pytest
 
 from src import extract_candidates as ex
 from src.verify_candidate_recall import score
@@ -167,3 +168,42 @@ class TestRecallScoring:
         # 「根菜」 does not put 「根菜類」 in front of a coder as its own row.
         got = score(self._claims(("a", "根菜類")), self._unique(("a", "根菜")))
         assert not bool(got.iloc[0]["covered"])
+
+
+class TestCandidateCsv:
+    """The enumeration has to leave the process as a file the batcher reads.
+
+    RD-3 blocked on this: ``main()`` printed its counts and wrote nothing, so
+    the batch generator had no input to start from.
+    """
+
+    def _unique(self):
+        return pd.DataFrame(
+            [
+                {
+                    "source_id": "a", "candidate": "生姜", "n_occurrences": 2,
+                    "first_line_no": 7, "paths": "list|prose",
+                    "heading": "体を温める", "line": "生姜、ねぎ",
+                }
+            ]
+        )
+
+    def test_renames_first_line_no_to_the_published_ledger_name(self):
+        frame = ex.to_candidate_frame(self._unique())
+        assert list(frame.columns) == [
+            "source_id", "line_no", "candidate", "n_occurrences",
+            "paths", "heading", "line",
+        ]
+        assert frame["line_no"].tolist() == [7]
+
+    def test_raises_when_dedupe_output_lacks_a_needed_column(self):
+        with pytest.raises(ValueError, match="missing"):
+            ex.to_candidate_frame(self._unique().drop(columns=["paths"]))
+
+    def test_write_candidates_round_trips_through_csv(self, tmp_path):
+        path = tmp_path / "candidates.csv"
+        written = ex.write_candidates(self._unique(), path)
+        back = pd.read_csv(path)
+        assert len(back) == len(written) == 1
+        assert back["candidate"].tolist() == ["生姜"]
+        assert back["line_no"].tolist() == [7]

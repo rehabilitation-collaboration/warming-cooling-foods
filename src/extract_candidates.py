@@ -48,7 +48,13 @@ import re
 
 import pandas as pd
 
-from .definitions import SOURCES_CSV, SOURCES_RAW_DIR
+from .definitions import DATA_DIR, SOURCES_CSV, SOURCES_RAW_DIR
+
+# The enumeration written out for the coders to judge. Git-ignored: its
+# ``heading`` and ``line`` columns carry source body text verbatim, and those two
+# columns are not part of the published ledger schema (coding_protocol.md §9.7).
+# The public artefact is data/claims_ledger.csv, built from the judgments.
+CANDIDATES_CSV = DATA_DIR / "candidates.csv"
 
 # --- Vocabularies and shapes ---------------------------------------------
 
@@ -268,6 +274,33 @@ def dedupe(occurrences: pd.DataFrame) -> pd.DataFrame:
     return grouped.sort_values(["source_id", "first_line_no"]).reset_index(drop=True)
 
 
+def to_candidate_frame(unique: pd.DataFrame) -> pd.DataFrame:
+    """``dedupe()`` output → the candidate columns the ledger is keyed on.
+
+    Renames ``first_line_no`` to ``line_no`` so the enumeration already speaks
+    the published ledger's vocabulary (coding_protocol.md §9.7), and orders rows
+    by (source, line, candidate) so a diff between two runs is readable.
+    """
+    out = unique.rename(columns={"first_line_no": "line_no"})
+    cols = ["source_id", "line_no", "candidate", "n_occurrences", "paths", "heading", "line"]
+    missing = [c for c in cols if c not in out.columns]
+    if missing:
+        raise ValueError(f"dedupe() output is missing {missing}")
+    return (
+        out[cols]
+        .sort_values(["source_id", "line_no", "candidate"])
+        .reset_index(drop=True)
+    )
+
+
+def write_candidates(unique: pd.DataFrame, path=CANDIDATES_CSV) -> pd.DataFrame:
+    """Write the enumeration to CSV and return the frame that was written."""
+    frame = to_candidate_frame(unique)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(path, index=False)
+    return frame
+
+
 def main() -> None:
     occurrences = extract_all()
     unique = dedupe(occurrences)
@@ -276,6 +309,11 @@ def main() -> None:
     print(occurrences["path"].value_counts().to_string())
     print("\nunique candidates per source:")
     print(unique.groupby("source_id").size().sort_values(ascending=False).to_string())
+    frame = write_candidates(unique)
+    lines = frame.groupby(["source_id", "line_no"]).ngroups
+    print(
+        f"\nwrote {len(frame)} candidates over {lines} line groups to {CANDIDATES_CSV}"
+    )
 
 
 if __name__ == "__main__":
