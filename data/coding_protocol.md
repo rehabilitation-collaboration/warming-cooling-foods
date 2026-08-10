@@ -68,6 +68,20 @@ Map each source's own vocabulary onto the binary lay direction:
 | 温める / 体を温める / 温性 / 熱性 / 陽性 / 陽 | `warm` |
 | 冷やす / 体を冷やす / 涼性 / 寒性 / 陰性 / 陰 | `cool` |
 | 平 / どちらでもない / 中庸 | `neutral` |
+| 温活向き / 温活食材 / 温活におすすめ / 温活をサポート | `warm` |
+| 温活で控えたい / 温活中は避けたい | `cool` |
+
+- **温活 on its own is the name of an activity, not a direction.** It carries one
+  only in the constructions above, which place a food on one side of it:
+  `温活向き` and `温活食材` say the food serves warming, `温活で控えたい` says it
+  works against it. `温活レシピ` and `温活に関する商品` place no food on either
+  side and state no direction. The 温活 rows were added on 2026-08-11 to match
+  coding already in `claims.csv` rather than to extend §3: `basefood`'s
+  飲み物の選び方: 温活向き ほうじ茶 / ココア are coded `warm` and its
+  温活で控えた方がよい=緑茶 `cool`, and `karada_onkatsu`'s
+  温活食材の中で最も代表的なのがしょうがです is coded `warm` — three of these
+  carry no other direction vocabulary at all, so a ledger that did not read 温活
+  as direction could not regenerate them (§9.7).
 
 - Record the source's **verbatim label** and a short quote/location in
   `claims.csv` (`quote` column) for traceability.
@@ -303,7 +317,21 @@ records. None is introduced for this ledger alone.
 | `not-food` | The span names something that is not a food: a colour, a shape, a nutrient, a cooking method, a body state. Sources use these to explain how to *tell* warm from cool (「色は赤、黒、黄色…が温活食材」). | §2: the unit of coding is a (food, source) pair. |
 | `navigation` | The page's apparatus rather than its own attributions — related-article links, tags, rankings, author blurbs, site chrome, and the reference lists a section cites. | §1: the frame is each source's per-food warm/cool list, not the page around it. A work the source cites is another author's claim, not this source's attribution, even where the citation's title names a food (`ショウガ摂取がヒト体表温に及ぼす影響`). |
 | `fragment` | An extraction artefact: a partial word or clause that is not a token the source presents as an item. Includes the residue of the `wrapped` path, where two lines are joined and the join is not a form the source presents (`かき氷サラダ`, `きゅうりトマト`). | Follows from §9.2 — overlapping granularities are emitted deliberately, so their residue is dropped here, on the record, rather than by a silent filter. |
-| `duplicate` | The same (food, source, direction) is already carried by another span **anywhere in the same source**, whichever span the coder judges first. | §2: one row per (food, source) pair — a scope narrower than the source would let the same food be coded twice from two sections, which §2 forbids; §8 round 2 removed eight within-source duplicates on the same principle. |
+| `duplicate` | The same (food, source, direction) is already carried by another span **on the same line group** — the granularities §9.2 emits from one line, where the clause-level span and the particle-level token name the same food. **Not** a repeat in another section: see below. | §9.2 emits overlapping granularities from one line on purpose, so one of them has to be the row and the others have to be dropped on the record. §8 round 2 removed eight within-source duplicates, but on the finished `claims.csv`, not on a coder's partial view. |
+
+**A repeat in another section is an `include`, not a `duplicate`.** A source that
+names 生姜 in its table and again in a recipe made the attribution twice, and the
+ledger records what was read (§9.1). Collapsing the two is a property of
+`claims.csv`, where §2's one row per (food, source) pair applies, and it happens
+mechanically when the ledger is projected there (§9.7) — not in a coder's head.
+
+The distinction is not cosmetic. Candidates are batched (§9.6), and a coder sees
+one batch. Scoping `duplicate` to the whole source asks a coder to drop a span
+because *another batch's coder will keep* the same food — a judgment it has no
+way to make. Measured on the kawashimaya canary: all 13 of one coder's
+source-wide duplicates pointed at spans in a batch it had never seen, so had the
+other coder excluded those too, the food would have left the ledger with both
+coders believing the other had it.
 
 **Applying them in order.** Two codes can both be literally true of one span
 (`かき氷サラダ` is a form the source does not present *and* an extraction
@@ -312,17 +340,29 @@ food already coded). Coding the first code that fits, in the order below,
 settles which one is recorded. The order is not a new judgment — it follows from
 the definitions above and from what each code's basis already covers:
 
-1. **`fragment`** — is the span a form the *extractor* produced rather than one
-   the source presents? Nothing further can be judged about a span that is not a
-   token, so this is asked first.
+1. **`fragment`** — is the span something other than a complete noun phrase?
+   Partial words, particle-ended cuts, verb and adjective forms, whole clauses,
+   and the splices the `wrapped` path produces are all `fragment`, whatever they
+   are about: `カリウムの持つ利尿作用により`, `全身が冷えてしまうためです`,
+   `ビタミンB群を含むものが多く`, `かき氷サラダ`. Nothing further can be judged
+   about a span that is not a nameable unit, so this is asked first. **A span
+   carrying direction vocabulary but no food noun is a `fragment` too**
+   (`体の芯から温まります`): the food it refers to is enumerated separately, so
+   nothing is lost by dropping the clause that mentions it.
 2. **`not-verbatim`** — is it a form a *coder* produced (a paraphrase or
    generalisation)? Its basis is §8's hiesyo_com ruling, where a coder wrote アジ
    for アジの開き. In this ledger the candidate string comes from the extractor,
    so this code is for the rare case where a coder restates rather than judges.
 3. **`navigation`** — is it page apparatus or a cited work?
-4. **`not-food`** — does the span *name* something, and is that thing not a
-   food? A span that names nothing at all is a `fragment`, not a `not-food`:
-   `ビタミンB群` names a nutrient, `それぞれ詳しく見ていきましょう` names nothing.
+4. **`not-food`** — the span is a complete noun phrase (rule 1 did not fire);
+   is what it names not a food? `ビタミンB群` names a nutrient, `おすすめ温活レシピ`
+   a section, `寒さ` a condition, `南国` a place. The test is the *form first,
+   the referent second*: `ビタミンB群を含むものが多く` is a clause and stops at
+   rule 1, while `ビタミンB群` is a noun phrase and reaches this rule. Splitting
+   the two rules this way is what makes them reproducible — on the kawashimaya
+   canary the two coders disagreed on 53 exclusions, every one of them a span
+   where one read "the extractor made this" and the other read "this names a
+   non-food", and both readings were defensible under the earlier wording.
 5. **`no-direction`** — is the food named without the source assigning it a
    direction? This precedes `duplicate` because `duplicate` is defined on
    (food, source, **direction**), and a span carrying no direction cannot meet
@@ -330,7 +370,7 @@ the definitions above and from what each code's basis already covers:
 6. **`serving-temperature`** — is what the source describes the temperature the
    item is served at rather than the nature attributed to it?
 7. **`duplicate`** — is this (food, source, direction) already recorded from
-   another span in this source?
+   another span **on the same line group**?
 
 A span that survives all seven is an `include`.
 
@@ -348,6 +388,31 @@ frame is 175 foods rather than 196. Re-deciding that at the ledger stage would
 create a second list of categories that could drift from the first. The ledger
 instead attaches a `category` sub-label, so a reader can move between the two
 without either being authoritative over the other.
+
+**A section's own title is not a food class.** Every example above names a class
+that exists outside this page — 葉物野菜 is a kind of vegetable whether or not a
+source lists it. `体を冷やしやすい食べ物一覧` names *this page's list*, and
+`体が温まる！おすすめ温活レシピ` names *this page's section*. Neither is a food,
+so rule 4 applies and they are `not-food`. Including them would mint a food
+literally called "list of foods that cool the body" and give it a direction.
+
+**A prepared dish is an `include` when the source predicates a direction of the
+dish itself**, with a `dish` sub-label. kawashimaya writes
+「愛知の郷土料理として知られる味噌煮込みうどんは、濃厚な味噌ベースのスープが体を
+芯から温めてくれます」 — the dish is the grammatical subject of the warming claim,
+and 「体が温まる！おすすめ温活レシピ」 predicates it of the recipes as a group.
+§3 forbids inferring a direction the source does not state; it does not license
+discarding one the source does state. This is the same move as the category
+rule above: record the attribution the source made, and leave whether the item
+can carry an Axis B measurement to `food_query_terms.EXCLUDE` (D30).
+
+The boundary is the grammatical subject, not the presence of a dish name. Where
+the dish is a vehicle and the warming is predicated of what goes into it —
+kawashimaya's 「おすすめの取り入れ方は朝の味噌汁です。温活食材である根菜類やねぎ
+を入れて」 — the attribution is to 根菜類/ねぎ, and the dish name is
+`no-direction`. §8's kracie ruling (白湯/生姜湯 dropped as prepared beverages
+rather than a food's nature) is the same distinction: there the source described
+how a drink is prepared, not what the drink does.
 
 ### 9.6 Two coders, kappa, adjudication
 
