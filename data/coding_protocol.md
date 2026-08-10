@@ -301,9 +301,38 @@ records. None is introduced for this ledger alone.
 | `no-direction` | A food is named but the source assigns it no direction — nutrient illustrations, recipe notes, substitute recommendations. | §3: "Do not infer a direction the source does not state." §8 round 1 dropped basefood てんさい糖/はちみつ/玄米/そば, and round 2 attaka_navi 黒糖 and karada_onkatsu はちみつ/玄米, on exactly this ground. |
 | `not-verbatim` | The span is not a form the source actually presents (a coder's paraphrase or generalisation). | §8 round 2 dropped hiesyo_com アジ/サケ, present only as アジの開き/塩サケ; §7 requires the verbatim label. |
 | `not-food` | The span names something that is not a food: a colour, a shape, a nutrient, a cooking method, a body state. Sources use these to explain how to *tell* warm from cool (「色は赤、黒、黄色…が温活食材」). | §2: the unit of coding is a (food, source) pair. |
-| `navigation` | Page furniture — related-article links, tags, rankings, author blurbs, site chrome. | §1: the frame is each source's per-food warm/cool list, not the page around it. |
-| `fragment` | An extraction artefact: a partial word or clause that is not a token the source presents as an item. | Follows from §9.2 — overlapping granularities are emitted deliberately, so their residue is dropped here, on the record, rather than by a silent filter. |
-| `duplicate` | The same (food, source, direction) is already carried by another span on the same line or block. | §2: one row per (food, source) pair; §8 round 2 removed eight within-source duplicates on the same principle. |
+| `navigation` | The page's apparatus rather than its own attributions — related-article links, tags, rankings, author blurbs, site chrome, and the reference lists a section cites. | §1: the frame is each source's per-food warm/cool list, not the page around it. A work the source cites is another author's claim, not this source's attribution, even where the citation's title names a food (`ショウガ摂取がヒト体表温に及ぼす影響`). |
+| `fragment` | An extraction artefact: a partial word or clause that is not a token the source presents as an item. Includes the residue of the `wrapped` path, where two lines are joined and the join is not a form the source presents (`かき氷サラダ`, `きゅうりトマト`). | Follows from §9.2 — overlapping granularities are emitted deliberately, so their residue is dropped here, on the record, rather than by a silent filter. |
+| `duplicate` | The same (food, source, direction) is already carried by another span **anywhere in the same source**, whichever span the coder judges first. | §2: one row per (food, source) pair — a scope narrower than the source would let the same food be coded twice from two sections, which §2 forbids; §8 round 2 removed eight within-source duplicates on the same principle. |
+
+**Applying them in order.** Two codes can both be literally true of one span
+(`かき氷サラダ` is a form the source does not present *and* an extraction
+artefact; `これらの香味野菜やスパイスは` carries no direction *and* repeats a
+food already coded). Coding the first code that fits, in the order below,
+settles which one is recorded. The order is not a new judgment — it follows from
+the definitions above and from what each code's basis already covers:
+
+1. **`fragment`** — is the span a form the *extractor* produced rather than one
+   the source presents? Nothing further can be judged about a span that is not a
+   token, so this is asked first.
+2. **`not-verbatim`** — is it a form a *coder* produced (a paraphrase or
+   generalisation)? Its basis is §8's hiesyo_com ruling, where a coder wrote アジ
+   for アジの開き. In this ledger the candidate string comes from the extractor,
+   so this code is for the rare case where a coder restates rather than judges.
+3. **`navigation`** — is it page apparatus or a cited work?
+4. **`not-food`** — does the span *name* something, and is that thing not a
+   food? A span that names nothing at all is a `fragment`, not a `not-food`:
+   `ビタミンB群` names a nutrient, `それぞれ詳しく見ていきましょう` names nothing.
+5. **`no-direction`** — is the food named without the source assigning it a
+   direction? This precedes `duplicate` because `duplicate` is defined on
+   (food, source, **direction**), and a span carrying no direction cannot meet
+   that condition.
+6. **`serving-temperature`** — is what the source describes the temperature the
+   item is served at rather than the nature attributed to it?
+7. **`duplicate`** — is this (food, source, direction) already recorded from
+   another span in this source?
+
+A span that survives all seven is an `include`.
 
 ### 9.5 Category and umbrella labels are included, not excluded
 

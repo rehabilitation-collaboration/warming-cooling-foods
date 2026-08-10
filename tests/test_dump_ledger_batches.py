@@ -95,10 +95,21 @@ class TestBuildBatch:
     def test_exposes_the_fields_a_coder_judges_on(self, monkeypatch):
         self._patched(monkeypatch)
         batch = dlb.build_batch(_candidates({1: 1}), "src", "src_b1", [1])
-        assert set(batch["candidates"][0]) == {
-            "line_no", "candidate", "paths", "heading", "line"
-        }
+        assert set(batch["candidates"][0]) == {"line_no", "candidate", "paths"}
         assert isinstance(batch["candidates"][0]["line_no"], int)
+
+    def test_withholds_the_heading_and_line_that_misled_both_canary_coders(
+        self, monkeypatch
+    ):
+        # `heading` is the last thermal short line, not the nearest section
+        # title, and `line` is where the emission started, so a `wrapped`
+        # candidate reports a line that does not contain it. Both are kept in
+        # the enumeration and withheld from the coder, whose context is
+        # source_text.
+        self._patched(monkeypatch)
+        batch = dlb.build_batch(_candidates({1: 1}), "src", "src_b1", [1])
+        assert "heading" not in batch["candidates"][0]
+        assert "line" not in batch["candidates"][0]
 
     def test_batch_path_is_named_after_the_batch_id(self):
         assert dlb.batch_path("kawashimaya_b2").name == "candidates_kawashimaya_b2.json"

@@ -5,7 +5,7 @@ Each coder agent receives one batch as
 
     {"batch_id": "kawashimaya_b2", "source_id": "kawashimaya",
      "source_text": "<the source's full body text>",
-     "candidates": [{"line_no", "candidate", "paths", "heading", "line"}]}
+     "candidates": [{"line_no", "candidate", "paths"}]}
 
 **Why the whole source text goes in every batch.** Only 38.7% of the 18,692
 candidates sit on a line that itself carries thermal vocabulary; 59.7% carry it
@@ -17,6 +17,20 @@ neighbouring lines to resolve at all. The cost of carrying the text is small:
 the whole frame is 93,812 characters and the largest source is 10,615, so
 repeating a source across its batches is cheaper than any partial-context scheme
 that loses judgments.
+
+**Why the batch carries no ``heading`` or ``line``.** The enumeration has both,
+and both mislead a coder who reads them as "the section this span sits under"
+and "the line this span came from". ``heading`` is the last *thermal* short line
+seen, which is what opens an extraction scope — not the nearest section title:
+in kawashimaya it is a call-to-action (`温活に関する商品はこちら`) for a third of
+the batch, and a list item (`冷やし中華`) governs the warming-recipe section.
+``line`` is the line the emission started on, so a ``wrapped`` candidate — one
+recovered from two joined lines — reports a line that does not contain it
+(`かき氷` reports `冷たい食べ物`). Both canary coders independently flagged this
+and judged against ``source_text`` instead. Neither field is dropped from the
+enumeration, where they record how the span was found; they are simply not shown
+to the coder, whose context is the text itself. ``line_no`` stays, as the
+position to read from, with ``paths`` naming how the span was produced.
 
 Batching rules:
 
@@ -53,7 +67,7 @@ from .extract_candidates import CANDIDATES_CSV, extract_all, dedupe, write_candi
 
 WORK_DIR = DATA_DIR / "ledger_work"
 BATCH_INDEX_CSV = WORK_DIR / "batch_index.csv"
-FIELDS = ["line_no", "candidate", "paths", "heading", "line"]
+FIELDS = ["line_no", "candidate", "paths"]
 DEFAULT_TARGET = 400
 
 
