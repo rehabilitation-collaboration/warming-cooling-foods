@@ -265,3 +265,112 @@ def test_exclusion_breakdown_reports_each_reason_with_its_share():
     assert bd.iloc[0]["reason"] == "fragment"
     assert bd.iloc[0]["n"] == 2
     assert bd.iloc[0]["share"] == pytest.approx(2 / 3)
+
+
+# --- guards added after review (2026-08-10) -------------------------------
+class TestExhaustivenessBothWays:
+    """The enumeration and the judgments have to match in both directions.
+
+    The first version checked only one: it left-joined the judgments onto the
+    enumeration, which structurally cannot surface an enumerated candidate that
+    nobody judged — and that is the failure the ledger exists to prevent, since
+    an unjudged candidate is indistinguishable from an excluded one once
+    published.
+    """
+
+    def test_an_enumerated_candidate_with_no_judgment_is_a_hard_error(self):
+        rows = [_row(candidate="しょうが")]
+        with pytest.raises(ValueError, match="carry no judgment"):
+            lg.to_ledger_csv(
+                lg.adjudicate(lg.reconcile(rows, rows)),
+                _enumeration([("src", "しょうが", 1), ("src", "ねぎ", 2)]),
+            )
+
+    def test_a_complete_pairing_passes(self):
+        rows = [_row(candidate="しょうが"), _row(candidate="ねぎ")]
+        out = lg.to_ledger_csv(
+            lg.adjudicate(lg.reconcile(rows, rows)),
+            _enumeration([("src", "しょうが", 1), ("src", "ねぎ", 2)]),
+        )
+        assert len(out) == 2
+
+
+class TestSplitDirection:
+    """Two coders can agree a span is an attribution and split on what it says.
+
+    ``status`` compares include/exclude only, so this never showed up as a
+    disagreement — the first version silently kept coder 1's direction.
+    Direction is Axis A's construct; RD-1b found three real cases of this in
+    macrobiotic_rashinban.
+    """
+
+    def _split(self):
+        return (
+            [_row(candidate="きゅうり", direction="warm")],
+            [_row(candidate="きゅうり", direction="cool")],
+        )
+
+    def test_a_split_direction_on_an_agreed_include_goes_to_the_author(self):
+        c1, c2 = self._split()
+        with pytest.raises(ValueError, match="needs an author ruling"):
+            lg.adjudicate(lg.reconcile(c1, c2))
+
+    def test_a_dict_ruling_settles_the_direction(self):
+        c1, c2 = self._split()
+        out = lg.adjudicate(
+            lg.reconcile(c1, c2),
+            {("src", "きゅうり"): {"label": "include", "direction": "cool"}},
+        )
+        assert out["final_direction"].tolist() == ["cool"]
+        assert out["adjudicated"].tolist() == [True]
+
+    def test_the_settled_direction_reaches_the_published_ledger(self):
+        c1, c2 = self._split()
+        out = lg.to_ledger_csv(
+            lg.adjudicate(
+                lg.reconcile(c1, c2),
+                {("src", "きゅうり"): {"label": "include", "direction": "cool"}},
+            ),
+            _enumeration([("src", "きゅうり", 41)]),
+        )
+        assert out["direction"].tolist() == ["cool"]
+
+    def test_agreement_on_the_direction_needs_no_ruling(self):
+        rows = [_row(candidate="きゅうり", direction="cool")]
+        out = lg.adjudicate(lg.reconcile(rows, rows))
+        assert out["adjudicated"].tolist() == [False]
+        assert out["final_direction"].tolist() == ["cool"]
+
+
+class TestIncludesCarryTheirCoding:
+    """§9.3: an include regenerates claims.csv, so it must carry the coding.
+
+    Reachable through the public API: a ruling may flip an agreed exclusion to
+    include, and neither coder ever filled in food_ja/food_en/direction on a
+    row they both excluded.
+    """
+
+    def test_a_ruling_flipping_an_exclusion_to_include_must_supply_the_coding(self):
+        rows = [_row(candidate="ねぎ", label="exclude", reason="fragment")]
+        with pytest.raises(ValueError, match="carries no"):
+            lg.adjudicate(lg.reconcile(rows, rows), {("src", "ねぎ"): "include"})
+
+    def test_a_dict_ruling_can_supply_it(self):
+        rows = [_row(candidate="ねぎ", label="exclude", reason="fragment")]
+        out = lg.adjudicate(
+            lg.reconcile(rows, rows),
+            {
+                ("src", "ねぎ"): {
+                    "label": "include", "food_ja": "ねぎ",
+                    "food_en": "spring onion", "direction": "warm",
+                }
+            },
+        )
+        assert out["final_label"].tolist() == ["include"]
+        assert out["final_food_en"].tolist() == ["spring onion"]
+
+    def test_an_include_a_coder_left_without_a_direction_is_rejected(self):
+        rows = [{"source_id": "src", "candidate": "ねぎ", "label": "include",
+                 "food_ja": "ねぎ", "food_en": "spring onion"}]
+        with pytest.raises(ValueError, match="carries no"):
+            lg.adjudicate(lg.reconcile(rows, rows))

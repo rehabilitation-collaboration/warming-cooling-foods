@@ -153,3 +153,28 @@ class TestVerifyPartition:
             both,
             [self._batch(a, "a", "a_b1"), self._batch(b, "b", "b_b1")],
         )  # does not raise
+
+
+# --- edge cases the review asked to pin -----------------------------------
+def test_a_source_with_exactly_the_target_stays_one_batch():
+    cands = _candidates({ln: 4 for ln in range(1, 101)})  # exactly 400
+    assert len(dlb.plan_batches(cands, target=400)) == 1
+
+
+def test_main_rejects_a_source_that_has_no_candidates(tmp_path, monkeypatch):
+    monkeypatch.setattr(dlb, "load_candidates", lambda: _candidates({1: 2}))
+    monkeypatch.setattr(dlb, "WORK_DIR", tmp_path)
+    with pytest.raises(ValueError, match="no candidates for source"):
+        dlb.main(["absent"])
+
+
+def test_main_writes_a_batch_per_plan_and_an_index(tmp_path, monkeypatch):
+    monkeypatch.setattr(dlb, "load_candidates", lambda: _candidates({1: 250, 2: 250}))
+    monkeypatch.setattr(dlb, "WORK_DIR", tmp_path)
+    monkeypatch.setattr(dlb, "BATCH_INDEX_CSV", tmp_path / "batch_index.csv")
+    monkeypatch.setattr(dlb, "batch_path", lambda bid: tmp_path / f"candidates_{bid}.json")
+    monkeypatch.setattr(dlb, "source_text", lambda source_id: "本文")
+    dlb.main(target=400)
+    index = pd.read_csv(tmp_path / "batch_index.csv")
+    assert index["n_candidates"].sum() == 500
+    assert len(list(tmp_path.glob("candidates_*.json"))) == len(index)

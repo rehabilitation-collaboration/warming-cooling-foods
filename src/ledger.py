@@ -60,6 +60,11 @@ UNCERTAIN = "uncertain"
 
 KEY = ["source_id", "candidate"]
 
+# What a coder returns on an include, per §9.3, so the ledger's include rows can
+# regenerate claims.csv. The first three are required; ``quote`` is carried
+# because §9.7's schema has a column for it, but §9.3 does not demand it.
+CODED_FIELDS = ("food_ja", "food_en", "direction", "quote")
+
 
 def _norm_label(value) -> str:
     """Normalise a coder's raw label to ``include``/``exclude`` or ``""``."""
@@ -130,7 +135,6 @@ def validate_codes(coded: pd.DataFrame, coder: str) -> None:
     reach the ledger and be read later as though §9.4 sanctioned it. A code the
     coders genuinely need is a protocol revision, not a silent addition.
     """
-    reasons = coded[f"reason_{coder}"]
     excluded = coded[coded[f"label_{coder}"] == EXCLUDE]
     bad = sorted(
         {
@@ -157,20 +161,22 @@ def validate_codes(coded: pd.DataFrame, coder: str) -> None:
         raise ValueError(
             f"coder {coder} used direction(s) outside {DIRECTIONS}: {bad_dir}"
         )
-    del reasons
 
 
-def reconcile(coder1, coder2, *, validate: bool = True) -> pd.DataFrame:
+def reconcile(coder1, coder2) -> pd.DataFrame:
     """Outer-join two codings on (source_id, candidate) with a ``status`` column.
 
     status ∈ {agree, disagree, only_c1, only_c2}. ``label`` columns are
     ``include``/``exclude``/``""`` (missing from that coder).
+
+    Validation is not optional: the protocol-bound vocabularies are checked on
+    the way in, so no later stage has to trust that a caller remembered to ask
+    for them.
     """
     df1 = _coder_frame(coder1, "c1")
     df2 = _coder_frame(coder2, "c2")
-    if validate:
-        validate_codes(df1, "c1")
-        validate_codes(df2, "c2")
+    validate_codes(df1, "c1")
+    validate_codes(df2, "c2")
     merged = df1.merge(df2, on=KEY, how="outer")
     for col in merged.columns:
         if col not in KEY:
@@ -216,22 +222,54 @@ def cohen_kappa(recon: pd.DataFrame) -> dict:
     return {"kappa": float(kappa), "n_both": int(n), "po": float(po), "pe": float(pe)}
 
 
-def _split_ruling(value) -> tuple[str, str]:
-    """A ruling is ``"exclude"`` or ``("exclude", "fragment")``."""
+def _split_ruling(value) -> dict:
+    """Normalise an author ruling to a dict of the fields it settles.
+
+    Three forms are accepted, in increasing order of what the author is
+    overriding::
+
+        "exclude"                              # label only
+        ("exclude", "fragment")                # label + reason code
+        {"label": "include", "direction": "cool", "food_ja": "きゅうり", ...}
+
+    The dict form exists because a ruling can change *what is coded*, not only
+    whether it is kept: settling a direction the coders split on, or turning an
+    agreed exclusion into an include, leaves fields that no coder ever filled in.
+    """
+    if isinstance(value, dict):
+        out = {k: str(v).strip() for k, v in value.items() if k != "label"}
+        out["label"] = _norm_label(value.get("label"))
+        out.setdefault("reason", "")
+        return out
     if isinstance(value, (tuple, list)):
         label = value[0]
         reason = value[1] if len(value) > 1 else ""
     else:
         label, reason = value, ""
-    return _norm_label(label), str(reason).strip()
+    return {"label": _norm_label(label), "reason": str(reason).strip()}
 
 
 def _needs_ruling(row) -> bool:
-    """Rows the author must settle: divergences and spans flagged unjudgeable."""
+    """Rows the author must settle: divergences, unjudgeable spans, split directions.
+
+    The third case is not covered by ``status``, which compares include/exclude
+    only. Two coders can agree a span is an attribution and still disagree on
+    *what it attributes* — RD-1b found three such candidates in
+    macrobiotic_rashinban (ジネンジョ / 玉ねぎ / きゅうり). Direction is Axis A's
+    construct, so a split there is a disagreement about the measurement itself
+    and cannot be resolved by taking the first coder's word for it.
+    """
     if row["status"] != "agree":
         return True
     flags = f"{row.get('reason_c1', '')} {row.get('reason_c2', '')}".lower()
-    return UNCERTAIN in flags
+    if UNCERTAIN in flags:
+        return True
+    if row["label_c1"] == INCLUDE:
+        d1 = str(row.get("direction_c1", "") or "")
+        d2 = str(row.get("direction_c2", "") or "")
+        if d1 and d2 and d1 != d2:
+            return True
+    return False
 
 
 def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame:
@@ -251,6 +289,7 @@ def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame
     finals: list[str] = []
     reasons: list[str] = []
     settled: list[bool] = []
+    coded: dict[str, list[str]] = {f: [] for f in CODED_FIELDS}
     for _, r in recon.iterrows():
         key = (r["source_id"], r["candidate"])
         coder_reason = r["reason_c1"] or r["reason_c2"]
@@ -259,26 +298,52 @@ def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame
                 raise ValueError(
                     f"candidate needs an author ruling ({r['status']}): {key}"
                 )
-            label, why = _split_ruling(rulings[key])
+            rule = _split_ruling(rulings[key])
+            label = rule["label"]
             if label not in LABELS:
                 raise ValueError(f"invalid ruling for {key}: {rulings[key]!r}")
-            reason = why or coder_reason
+            reason = rule["reason"] or coder_reason
             if label == EXCLUDE and reason not in REASON_CODES:
                 raise ValueError(
                     f"ruling for {key} excludes with reason {reason!r}, which is "
                     f"not one of coding_protocol.md §9.4's codes"
                 )
-            finals.append(label)
-            reasons.append(reason if label == EXCLUDE else "")
-            settled.append(True)
+            fields = {f: rule.get(f, "") or _agreed_field(r, f) for f in CODED_FIELDS}
+            is_ruled = True
         else:
-            finals.append(r["label_c1"])
-            reasons.append(coder_reason if r["label_c1"] == EXCLUDE else "")
-            settled.append(False)
+            label = r["label_c1"]
+            reason = coder_reason
+            fields = {f: _agreed_field(r, f) for f in CODED_FIELDS}
+            is_ruled = False
+
+        if label == INCLUDE:
+            # §9.3: an include carries the coding that regenerates claims.csv.
+            # A ruling that flips an agreed exclusion to include reaches here
+            # with every field empty, because no coder ever filled one in.
+            blank = [f for f in ("food_ja", "food_en", "direction") if not fields[f]]
+            if blank:
+                raise ValueError(
+                    f"{key} is included but carries no {blank} — §9.3 requires "
+                    "them on every include, so the ledger's include rows can "
+                    "regenerate claims.csv. A ruling that flips an exclusion to "
+                    "include has to supply them: {'label': 'include', ...}"
+                )
+            if fields["direction"] not in DIRECTIONS:
+                raise ValueError(
+                    f"{key} has direction {fields['direction']!r}, outside {DIRECTIONS}"
+                )
+
+        finals.append(label)
+        reasons.append(reason if label == EXCLUDE else "")
+        settled.append(is_ruled)
+        for f in CODED_FIELDS:
+            coded[f].append(fields[f] if label == INCLUDE else "")
     out = recon.copy()
     out["final_label"] = finals
     out["reason"] = reasons
     out["adjudicated"] = settled
+    for f in CODED_FIELDS:
+        out[f"final_{f}"] = coded[f]
     return out
 
 
@@ -300,6 +365,11 @@ def _agreed_field(row, prefix: str) -> str:
     difference on an agreed include, not a disagreement about the decision, and
     §3 already leaves naming to the coder — so the ledger keeps c1's and the
     author's ruling overrides it where it matters.
+
+    ``direction`` is different in kind and is deliberately not left to this
+    rule: a split there routes to the author through ``_needs_ruling``, so by
+    the time this function supplies one the coders agree, or a ruling has
+    already settled it.
     """
     return str(row.get(f"{prefix}_c1", "") or "") or str(row.get(f"{prefix}_c2", "") or "")
 
@@ -313,18 +383,34 @@ def to_ledger_csv(adjudicated: pd.DataFrame, candidates: pd.DataFrame) -> pd.Dat
     enumeration rather than from a coder, so the ledger records where the span
     was found independently of how it was judged.
 
-    Every adjudicated row must correspond to an enumerated candidate: a judgment
-    on something never enumerated would mean the coder invented a span, and the
-    ledger's claim to be exhaustive rests on the two sets matching.
+    The enumeration and the judgments must match **in both directions**:
+
+    - a judgment on a span that was never enumerated means a coder invented it;
+    - an enumerated candidate that carries no judgment never reached a coder, or
+      was dropped from the CSV a coder returned — and in the finished ledger
+      that is indistinguishable from a candidate the coders excluded.
+
+    The second direction is the whole point of the ledger, and nothing upstream
+    catches it: ``reconcile`` builds its frame from the two submitted CSVs and
+    has no knowledge of the enumeration, so a coder omitting rows from a batch
+    of 400 would otherwise publish a silently short ledger.
     """
     keys = candidates[KEY + ["line_no", "paths"]].drop_duplicates(KEY)
-    merged = adjudicated.merge(keys, on=KEY, how="left", indicator=True)
-    orphans = merged[merged["_merge"] != "both"]
-    if not orphans.empty:
-        sample = list(zip(orphans["source_id"], orphans["candidate"]))[:5]
+    merged = adjudicated.merge(keys, on=KEY, how="outer", indicator=True)
+    invented = merged[merged["_merge"] == "left_only"]
+    if not invented.empty:
+        sample = list(zip(invented["source_id"], invented["candidate"]))[:5]
         raise ValueError(
-            f"{len(orphans)} judged candidates are not in the enumeration, "
+            f"{len(invented)} judged candidates are not in the enumeration, "
             f"e.g. {sample}"
+        )
+    unjudged = merged[merged["_merge"] == "right_only"]
+    if not unjudged.empty:
+        sample = list(zip(unjudged["source_id"], unjudged["candidate"]))[:5]
+        raise ValueError(
+            f"{len(unjudged)} enumerated candidates carry no judgment, "
+            f"e.g. {sample} — an unjudged candidate reads as an exclusion in "
+            "the published ledger, which is what it exists to prevent"
         )
     included = merged["final_label"] == INCLUDE
     out = pd.DataFrame(
@@ -339,10 +425,10 @@ def to_ledger_csv(adjudicated: pd.DataFrame, candidates: pd.DataFrame) -> pd.Dat
             "final_label": merged["final_label"],
             "reason": merged["reason"],
             "sublabels": merged.apply(_union, prefix="sublabels", axis=1),
-            "food_ja": merged.apply(_agreed_field, prefix="food_ja", axis=1).where(included, ""),
-            "food_en": merged.apply(_agreed_field, prefix="food_en", axis=1).where(included, ""),
-            "direction": merged.apply(_agreed_field, prefix="direction", axis=1).where(included, ""),
-            "quote": merged.apply(_agreed_field, prefix="quote", axis=1).where(included, ""),
+            "food_ja": merged["final_food_ja"].where(included, ""),
+            "food_en": merged["final_food_en"].where(included, ""),
+            "direction": merged["final_direction"].where(included, ""),
+            "quote": merged["final_quote"].where(included, ""),
         }
     )
     return out.sort_values(["source_id", "line_no", "candidate"]).reset_index(drop=True)
