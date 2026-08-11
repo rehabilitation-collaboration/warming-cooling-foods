@@ -51,6 +51,11 @@ from .ledger import (
 
 LEDGER_CSV = DATA_DIR / "claims_ledger.csv"
 
+# What a coder CSV carries, plus the batch id this module attaches from the
+# file name. Used to shape the empty frame for a coder that has not started.
+COLUMNS = ["source_id", "candidate", "label", "reason", "sublabels",
+           "food_ja", "food_en", "direction", "quote", "batch_id"]
+
 # --- author rulings -------------------------------------------------------
 # The author's decisions live in ``data/ledger_rulings.csv``
 # (source_id, candidate, final_label, reason, food_ja, food_en, direction,
@@ -137,14 +142,11 @@ def load_coder(coder: str) -> pd.DataFrame:
     """
     files = sorted((WORK_DIR / coder).glob("*.csv"))
     if not files:
-        total = len(pd.read_csv(BATCH_INDEX_CSV)) if BATCH_INDEX_CSV.exists() else "?"
-        sys.exit(
-            f"no coder CSVs under {WORK_DIR / coder} — coder {coder} has judged "
-            f"0 of {total} batches.\nThe batches are already generated; what is "
-            f"missing is the coding. Send a coder agent per batch using the "
-            f"prompt in data/ledger_coder_prompt.md (substitute {{N}} and "
-            f"{{BATCH}}), then run this again."
-        )
+        # Empty rather than fatal: the coders are dispatched a wave at a time,
+        # and a wave is often all c1 or all c2. Dying here would mean the batch
+        # audit — the whole reason to run this between waves — could not fire
+        # until both coders had returned something.
+        return pd.DataFrame(columns=COLUMNS)
     frames = []
     for path in files:
         df = pd.read_csv(path, dtype=str)
@@ -239,8 +241,16 @@ def report_pending(pending: dict[str, list[str]], total: int) -> bool:
 def main() -> None:
     c1 = load_coder("c1")
     c2 = load_coder("c2")
-    pending = {"c1": audit_batches(c1, "c1"), "c2": audit_batches(c2, "c2")}
     total = len(pd.read_csv(BATCH_INDEX_CSV))
+    if c1.empty and c2.empty:
+        sys.exit(
+            f"neither coder has returned anything under {WORK_DIR} — 0 of "
+            f"{total} batches judged.\nThe batches are already generated; what "
+            f"is missing is the coding. Send a coder agent per batch using the "
+            f"prompt in data/ledger_coder_prompt.md (substitute {{N}} and "
+            f"{{BATCH}}), then run this again."
+        )
+    pending = {"c1": audit_batches(c1, "c1"), "c2": audit_batches(c2, "c2")}
     if report_pending(pending, total):
         sys.exit("\nledger not written: the enumeration is not fully judged yet")
 

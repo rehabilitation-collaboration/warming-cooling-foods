@@ -135,11 +135,27 @@ class TestLoadCoder:
         # cannot check a batch against the slice it was handed without it.
         assert out.groupby("batch_id").size().to_dict() == {"src_b1": 3, "src_b2": 5}
 
-    def test_exits_when_a_coder_has_returned_nothing(self, tmp_path, monkeypatch):
+    def test_a_coder_that_has_not_started_yields_an_empty_frame(
+        self, tmp_path, monkeypatch
+    ):
+        # Not fatal. Coders are dispatched a wave at a time and a wave is often
+        # all c1 or all c2; exiting here would mean the batch audit could not
+        # run between waves — which is the only time it is cheap to act on.
         monkeypatch.setattr(bl, "WORK_DIR", tmp_path)
         (tmp_path / "c1").mkdir()
-        with pytest.raises(SystemExit):
-            bl.load_coder("c1")
+
+        out = bl.load_coder("c1")
+
+        assert out.empty
+        assert "batch_id" in out.columns
+
+    def test_the_audit_still_runs_for_the_coder_that_is_ahead(
+        self, tmp_path, monkeypatch, batches
+    ):
+        monkeypatch.setattr(bl, "WORK_DIR", tmp_path)
+        (tmp_path / "c2").mkdir()
+
+        assert bl.audit_batches(bl.load_coder("c2"), "c2") == ["src_b1", "src_b2"]
 
 
 # --- load_rulings ---------------------------------------------------------
