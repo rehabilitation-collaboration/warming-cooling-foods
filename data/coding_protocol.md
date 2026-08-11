@@ -68,14 +68,34 @@ Map each source's own vocabulary onto the binary lay direction:
 | 温める / 体を温める / 温性 / 熱性 / 陽性 / 陽 | `warm` |
 | 冷やす / 体を冷やす / 涼性 / 寒性 / 陰性 / 陰 | `cool` |
 | 平 / どちらでもない / 中庸 | `neutral` |
-| 温活向き / 温活食材 / 温活におすすめ / 温活をサポート | `warm` |
-| 温活で控えたい / 温活中は避けたい | `cool` |
+| 温活向き / 温活食材 / 温活におすすめ / 温活をサポート / 温活に適している / 温活に役立つ / 温活と相性のよい | `warm` |
+| 温活で控えたい / 温活中は避けたい / 温活で控えた方がよい / 温活の妨げになる | `cool` |
 
 - **温活 on its own is the name of an activity, not a direction.** It carries one
-  only in the constructions above, which place a food on one side of it:
-  `温活向き` and `温活食材` say the food serves warming, `温活で控えたい` says it
-  works against it. `温活レシピ` and `温活に関する商品` place no food on either
-  side and state no direction. The 温活 rows were added on 2026-08-11 to match
+  **when the sentence places a food, or a food class, on one side of it** — the
+  food is what is recommended for 温活, suits it, helps it, or is to be limited
+  during it. `温活向き` and `温活食材` say the food serves warming, `温活で控えたい`
+  says it works against it. `温活レシピ` and `温活に関する商品` place no food on
+  either side and state no direction.
+
+  **The rows above are worked examples of that test, not a closed list.** The
+  fifteen frame sources write 温活 with 228 distinct continuations, and the same
+  wording appears on both sides of the test: 温活に効く食べ物 is an attribution in
+  「にんにくは温活に効く食べ物です」and an article title in
+  「温活に効く食べ物の見分け方」. No list of strings separates those; the
+  grammatical question does, and it is the one §9.5 already asks of dishes —
+  what is the sentence predicating this of? 温活 modifying a noun that is not a
+  food (レシピ, 商品, 術, ガイド, 習慣, a section's own メニュー heading) never
+  places a food anywhere, whatever the wording.
+
+  ★ **2026-08-11**: this replaced "only in the constructions above". The closed
+  list was over-specified: two coders reading the same batch split 5 includes
+  against 11 on whether 温活に適している, 温活と相性のよい食材 and 温活に役立つ
+  食べ物 counted, and that split moves include/exclude, κ and n_sources. The
+  enumeration behind the change is `data/ledger_work/onkatsu_constructions.json`
+  (regenerate by scanning `data/sources_raw/*.txt` for 温活).
+
+  The 温活 rows were added on 2026-08-11 to match
   coding already in `claims.csv` rather than to extend §3: `basefood`'s
   飲み物の選び方: 温活向き ほうじ茶 / ココア are coded `warm` and its
   温活で控えた方がよい=緑茶 `cool`, and `karada_onkatsu`'s
