@@ -70,7 +70,7 @@ source_id,candidate,label,reason,sublabels,food_ja,food_en,direction,quote
 
 ## Blind conditions
 
-Do **not** read: `data/claims.csv`, `data/screening*.csv`, `data/independent_read/`, `src/ledger.py`, `src/build_claims.py`, `src/verify_*`, the other coder's directory, `data/ledger_work/round*/`, or any other coder's output. Your judgment must come from the protocol and the source text alone.
+Do **not** read: `data/claims.csv`, `data/screening*.csv`, `data/independent_read/`, `src/ledger.py`, `src/build_claims.py`, `src/verify_*`, the other coder's directory, `data/ledger_work/round*/`, `data/ledger_work/superseded/`, or any other coder's output. Your judgment must come from the protocol and the source text alone.
 
 Scratch files go in the session scratchpad and must be prefixed `c{N}_{BATCH}_`.
 
