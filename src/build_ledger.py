@@ -137,7 +137,14 @@ def load_coder(coder: str) -> pd.DataFrame:
     """
     files = sorted((WORK_DIR / coder).glob("*.csv"))
     if not files:
-        sys.exit(f"no coder CSVs under {WORK_DIR / coder}")
+        total = len(pd.read_csv(BATCH_INDEX_CSV)) if BATCH_INDEX_CSV.exists() else "?"
+        sys.exit(
+            f"no coder CSVs under {WORK_DIR / coder} — coder {coder} has judged "
+            f"0 of {total} batches.\nThe batches are already generated; what is "
+            f"missing is the coding. Send a coder agent per batch using the "
+            f"prompt in data/ledger_coder_prompt.md (substitute {{N}} and "
+            f"{{BATCH}}), then run this again."
+        )
     frames = []
     for path in files:
         df = pd.read_csv(path, dtype=str)
