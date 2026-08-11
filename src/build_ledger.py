@@ -26,12 +26,19 @@ Run: ``python3 -m src.build_ledger``
 
 from __future__ import annotations
 
+import json
 import sys
+from collections import Counter
 
 import pandas as pd
 
 from .definitions import DATA_DIR
-from .dump_ledger_batches import BATCH_INDEX_CSV, WORK_DIR, load_candidates
+from .dump_ledger_batches import (
+    BATCH_INDEX_CSV,
+    WORK_DIR,
+    batch_path,
+    load_candidates,
+)
 from .ledger import (
     CODED_FIELDS,
     KEY,
@@ -52,6 +59,17 @@ LEDGER_CSV = DATA_DIR / "claims_ledger.csv"
 # than grown as a dict literal first (project decision D41): the review that
 # asked for Axis A's judgments to be auditable gets a file it can read.
 RULINGS_CSV = DATA_DIR / "ledger_rulings.csv"
+
+
+def _key(source_id, candidate) -> tuple[str, str]:
+    """A candidate's identity, normalised the way ``ledger.py`` normalises it.
+
+    ``_coder_frame`` strips both fields before keying, so anything that has to
+    meet a coder's row on that key has to strip too. The rulings file is the one
+    input a person types, and it carries free-text Japanese spans; a stray space
+    there would otherwise produce a key that matches nothing.
+    """
+    return (str(source_id).strip(), str(candidate).strip())
 
 
 def load_rulings() -> dict:
@@ -83,8 +101,31 @@ def load_rulings() -> dict:
     for row in df.to_dict("records"):
         ruling = {"label": row.get("final_label", ""), "reason": row.get("reason", "")}
         ruling.update({f: row.get(f, "") for f in CODED_FIELDS})
-        rulings[(row["source_id"], row["candidate"])] = ruling
+        rulings[_key(row["source_id"], row["candidate"])] = ruling
     return rulings
+
+
+def check_rulings_land(recon: pd.DataFrame, rulings: dict) -> None:
+    """Fail loudly on a ruling whose key matches no candidate.
+
+    ``adjudicate`` raises when a candidate that needs a ruling has none. It
+    cannot raise for the reverse — a ruling that reaches nothing — and the case
+    that matters is precisely the one it stays quiet about: an override filed on
+    a row where *both coders agreed*. There ``_needs_ruling`` is False, so a key
+    that fails to match simply falls through to the coders' shared label, and
+    the author's decision disappears without a word.
+
+    That override is the only instrument for a judgment the coders got wrong in
+    the same direction (D42), so losing one silently is the worst outcome this
+    build step can produce.
+    """
+    known = {_key(s, c) for s, c in zip(recon["source_id"], recon["candidate"])}
+    stray = sorted(k for k in rulings if k not in known)
+    if stray:
+        raise ValueError(
+            f"{len(stray)} ruling(s) in {RULINGS_CSV.name} match no candidate: "
+            f"{stray[:5]} — a ruling that reaches nothing was never applied"
+        )
 
 
 def load_coder(coder: str) -> pd.DataFrame:
@@ -105,38 +146,72 @@ def load_coder(coder: str) -> pd.DataFrame:
     return pd.concat(frames, ignore_index=True)
 
 
+def assigned_candidates(batch_id: str) -> list[str]:
+    """The candidate spans a batch actually handed its coder.
+
+    Read from the batch file rather than reconstructed from ``candidates.csv``,
+    because the batch file *is* what the agent was given: if the two ever
+    disagree, the coder's answer belongs to the batch file.
+    """
+    batch = json.loads(batch_path(batch_id).read_text(encoding="utf-8"))
+    return [c["candidate"] for c in batch["candidates"]]
+
+
 def audit_batches(coded: pd.DataFrame, coder: str) -> list[str]:
-    """Check what one coder returned against ``batch_index.csv``.
+    """Check what one coder returned against the batches it was handed.
 
     Returns the batch ids that have not come back yet — pending work, not an
-    error. Two things *are* errors:
+    error. Three things *are* errors:
 
-    - a batch id absent from the index: the coder wrote to a name nobody
-      assigned, so those rows belong to no partition;
-    - a returned batch whose row count differs from its candidate count: rows
-      were dropped or invented. A dropped row is the failure mode the ledger
-      exists to prevent, because in the finished file it is indistinguishable
-      from a candidate the coders chose to exclude.
+    - a batch id absent from ``batch_index.csv``: the coder wrote to a name
+      nobody assigned, so those rows belong to no partition;
+    - a returned batch whose candidates are not exactly the ones it was handed;
+    - a row whose ``source_id`` is not the batch's own.
+
+    Comparing the multiset of candidates rather than only its size is what makes
+    this worth running per batch. A batch that returns one candidate twice and
+    another not at all has the right row count, and ``_coder_frame`` will later
+    collapse the duplicate with a warning on stderr, so the dropped candidate
+    reaches the end of the run looking like an exclusion nobody questioned. The
+    comparison is byte-exact because that is what the coder was told to return;
+    a coder that normalises a span has changed the key the ledger is built on.
     """
     index = pd.read_csv(BATCH_INDEX_CSV)
-    expected = {str(b): int(n) for b, n in zip(index["batch_id"], index["n_candidates"])}
-    got = coded.groupby("batch_id").size().to_dict()
+    source_of = {str(b): str(s) for b, s in zip(index["batch_id"], index["source_id"])}
+    got = {str(b): rows for b, rows in coded.groupby("batch_id")}
 
-    unknown = sorted(set(got) - set(expected))
+    unknown = sorted(set(got) - set(source_of))
     if unknown:
         raise ValueError(
             f"coder {coder} returned batch(es) absent from "
             f"{BATCH_INDEX_CSV.name}: {unknown}"
         )
-    wrong = {b: n for b, n in sorted(got.items()) if n != expected[b]}
-    if wrong:
-        detail = ", ".join(f"{b} returned {n}, expected {expected[b]}"
-                           for b, n in wrong.items())
+
+    problems: list[str] = []
+    for batch_id, rows in sorted(got.items()):
+        assigned = Counter(assigned_candidates(batch_id))
+        returned = Counter(rows["candidate"].astype(str))
+        if returned != assigned:
+            missing = sorted((assigned - returned).elements())
+            extra = sorted((returned - assigned).elements())
+            problems.append(
+                f"{batch_id}: returned {sum(returned.values())} rows for "
+                f"{sum(assigned.values())} candidates; "
+                f"{len(missing)} missing (e.g. {missing[:3]}), "
+                f"{len(extra)} unassigned (e.g. {extra[:3]})"
+            )
+        stray = sorted(set(rows["source_id"].astype(str)) - {source_of[batch_id]})
+        if stray:
+            problems.append(
+                f"{batch_id}: rows carry source_id {stray}, "
+                f"but the batch is {source_of[batch_id]!r}"
+            )
+    if problems:
         raise ValueError(
-            f"coder {coder} returned the wrong number of rows for "
-            f"{len(wrong)} batch(es): {detail}"
+            f"coder {coder} returned {len(problems)} batch(es) that do not match "
+            "what they were handed:\n  " + "\n  ".join(problems)
         )
-    return sorted(set(expected) - set(got))
+    return sorted(set(source_of) - set(got))
 
 
 def report_pending(pending: dict[str, list[str]], total: int) -> bool:
@@ -170,7 +245,9 @@ def main() -> None:
     print(f"Cohen's kappa = {k['kappa']:.4f} on {k['n_both']} co-coded candidates "
           f"(observed agreement {k['po']:.4f})")
 
-    adjudicated = adjudicate(recon, load_rulings())
+    rulings = load_rulings()
+    check_rulings_land(recon, rulings)
+    adjudicated = adjudicate(recon, rulings)
     out = to_ledger_csv(adjudicated, load_candidates())
     out.to_csv(LEDGER_CSV, index=False)
     n_include = int((out["final_label"] == "include").sum())
