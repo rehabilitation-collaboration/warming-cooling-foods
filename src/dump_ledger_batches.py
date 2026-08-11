@@ -7,7 +7,7 @@ Each coder agent receives one batch as
      "source_text": "<the source's full body text>",
      "candidates": [{"line_no", "candidate", "paths"}]}
 
-**Why the whole source text goes in every batch.** Only 38.7% of the 18,692
+**Why the whole source text goes in every batch.** Only 38.7% of the 18,659
 candidates sit on a line that itself carries thermal vocabulary; 59.7% carry it
 only in the enclosing heading, and a further 1.6% only in an adjacent line
 (``THERM_WINDOW``). A span shown on its own — or even with its line — therefore
