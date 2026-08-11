@@ -88,6 +88,8 @@ PARENS = re.compile(r"[（(\[【][^）)\]】]*[）)\]】]")
 # the delimiter-level span is emitted alongside the particle-level token.
 PARTICLES = re.compile(r"や|と|は|も|が|を|に|で|の|など|および|ならびに|そして|また")
 
+TRIM = " 　\t・…‥-–—〜~"  # decorative separators a span may wear at either end
+
 MAX_HEADING_LEN = 28   # longer lines carrying thermal words are prose, not headings
 MAX_ITEM_LEN = 16      # longest plausible food label in these sources
 MAX_PROSE_SPAN = 40    # a clause may carry the food plus its qualifying phrase
@@ -111,8 +113,28 @@ def _is_heading(line: str) -> bool:
     )
 
 
+def _trim(token: str) -> str:
+    """Strip decorative separators and any Unicode whitespace from both ends.
+
+    ``strip(TRIM)`` alone misses the spaces these sources actually use:
+    macrobiotic_rashinban pads every item of its three macrobiotic lists with
+    U+2002 EN SPACE, which is not in TRIM, so the whole strip stopped at the
+    first character and left the padding on. That produced 34 spans carrying
+    their padding, 33 of which the enumeration also holds bare — the same span
+    in two rows, which ``ledger.py`` then keys to one and drops to a warning.
+
+    Alternating until the token stops shrinking handles one wearing both, where
+    a single pass in either order would leave the other's characters behind.
+    """
+    previous = None
+    while previous != token:
+        previous = token
+        token = token.strip().strip(TRIM)
+    return token
+
+
 def _clean(token: str) -> str:
-    return PARENS.sub("", token).strip(" 　\t・…‥-–—〜~")
+    return _trim(PARENS.sub("", token))
 
 
 def _is_item(token: str, max_len: int = MAX_ITEM_LEN) -> bool:
@@ -121,7 +143,7 @@ def _is_item(token: str, max_len: int = MAX_ITEM_LEN) -> bool:
 
 def _variants(raw: str) -> list[str]:
     """The token as the source writes it, and with parenthetical asides removed."""
-    stripped = raw.strip(" 　\t・…‥-–—〜~")
+    stripped = _trim(raw)
     cleaned = _clean(raw)
     return [t for t in dict.fromkeys([cleaned, stripped]) if t]
 

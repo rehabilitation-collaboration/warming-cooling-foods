@@ -123,6 +123,32 @@ class TestCandidateShape:
         text = "体を温める" + "あ" * 200 + "。"
         assert all(len(c) <= ex.MAX_PROSE_SPAN for c in candidates(text))
 
+    def test_a_span_never_carries_whitespace_at_either_end(self):
+        # macrobiotic_rashinban pads every item of its lists with U+2002 EN
+        # SPACE, which the decorative TRIM set does not contain, so the strip
+        # used to stop at the first character. The result was 34 spans wearing
+        # their padding, 33 of which the enumeration also held bare: the same
+        # span in two rows, which ledger.py keys to one and drops to a warning
+        # on stderr - a candidate silently absent from a ledger whose reason for
+        # existing is that nothing goes missing silently.
+        #
+        # Written with escapes because the character is invisible in a diff, and
+        # asserted against TRIM first because an ASCII or ideographic space is
+        # already in TRIM: the same test spelled with one would have passed
+        # against the unfixed strip.
+        assert "\u2002チーズ\u2002".strip(ex.TRIM) != "チーズ"
+
+        got = candidates("陰性食品\n\u2002チーズ\u2002、\u2002卵\u2002、\u2002精製塩\u2002")
+
+        assert got == [c.strip() for c in got]
+        assert "チーズ" in got
+
+    def test_a_span_wearing_both_padding_and_a_separator_loses_both(self):
+        # One pass in either order leaves the other's characters behind.
+        got = candidates("体を温める\n\u2002・生姜・\u2002")
+        assert "生姜" in got
+        assert got == [c.strip() for c in got]
+
 
 class TestDedupe:
     def test_occurrences_collapse_to_one_row_per_source_and_candidate(self):
