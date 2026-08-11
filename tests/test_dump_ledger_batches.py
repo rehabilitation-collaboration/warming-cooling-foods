@@ -23,6 +23,7 @@ def _candidates(spec: dict[int, int], source_id: str = "src") -> pd.DataFrame:
             "line_no": line_no,
             "candidate": f"{source_id}-L{line_no}-{i}",
             "n_occurrences": 1,
+            "lines": str(line_no),
             "paths": "list",
             "heading": "体を温める食材",
             "line": f"line {line_no}",
@@ -33,7 +34,7 @@ def _candidates(spec: dict[int, int], source_id: str = "src") -> pd.DataFrame:
     return pd.DataFrame(
         rows,
         columns=[
-            "source_id", "line_no", "candidate", "n_occurrences",
+            "source_id", "line_no", "candidate", "n_occurrences", "lines",
             "paths", "heading", "line",
         ],
     )
@@ -95,8 +96,25 @@ class TestBuildBatch:
     def test_exposes_the_fields_a_coder_judges_on(self, monkeypatch):
         self._patched(monkeypatch)
         batch = dlb.build_batch(_candidates({1: 1}), "src", "src_b1", [1])
-        assert set(batch["candidates"][0]) == {"line_no", "candidate", "paths"}
+        assert set(batch["candidates"][0]) == {"line_no", "lines", "candidate", "paths"}
         assert isinstance(batch["candidates"][0]["line_no"], int)
+
+    def test_gives_the_coder_every_line_the_span_was_emitted_from(self, monkeypatch):
+        # A candidate row stands for the span across the whole source (§2's
+        # (food, source) unit) and 62% of them occur more than once, so a coder
+        # shown only the first line judges the food from wherever it happens to
+        # appear first. For 大根 in attaka_navi that is a reader's question the
+        # source then refutes; for 白砂糖 it is the table of contents. Both were
+        # excluded on that basis while the source assigns them a direction
+        # further down, and both are in claims.csv.
+        self._patched(monkeypatch)
+        cands = _candidates({1: 1})
+        cands.loc[0, "lines"] = "1;56;70"
+
+        batch = dlb.build_batch(cands, "src", "src_b1", [1])
+
+        assert batch["candidates"][0]["lines"] == [1, 56, 70]
+        assert all(isinstance(n, int) for n in batch["candidates"][0]["lines"])
 
     def test_withholds_the_heading_and_line_that_misled_both_canary_coders(
         self, monkeypatch

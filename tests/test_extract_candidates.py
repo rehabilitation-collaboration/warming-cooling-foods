@@ -224,7 +224,7 @@ class TestCandidateCsv:
             [
                 {
                     "source_id": "a", "candidate": "生姜", "n_occurrences": 2,
-                    "first_line_no": 7, "paths": "list|prose",
+                    "first_line_no": 7, "lines": [7, 41], "paths": "list|prose",
                     "heading": "体を温める", "line": "生姜、ねぎ",
                 }
             ]
@@ -233,7 +233,7 @@ class TestCandidateCsv:
     def test_renames_first_line_no_to_the_published_ledger_name(self):
         frame = ex.to_candidate_frame(self._unique())
         assert list(frame.columns) == [
-            "source_id", "line_no", "candidate", "n_occurrences",
+            "source_id", "line_no", "candidate", "n_occurrences", "lines",
             "paths", "heading", "line",
         ]
         assert frame["line_no"].tolist() == [7]

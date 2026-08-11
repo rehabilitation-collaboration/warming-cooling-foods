@@ -30,11 +30,12 @@ Read `data/coding_protocol.md` **in full** before judging anything. It is the ju
 `data/ledger_work/candidates_{BATCH}.json` contains:
 
 - `source_text` — the full body text of the source. **This is your context.** A span cannot be judged alone: roughly six candidates in ten carry their thermal context only in the enclosing section or in a neighbouring line.
-- `candidates` — spans enumerated from that text by a deliberately dictionary-free structural extractor, each with `line_no` and `paths`.
+- `candidates` — spans enumerated from that text by a deliberately dictionary-free structural extractor, each with `line_no`, `lines` and `paths`.
 
-Two things about `line_no` and `paths`:
+Three things about those fields:
 
-- `line_no` is the 1-based line of `source_text` where the emission **started**. For a candidate whose `paths` includes `wrapped`, the span was recovered by joining that line with the **next** one, so the span may not appear in `line_no` alone — read both.
+- ★ **`lines` lists *every* line the span was emitted from; `line_no` is only the first.** A candidate row stands for the span across the whole source — §2 makes the unit of coding a (food, source) pair — and about six candidates in ten occur more than once. **Read all of `lines` before deciding.** The first occurrence is often not where the source assigns a direction: it may be a table-of-contents entry, or a question the source then refutes, while the attribution sits forty lines further down.
+- `line_no` is the 1-based line where the emission **started**. For a candidate whose `paths` includes `wrapped`, the span was recovered by joining that line with the **next** one, so the span may not appear in that line alone — read both.
 - The candidates **overlap in granularity on purpose** (a clause-level span and a particle-level token from the same line) and **contain noise on purpose**. §9.2 explains why; noise is dropped in the ledger with a reason code, not filtered out silently.
 
 ## The judgment

@@ -293,10 +293,21 @@ def extract_all() -> pd.DataFrame:
 
 
 def dedupe(occurrences: pd.DataFrame) -> pd.DataFrame:
-    """Collapse occurrences to one row per (source_id, candidate) for the ledger."""
+    """Collapse occurrences to one row per (source_id, candidate) for the ledger.
+
+    ``lines`` keeps every line the span was emitted from, not only the first.
+    The ledger's key is (source_id, candidate) and §2 makes the unit of coding a
+    (food, source) pair, so one row stands for every occurrence in the source —
+    and 62% of candidates occur more than once. A coder shown only the first
+    line judges the food from wherever it happens to appear first, which for
+    大根 in attaka_navi is a reader's question the source goes on to refute, and
+    for 白砂糖 is the table of contents. Both were excluded on that basis while
+    the source assigns them a direction further down.
+    """
     grouped = occurrences.groupby(["source_id", "candidate"], as_index=False).agg(
         n_occurrences=("line_no", "size"),
         first_line_no=("line_no", "min"),
+        lines=("line_no", lambda s: sorted(set(s))),
         paths=("path", lambda s: "|".join(sorted(set(s)))),
         heading=("heading", "first"),
         line=("line", "first"),
@@ -312,7 +323,12 @@ def to_candidate_frame(unique: pd.DataFrame) -> pd.DataFrame:
     by (source, line, candidate) so a diff between two runs is readable.
     """
     out = unique.rename(columns={"first_line_no": "line_no"})
-    cols = ["source_id", "line_no", "candidate", "n_occurrences", "paths", "heading", "line"]
+    if "lines" in out.columns:
+        out["lines"] = out["lines"].map(
+            lambda v: ";".join(str(n) for n in v) if isinstance(v, (list, tuple)) else v
+        )
+    cols = ["source_id", "line_no", "candidate", "n_occurrences", "lines",
+            "paths", "heading", "line"]
     missing = [c for c in cols if c not in out.columns]
     if missing:
         raise ValueError(f"dedupe() output is missing {missing}")

@@ -67,7 +67,7 @@ from .extract_candidates import CANDIDATES_CSV, extract_all, dedupe, write_candi
 
 WORK_DIR = DATA_DIR / "ledger_work"
 BATCH_INDEX_CSV = WORK_DIR / "batch_index.csv"
-FIELDS = ["line_no", "candidate", "paths"]
+FIELDS = ["line_no", "lines", "candidate", "paths"]
 DEFAULT_TARGET = 400
 
 
@@ -77,7 +77,7 @@ def load_candidates(path=CANDIDATES_CSV) -> pd.DataFrame:
         return write_candidates(dedupe(extract_all()), path)
     df = pd.read_csv(path, dtype={"source_id": str, "candidate": str})
     df["line_no"] = df["line_no"].astype(int)
-    for col in ("paths", "heading", "line"):
+    for col in ("lines", "paths", "heading", "line"):
         df[col] = df[col].fillna("").astype(str)
     return df
 
@@ -127,13 +127,23 @@ def build_batch(candidates: pd.DataFrame, source_id: str, batch_id: str, lines: 
     rows = candidates[candidates["line_no"].isin(set(lines))].sort_values(
         ["line_no", "candidate"]
     )
+    def field(row, name):
+        if name == "line_no":
+            return int(row[name])
+        if name == "lines":
+            # Every line the span was emitted from, not only the first. A
+            # candidate stands for all of its occurrences (§2's (food, source)
+            # unit), and the first one is often not where the source assigns a
+            # direction — see dedupe()'s note on 大根 and 白砂糖.
+            return [int(n) for n in str(row[name]).split(";") if n]
+        return str(row[name])
+
     return {
         "batch_id": batch_id,
         "source_id": source_id,
         "source_text": source_text(source_id),
         "candidates": [
-            {f: (int(r[f]) if f == "line_no" else str(r[f])) for f in FIELDS}
-            for _, r in rows.iterrows()
+            {f: field(r, f) for f in FIELDS} for _, r in rows.iterrows()
         ],
     }
 
