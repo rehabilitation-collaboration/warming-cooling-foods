@@ -143,6 +143,22 @@ class TestCandidateShape:
         assert got == [c.strip() for c in got]
         assert "チーズ" in got
 
+    def test_a_parenthesised_list_survives_the_delimiters_inside_it(self):
+        # The bracket pair is what tells _paren_inner there is an enumeration
+        # here, and the enumeration's own delimiters used to cut the pair in
+        # half first: 夏野菜（トマト、きゅうり） became 夏野菜（トマト and
+        # きゅうり）, neither of which matches a pattern needing both brackets.
+        # The foods then reached a coder only inside a span carrying half a
+        # bracket, which §9.4 rule 2 excludes as a fragment — correctly, since
+        # the source does not present 夏野菜（トマト as an item. Thirteen rows of
+        # claims.csv had no other span to be coded from.
+        got = candidates("体を冷やす\n夏野菜（トマト、きゅうり）")
+        assert "トマト" in got and "きゅうり" in got
+
+    def test_the_same_holds_for_a_parenthesis_inside_running_text(self):
+        got = candidates("平性 — 温めも冷やしもしない（米、大豆、卵など）。")
+        assert "米" in got and "大豆" in got
+
     def test_a_span_wearing_both_padding_and_a_separator_loses_both(self):
         # One pass in either order leaves the other's characters behind.
         got = candidates("体を温める\n\u2002・生姜・\u2002")

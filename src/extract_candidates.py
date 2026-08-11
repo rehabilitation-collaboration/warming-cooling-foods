@@ -161,7 +161,14 @@ def _paren_inner(text: str) -> list[str]:
 
 
 def _split_items(payload: str) -> list[str]:
-    out = []
+    # The parenthetical is read before the delimiters cut, because a
+    # parenthesised enumeration contains them: 夏野菜（トマト、きゅうり） splits
+    # into 夏野菜（トマト and きゅうり）, and _paren_inner's pattern needs a
+    # matched pair, so after the cut it sees nothing in either half. The foods
+    # then reach a coder only inside a span carrying half a bracket, which §9.4
+    # rule 2 excludes as a fragment — correctly, since the source does not
+    # present 夏野菜（トマト as an item. The fix belongs here, not in the rule.
+    out = _paren_inner(payload)
     for part in DELIM.split(payload):
         out.extend(t for t in _variants(part) if _is_item(t))
         out.extend(_paren_inner(part))
@@ -172,6 +179,7 @@ def _split_prose(line: str) -> list[str]:
     """Spans from a running-text sentence, at two granularities (see module doc)."""
     out: list[str] = []
     for sentence in SENTENCE_END.split(line):
+        out.extend(_paren_inner(sentence))   # before the cut — see _split_items
         for segment in DELIM.split(sentence):
             segment = segment.strip()
             if _is_item(segment, MAX_PROSE_SPAN):
