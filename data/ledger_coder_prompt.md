@@ -38,6 +38,8 @@ Three things about those fields:
 - `line_no` is the 1-based line where the emission **started**. For a candidate whose `paths` includes `wrapped`, the span was recovered by joining that line with the **next** one, so the span may not appear in that line alone — read both.
 - The candidates **overlap in granularity on purpose** (a clause-level span and a particle-level token from the same line) and **contain noise on purpose**. §9.2 explains why; noise is dropped in the ledger with a reason code, not filtered out silently.
 
+★ **Your batch is one slice of the source, not the whole enumeration.** The source's candidates are partitioned across several batches by line group, and every other slice is being coded by someone else. A food you can see in `source_text` but cannot find among your candidates is almost always enumerated in a neighbouring batch — three coders in a row have reported such a food as an extraction gap, and all three times it was in the next batch along. Judge the candidates you were given; do not infer anything about the enumeration as a whole from what is missing here.
+
 ## The judgment
 
 For **every candidate in the batch**, decide `include` or `exclude` per §9.3.
