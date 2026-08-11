@@ -340,29 +340,47 @@ food already coded). Coding the first code that fits, in the order below,
 settles which one is recorded. The order is not a new judgment — it follows from
 the definitions above and from what each code's basis already covers:
 
-1. **`fragment`** — is the span something other than a complete noun phrase?
-   Partial words, particle-ended cuts, verb and adjective forms, whole clauses,
-   and the splices the `wrapped` path produces are all `fragment`, whatever they
-   are about: `カリウムの持つ利尿作用により`, `全身が冷えてしまうためです`,
-   `ビタミンB群を含むものが多く`, `かき氷サラダ`. Nothing further can be judged
-   about a span that is not a nameable unit, so this is asked first. **A span
-   carrying direction vocabulary but no food noun is a `fragment` too**
-   (`体の芯から温まります`): the food it refers to is enumerated separately, so
-   nothing is lost by dropping the clause that mentions it.
-2. **`not-verbatim`** — is it a form a *coder* produced (a paraphrase or
+1. **`navigation`** — is the span in a region the frame excludes: page
+   apparatus, a related-article link, a tag, a ranking, an author blurb, or a
+   work the section cites? §1 puts these outside the frame regardless of what
+   they contain, so the question comes before any question about the span's
+   shape. Everything the extractor emits from a 参考： citation block is
+   `navigation`, whole line or fragment of one, because the block is a list of
+   other authors' claims.
+2. **`fragment`** — is the span a form the **source does not present as an
+   item**? This is the table's wording above, and it is the whole test. A span
+   is an item where the source itself sets it off — a list entry, a table cell,
+   a heading, or a food名 standing on its own in a sentence. It is *not* an item
+   when the extractor has cut into or across the source's own units:
+
+   - a partial word or a cut mid-phrase: `し中華`, `育つ果物`, `変える働き`
+   - a `wrapped` splice joining two lines: `かき氷サラダ`, `きゅうりトマト`
+   - a clause or sentence, with or without direction vocabulary:
+     `カリウムの持つ利尿作用により`, `体の芯から温まります`
+   - **a food name carried along with its modifiers or its topic particle**:
+     `水分を多く含む夏野菜は`, `りんごやぶどうなど寒い地域で育つ果物は`,
+     `サポートしてくれる食材`, `これらの香味野菜やスパイスは`. The source presents
+      夏野菜 and 果物; it does not present these longer strings as items. §9.2
+     emits both granularities on purpose, and the shorter one — enumerated from
+     the same line group — is the row.
+   - **a span naming two or more foods jointly**: `豚肉や根菜類`, `味噌や生姜など`.
+     A ledger row carries one `food_ja` (§9.7), and each of the foods is
+     enumerated separately from the same line group.
+
+   Nothing further can be judged about a span the source never offered as a
+   unit, so this is asked before the questions about what it names.
+3. **`not-verbatim`** — is it a form a *coder* produced (a paraphrase or
    generalisation)? Its basis is §8's hiesyo_com ruling, where a coder wrote アジ
    for アジの開き. In this ledger the candidate string comes from the extractor,
    so this code is for the rare case where a coder restates rather than judges.
-3. **`navigation`** — is it page apparatus or a cited work?
-4. **`not-food`** — the span is a complete noun phrase (rule 1 did not fire);
-   is what it names not a food? `ビタミンB群` names a nutrient, `おすすめ温活レシピ`
-   a section, `寒さ` a condition, `南国` a place. The test is the *form first,
-   the referent second*: `ビタミンB群を含むものが多く` is a clause and stops at
-   rule 1, while `ビタミンB群` is a noun phrase and reaches this rule. Splitting
-   the two rules this way is what makes them reproducible — on the kawashimaya
-   canary the two coders disagreed on 53 exclusions, every one of them a span
-   where one read "the extractor made this" and the other read "this names a
-   non-food", and both readings were defensible under the earlier wording.
+4. **`not-food`** — the span is one the source presents (rule 2 did not fire);
+   is what it names not a food? Three kinds reach this rule: things that are
+   plainly not food (`ビタミンB群` a nutrient, `寒さ` a condition, `南国` a place),
+   a section's own title (§9.5), and **generic terms that are food-shaped but
+   name no particular food** — 食材, 食べ物, 料理, レシピ, メニュー, 一品, 飲み物.
+   §2 makes the unit of coding a (food, source) pair, and a generic term
+   identifies no food to pair with the source; coding one would mint a food
+   named "ingredient".
 5. **`no-direction`** — is the food named without the source assigning it a
    direction? This precedes `duplicate` because `duplicate` is defined on
    (food, source, **direction**), and a span carrying no direction cannot meet
@@ -370,9 +388,22 @@ the definitions above and from what each code's basis already covers:
 6. **`serving-temperature`** — is what the source describes the temperature the
    item is served at rather than the nature attributed to it?
 7. **`duplicate`** — is this (food, source, direction) already recorded from
-   another span **on the same line group**?
+   another span **on the same line group**? Rules 2 and 4 remove most of what
+   would once have been a duplicate, so this code is rare; it is kept because
+   the granularities of one line can still both be items the source presents.
 
 A span that survives all seven is an `include`.
+
+**Why this order was changed.** Three rounds of the kawashimaya canary measured
+it. Round 1 had no order at all and the two coders agreed on *why* only 46.2% of
+their agreed exclusions were excluded. An order keyed on "is this a complete
+noun phrase" took that to 74.7%, then to 89.0% once the category and dish rules
+were settled — but it left a criterion that competed with the table's own
+wording, and every one of the 38 remaining splits was a span where one coder
+asked "did the source present this" and the other asked "is this a well-formed
+noun phrase". Rule 2 now asks only the first question. Round 3 also showed
+`navigation` unreachable behind a shape test, since a citation block reaches the
+extractor as splices; hence rule 1.
 
 ### 9.5 Category and umbrella labels are included, not excluded
 
