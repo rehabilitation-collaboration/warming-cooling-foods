@@ -141,7 +141,17 @@ def main() -> None:
     # universe is widened, a food can have L2 hits that have not been fetched or
     # screened yet, and those must stay NaN rather than be silently called zero.
     zero_hit = set(l2_rows.loc[l2_rows["n_pubmed"] == 0, "food_key"])
-    screened = sorted(coded | zero_hit)
+    screened = sorted((coded | zero_hit) & l2_foods)
+    # A food can be coded and yet no longer be in the L2 universe: the Route D
+    # class-label filter (2026-08-12) took `white fish` out of the queryable set
+    # after its records had been screened. Its judgments stay in screening.csv
+    # as provenance, but counting it here would report more screened foods than
+    # there are foods, so it is named rather than folded into the total.
+    departed = sorted(coded - l2_foods)
+    if departed:
+        print(f"\n{len(departed)} coded foods are no longer in the L2 universe "
+              f"(judgments kept in screening.csv, excluded from the counts "
+              f"below): {departed}")
     unscreened = sorted(l2_foods - set(screened))
     if unscreened:
         print(f"\n{len(unscreened)} foods have L2 hits that are not screened yet "
@@ -150,7 +160,8 @@ def main() -> None:
     updated.to_csv(PUBMED_COUNTS_CSV, index=False)
 
     print(f"\nL2' over {len(screened)} of {len(l2_foods)} L2 foods "
-          f"({len(coded)} coded, {len(zero_hit)} with no L2 hit to screen):")
+          f"({len(coded & l2_foods)} coded, {len(zero_hit)} with no L2 hit "
+          f"to screen):")
     nonzero = [f for f in screened if l2s.get(f, 0)]
     for food in sorted(nonzero, key=lambda f: -l2s.get(f, 0)):
         raw = counts_df[(counts_df.food_key == food) & (counts_df.layer == "L2")]
