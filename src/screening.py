@@ -315,6 +315,25 @@ def golden_scores(coder: list[dict] | pd.DataFrame, golden: list[dict] | pd.Data
     }
 
 
+def measured_foods(coded, l2_foods, zero_hit) -> tuple[list[str], list[str]]:
+    """Split the coded foods into those still in the L2 universe and those not.
+
+    A food's L2′ is measured if its records were coded, or if its L2 query
+    returned nothing at all — screening only ever removes records, so an empty
+    hit set is a measured zero rather than an unmeasured blank.
+
+    The second return value is the foods that were coded and have since left the
+    universe. That is not hypothetical: the Route D class-label filter took
+    `white fish` out of the queryable set on 2026-08-12, after its records had
+    been screened. Counting such a food as measured reports more screened foods
+    than there are foods, which is how it was first noticed; dropping it without
+    saying so would hide that a published judgment no longer has a food to
+    attach to. So it is returned separately, for the caller to name.
+    """
+    coded, l2_foods, zero_hit = set(coded), set(l2_foods), set(zero_hit)
+    return sorted((coded | zero_hit) & l2_foods), sorted(coded - l2_foods)
+
+
 def attach_l2_screened(
     pubmed_counts: pd.DataFrame,
     l2s: pd.Series,

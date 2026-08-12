@@ -361,3 +361,31 @@ def test_exclusion_breakdown_classes_on_the_prefix_not_the_free_text():
     # Includes must not enter the denominator.
     assert int(out["n"].sum()) == 4
     assert float(out.loc["animal", "pct"]) == 75.0
+
+
+def test_measured_foods_keeps_zero_hit_foods_and_drops_departed_ones():
+    # A food with no L2 hits at all is measured (screening only removes records),
+    # so it belongs in the denominator of "N foods with no direct research".
+    # A food that was coded and has since left the queryable universe is not:
+    # counting it reported 191 screened foods out of 190, which is how the bug
+    # was found. Reverting the intersection must fail this test.
+    from src.screening import measured_foods
+
+    screened, departed = measured_foods(
+        coded={"ginger", "cream", "white fish"},
+        l2_foods={"ginger", "cream", "burdock"},
+        zero_hit={"burdock"},
+    )
+    assert screened == ["burdock", "cream", "ginger"]
+    assert departed == ["white fish"]
+    assert len(screened) <= 3  # never more screened foods than there are foods
+
+
+def test_measured_foods_reports_nothing_departed_when_every_coded_food_remains():
+    from src.screening import measured_foods
+
+    screened, departed = measured_foods(
+        coded={"ginger"}, l2_foods={"ginger", "salt"}, zero_hit={"salt"}
+    )
+    assert screened == ["ginger", "salt"]
+    assert departed == []

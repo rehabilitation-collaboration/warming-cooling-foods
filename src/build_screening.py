@@ -34,6 +34,7 @@ from .screening import (
     cohen_kappa,
     golden_scores,
     l2_screened,
+    measured_foods,
     reconcile,
     to_screening_csv,
 )
@@ -141,13 +142,7 @@ def main() -> None:
     # universe is widened, a food can have L2 hits that have not been fetched or
     # screened yet, and those must stay NaN rather than be silently called zero.
     zero_hit = set(l2_rows.loc[l2_rows["n_pubmed"] == 0, "food_key"])
-    screened = sorted((coded | zero_hit) & l2_foods)
-    # A food can be coded and yet no longer be in the L2 universe: the Route D
-    # class-label filter (2026-08-12) took `white fish` out of the queryable set
-    # after its records had been screened. Its judgments stay in screening.csv
-    # as provenance, but counting it here would report more screened foods than
-    # there are foods, so it is named rather than folded into the total.
-    departed = sorted(coded - l2_foods)
+    screened, departed = measured_foods(coded, l2_foods, zero_hit)
     if departed:
         print(f"\n{len(departed)} coded foods are no longer in the L2 universe "
               f"(judgments kept in screening.csv, excluded from the counts "
