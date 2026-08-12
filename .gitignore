@@ -51,7 +51,7 @@ data/ledger_work/
 PLAN.md
 PLAN-DEVIATIONS.md
 LITERATURE.md
-REVIEW-REPORT.md
+REVIEW-REPORT*.md
 GPT-REVIEW-*.md
 
 # SSRN submission guide (internal workflow tool, not a reproducibility artifact)
