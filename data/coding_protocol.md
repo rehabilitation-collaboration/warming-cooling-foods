@@ -265,8 +265,8 @@ closes.
 
 ### 9.1 Why the ledger exists
 
-Axis B keeps both sides of its judgment: `screening.csv` carries 292 includes
-*and* 12,145 exclusions, each with a reason code, so a reader can check the
+Axis B keeps both sides of its judgment: `screening.csv` carries 298 includes
+*and* 12,435 exclusions, each with a reason code, so a reader can check the
 exclusions rather than take them on trust. Axis A kept only the 649 kept rows.
 `verify_claims.py` shows that each of those rows is real — every `food_ja`
 occurs verbatim in its cited source — but no artefact shows that nothing was

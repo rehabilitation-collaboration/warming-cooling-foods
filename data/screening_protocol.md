@@ -56,10 +56,13 @@ this protocol, bringing the set to **12,733 records across 147 foods**. The
 previously judged records are reused verbatim for the same reason as before.
 The κ in §5 and every count in the manuscript are computed over the full 12,733.
 
-One coded food has since left the L2 universe: `white fish` was reclassified as
-a class label rather than a food on 2026-08-12, so its single judgment stays in
-`screening.csv` as provenance but is outside the 190-food L2 denominator.
-`build_screening.py` names it on each run rather than folding it into a total.
+A food can also leave the L2 universe after its records have been screened, in
+which case its judgments stay in `screening.csv` as provenance but sit outside
+the L2 denominator. As of 2026-08-12 that is one food: `white fish`, which was
+reclassified as a class label rather than a food, and whose single judgment is
+therefore not part of the 190-food count. `build_screening.py` derives that list
+on each run and prints whatever is in it, so this paragraph is a snapshot of the
+list rather than a statement of what it will contain.
 
 This is the complete L2 hit set; screening covers **all** queryable foods'
 records (not the GPT minimum of zero-count + top-count foods).
@@ -118,11 +121,28 @@ or removed by them.
   sensation's substrate; cerebral or renal perfusion is not. Without this line any
   vascular-function trial of any food becomes an include and L2′ fills with
   endothelial-function literature that the folk claim never addressed.)
-- **Energy expenditure.** EE / RMR / BMR qualifies only where the paper frames it
-  as thermogenesis, diet-induced thermogenesis, thermic effect of food or the
-  food's thermogenic effect. EE appearing as a covariate, as the denominator of an
-  exercise energy balance, as a body-composition or weight-loss endpoint, or as a
-  frailty criterion is `no-thermal`.
+- **Energy expenditure.** EE / RMR / BMR qualifies where it is an endpoint of the
+  study in its own right — what the food was given in order to move. EE appearing
+  as a covariate, as the denominator of an exercise energy balance, as a
+  body-composition or weight-loss endpoint, or as a frailty criterion is
+  `no-thermal`: there the measurement serves another question.
+
+  Wording such as thermogenesis, diet-induced thermogenesis, thermic effect of
+  food or the food's thermogenic effect is the clearest evidence that a paper is
+  in the first case, but it is evidence, not the test. **Restated on 2026-08-12
+  to describe the rule the corpus was actually built on, not to change it.** The
+  earlier wording — "qualifies only where the paper frames it as thermogenesis,
+  [DIT], [TEF]" — reads as a vocabulary test, and 63 of the 292 includes standing
+  before that date use no such wording (`chili pepper`/8926537, "Effects of
+  red-pepper diet on the energy metabolism in men"; `corn`/29193741; `potato`/
+  3059793; `lotus root`/24045789). The rulings filed on 2026-08-07 and 2026-08-08
+  state the role test outright and predate the restatement: `green tea`/16418760
+  ("metabolic rate over 6 h supine rest is **the primary outcome** of a
+  thermogenic formula **rather than an energy-expenditure covariate of another
+  endpoint**"), `green tea`/17919327, and `green tea`/36558368, which the §2.3
+  sweep re-read and kept on that ground. Every exclusion filed under this clause
+  names a subordinate role; none names a missing word. No label was changed by
+  the restatement.
 - **Reactivity probes.** A pharmacological endothelial probe — acetylcholine,
   sodium nitroprusside, methacholine or insulin-stimulated limb flow, or
   flow-mediated dilatation — read in a hypertension or endothelial-function
@@ -381,11 +401,17 @@ reported in Methods.
 
 - `data/screening.csv` — `pmid, food_key, coder1, coder2, adjudicated,
   final_label, reason, sublabels`. One row per (food_key, pmid). `coder1` /
-  `coder2` are the two independent labels; `adjudicated` is `True` on the rows
-  the author settled — divergences, coverage differences, `uncertain-species`
-  records, and the agreed includes the §2.3 sweep overrode — and `False` where
-  the coders agreed and no ruling was filed; `reason`
-  carries the author's adjudication rationale on those rows and the coders'
+  `coder2` are the two independent labels; `adjudicated` is `True` on every row
+  carrying an author ruling and `False` where the coders agreed and no ruling was
+  filed. Rulings are of five kinds, and the flag does not distinguish them —
+  read `screening_rulings.csv`'s `batch` and `rationale` columns for that:
+  (a) divergences, (b) coverage differences, (c) records either coder flagged
+  `uncertain-species` or `no-abstract`, (d) agreed includes the §2.3 sweep
+  overrode, and — since 2026-08-12 — (e) agreed excludes where the ruling fixes
+  only the reason code and leaves the label untouched. (e) covers 156 `cream`
+  records; 11 rows of (d) are confirmations that changed nothing either. So 167
+  of the 499 flagged rows carry the same label the coders agreed on. `reason`
+  carries the author's adjudication rationale on ruled rows and the coders'
   reason elsewhere; `sublabels` is the union of the sub-labels either coder
   attached (`review`, `constituent`, `supradose`, `confounded`).
 - **L2′** = per food, count of `final_label == include`. Written to
@@ -407,11 +433,20 @@ auditable (the GPT reproducibility ask).
 **Known limit of the published `reason` column.** Where both coders exclude a
 record but write different codes, `adjudicate()` records coder 1's, because it
 reads `reason_c1 or reason_c2`; no rule in this protocol selects between them.
-That applies to **1,999 of the 12,263 rows the two coders agreed on before the
-Route D batch (16.3%)**, and the largest classes are pairs where both codes are
-literally true of the record (`no-thermal`/`name-only`, `name-only`/`animal`,
-`livestock-heat`/`animal`). It does not touch any include/exclude decision, κ,
-or L2′ — only the exclusion breakdown. Unlike Axis A, whose §9.4 already fixed
-an order the codes could be resolved in, §2 states no order, so settling this
-would mean writing a new rule rather than applying an existing one. It is
-recorded here rather than resolved.
+Over the full ledger that applies to **1,825 of the 12,557 rows the two coders
+agreed on (14.5%)**, or 15.0% of the 12,172 they both excluded; before the Route
+D batch it was 1,628 of 12,263 (13.3%), or 13.7% of 11,883. The largest classes
+are pairs where both codes are literally true of the record — `animal`/
+`name-only` 424, `name-only`/`no-thermal` 297, `animal`/`invitro` 143,
+`animal`/`livestock-heat` 136, `invitro`/`name-only` 109, counted over the
+pre-Route-D agreed exclusions.
+
+Agreed *includes* are excluded from those counts. Their `reason` is a free-text
+description of the study rather than a code, so it differs between coders in 371
+of 380 cases and would inflate the figure to 1,999 without saying anything about
+the exclusion breakdown, which is the only thing this limit reaches. It touches
+no include/exclude decision, no κ and no L2′.
+
+Unlike Axis A, whose §9.4 already fixed an order the codes could be resolved in,
+§2 states no order, so settling this would mean writing a new rule rather than
+applying an existing one. It is recorded here rather than resolved.
