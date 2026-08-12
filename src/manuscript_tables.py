@@ -314,7 +314,7 @@ def table5_expected(frame: pd.DataFrame, ledger: pd.DataFrame) -> dict[str, dict
             "L1 total": int(row["l1"]),
             "Raw L2": int(row["l2_raw"]),
             "L2′": int(row["l2_screened"]),
-            "Whole-food primary": int(narrow.get(food, 0)),
+            "Food-form primary": int(narrow.get(food, 0)),
             "L2′/L1": 100 * row["l2_screened"] / row["l1"],
         }
     return expected
