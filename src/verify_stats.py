@@ -29,7 +29,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-from . import claim_framing
+from . import claim_directed, claim_framing
 from .alt_l1 import ALT_L1_FILTERS, load_alt_l1
 from .analysis import MEASURE, _read_counts, bottom_right_foods, prepare_scatter_data
 from .claim_mapping import load_claims, load_sources
@@ -219,9 +219,20 @@ def main() -> None:
     # for "has this claim been examined at all" and each is arguable, so the
     # primary model is refit without each rather than the choice being asserted.
     print("[Definition sensitivity] primary model refit under narrower L2' definitions")
-    screening = pd.read_csv(SCREENING_CSV)
+    # The §8 pass adds a third narrowing: drop the records whose own research
+    # question was not the food's thermal effect. It is joined at read time, so
+    # `screening.csv` — and therefore L2' as reported — is untouched by it.
+    cd_ledger = claim_directed.load_ledger()
+    screening = claim_directed.attach(pd.read_csv(SCREENING_CSV), cd_ledger)
+    sensitivity = list(DEFINITION_SENSITIVITY)
+    if cd_ledger is None:
+        print("  (protocol §8 sub-labels not present; claim-directed row omitted)")
+    else:
+        sensitivity.append(
+            ("claim-directed only (drop incidental)", (claim_directed.INCIDENTAL,))
+        )
     measured = df["l2_screened"].notna()
-    for label, excl in DEFINITION_SENSITIVITY:
+    for label, excl in sensitivity:
         narrowed = l2_screened(screening, exclude_sublabels=excl)
         d = df.copy()
         # A narrower definition removes records; it does not turn a food that

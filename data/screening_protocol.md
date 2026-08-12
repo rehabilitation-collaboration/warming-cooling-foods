@@ -450,3 +450,244 @@ no include/exclude decision, no κ and no L2′.
 Unlike Axis A, whose §9.4 already fixed an order the codes could be resolved in,
 §2 states no order, so settling this would mean writing a new rule rather than
 applying an existing one. It is recorded here rather than resolved.
+
+## 8. Claim-directed vs incidental sub-label (added 2026-08-12)
+
+§2 asks whether a record is *on-construct* — a human ingesting the food, with a
+qualifying thermal outcome. It does not ask whether the study set out to answer
+the question the lay sources answer, and the two come apart. `chicken`/41901102
+and `chicken`/42072392 are ingestion trials of chicken meat with microvascular
+outcomes, and neither was designed to ask whether chicken warms the body. The
+external review of 2026-08-12 named the gap — *on-construct is not the same as an
+explicit test of the folk claim* — and this section adds the sub-label under
+which the primary model can be refit on the narrower reading.
+
+**Scope.** The pass runs over the records already settled as `include` (298 at
+the time of writing, 284 of them in the Tier-1 primary frame) and over nothing
+else. It **cannot change a `final_label`**. A coder who thinks a record should
+never have been included says so in `reason`; the author then handles it as a
+§2.3-style ruling in `screening_rulings.csv`, where such a change belongs, and
+not here. `screening.csv` itself is not rewritten by this pass: the sub-label is
+published as its own ledger (below) and joined by the analysis code at read time,
+so L2′ as reported is provably untouched by anything decided under this section.
+
+**Unit.** (food_key, pmid), as in §2 — the question is about *this* food, and a
+record can be claim-directed for one food and incidental for another. The 298
+rows cover 263 distinct records; 32 of those records are judged under more than
+one food.
+
+### The two values
+
+- **`claim-directed`** — the study's own research question is whether ingesting
+  this food, a food form of it, or its principal dietary constituent (§3) changes
+  a thermal outcome of §2 condition 3. Operationally: the thermal outcome is a
+  primary or co-primary endpoint **and** the food is the exposure the study is
+  about.
+- **`incidental`** — the record qualifies under §2, but the study is asking
+  something else, and the qualifying outcome is measured in service of that
+  question or reported alongside it. Questions seen in this corpus include weight
+  loss and body composition, endothelial or cardiovascular function, exercise
+  performance, glycaemic control, metabolisable-energy accounting and disease
+  markers; the list is illustrative and not a closed set, so a question that is
+  none of these is still `incidental` if the thermal outcome is not what the
+  study was built to move.
+
+**Where the question is read from** (added after the canary rounds, 2026-08-12).
+The study's own framing is its **title and the aim or objective sentences of its
+abstract** — the two *places* the authors state what the report is about. Not the
+journal's scope, not what studies of that food usually ask, not the discussion's
+speculation about implications. The review clause below already read the
+judgment off the "stated objective"; that is the general test, and it is stated
+here so it is not applied to reviews alone. Where an abstract is unstructured and
+carries no aim sentence — common in older reviews — its opening topic sentence is
+its framing; the absence of a labelled objective is not by itself an
+`unclear-question`.
+
+The `claim-directed` conjunction therefore has two **conditions**, and a record
+is `incidental` when **either** fails. (Conditions and places are different
+things: the two conditions are what must be true, the two places are where to
+look for them.)
+
+1. **The framing names this food** — the food, a food form of it, or its
+   principal dietary constituent — **as what is given or varied.** A record where
+   the food is present in every arm while something else is what varies fails
+   here: it is the vehicle, not the exposure. Worked example — `cheese`/20613890,
+   "Postprandial energy expenditure in whole-food and processed-food meals",
+   contrasts two meals differing in processing, with cheese in both, so its
+   subject is processing rather than cheese: `incidental`. Varying the *amount*
+   or the *form* of the food itself does not fail this condition;
+   `barley`/23742725 varies the molecular weight of barley β-glucan and its
+   subject is still the β-glucan. Neither does being one component of a
+   fixed-combination product: the `confounded` clause below keeps such records in
+   play, so `chicken`/14974736 and `black tea`/16366740 both pass condition 1 and
+   are separated by condition 2.
+2. **The framing names a thermal outcome of §2 condition 3 as something being
+   measured.** A record where the title and aim name a different outcome, and the
+   qualifying measurement appears only further down the results, fails here. The
+   §2 include already settled that the record's measurement *is* thermal, so this
+   condition asks only whether the framing names it, not whether it qualifies.
+
+**One class this does not settle, by design.** Where the framing names a
+*category* — dietary protein source, a festive meal — and this food is the
+instance chosen to stand for it, the two canary coders divided and neither
+reading is forced by the text above: the category is what the study is about, and
+the food is named inside it. `beef`/26821042 ("Effects of Dietary Protein Source
+and Quantity during Weight Loss") is the instance. Rather than write a rule that
+would settle it by fiat after seeing how the coders split, records of this shape
+are left to divide and the author adjudicates them, which is what §5's machinery
+is for.
+
+**The test is the study's question, not its motivation.** Almost nothing in this
+corpus cites a Japanese warming or cooling belief, so a rule that required the
+citation would return `incidental` for nearly every record and would be measuring
+the citation habits of nutrition journals rather than what was studied.
+`claim-directed` is the closest observable proxy for *the claim was put to the
+test*: the thermal effect of eating the food is the thing the study set out to
+measure. Any report of this sub-label must say so. It does not license the phrase
+"tested the folk claim", and the §2 sentence it refines — the construct is the
+study's outcome, not its motivation — stands.
+
+**The test is not study quality.** §2 refuses quality grading and this section
+keeps that refusal. A small single-arm trial whose question is the thermal effect
+is `claim-directed`; a large well-controlled trial that measures skin blood flow
+as one secondary outcome of a lipid study is `incidental`.
+
+### Boundary rules
+
+- **Reviews** (`review`, §3). Judge the review's stated objective by the same
+  test. §3 already admits a review only where its objective is the thermal,
+  thermogenic or energy-metabolism effect itself, so a review that survived
+  screening is normally `claim-directed`; it is `incidental` where the stated
+  objective is broader and the thermal material is one strand within it.
+- **Isolated constituents and supra-dietary doses** (`constituent`, `supradose`,
+  §3). The constituent stands in for the food, so a study asking whether
+  capsaicin raises energy expenditure is `claim-directed` under `chili pepper`.
+  Dose does not enter this judgment: `supradose` already carries it and is
+  dropped in its own sensitivity variant.
+- **Mixed interventions** (`confounded`, §3). Confounding is a property of the
+  design, not of the question. A trial asking whether a ginger drink taken with
+  exercise raises energy expenditure, with no way to separate the two, is
+  `claim-directed` and stays `confounded`.
+- **Multi-arm and multi-food studies.** Judge per food. Where several foods are
+  arms of one trial whose question is their thermal effect, each is
+  `claim-directed`. Where this food is a comparator chosen to answer a question
+  about something else, it is `incidental`. (A food present only as a vehicle is
+  an §2 exclusion, not an incidental include.)
+- **Secondary analyses and sub-studies.** Judge the report in hand, not its
+  parent trial. A secondary analysis whose own question is the thermal outcome is
+  `claim-directed` even where the parent trial was about weight loss.
+- **Composite metabolic endpoints.** Resting and postprandial energy expenditure
+  is the recurring hard case, and the role test of §2.3 settles it here too:
+  where energy expenditure, DIT or TEF is the endpoint the study is built around
+  and reports as its result, `claim-directed`; where it is one of a panel of
+  measures supporting a conclusion about something else, `incidental`. The
+  conclusion being supported is not always about weight — gastric emptying and
+  glycaemic response are the other panel this corpus contains — so read the
+  framing rather than matching against a list of rival outcomes. Where the
+  thermal outcome is named in **both places — the title and the aim** — being one
+  of several co-equal aims does not demote it: `agar`/23872837 and
+  `barley`/23742725 each name diet-induced thermogenesis in the title and in the
+  aim, alongside gastric emptying and glycaemic response, and both are
+  `claim-directed`. Where this pulls against the review clause's "one strand
+  within a broader objective", **this clause governs** — a thermal aim named in
+  both places is not demoted by having company, and `chili pepper`/33789250
+  ("Effects of Red Pepper, Ginger, and Turmeric on Energy Metabolism", objective
+  naming weight control, weight loss and energy metabolism) is `claim-directed`
+  on that order. Worked
+  example the other way — `chicken`/11676025, "Effects of chicken essence tablets
+  on resting metabolic rate", is `claim-directed`; the two enriched-meat trials
+  above are `incidental`, their framing naming microvascular and endothelial
+  function.
+
+### When the record does not say
+
+- `no-abstract` — three of the 298 carry no abstract. The coder gives its best
+  label from the title and flags the record **unconditionally**, which routes it
+  to the author as in §5. ★ This is deliberately stricter than §2's version of
+  the flag, which lets a sufficient title settle the record: §2 asks four
+  questions a title can answer, while §8 asks what the study was built to
+  measure, and a title states the titled question without ruling out that an
+  unnamed endpoint shared primacy with it. Both canary coders read "Effect of
+  ginger on metabolic rate" as settling the question and did not flag it, which
+  is why the rule is written out here rather than left to the analogy with §2.
+- `unclear-question` — the abstract reports outcomes but never states what was
+  being asked. Flag it rather than guessing; the author settles it from the full
+  text. This flag exists only in this section.
+
+Neither flag is a third value: `sub_label` always carries one of the two labels
+and the flag travels in `reason`, so a routed record still records what the
+coders thought rather than a blank.
+
+### Output
+
+- `data/screening_claim_directed.csv` — `pmid, food_key, coder1, coder2,
+  adjudicated, sub_label, reason`, one row per included (food_key, pmid).
+- `data/screening_claim_directed_rulings.csv` — `food_key, pmid, sub_label,
+  rationale, batch`, the author's ruling ledger, in the same shape and the same
+  role as `screening_rulings.csv`.
+- The analysis joins the ledger onto the screening ledger in memory and refits
+  the primary model with the `incidental` records dropped (`src/claim_directed.py`,
+  reported by `src/verify_stats.py` beside the other definition-sensitivity
+  variants). This is a **sensitivity analysis, not a redefinition of L2′**.
+
+### Coders and agreement
+
+The instrument is the one §5 describes: two coders, `claude-sonnet-5` (c1) and
+`claude-opus-5` (c2), each given this protocol and its assigned records, with the
+other coder's labels and the reconciliation code withheld. Each record is
+presented with its title, abstract, publication types and the §3 sub-labels
+already settled for it, since those are part of the screening judgment this pass
+builds on rather than another coder's opinion about the question at issue. κ is
+computed on the co-coded records, categories = {claim-directed, incidental}, and
+the within-lineage caveat of §5 applies unchanged — the pair bounds how stably
+one model family applies this section, and is not an independence-based
+reliability estimate. Divergence target κ ≥ 0.60; below it the definitions here
+are refined and the pass re-run, rather than the labels being hand-fixed.
+
+### Canary rounds (2026-08-12)
+
+This section was written before any record was judged under it. It was then
+calibrated the way the Axis A coding protocol was (project decision D55): a
+20-record canary stratified over the boundary clauses above — reviews,
+constituents, confounded designs, absent abstracts, records judged under more
+than one food, and plain cases — was coded by both coders twice, and both times
+the coders were asked to report every clause they had to stretch rather than only
+to label.
+
+| Round | κ (20 records) | Observed agreement | Divergences |
+|---|---:|---:|---:|
+| 1 | 0.588 | 80.0% | 4 |
+| 2 | 0.886 | 95.0% | 1 |
+
+**Round 1** fell below the 0.60 target, and its four divergences were two classes
+the coders had independently named: records whose framing lists a thermal outcome
+among several co-equal aims (`agar`/23872837, `black tea`/16580033,
+`chili pepper`/33789250), and one where the food sits in every arm while
+something else varies (`cheese`/20613890). Both coders also reported that the
+`no-abstract` clause, written as an analogy to §5, left them importing §2's
+"a sufficient title settles it" carve-out — which neither §8 nor the instruction
+they were given actually stated.
+
+The revisions those findings produced are restatements of what this section
+already said rather than new criteria: the "where the question is read from"
+paragraph generalises the review clause's own "stated objective"; the conjunction
+was already a conjunction; the composite-endpoint clause lost a weight-loss
+trigger it should never have been specific to; the illustrative list of rival
+questions had been closed by accident; and the `no-abstract` rule was written out
+instead of being left to an analogy.
+
+**Round 2** left one divergence, `beef`/26821042, and coder 2 named it as the
+judgment it had stretched furthest. It is the category-instance class recorded
+above as deliberately unsettled, so it was not legislated away. Round 2 also
+found a genuine defect introduced by the round-1 revision — the word "halves" had
+been used for both the conditions and the places, and the ambiguity was
+load-bearing on at least one record. That wording is fixed above; the fix states
+the reading both round-2 coders had already adopted, so it is not expected to
+move labels, and the full pass re-codes these 20 records, which makes it
+checkable rather than assumed.
+
+**No canary label was carried forward.** All 20 records are re-coded in the full
+pass under the final text, so no record's sub-label was decided under a
+superseded reading. The canary outputs are retained under
+`data/screening_work/cd_canary/` (git-ignored, like the other coder
+intermediates) as the evidence for the revisions.

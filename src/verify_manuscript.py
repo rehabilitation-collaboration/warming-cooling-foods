@@ -27,6 +27,7 @@ from contextlib import redirect_stdout
 import pandas as pd
 
 from . import (
+    claim_directed,
     manuscript_tables,
     verify_candidate_recall,
     verify_independent_read,
@@ -244,6 +245,21 @@ def pipeline_values(inputs: dict) -> set[str]:
         int((ledger["final_label"] == "exclude").sum()),
     ):
         values |= _renderings(str(value))
+    # The §8 sub-label pass reports its own agreement figures, and they are
+    # recomputed from the published ledger's coder columns rather than from the
+    # working files, so a reader with only the repository can check them.
+    cd_ledger = claim_directed.load_ledger()
+    if cd_ledger is not None:
+        agreement = claim_directed.ledger_agreement(cd_ledger)
+        for value in (
+            agreement["n"], agreement["kappa"], agreement["po"],
+            100 * agreement["po"], agreement["adjudicated"],
+            agreement["divergences"], agreement[claim_directed.CLAIM_DIRECTED],
+            agreement[claim_directed.INCIDENTAL],
+            len(pd.read_csv(claim_directed.RULINGS_CSV)),
+        ):
+            values |= _renderings(str(value))
+
     breakdown = exclusion_breakdown(ledger)
     for column in breakdown.columns:
         if pd.api.types.is_numeric_dtype(breakdown[column]):
