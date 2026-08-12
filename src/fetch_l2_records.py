@@ -40,6 +40,7 @@ from .evidence_mapping import (
     REQUEST_TIMEOUT,
     USER_AGENT,
     _slug,
+    class_labels,
     is_queryable,
     target_foods,
 )
@@ -208,12 +209,17 @@ def collect_l2_records(
     if save_raw:
         QUERY_LOG_DIR.mkdir(parents=True, exist_ok=True)
     tgt = target_foods(claims, sources)
+    # Same exclusion as the count side (D30, §9.5): a label the ledger records
+    # as a class is not a food to fetch records for. Without it this pulled
+    # 6,034 records for 39 class labels — fish 2,245, alcohol 1,984, fruit 612 —
+    # all of which would then have gone to the screening coders as foods.
+    classes = class_labels(claims)
 
     rows: list[dict] = []
     skipped: list[str] = []
     for _, t in tgt.iterrows():
         food = t["food_key"]
-        if not is_queryable(food):
+        if food in classes or not is_queryable(food):
             skipped.append(food)
             continue
 
