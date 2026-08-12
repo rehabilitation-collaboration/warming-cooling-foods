@@ -138,9 +138,12 @@ def main() -> None:
     frozen = pd.read_csv(CLAIMS_FROZEN_CSV, dtype=str).fillna("")
     print(f"wrote {len(df)} claims to {CLAIMS_CSV}")
     print(f"  frozen hand coding: {len(frozen)} rows")
-    print(f"  condition annotations carried over: "
-          f"{int((df['condition'] != '').sum())} of "
-          f"{int((frozen['condition'] != '').sum())}")
+    # More rows can carry a condition than the frozen file has rows with one:
+    # the join is on (source, food), and the ledger can hold two rows for a food
+    # the frozen file held once. Printed as a count, not as "N of M", because the
+    # "of" read as a ceiling and 48 of 47 looked like a bug.
+    print(f"  condition annotations attached: {int((df['condition'] != '').sum())}"
+          f"  (frozen rows carrying one: {int((frozen['condition'] != '').sum())})")
     print(f"  distinct (source, food_en): "
           f"{df.groupby(['source_id', df.food_en.map(_norm_en)]).ngroups}")
 

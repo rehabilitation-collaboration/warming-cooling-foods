@@ -2,8 +2,9 @@
 
 第28 forecast that the ledger would carry *fewer* attributions than claims.csv
 and that n_sources would fall. Measured after the RD-3 adjudication, the delta
-runs the other way and only the other way: nothing is lost and 220 (source, food)
-attributions are added. So this is not a loss accounting — it is a classification
+runs the other way and only the other way: nothing is lost and attributions are
+added (the count is printed rather than quoted here, because it moved twice as
+late rulings landed and a figure in prose does not). So this is not a loss accounting — it is a classification
 of what Route D added and what that costs downstream.
 
 The question that decides RD-5's size is not "how many rows are new" but "how
@@ -173,6 +174,34 @@ def main() -> None:
 
     print(f"\n★ n_sources が増えるだけの既存食品: "
           f"{int((~new.food_en.isin(frame.food_en) & (new.sublabel_head == '')).sum())} 行")
+
+    reason_sweep()
+
+
+def reason_sweep() -> pd.DataFrame:
+    """RD-4 (e)'s target rows: agreed exclusions whose reason codes differ.
+
+    Printed from here because the figure had no command behind it and a
+    cold-start reader recomputed it two rows off — the ambiguity was whether
+    `only_c1`/`only_c2` rows and the `uncertain` flag count. They do not: the
+    sweep is over rows both coders excluded, which is what a reason-only
+    ruling can act on without touching include/exclude.
+    """
+    from .build_ledger import load_coder
+    from .ledger import _needs_ruling, reconcile
+
+    c1, c2 = load_coder("c1"), load_coder("c2")
+    recon = reconcile(c1.to_dict("records"), c2.to_dict("records"))
+    settled = recon[~recon.apply(_needs_ruling, axis=1)]
+    exc = settled[settled["label_c1"] == "exclude"]
+    mism = exc[exc["reason_c1"] != exc["reason_c2"]].copy()
+    mism["pair"] = [" <-> ".join(sorted([a, b]))
+                    for a, b in zip(mism.reason_c1, mism.reason_c2)]
+    print(f"\n★ RD-4(e) の対象: 一致 exclude {len(exc):,} 行のうち reason 不一致 "
+          f"{len(mism):,} 行 ({len(mism) / len(exc):.1%})")
+    for pair, n in mism["pair"].value_counts().head(5).items():
+        print(f"    {pair:34s} {n:5d}")
+    return mism
 
 
 if __name__ == "__main__":
