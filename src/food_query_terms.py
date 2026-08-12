@@ -150,6 +150,12 @@ EXCLUDE: dict[str, str] = {
         "category label, not a specific food; would over-count under a broad query"
     ),
     "nuts": "category label (mixed tree nuts); no single unambiguous query term",
+    "mixed nuts": (
+        "the same label as `nuts` with the mixing stated ('ミックスナッツ'); an "
+        "unspecified blend has no single query term either. Named blends are a "
+        "different case and stay queryable — `curry powder` is a food key, and "
+        "so is 七味 — because the blend itself has a name a query can use"
+    ),
     "spices": "category label (mixed spices); no single unambiguous query term",
     # Surfaced when the Axis B universe was widened to n_sources = 1 (D28):
     # single-source labels were never queried before, so these were never

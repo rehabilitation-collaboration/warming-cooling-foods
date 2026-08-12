@@ -89,6 +89,48 @@ def canonicalise_food_en(inc: pd.DataFrame, frozen_path=CLAIMS_FROZEN_CSV) -> pd
     return inc
 
 
+# A preparation of a measured food is that food, not a new one. This is the
+# frozen coding's own practice, applied consistently: 加熱した生姜 is `ginger`
+# with condition=heated, 塩サケ is `salmon`, アジの開き is `horse mackerel`,
+# ポテトチップス is `potato`, 黒焼き梅干し is `umeboshi`.
+#
+# A preparation earns its own food_en only where the same source gives it the
+# opposite direction from the parent, since folding it would then make the file
+# contradict itself: attaka_navi calls 干し柿 warm and 柿 cool, prezo calls
+# 切り干し大根 warm and 大根 cool, gveggie calls 高野豆腐 warm and 豆腐 cool — which
+# is why those three are separate keys in the frozen vocabulary. Each fold below
+# was checked against that test and carries the parent's direction in the source
+# it appears in.
+#
+# Without this the foods leave the analysis frame silently: the frame is built
+# from pubmed_counts.csv, so `boiled egg` simply never appears, which the Route D
+# goal declaration counts as a failure (#5).
+PREP_PARENT: dict[str, str] = {
+    "boiled egg": "egg",                    # oitr/onkatsu_note warm; egg warm in oitr
+    "canned mackerel": "mackerel",          # oitr warm; mackerel warm in oitr
+    "coarse sea salt": "salt",              # a grind of salt, as 塩 is the only salt key
+    "dried ginger": "ginger",
+    "ginger (heated/dried)": "ginger",
+    "ginger (raw)": "ginger",
+    "ginger powder (dried ginger)": "ginger",
+    "ginger powder (dried)": "ginger",
+    "raw ginger": "ginger",
+}
+
+
+def fold_preparations(inc: pd.DataFrame) -> pd.DataFrame:
+    """Rewrite a preparation's ``food_en`` to the food it is a preparation of.
+
+    Runs after :func:`canonicalise_food_en` (which settles spelling) and before
+    :func:`collapse` (which is what actually merges the rows, on §2's unit). The
+    Japanese label is left alone, so the preparation stays visible in `food_ja`
+    exactly as 塩サケ does in the frozen file.
+    """
+    inc = inc.copy()
+    inc["food_en"] = inc["food_en"].map(lambda f: PREP_PARENT.get(f, f))
+    return inc
+
+
 def collapse(inc: pd.DataFrame) -> pd.DataFrame:
     """Ledger rows -> one row per (source, food, direction).
 
@@ -127,7 +169,7 @@ def attach_condition(claims: pd.DataFrame, frozen_path=CLAIMS_FROZEN_CSV) -> pd.
 
 
 def build() -> pd.DataFrame:
-    df = attach_condition(collapse(canonicalise_food_en(load_includes())))
+    df = attach_condition(collapse(fold_preparations(canonicalise_food_en(load_includes()))))
     return df[COLUMNS].sort_values(
         ["source_id", "food_en", "direction"]).reset_index(drop=True)
 

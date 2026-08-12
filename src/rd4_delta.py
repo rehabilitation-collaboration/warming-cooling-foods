@@ -109,20 +109,26 @@ def coverage(inc: pd.DataFrame | None = None) -> pd.DataFrame:
         lambda s: s.str.split(";").str[0].str.split(":").str[0].mode().iat[0]
         if len(s.mode()) else "")
 
-    # A measured food under a preparation modifier is not a new food. The frozen
-    # coding settled this shape: kracie's 加熱した生姜 is `ginger` with
-    # condition=heated, not a food called "heated ginger". Six ginger variants
-    # reach here (raw / dried / powder / heated-dried …); building a PubMed query
-    # for each would be six queries for one food.
-    measured_words = {w for f in measured for w in _norm_en(f).split()}
+    # A measured food under a preparation modifier is not a new food, and which
+    # labels those are is `build_claims.PREP_PARENT` — the same dict the
+    # projection folds with, so this report cannot disagree with what claims.csv
+    # actually did.
+    #
+    # This was a word-overlap test ("does any word appear in a measured key")
+    # and it was wrong in both directions. It claimed `long pepper` (ヒハツ,
+    # Piper longum) as a preparation of こしょう, though the frozen vocabulary
+    # keeps pepper / bell pepper / chili pepper as three keys; it claimed
+    # `mugwort tea` as a preparation of tea, though every tea is its own key and
+    # a bare `tea` does not exist; and it split 米あめ from 麦あめ purely because
+    # `rice` happens to be a measured word and `malt` does not.
+    from .build_claims import PREP_PARENT
 
     rows = []
     for food in sorted(inc["food_en"].unique()):
         if food in measured or food in EXCLUDE:
             continue
         head = sub.get(food, "")
-        words = set(_norm_en(food).split())
-        prep = bool(words & measured_words) and food not in measured
+        prep = food in PREP_PARENT
         rows.append({
             "food_en": food,
             "sublabel": head,
