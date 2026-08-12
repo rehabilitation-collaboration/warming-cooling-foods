@@ -36,6 +36,7 @@ accepts, and L2 was refetched for all 175 queryable foods:
 |---|---|---|
 | four-term query (2026-08-07) | 2,887 | 107 |
 | 22-term query (2026-08-08) | **12,437** | **138** |
+| Route D universe extension (2026-08-12) | **12,733** | **147** |
 
 The 22 terms are an OR-superset of the original four, verified against the
 records rather than the counts: every one of the 2,887 already-judged
@@ -43,8 +44,22 @@ records rather than the counts: every one of the 2,887 already-judged
 **9,550 new pairs across 134 foods**. Those 9,550 are coded by two fresh coders
 under this same protocol; the 2,887 existing judgments are reused verbatim,
 because re-coding a record already judged would put two labels on one
-(food_key, pmid) key. The κ in §5 and every count in the manuscript are computed
-over the full 12,437.
+(food_key, pmid) key.
+
+**Extended a third time by the Axis A ledger rebuild (2026-08-12, Route D).**
+Rebuilding Axis A from a full candidate ledger admitted foods the hand-coded
+`claims.csv` had not carried, so the food universe grew and L2 was fetched for
+them. That added **296 unjudged records across 9 foods** — `cream` 220, `yogurt`
+35, `ice cream` 15, `avocado` 9, `fennel` 7, `pheasant` 4, `papaya` 3,
+`long pepper` 2, `star anise` 1 — screened by the same two coder tiers under
+this protocol, bringing the set to **12,733 records across 147 foods**. The
+previously judged records are reused verbatim for the same reason as before.
+The κ in §5 and every count in the manuscript are computed over the full 12,733.
+
+One coded food has since left the L2 universe: `white fish` was reclassified as
+a class label rather than a food on 2026-08-12, so its single judgment stays in
+`screening.csv` as provenance but is outside the 190-food L2 denominator.
+`build_screening.py` names it on each run rather than folding it into a total.
 
 This is the complete L2 hit set; screening covers **all** queryable foods'
 records (not the GPT minimum of zero-count + top-count foods).
@@ -160,6 +175,16 @@ addressed.
 - `invitro` — cell/tissue/enzyme only, no human ingestion.
 - `agri` — agronomy: crop cold tolerance, storage temperature, post-harvest
   physiology, chilling injury.
+- `not-ingestion` — the food reaches the subject by a route other than eating
+  it (footbath, topical cream, inhalation, IV infusion), or is present in the
+  setting without being consumed (occupational exposure in an orchard, food
+  antigens applied in a skin test). Condition 2 is what fails, not condition 3,
+  so these do not belong under `name-only`. The code has been in use since the
+  golden set — `build_golden.py` defines it and `screening_golden.csv` carries
+  8 rows of it — and 180 records in `screening.csv` are labelled with it; it is
+  written into this list on 2026-08-12 because it was in the data and not in the
+  protocol. No record's include/exclude decision turns on it: every use is an
+  exclude either way, and the code only says which condition failed.
 - `name-only` — food term matches but the study is unrelated to a thermal
   ingestion effect (allergy, contamination, composition assay, epidemiology with
   no thermal physiological outcome, food named incidentally). Includes `salt`
@@ -327,14 +352,18 @@ reported in Methods.
   | Remaining 76 foods (8 bundles) | 2,149 | `claude-sonnet-5` | `claude-opus-5` |
   | Universe extension (26 foods) | 115 | `claude-sonnet-5` | `claude-opus-5` |
   | Recall rebuild — records the 22-term query added (134 foods, 24 bundles) | 9,550 | `claude-sonnet-5` | `claude-opus-5` |
+  | Route D universe extension (9 foods, 2 bundles) | 296 | `claude-sonnet-5` | `claude-opus-5` |
 
   The model versions differ between batches because the screening ran across
   several working sessions as the available models changed; within every batch
-  the two coders are contemporaneous. The recall-rebuild batch deliberately
-  reuses the same two tiers as the batches that carry most of the existing
-  judgments, so the widened record set is judged by the same instrument as the
-  set it extends. Kappa is computed over all co-coded records regardless of
-  batch.
+  the two coders are contemporaneous. The recall-rebuild and Route D batches
+  deliberately reuse the same two tiers as the batches that carry most of the
+  existing judgments, so the widened record set is judged by the same instrument
+  as the set it extends. Kappa is computed over all co-coded records regardless
+  of batch. The instruction the coder agents receive is published as
+  `screening_coder_prompt.md`; the file records the wording used for the Route D
+  batch, the earlier batches having been composed per session from the same
+  independence conditions and output schema without the text being kept.
 - Codings are reconciled on the `pmid` key. **Cohen's κ is computed on the
   co-coded records** (both coders labelled), categories = {include, exclude}.
   Coverage differences (a pmid only one coder returned) are reported separately
@@ -370,6 +399,19 @@ reported in Methods.
 ## 7. Provenance / reproducibility
 
 Raw efetch responses per food are under `data/query_log/pubmed_*_L2_records.json`
-(saved by `fetch_l2_records.py`). `screening.csv`, `screening_golden.csv`, and
-`screening_protocol.md` are committed to the analysis repository so the
-include/exclude judgments are auditable (the GPT reproducibility ask).
+(saved by `fetch_l2_records.py`). `screening.csv`, `screening_golden.csv`,
+`screening_rulings.csv`, `screening_protocol.md` and `screening_coder_prompt.md`
+are committed to the analysis repository so the include/exclude judgments are
+auditable (the GPT reproducibility ask).
+
+**Known limit of the published `reason` column.** Where both coders exclude a
+record but write different codes, `adjudicate()` records coder 1's, because it
+reads `reason_c1 or reason_c2`; no rule in this protocol selects between them.
+That applies to **1,999 of the 12,263 rows the two coders agreed on before the
+Route D batch (16.3%)**, and the largest classes are pairs where both codes are
+literally true of the record (`no-thermal`/`name-only`, `name-only`/`animal`,
+`livestock-heat`/`animal`). It does not touch any include/exclude decision, κ,
+or L2′ — only the exclusion breakdown. Unlike Axis A, whose §9.4 already fixed
+an order the codes could be resolved in, §2 states no order, so settling this
+would mean writing a new rule rather than applying an existing one. It is
+recorded here rather than resolved.
