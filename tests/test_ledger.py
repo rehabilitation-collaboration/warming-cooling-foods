@@ -99,6 +99,66 @@ class TestValidateCodes:
         with pytest.raises(ValueError, match="direction"):
             lg.reconcile(c1, c1)
 
+
+class TestReasonOrder:
+    """§9.4's application order settles which code an agreed exclusion carries.
+
+    Before this, the ledger took the first coder's code whenever the two
+    differed — 1,964 of 17,830 agreed exclusions on the finished corpus. Nothing
+    in §9.4 sanctions preferring a coder, and which coder reads a rule literally
+    varies by source, so the bias had no fixed direction to correct for.
+    """
+
+    def test_reason_codes_are_in_section_9_4_application_order(self):
+        # The tuple is both the vocabulary and the order (§9.4). If a code is
+        # added or moved, this is the test that says the protocol text and the
+        # code have to be changed together.
+        assert lg.REASON_CODES == (
+            "navigation",
+            "fragment",
+            "not-verbatim",
+            "not-food",
+            "no-direction",
+            "serving-temperature",
+            "duplicate",
+        )
+
+    def test_the_earlier_code_in_the_order_is_recorded(self):
+        # navigation (1st) beats not-food (4th): §1 puts a region outside the
+        # frame regardless of what the span names.
+        assert lg._first_code("not-food", "navigation") == "navigation"
+        assert lg._first_code("navigation", "not-food") == "navigation"
+
+    def test_it_does_not_prefer_the_first_coder(self):
+        # The regression the rewrite fixes: with `reason_c1 or reason_c2` both
+        # of these returned the c1 value, so the published code depended on who
+        # was assigned the batch.
+        assert lg._first_code("not-food", "fragment") == "fragment"
+        assert lg._first_code("duplicate", "no-direction") == "no-direction"
+
+    def test_one_code_or_two_identical_ones_are_unchanged(self):
+        assert lg._first_code("fragment", "fragment") == "fragment"
+        assert lg._first_code("", "not-food") == "not-food"
+        assert lg._first_code("navigation", "") == "navigation"
+        assert lg._first_code("", "") == ""
+
+    def test_an_unrankable_flag_falls_back_rather_than_raising(self):
+        # `uncertain` is not one of §9.4's codes; a row carrying it goes to the
+        # author via _needs_ruling anyway, so this only supplies the value a
+        # ruling may override.
+        assert lg._first_code(lg.UNCERTAIN, "fragment") == "fragment"
+        assert lg._first_code(lg.UNCERTAIN, lg.UNCERTAIN) == lg.UNCERTAIN
+
+    def test_ordering_a_split_reason_moves_no_decision(self):
+        # Both coders exclude; only the name differs. The decision, and so κ and
+        # every Axis A count, must be untouched.
+        c1 = [_row(candidate="しかし", label="exclude", reason="not-food")]
+        c2 = [_row(candidate="しかし", label="exclude", reason="fragment")]
+        out = lg.adjudicate(lg.reconcile(c1, c2))
+        assert out["final_label"].tolist() == ["exclude"]
+        assert out["reason"].tolist() == ["fragment"]
+        assert not out["adjudicated"].any()
+
     def test_uncertain_is_allowed_as_a_reason_without_being_an_exclusion_code(self):
         # §9.6: a span the coder cannot judge from the source goes to the
         # author. It is a routing flag, not a §9.4 exclusion basis.

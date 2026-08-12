@@ -42,13 +42,18 @@ LABELS = (INCLUDE, EXCLUDE)
 
 # coding_protocol.md §9.4. Every code is grounded in a rule or an adjudication
 # the protocol already records; none was introduced for the ledger alone.
+#
+# The sequence is §9.4's own application order and is load-bearing, not
+# cosmetic: "Coding the first code that fits, in the order below, settles which
+# one is recorded." It is kept as one tuple rather than a set plus a separate
+# ordering so the two cannot drift apart.
 REASON_CODES = (
-    "serving-temperature",
-    "no-direction",
-    "not-verbatim",
-    "not-food",
     "navigation",
     "fragment",
+    "not-verbatim",
+    "not-food",
+    "no-direction",
+    "serving-temperature",
     "duplicate",
 )
 
@@ -272,6 +277,34 @@ def _needs_ruling(row) -> bool:
     return False
 
 
+def _first_code(*reasons: str) -> str:
+    """§9.4's application order, applied to the codes the two coders reached.
+
+    Two coders can agree a span is excluded and still name it differently — both
+    codes being literally true of the span is the case §9.4's order was written
+    for, so the order settles these rows too: the code recorded is the first one
+    either coder reached.
+
+    Taking the first coder's word instead (the behaviour this replaces) made the
+    published ``reason`` column a property of who was assigned the batch. It is
+    not a harmless default: which coder reads a rule literally and which rescues
+    an attribution varies by source and by batch, so the bias has no fixed
+    direction to correct for. Ordering moves the code away from each coder on a
+    different set of rows and prefers neither.
+
+    Codes outside §9.4's list (``uncertain``) cannot be ranked; a row carrying
+    one goes to the author via :func:`_needs_ruling` regardless, so the fallback
+    here only supplies the value a ruling may override.
+    """
+    present = [r for r in reasons if r]
+    if not present:
+        return ""
+    ranked = [r for r in present if r in REASON_CODES]
+    if not ranked:
+        return present[0]
+    return min(ranked, key=REASON_CODES.index)
+
+
 def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame:
     """Resolve every candidate to a ``final_label``, adding an ``adjudicated`` flag.
 
@@ -292,7 +325,7 @@ def adjudicate(recon: pd.DataFrame, rulings: dict | None = None) -> pd.DataFrame
     coded: dict[str, list[str]] = {f: [] for f in CODED_FIELDS}
     for _, r in recon.iterrows():
         key = (r["source_id"], r["candidate"])
-        coder_reason = r["reason_c1"] or r["reason_c2"]
+        coder_reason = _first_code(r["reason_c1"], r["reason_c2"])
         if _needs_ruling(r) or key in rulings:
             if key not in rulings:
                 raise ValueError(

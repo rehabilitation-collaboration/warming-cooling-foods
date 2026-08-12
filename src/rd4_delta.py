@@ -201,6 +201,27 @@ def reason_sweep() -> pd.DataFrame:
           f"{len(mism):,} 行 ({len(mism) / len(exc):.1%})")
     for pair, n in mism["pair"].value_counts().head(5).items():
         print(f"    {pair:34s} {n:5d}")
+
+    # How the ledger settled them. The coders' raw codes still differ — the
+    # sweep does not rewrite their files — so the count above is unchanged by
+    # RD-4(e) and cannot show it is done. This is what shows it.
+    led = pd.read_csv(LEDGER, dtype=str).fillna("")
+    j = mism.merge(led[["source_id", "candidate", "reason", "adjudicated"]],
+                   on=["source_id", "candidate"], how="left")
+    ruled = j["adjudicated"].str.lower() == "true"
+    ordered = ~ruled
+    unsettled = int((~ruled & (j["reason"] != j["reason_c1"])
+                     & (j["reason"] != j["reason_c2"])).sum())
+    from .ledger import REASON_CODES
+    rank = {c: i for i, c in enumerate(REASON_CODES)}
+    off_order = int(sum(
+        rank.get(r.reason, 99) != min(rank.get(r.reason_c1, 99), rank.get(r.reason_c2, 99))
+        for r in j[ordered].itertuples()))
+    print(f"    → 台帳での解決: §9.4 の順序 {int(ordered.sum()):,} 行 / "
+          f"著者裁定 {int(ruled.sum())} 行 / 未解決 {unsettled} 行")
+    print(f"      （順序を外れた行 {off_order} / c1 側に落ちた "
+          f"{int((j.reason == j.reason_c1).sum()):,} ・ c2 側 "
+          f"{int((j.reason == j.reason_c2).sum()):,}）")
     return mism
 
 

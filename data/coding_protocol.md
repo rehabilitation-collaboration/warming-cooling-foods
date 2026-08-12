@@ -360,18 +360,51 @@ food already coded). Coding the first code that fits, in the order below,
 settles which one is recorded. The order is not a new judgment — it follows from
 the definitions above and from what each code's basis already covers:
 
-1. **`navigation`** — is the span in a region the frame excludes: page
-   apparatus, a related-article link, a tag, a ranking, an author blurb, or a
-   work the section cites? §1 puts these outside the frame regardless of what
-   they contain, so the question comes before any question about the span's
-   shape. Everything the extractor emits from a 参考： citation block is
-   `navigation`, whole line or fragment of one, because the block is a list of
-   other authors' claims.
+1. **`navigation`** — is the span in a region the frame excludes? §1 makes the
+   frame each source's own per-food warm/cool attributions, so a region falls
+   outside it when the text there is not this source speaking about a food:
+   the page's apparatus and chrome, another author's claim, or a pointer to
+   text located elsewhere. The instances met so far are a related-article link,
+   a tag, a ranking, an author blurb, a 参考： citation block, an in-page table
+   of contents, a footnote or fine-print block, a qualification or
+   certification list, a product card, a disclaimer, a signature or date line,
+   and the site's own promotional block. **That list is worked examples of the
+   test above, not the test itself** — a region answering the test is
+   `navigation` whether or not it is named here. This was measured: coding the
+   corpus against the six-item list this rule first carried produced six
+   further kinds of apparatus that the list did not name, so a closed list is
+   not available for this code. §1 puts such regions outside the frame
+   regardless of what they contain, so the question comes before any question
+   about the span's shape, and everything the extractor emits from one is
+   `navigation`, whole line or fragment of one.
+
+   **A span emitted from more than one line.** §9.2 emits each candidate once,
+   carrying every line it occurs on, so one span can sit in an excluded region
+   on one line and in the body on another. Rule 1 fires only where **every**
+   occurrence is in an excluded region; otherwise the span falls through to
+   rules 2-7 and is judged on its body occurrence. §1 excludes regions, not
+   strings: a food this source attributes in its body does not leave the ledger
+   because the same word also appears in its tag cloud. Four independent coder
+   derivations across jsfca, yomeishu and kracie reached this rule from the
+   text above before it was written down; the alternative they had to choose
+   between — letting the first emitted line decide — makes the code a property
+   of extraction order rather than of the frame.
 2. **`fragment`** — is the span a form the **source does not present as an
    item**? This is the table's wording above, and it is the whole test. A span
    is an item where the source itself sets it off — a list entry, a table cell,
    a heading, or a food名 standing on its own in a sentence. It is *not* an item
-   when the extractor has cut into or across the source's own units:
+   when the extractor has cut into or across the source's own units.
+
+   **The test is about the cut, not about what the cut produced.** A string the
+   extractor lifted out of running prose is residue whatever it happens to name
+   — a noun, a conjunction (`しかし`, `一方`), a pronoun (`これら`), an adjectival
+   stem (`一時的`, `大切`), a numeral (`1つ`), or a single character (`熱`, `逆`,
+   `冬`). None of these is a unit the source offered, so all of them are
+   `fragment`. Without this sentence such spans match none of the shapes below,
+   fall through to rule 4, and the published ledger asserts that しかし is not a
+   food — literally true, and plainly not what that code is for. The shapes
+   below are worked examples of the test; they are not a closed list of what
+   fails it.
 
    - a partial word or a cut mid-phrase: `し中華`, `育つ果物`, `変える働き`
    - a `wrapped` splice joining two lines: `かき氷サラダ`, `きゅうりトマト`
@@ -387,6 +420,29 @@ the definitions above and from what each code's basis already covers:
      A ledger row carries one `food_ja` (§9.7), and each of the foods is
      enumerated separately from the same line group.
 
+   **The cut can also join two units the source did present.** A wrapping table
+   row, the `wrapped` path, or a list marker can glue a span together out of
+   material that was set off: a row label and its first cell
+   (`野菜 ...... きゅうり`), a marker and its entry (`└小豆`), an entry and a
+   trailing 等 (`きゅうり等`), or a food and the clause predicated of it
+   (`納豆は温める`). The source did set the food off here; what the extractor did
+   was carry a neighbour along with it. Such a span is not `fragment`. It is the
+   row for the food it names, with §9.7's single `food_ja` naming the food and
+   the `quote` keeping the span as the source wrote it.
+
+   This limb and the joint-naming bullet above look alike, and what separates
+   them is whether the food survives anywhere else: `豚肉や根菜類` is dropped
+   because the source enumerates 豚肉 and 根菜類 separately from the same line
+   group, while `野菜 ...... きゅうり` is kept because a glued row is the only form
+   in which that source presents きゅうり at all — on yomeishu, six foods exist
+   in no other form. **A coder cannot settle that question.** §9.6 splits a
+   source into batches, so whether another batch enumerates the food cleanly is
+   not visible from inside one; coders record what they see and flag the span,
+   and the ledger settles it in adjudication, where the whole source is. Which
+   coder rescues and which applies the bullet literally was measured across the
+   corpus and is not a property of the coder — it tracks how badly the source's
+   own enumeration was broken.
+
    Nothing further can be judged about a span the source never offered as a
    unit, so this is asked before the questions about what it names.
 3. **`not-verbatim`** — is it a form a *coder* produced (a paraphrase or
@@ -401,18 +457,73 @@ the definitions above and from what each code's basis already covers:
    §2 makes the unit of coding a (food, source) pair, and a generic term
    identifies no food to pair with the source; coding one would mint a food
    named "ingredient".
+
+   **A product or brand name is `not-food` on the same ground.** Four of the
+   fifteen sources are company sites, and a brand names a product rather than a
+   food in §2's sense — coding `ベースフード` would mint a food called "BASE
+   FOOD". The hand coding this ledger replaces carried no brand row in any of
+   the 151 rows those four sites contributed, so this records an existing
+   practice rather than a new judgment.
+
+   **The generic-term limb reaches the bare term only.** 飲み物 names no food;
+   `冷たい飲み物` names no food either, but what the source is saying about it is
+   how it is served, and that is rule 6's question and the case §3 closes on.
+   A generic term carrying a serving-temperature modifier is therefore not
+   disposed of here — see rule 6.
 5. **`no-direction`** — is the food named without the source assigning it a
    direction? This precedes `duplicate` because `duplicate` is defined on
    (food, source, **direction**), and a span carrying no direction cannot meet
-   that condition.
+   that condition. It does **not** cover a span whose point is the temperature
+   the item is served at: the source has said something there, just not about
+   the food's nature, and rule 6 is where that is recorded. Reading this rule as
+   covering it is what made rule 6 unreachable from its own paradigm case.
 6. **`serving-temperature`** — is what the source describes the temperature the
-   item is served at rather than the nature attributed to it?
+   item is served at rather than the nature attributed to it? §3's closing
+   bullet and §8's round-2 kracie ruling make `冷たい飲み物` and 白湯/生姜湯 this
+   code's paradigm cases, so the order has to reach them, and two earlier rules
+   would otherwise take them first: rule 4 because 飲み物 is a generic term (see
+   rule 4, which excludes the modified form), and rule 5 because the source has
+   attributed no nature. **Rule 5 does not fire on a span whose temperature
+   modifier is the source's point** — the source has said something about the
+   item, just not about its nature, and that is precisely the distinction §3
+   draws in telling the coder not to conflate the two. Rules 1-3 still come
+   first: a temperature phrase the extractor cut out of a sentence is
+   `fragment`, because nothing can be judged about a form the source never
+   offered as a unit.
 7. **`duplicate`** — is this (food, source, direction) already recorded from
    another span **on the same line group**? Rules 2 and 4 remove most of what
    would once have been a duplicate, so this code is rare; it is kept because
    the granularities of one line can still both be items the source presents.
 
 A span that survives all seven is an `include`.
+
+**When the two coders record different codes.** §9.6 puts two coders on every
+candidate, and they can agree on the decision while differing on which code
+names it. They do so often: measured on the completed corpus before this sweep,
+1,964 of the 17,830 agreed exclusions (11.0%) carried two different codes
+(`python3 -m src.rd4_delta` prints the current figure). That disagreement is the
+situation this order was written for — both codes are literally true of the span
+— so the order settles those rows as well: **the code recorded is the first one,
+in the order above, that either coder reached.**
+
+Neither coder is preferred over the other. Preferring one would make the
+published `reason` column a property of which coder was assigned the batch
+rather than of the span, and the corpus shows why that is not a safe shortcut:
+which coder reads a rule literally and which rescues an attribution is not
+stable within a coder, varying by source and even by batch. The order settles
+1,952 of the 1,964 rows, moving the recorded code away from c1 on 726 of them
+and away from c2 on 1,226 — it favours neither, which is what a uniform ruling
+means. The remaining 12 are author rulings, filed where the order was itself
+the thing in doubt: rule 6's paradigm cases, which every earlier rule could
+also claim, and two brand names covered by rule 4.
+`python3 -m src.rd4_delta` prints all of these figures, and they move whenever
+a ruling is filed, so read them there rather than from this paragraph.
+
+This settles only which name an exclusion carries. It moves no candidate between
+`include` and `exclude`, so κ (§9.6, computed on the decision) and every Axis A
+count are unchanged by it. Where the order is itself the thing in doubt — as it
+was for rule 6 above — the row goes to author adjudication instead of to
+whichever code happens to sort first.
 
 **Why this order was changed.** Three rounds of the kawashimaya canary measured
 it. Round 1 had no order at all and the two coders agreed on *why* only 46.2% of
