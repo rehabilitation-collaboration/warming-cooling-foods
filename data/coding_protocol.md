@@ -608,3 +608,75 @@ exclusions are auditable in the same way Axis B's are.
 maintained beside it, so there is one record of the coding rather than two that
 can disagree. The migration is verified to be lossless against the frozen 649-row
 file, and any difference is a Route D judgment that is itself in the ledger.
+
+## 10. Human audit of the ledger (specified 2026-08-13)
+
+Every judgment in §9 was made by a language model, and §8's agreement statistic
+pairs two capability tiers of one vendor's line, so it bounds consistency within
+that lineage rather than establishing accuracy. That is a general weakness; it
+becomes a specific one here because the headline result is a *non-finding*. If
+`n_sources` carries measurement error, the error attenuates the coverage
+association towards zero, which is the direction the paper already reports. No
+statistic computed from the coders can answer that. A human reading the sources
+can, and this section fixes what that reading is before it happens.
+
+The audit is specified, sampled and scored by `src/human_audit.py`; the seed is
+**20260813** and is published, so the sample cannot have been chosen after seeing
+which rows would look good.
+
+### 10.1 Precision — is what we assert there?
+
+A simple random sample of **60 of the 497 Tier-1 claim rows** is read back
+against the live source page. Simple rather than stratified: the quantity being
+estimated is a proportion over all published claims, and stratifying would make
+the sample easier to defend on balance and harder to defend on selection.
+
+Each row takes one verdict, and the five are fixed here rather than invented
+while reading:
+
+| verdict | meaning |
+|---|---|
+| `supported` | the source gives this food this direction |
+| `wrong-direction` | the food is attributed, the direction is not the one recorded |
+| `not-in-source` | the source does not attribute this food at all |
+| `wrong-food` | the span was read as the wrong food |
+| `unlocatable` | the page has changed since the freeze and the claim cannot be checked |
+
+`unlocatable` leaves the denominator: a page edited after 2026-08-03 is a fact
+about the web, not about the coding. The other four stay in it, including
+`wrong-direction`, which is a coding error even though the food is real.
+
+Sheets: `data/human_audit_sample.csv` (the 60 rows, with source URL and the
+recorded quote) and `data/human_audit_results.csv` (one verdict and note per row).
+
+### 10.2 Completeness — is what is there asserted?
+
+**Two of the nine Tier-1 sources are read end to end**, listing every food the
+source gives a direction *without consulting the ledger*, and the list is then
+diffed against the ledger's rows for that source. This is the half that answers
+the review's objection: a missed claim lowers that food's `n_sources`, compresses
+the predictor's spread, and pulls the estimate towards null, whereas a spurious
+claim mostly adds noise.
+
+The two are **the longest source by extracted body text, plus one drawn at
+random from the remaining eight** — `basefood` (10,615 characters) and
+`macaroni` (4,417). The longest is where an omission is most likely, since it
+offers the most text to miss something in; the random draw keeps the pair from
+being only a worst case. Two random draws would be cleaner to describe but could
+leave the densest source unaudited by luck; the two longest would measure only
+the hard tail.
+
+Matching is on `food_ja` as the reader writes it, because that is what the source
+prints. A food the reader names that the ledger holds under a different Japanese
+surface form counts as **missed** until the author rules otherwise — the
+conservative direction for a completeness claim.
+
+Sheet: `data/human_audit_source_reads.csv`.
+
+### 10.3 What the result can and cannot support
+
+Sixty rows bound precision to roughly ±10 percentage points, and two sources of
+nine bound completeness for those two only. Neither is a census, and the audit is
+reported as what it is: a human check on a machine-built ledger, at a size that
+can detect a systematic failure rather than certify the absence of one. Whatever
+it finds is reported, including if it finds nothing.

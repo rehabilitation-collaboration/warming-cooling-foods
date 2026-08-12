@@ -1,0 +1,66 @@
+source_id,url,food_en,food_ja,direction,quote
+basefood,https://basefood.co.jp/magazine/column/46436/,chicken,鶏肉,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります
+basefood,https://basefood.co.jp/magazine/column/46436/,chili pepper,唐辛子,warm,発汗や一時的な体温上昇を促し
+basefood,https://basefood.co.jp/magazine/column/46436/,cocoa,ココア,warm,飲み物の選び方も、温活を進めるうえで大切なポイントです。温活向きの飲み物には、ほうじ茶や紅茶、ウーロン茶、ココア、生姜湯などがあります。
+basefood,https://basefood.co.jp/magazine/column/46436/,vegetables,野菜,warm,冬が旬の野菜は体を温める効果が期待できるものが多いため
+esse,https://esse-online.jp/articles/-/27271,banana,バナナ,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ
+esse,https://esse-online.jp/articles/-/27271,carrot,ニンジン,warm,ニンジン
+esse,https://esse-online.jp/articles/-/27271,kiwi,キウイ,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ
+esse,https://esse-online.jp/articles/-/27271,leafy greens,葉野菜,cool,葉野菜
+esse,https://esse-online.jp/articles/-/27271,octopus,タコ,warm,タコ
+esse,https://esse-online.jp/articles/-/27271,soy sauce,しょうゆ,warm,しょうゆ
+esse,https://esse-online.jp/articles/-/27271,udon,うどん,cool,うどん
+jsfca,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,barley,大麦,warm,穀物では、玄米や大麦が陽性食材としておすすめです。
+jsfca,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,meat dish,肉料理,warm,温かい陽性の肉料理には、冷たい陰性のサラダを添えると良いでしょう。
+jsfca,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,mozuku seaweed,もずく,cool,わかめやもずくは、味噌汁やサラダに加えることで栄養を摂取できます
+jsfca,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,oatmeal,オートミール,cool,また、穀物では、白米やオートミールが陰性で、これらを主食にすることでバランスを保てます。
+jsfca,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,pumpkin,かぼちゃ,warm,さつまいもやかぼちゃやナッツ類を取り入れ、体を温める食材を意識的に選ぶと良いでしょう。
+jsfca,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,seaweed,海藻,cool,海藻は陰性です。
+jsfca,https://www.asc-jp.com/diet/macrobiotic/macrobiotic-column09/,sweet potato,さつまいも,warm,さつまいもやかぼちゃやナッツ類を取り入れ、体を温める食材を意識的に選ぶと良いでしょう
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,atsuage,厚揚げ,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,chicken,鶏肉,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,fermented foods,発酵食品,warm,味噌や納豆などの発酵食品も温活におすすめの食材です。
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,lotus root,れんこん,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,miso,味噌,warm,納豆／味噌／醤油／漬物／キムチ
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,pineapple,パイナップル,cool,バナナ／パイナップル／マンゴー／スイカ／メロン
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,pork miso soup,豚汁,warm,"豚汁
+豚肉のたんぱく質と根菜類がたっぷり入った、栄養バランス抜群の一品です。
+味噌と生姜を加えると、体の芯から温まります。野菜もたくさん摂れるので、毎日の温活メニューに最適です。"
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,root vegetables and other winter vegetables,根菜類などの冬野菜,warm,厳しい環境で育った冬野菜は、体を温める代表的な食材です。
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,salmon,鮭,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ
+kawashimaya,https://kawashima-ya.jp/contents/?p=123030,soy sauce,醤油,warm,納豆／味噌／醤油／漬物／キムチ
+macaroni,https://macaro-ni.jp/82842,beer,ビール,cool,また、飲み物であるビールやコーヒー・緑茶も体を冷やします。
+macaroni,https://macaro-ni.jp/82842,chili pepper,唐辛子,warm,唐辛子やこしょうなどの香辛料は、血行を良くし体を温めてくれる作用がありますよ。
+macaroni,https://macaro-ni.jp/82842,mango,マンゴー,cool,マンゴーやバナナ・パイナップルなどの暑い環境で育つ南国の果物も、体を冷やすはたらきがあります。
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,aromatic vegetables and flavorings,薬味・香味野菜,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,cold-region fruits and nuts,寒冷地の果物・ナッツ,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,daikon,大根,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,fermented foods,発酵食品,warm,「色が濃い・辛い・発酵している」食材は体を温めやすいとされています。
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,green onion,ねぎ,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,kiwi,キウイ,cool,"❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）
+→ 温かい地域の果物は陰性食品に分類される。"
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,mango,マンゴー,cool,"❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）
+→ 温かい地域の果物は陰性食品に分類される。"
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,oily/blue-backed fish,青魚,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,pineapple,パイナップル,cool,"❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）
+→ 温かい地域の果物は陰性食品に分類される。"
+oitr,https://oitr.jp/media/womens-body-concerns/onkatsu-foods/,pumpkin,かぼちゃ,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。
+prezo,https://prezo.jp/column/6371,carrot,にんじん,warm,にんじん
+prezo,https://prezo.jp/column/6371,dried goods,乾物,warm,干物や乾物は体を温める特徴を持っていることがあります。
+prezo,https://prezo.jp/column/6371,flaxseed oil,あまに油,warm,あまに油
+prezo,https://prezo.jp/column/6371,grape,ぶどう,warm,ぶどう
+prezo,https://prezo.jp/column/6371,horse mackerel,あじ,warm,青魚（あじなど）
+prezo,https://prezo.jp/column/6371,kimchi,キムチ,warm,チーズやキムチも体を温める発酵食品のひとつです。
+prezo,https://prezo.jp/column/6371,pineapple,パイナップル,cool,体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です
+prezo,https://prezo.jp/column/6371,red-fleshed fish,赤身魚,warm,赤身魚（まぐろなど）
+prezo,https://prezo.jp/column/6371,root vegetables,根菜類,warm,根菜類や発酵食品は体を温めるものが多い
+prezo,https://prezo.jp/column/6371,soybean,大豆,neutral,大豆には体を温める・冷やす作用はありませんが、
+yomeishu,https://www.yomeishu.co.jp/health/4264/,barley,大麦,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど
+yomeishu,https://www.yomeishu.co.jp/health/4264/,bitter melon,ゴーヤ,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など
+yomeishu,https://www.yomeishu.co.jp/health/4264/,eggplant,なす,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など
+yomeishu,https://www.yomeishu.co.jp/health/4264/,konjac,こんにゃく,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど
+yomeishu,https://www.yomeishu.co.jp/health/4264/,meat,肉,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。
+yomeishu,https://www.yomeishu.co.jp/health/4264/,oyster sauce,オイスターソース,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど
+yomeishu,https://www.yomeishu.co.jp/health/4264/,persimmon,柿,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど
+yomeishu,https://www.yomeishu.co.jp/health/4264/,spinach,ほうれん草,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など
+yomeishu,https://www.yomeishu.co.jp/health/4264/,tomato,トマト,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など
