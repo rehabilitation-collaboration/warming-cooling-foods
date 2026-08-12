@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "9"
+  },
+  "_query": "\"rice syrup\"[tiab] AND humans[mh]"
+}

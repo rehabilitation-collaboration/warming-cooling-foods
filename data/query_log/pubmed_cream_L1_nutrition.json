@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "3212"
+  },
+  "_query": "cream[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

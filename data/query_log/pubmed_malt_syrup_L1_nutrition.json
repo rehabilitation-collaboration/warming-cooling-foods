@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "3"
+  },
+  "_query": "\"malt syrup\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

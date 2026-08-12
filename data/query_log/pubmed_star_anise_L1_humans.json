@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "82"
+  },
+  "_query": "(\"star anise\"[tiab] OR \"Illicium verum\"[tiab]) AND humans[mh]"
+}

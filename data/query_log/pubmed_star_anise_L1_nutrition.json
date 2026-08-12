@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "120"
+  },
+  "_query": "(\"star anise\"[tiab] OR \"Illicium verum\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}

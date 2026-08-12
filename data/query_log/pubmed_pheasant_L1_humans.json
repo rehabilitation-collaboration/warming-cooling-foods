@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "92"
+  },
+  "_query": "pheasant[tiab] AND humans[mh]"
+}

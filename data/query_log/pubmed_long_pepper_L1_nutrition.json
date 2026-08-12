@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "22"
+  },
+  "_query": "\"long pepper\"[tiab] AND \"diet, food, and nutrition\"[mh]"
+}

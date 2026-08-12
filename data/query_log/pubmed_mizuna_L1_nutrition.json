@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "27"
+  },
+  "_query": "(mizuna[tiab] OR \"potherb mustard\"[tiab]) AND \"diet, food, and nutrition\"[mh]"
+}
