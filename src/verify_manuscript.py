@@ -26,10 +26,12 @@ from contextlib import redirect_stdout
 
 import pandas as pd
 
-from . import verify_stats
+from . import manuscript_tables, verify_stats
+from .analysis import _read_counts, prepare_scatter_data
 from .build_screening import RULINGS_CSV, exclusion_breakdown
 from .claim_mapping import aggregate_axis_a, load_claims, load_sources
 from .definitions import PROJECT_ROOT, PUBMED_COUNTS_CSV, TIER_ORG
+from .gap_models import prepare_model_frame
 from .screening import SCREENING_CSV, cohen_kappa
 
 MANUSCRIPT = PROJECT_ROOT / "manuscript.md"
@@ -39,11 +41,28 @@ NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
 # Tokens that look like identifiers rather than measurements. These are still
 # reported — the flag is a reading aid, not a filter.
 YEAR = re.compile(r"^(19|20)\d{2}$")
-DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
-IDENTIFIER_CONTEXT = re.compile(
-    r"PMID|doi:|https?://|ORCID|Claude|Python|pandas|scipy|numpy|statsmodels"
-    r"|matplotlib|weasyprint|commit|CFR|45 CFR"
+
+# Spans whose digits name something rather than measure it. Matched as spans,
+# not as a line-wide keyword test: the line-wide version let one word disarm a
+# whole line. "The analysis plan commits to reporting" matched `commit` and
+# demoted all 61 numbers in Table 3's footnote; "Claude Sonnet 4.6" did the
+# same to the screening-reliability paragraph, which carries κ and the
+# adjudication counts; and `Python 3.14.3` hid the unit-test count in two
+# places. Every one of those lines held stale values.
+IDENTIFIER_SPAN = re.compile(
+    r"\d{4}-\d{2}-\d{2}"                                    # access date
+    r"|PMID[:\s]*\d+"
+    r"|doi:\S+|https?://\S+"
+    r"|ORCID[^\d]{0,4}[\d-]+X?"
+    r"|Claude [A-Za-z]+ [\d.]+"                             # coder model
+    r"|(?:Python|pandas|scipy|numpy|statsmodels|matplotlib|weasyprint) [\d.]+"
+    r"|45 CFR [\d.()a-z]+"
+    r"|\b(?=[0-9a-f]{7,40}\b)[0-9a-f]*[a-f][0-9a-f]*\b"     # commit anchor
 )
+
+# Sections whose numbers belong to other people's papers — page ranges, volume
+# numbers, the sample size of a cited trial. Nothing here is ours to recompute.
+CITATION_SECTIONS = {"References"}
 
 
 def _strip(token: str) -> str:
@@ -90,32 +109,14 @@ def counts_reference(counts: pd.DataFrame) -> set[str]:
     return values
 
 
-def pipeline_values() -> set[str]:
-    """Everything the pipeline can currently vouch for, as printable strings.
+def pipeline_inputs() -> dict:
+    """The frames both reports read, loaded once so they cannot disagree.
 
-    Three sources, and each is the published one for its quantities: the analysis
-    statistics as `verify_stats` prints them, the per-food counts the tables are
-    built from, and the screening ledger's own tallies. Axis A composition is
-    recomputed here because `verify_stats` prints the frame size but not the
-    coding totals that Table 1's first rows report — the gap that let those rows
-    go stale unnoticed.
+    The cell checks need the same claims, model frame and screening ledger the
+    token walk builds its value set from. Loading them separately would let one
+    report pass on a value the other calls stale.
     """
-    buffer = io.StringIO()
-    with redirect_stdout(buffer):
-        verify_stats.main()
-    values: set[str] = set()
-    for token in _tokens(buffer.getvalue()):
-        values |= _renderings(token)
-
-    values |= counts_reference(pd.read_csv(PUBMED_COUNTS_CSV))
-
-    claims, sources = load_claims(), load_sources()
-    axis_a = aggregate_axis_a(claims, sources, max_tier=TIER_ORG)
-    for value in (len(claims), claims["food_en"].nunique(), len(axis_a)):
-        values |= _renderings(str(value))
-    for direction, n in axis_a["direction"].value_counts().items():
-        values |= _renderings(str(n))
-
+    claims, sources, counts = load_claims(), load_sources(), _read_counts()
     ledger = pd.read_csv(SCREENING_CSV)
     recon = pd.DataFrame(
         {
@@ -126,11 +127,51 @@ def pipeline_values() -> set[str]:
             ),
         }
     )
-    kappa = cohen_kappa(recon)
+    return {
+        "claims": claims,
+        "sources": sources,
+        "counts": counts,
+        "frame": prepare_model_frame(prepare_scatter_data(claims, sources, counts)),
+        "ledger": ledger,
+        "kappa": cohen_kappa(recon),
+    }
+
+
+def pipeline_values(inputs: dict) -> set[str]:
+    """Everything the pipeline can currently vouch for, as printable strings.
+
+    Three sources, and each is the published one for its quantities: the analysis
+    statistics as `verify_stats` prints them, the per-food counts the tables are
+    built from, and the screening ledger's own tallies. Axis A composition is
+    recomputed here because `verify_stats` prints the frame size but not the
+    coding totals that Table 1's first rows report — the gap that let those rows
+    go stale unnoticed.
+
+    Membership in this set is a weak test on its own: it says a number occurs
+    somewhere in the pipeline, not that it belongs where the manuscript prints
+    it. `manuscript_tables` supplies the positional test for every table cell.
+    """
+    buffer = io.StringIO()
+    with redirect_stdout(buffer):
+        verify_stats.main()
+    values: set[str] = set()
+    for token in _tokens(buffer.getvalue()):
+        values |= _renderings(token)
+
+    values |= counts_reference(pd.read_csv(PUBMED_COUNTS_CSV))
+
+    claims, sources = inputs["claims"], inputs["sources"]
+    axis_a = aggregate_axis_a(claims, sources, max_tier=TIER_ORG)
+    for value in (len(claims), claims["food_en"].nunique(), len(axis_a)):
+        values |= _renderings(str(value))
+    for direction, n in axis_a["direction"].value_counts().items():
+        values |= _renderings(str(n))
+
+    ledger, kappa = inputs["ledger"], inputs["kappa"]
     for value in (
         len(ledger),
         int(ledger["adjudicated"].sum()),
-        int((recon["status"] == "disagree").sum()),
+        int((ledger["coder1"] != ledger["coder2"]).sum()),
         len(pd.read_csv(RULINGS_CSV)),
         kappa["kappa"],
         kappa["po"],
@@ -156,19 +197,19 @@ def audit(manuscript_text: str, values: set[str]) -> pd.DataFrame:
             section = line.lstrip("# ").strip()
         # An access date is one identifier, not three numbers, so its month and
         # day are marked with it rather than surfacing as unexplained tokens.
-        dates = [m.span() for m in DATE.finditer(line)]
+        spans = [m.span() for m in IDENTIFIER_SPAN.finditer(line)]
         for match in NUMBER.finditer(line):
             plain = _strip(match.group())
-            in_date = any(start <= match.start() < end for start, end in dates)
+            in_identifier = any(s <= match.start() < e for s, e in spans)
             rows.append(
                 {
                     "line": line_no,
                     "section": section,
                     "token": match.group(),
                     "matched": plain in values,
-                    "looks_like_id": in_date
+                    "looks_like_id": in_identifier
                     or bool(YEAR.match(plain))
-                    or bool(IDENTIFIER_CONTEXT.search(line)),
+                    or section in CITATION_SECTIONS,
                     "context": line.strip()[:110],
                 }
             )
@@ -177,7 +218,8 @@ def audit(manuscript_text: str, values: set[str]) -> pd.DataFrame:
 
 def main() -> None:
     text = MANUSCRIPT.read_text(encoding="utf-8")
-    report = audit(text, pipeline_values())
+    inputs = pipeline_inputs()
+    report = audit(text, pipeline_values(inputs))
     unmatched = report[~report["matched"]]
 
     print("=" * 78)
@@ -202,6 +244,9 @@ def main() -> None:
     for section, group in identifiers.groupby("section", sort=False):
         print(f"    ## {section}: {len(group)} tokens on lines "
               f"{sorted(set(group['line']))[:12]}")
+
+    manuscript_tables.report(text, inputs["claims"], inputs["sources"], inputs["frame"],
+                             inputs["counts"], inputs["ledger"], inputs["kappa"])
 
 
 if __name__ == "__main__":

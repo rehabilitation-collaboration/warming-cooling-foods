@@ -3,7 +3,13 @@
 import pandas as pd
 import pytest
 
-from src.verify_manuscript import _renderings, audit, counts_reference, pipeline_values
+from src.verify_manuscript import (
+    _renderings,
+    audit,
+    counts_reference,
+    pipeline_inputs,
+    pipeline_values,
+)
 
 
 class TestRenderings:
@@ -44,12 +50,30 @@ class TestAudit:
         assert report["section"].iloc[0] == "Table 3. Primary statistics"
 
 
+class TestIdentifierSpans:
+    def test_one_identifier_word_does_not_demote_the_whole_line(self):
+        # "the analysis plan commits to reporting" matched the bare word
+        # `commit` and marked all 61 numbers in Table 3's footnote as
+        # identifiers — every one of which was stale.
+        report = audit("the plan commits to reporting OR 1.070 at each level\n", set())
+        assert not report["looks_like_id"].any()
+
+    def test_a_model_version_is_an_identifier_and_its_neighbours_are_not(self):
+        text = "Claude Sonnet 4.6 labelled 12,437 records at kappa 0.806\n"
+        report = audit(text, set())
+        assert list(report[report["looks_like_id"]]["token"]) == ["4.6"]
+
+    def test_reference_list_numbers_are_not_ours_to_recompute(self):
+        report = audit("## References\n1. Someone. Journal. 2021;12(3):45-67.\n", set())
+        assert report["looks_like_id"].all()
+
+
 class TestPipelineValues:
     def test_the_reference_set_covers_the_current_primary_estimate(self):
         # An end-to-end guard: if the reference set stops carrying what
         # verify_stats prints, every current number turns into a false positive
         # and the report becomes noise.
-        values = pipeline_values()
+        values = pipeline_values(pipeline_inputs())
         assert "1.062" in values
         assert "146" in values
 
