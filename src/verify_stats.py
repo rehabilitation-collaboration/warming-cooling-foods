@@ -41,6 +41,7 @@ from .gap_models import (
     predictor_vif,
     prepare_model_frame,
     presence_logit,
+    presence_logit_l1_forms,
     spearman_with_ci,
 )
 from .screening import SCREENING_CSV, l2_screened
@@ -347,6 +348,26 @@ def main() -> None:
             print(f"{'':4s}n_sources OR={t['or']:.3f} [{t['or_lo']:.3f}, {t['or_hi']:.3f}] "
                   f"p={t['p']:.4f}    log_l1 OR={v['or']:.3f} "
                   f"[{v['or_lo']:.3f}, {v['or_hi']:.3f}] p={v['p']:.4g}")
+    print(RULE)
+
+    # --- Functional form: the shape the L1 adjustment assumes ---------------
+    # The adjusted breadth estimate is a statement about what survives the L1
+    # adjustment, so the shape that adjustment assumes belongs to the claim and
+    # not to the diagnostics. The primary model's single linear term in
+    # log(L1 + 1) is refit here against a quadratic, tertile indicators and a
+    # natural cubic spline; see src.gap_models.presence_logit_l1_forms.
+    print("[Functional form] primary model refit with L1 entering three other ways")
+    base = presence_logit(frame)["terms"]["n_sources"]
+    print(f"  {'linear log(L1+1) [primary]':28s} OR={base['or']:.3f} "
+          f"[{base['or_lo']:.3f}, {base['or_hi']:.3f}] p={base['p']:.4f}   params=3")
+    for name, res in presence_logit_l1_forms(frame).items():
+        if not res.get("converged"):
+            print(f"  {name:28s} did not converge — {res.get('error', '')}")
+            continue
+        extra = f"   curvature p={res['curvature_p']:.4f}" if "curvature_p" in res else ""
+        print(f"  {name:28s} OR={res['or']:.3f} "
+              f"[{res['or_lo']:.3f}, {res['or_hi']:.3f}] p={res['p']:.4f}   "
+              f"params={res['n_params']}{extra}")
     print(RULE)
 
     # --- Influence: can one food carry the coverage estimate? ---------------

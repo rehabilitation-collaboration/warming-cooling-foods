@@ -207,6 +207,76 @@ def presence_logit_curve(
     return pd.DataFrame(rows)
 
 
+def presence_logit_l1_forms(frame: pd.DataFrame) -> dict:
+    """SENSITIVITY: refit the primary model under other forms of the L1 adjustment.
+
+    The paper's claim about belief breadth is a claim about what survives
+    adjustment for general literature volume, so the form that adjustment takes
+    belongs to the claim rather than to the diagnostics. A single linear term in
+    log(L1 + 1) assumes the log-odds of having any on-construct study move
+    linearly with it; if they do not, the linear term leaves residual confounding
+    and the adjusted breadth estimate reports the shape of a mis-specified
+    covariate rather than the effect of the covariate.
+
+    Three alternatives are refit, each holding ``n_sources`` as the term of
+    interest and changing only how L1 enters:
+
+    - ``quadratic`` — log(L1 + 1) and its square. The square's own p-value is
+      returned as ``curvature_p``: a null there is evidence for the linear form
+      rather than merely an absence of evidence against it.
+    - ``tertile``   — L1 as indicators for its tertiles, which assumes no shape
+      at all within a tertile and so cannot be led by one.
+    - ``spline``    — a natural (restricted) cubic spline on log(L1 + 1), df=3.
+
+    Each entry carries ``n_params`` because this frame has 50 events: a
+    specification that spends five parameters is being asked for more than the
+    data hold, and the reader should see the cost next to the estimate.
+    Non-convergence is reported, not worked around.
+    """
+    import statsmodels.api as sm
+    from patsy import dmatrix
+
+    y = frame["has_study"].reset_index(drop=True)
+    breadth = frame[["n_sources"]].astype(float).reset_index(drop=True)
+    log_l1 = frame["log_l1"].astype(float).reset_index(drop=True)
+
+    designs: dict[str, pd.DataFrame] = {}
+    designs["quadratic"] = breadth.assign(log_l1=log_l1, log_l1_sq=log_l1**2)
+
+    tertile = pd.qcut(frame["l1"].astype(float), 3, labels=["t1", "t2", "t3"])
+    indicators = pd.get_dummies(tertile, prefix="l1", drop_first=True).astype(float)
+    designs["tertile"] = pd.concat([breadth, indicators.reset_index(drop=True)], axis=1)
+
+    basis = dmatrix("cr(x, df=3) - 1", {"x": log_l1.to_numpy()}, return_type="dataframe")
+    basis.columns = [f"l1_spline{i + 1}" for i in range(basis.shape[1])]
+    designs["spline"] = pd.concat([breadth, basis.reset_index(drop=True)], axis=1)
+
+    out: dict[str, dict] = {}
+    for name, design in designs.items():
+        X = sm.add_constant(design, has_constant="add")
+        try:
+            fit = sm.Logit(y, X).fit(disp=0)
+        except Exception as exc:  # separation / singular design
+            out[name] = {"converged": False, "error": f"{type(exc).__name__}: {exc}"}
+            continue
+        ci = fit.conf_int()
+        entry = {
+            "converged": bool(fit.mle_retvals.get("converged", False)),
+            "n": int(len(frame)),
+            "n_with_study": int(y.sum()),
+            "n_params": int(X.shape[1]),
+            "pseudo_r2": float(fit.prsquared),
+            "or": float(np.exp(fit.params["n_sources"])),
+            "or_lo": float(np.exp(ci.loc["n_sources", 0])),
+            "or_hi": float(np.exp(ci.loc["n_sources", 1])),
+            "p": float(fit.pvalues["n_sources"]),
+        }
+        if name == "quadratic":
+            entry["curvature_p"] = float(fit.pvalues["log_l1_sq"])
+        out[name] = entry
+    return out
+
+
 def count_negbin(frame: pd.DataFrame) -> dict:
     """SENSITIVITY: NB regression of L2' with log(L1 + 1) as offset.
 

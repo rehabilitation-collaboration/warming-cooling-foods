@@ -226,3 +226,63 @@ def test_leave_one_out_keeps_a_failed_refit_instead_of_dropping_the_row():
     assert set(out.columns) >= {"omitted", "or", "p", "converged", "l1", "l2_screened"}
     assert not out["converged"].any()  # the fixture is separated on purpose
     assert out.loc[~out["converged"], ["or", "p"]].isna().all().all()
+
+
+# --- Functional form of the L1 adjustment ---------------------------------
+def _l1_frame(curvature: float, seed: int = 0, n: int = 600):
+    """A frame where L1 tracks breadth and breadth itself does nothing.
+
+    The true breadth odds ratio is 1 in both variants. Because the predictors
+    are correlated, any part of L1's shape the model fails to absorb has nowhere
+    to go but the breadth term — which is the failure mode the functional-form
+    refits exist to detect. ``curvature`` = 0 gives an outcome that really is
+    linear in log(L1 + 1); a negative value bends it.
+    """
+    rng = np.random.default_rng(seed)
+    n_sources = rng.integers(1, 10, n)
+    l1 = np.exp(n_sources * 0.6 + rng.normal(0, 0.4, n)).astype(int) + 1
+    log_l1 = np.log(l1 + 1.0)
+    eta = -1.0 + 1.2 * log_l1 + curvature * log_l1**2
+    outcome = (rng.random(n) < 1 / (1 + np.exp(-eta))).astype(int)
+    return gm.prepare_model_frame(_frame(n_sources, outcome, l1=l1))
+
+
+def test_l1_forms_fits_all_three_specifications_and_reports_their_cost():
+    out = gm.presence_logit_l1_forms(_l1_frame(curvature=-0.20))
+    assert set(out) == {"quadratic", "tertile", "spline"}
+    assert all(r["converged"] for r in out.values())
+    # The parameter count is what tells a reader what the events are buying.
+    assert out["quadratic"]["n_params"] == 4
+    assert out["tertile"]["n_params"] == 4
+    assert out["spline"]["n_params"] == 5
+
+
+def test_l1_forms_reports_curvature_only_where_a_curvature_term_exists():
+    out = gm.presence_logit_l1_forms(_l1_frame(curvature=-0.20))
+    assert "curvature_p" in out["quadratic"]
+    assert "curvature_p" not in out["tertile"]
+    assert "curvature_p" not in out["spline"]
+
+
+def test_l1_forms_move_the_breadth_estimate_when_the_outcome_bends():
+    # The check has to be able to move. If a mis-specified linear adjustment
+    # could never shift the breadth estimate, agreement between the forms would
+    # not be evidence of anything.
+    frame = _l1_frame(curvature=-0.20)
+    linear = gm.presence_logit(frame)["terms"]["n_sources"]["or"]
+    out = gm.presence_logit_l1_forms(frame)
+    assert out["quadratic"]["curvature_p"] < 0.01
+    assert abs(np.log(out["quadratic"]["or"] / linear)) > 0.05
+    assert abs(np.log(out["spline"]["or"] / linear)) > 0.05
+
+
+def test_l1_forms_leave_the_breadth_estimate_alone_when_it_does_not_bend():
+    # And it has to stay still otherwise, which is the case the paper is in:
+    # agreement across the forms only means something if disagreement was
+    # available and did not happen.
+    frame = _l1_frame(curvature=0.0)
+    linear = gm.presence_logit(frame)["terms"]["n_sources"]["or"]
+    out = gm.presence_logit_l1_forms(frame)
+    assert out["quadratic"]["curvature_p"] > 0.05
+    for spec in ("quadratic", "spline"):
+        assert abs(np.log(out[spec]["or"] / linear)) < 0.05
