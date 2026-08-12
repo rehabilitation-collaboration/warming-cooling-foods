@@ -31,8 +31,8 @@ import sys
 
 import pandas as pd
 
-from .definitions import CLAIMS_FROZEN_CSV, SOURCES_CSV
-from .extract_candidates import dedupe, extract_all
+from .definitions import CLAIMS_FROZEN_CSV, SOURCES_CSV, SOURCES_RAW_DIR
+from .extract_candidates import THERM, dedupe, extract_all
 
 RECALL_TARGET = 0.90  # PLAN branch condition: below this, extend the paths
 
@@ -83,6 +83,35 @@ def summarise(scored: pd.DataFrame, tier1: set[str]) -> pd.DataFrame:
     )
 
 
+def thermal_line_coverage(occurrences: pd.DataFrame,
+                          texts: dict[str, str]) -> pd.DataFrame:
+    """Body-text lines carrying thermal vocabulary, and whether each yielded a candidate.
+
+    The recall above is measured against the frozen coding, so it cannot speak
+    for a food no coder ever recorded — the failure the goal declaration names
+    first. This check reads no coded data at all. §3 forbids coding a direction
+    the source does not state, so a line that attributes one must carry thermal
+    vocabulary; a thermal line that produced no candidate is a line the ledger
+    could never have judged, whatever the frozen coding happens to contain.
+    """
+    emitted = occurrences.groupby("source_id")["line_no"].apply(set).to_dict()
+    rows = []
+    for source_id, text in texts.items():
+        seen = emitted.get(source_id, set())
+        for line_no, raw in enumerate(text.split("\n"), start=1):
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+            rows.append({
+                "source_id": source_id,
+                "line_no": line_no,
+                "thermal": bool(THERM.search(line)),
+                "has_candidate": line_no in seen,
+                "line": line,
+            })
+    return pd.DataFrame(rows)
+
+
 def main() -> None:
     claims = pd.read_csv(CLAIMS_FROZEN_CSV).fillna("")
     sources = pd.read_csv(SOURCES_CSV)
@@ -110,6 +139,18 @@ def main() -> None:
     print(f"\n=== misses ({len(misses)}) — foods a coder would never be shown ===")
     if not misses.empty:
         print(misses[["source_id", "food_ja", "food_en"]].to_string(index=False))
+
+    texts = {sid: (SOURCES_RAW_DIR / f"{sid}.txt").read_text(encoding="utf-8")
+             for sid in sources["source_id"]}
+    coverage = thermal_line_coverage(occurrences, texts)
+    thermal = coverage[coverage["thermal"]]
+    uncovered = thermal[~thermal["has_candidate"]]
+    print("\n=== thermal-vocabulary lines (measured without reading any coding) ===")
+    print(f"body-text lines {len(coverage)}   yielding a candidate "
+          f"{int(coverage['has_candidate'].sum())}   carrying thermal vocabulary "
+          f"{len(thermal)}   thermal with no candidate {len(uncovered)}")
+    if not uncovered.empty:
+        print(uncovered[["source_id", "line_no", "line"]].head(20).to_string(index=False))
 
     covered_recall = scored["covered"].mean()
     print(f"\nheadline covered-recall = {covered_recall:.4f} (target {RECALL_TARGET})")
