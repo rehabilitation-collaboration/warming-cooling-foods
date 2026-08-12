@@ -1,0 +1,50 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%92%E3%83%8F%E3%83%84&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - ヒハツ 1 json",
+  "description": "CiNii Research all - ヒハツ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%92%E3%83%8F%E3%83%84&count=1&format=json"
+  },
+  "dc:date": "2026-08-12T12:03:15.739+09:00",
+  "opensearch:totalResults": 876,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1570009751307872640",
+      "@type": "item",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1570009751307872640"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1570009751307872640.json"
+      },
+      "dc:creator": [
+        "フランツ ポェヒハッカー"
+      ],
+      "dc:publisher": "みすず書房",
+      "dc:type": "Article",
+      "prism:publicationName": "通訳学入門",
+      "prism:publicationDate": "2008",
+      "dc:identifier": [
+        {
+          "@type": "cir:NAID",
+          "@value": "10027152212"
+        }
+      ]
+    }
+  ],
+  "_query": "ヒハツ"
+}

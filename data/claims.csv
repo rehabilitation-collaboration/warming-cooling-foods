@@ -1,1030 +1,1030 @@
-food_en,food_ja,source_id,direction,quote,condition
+food_en,food_ja,source_id,direction,quote,condition,sublabel
 apple,りんご,attaka_navi,warm,"温める食材：
-りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",
+りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",,
 asari clam,アサリ,attaka_navi,cool,"冷やす食材：
-タコ、カニ、アサリ、牡蠣",
-banana,バナナ,attaka_navi,cool,— 体を強く冷やす（きゅうり、トマト、スイカ、バナナなど）,
-bean sprouts,もやし,attaka_navi,cool,白菜、大根、豆腐、もやし、水菜…。鍋の定番具材ですが、薬膳的にはすべて「涼性〜寒性」の食材です。,
+タコ、カニ、アサリ、牡蠣",,
+banana,バナナ,attaka_navi,cool,— 体を強く冷やす（きゅうり、トマト、スイカ、バナナなど）,,
+bean sprouts,もやし,attaka_navi,cool,白菜、大根、豆腐、もやし、水菜…。鍋の定番具材ですが、薬膳的にはすべて「涼性〜寒性」の食材です。,,
 beef,牛肉,attaka_navi,neutral,"どちらでもない：
-豚肉、牛肉、イカ、卵",
-burdock,ごぼう,attaka_navi,cool,ただし、根菜類でも大根やごぼうは薬膳では涼性に分類されるので注意が必要です。加熱して食べる分には冷えの心配は少ないですが、大根おろしのように生で食べると体を冷やしやすくなります。,
+豚肉、牛肉、イカ、卵",,
+burdock,ごぼう,attaka_navi,cool,ただし、根菜類でも大根やごぼうは薬膳では涼性に分類されるので注意が必要です。加熱して食べる分には冷えの心配は少ないですが、大根おろしのように生で食べると体を冷やしやすくなります。,,
 carrot,にんじん,attaka_navi,warm,"温める食材：
-生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",
+生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",,
 celery,セロリ,attaka_navi,cool,"冷やす食材：
-きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ",
+きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ",,
 cherry,さくらんぼ,attaka_navi,warm,"温める食材：
-りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",
+りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",,
 chestnut,栗,attaka_navi,warm,"温める食材：
-りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",
-chicken,鶏肉,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,
-chili pepper,唐辛子,attaka_navi,warm,— 体を強く温める（唐辛子、シナモン、山椒など）,
-chinese cabbage,白菜,attaka_navi,cool,— 体を穏やかに冷やす（大根、白菜、ほうれん草など）,
-cinnamon,シナモン,attaka_navi,warm,— 体を強く温める（唐辛子、シナモン、山椒など）,
+りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",,
+chicken,鶏肉,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,,
+chili pepper,唐辛子,attaka_navi,warm,— 体を強く温める（唐辛子、シナモン、山椒など）,,
+chinese cabbage,白菜,attaka_navi,cool,— 体を穏やかに冷やす（大根、白菜、ほうれん草など）,,
+cinnamon,シナモン,attaka_navi,warm,— 体を強く温める（唐辛子、シナモン、山椒など）,,
 corn,とうもろこし,attaka_navi,neutral,"どちらでもない：
-じゃがいも、さつまいも、長いも、とうもろこし、きのこ類",
+じゃがいも、さつまいも、長いも、とうもろこし、きのこ類",,
 crab,カニ,attaka_navi,cool,"冷やす食材：
-タコ、カニ、アサリ、牡蠣",
-cucumber,きゅうり,attaka_navi,cool,— 体を強く冷やす（きゅうり、トマト、スイカ、バナナなど）,
-daikon,大根,attaka_navi,cool,実は大根は薬膳では「体を冷やす食材」に分類されるんです,
-dried fruit,ドライフルーツ,attaka_navi,warm,ドライフルーツにすると温め寄りに変化します,
+タコ、カニ、アサリ、牡蠣",,
+cucumber,きゅうり,attaka_navi,cool,— 体を強く冷やす（きゅうり、トマト、スイカ、バナナなど）,,
+daikon,大根,attaka_navi,cool,実は大根は薬膳では「体を冷やす食材」に分類されるんです,,
+dried fruit,ドライフルーツ,attaka_navi,warm,ドライフルーツにすると温め寄りに変化します,,category
 dried persimmon,干し柿,attaka_navi,warm,"ドライフルーツにすると変わる：
-生の柿は寒性ですが、干し柿にすると温性に変化。水分が抜けることで性質が変わるんです。",干し柿
-egg,卵,attaka_navi,neutral,— 温めも冷やしもしない（米、大豆、じゃがいも、卵など）,
+生の柿は寒性ですが、干し柿にすると温性に変化。水分が抜けることで性質が変わるんです。",干し柿,
+egg,卵,attaka_navi,neutral,— 温めも冷やしもしない（米、大豆、じゃがいも、卵など）,,
 eggplant,なす,attaka_navi,cool,"冷やす食材：
-きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ",
-fermented food,発酵食品,attaka_navi,warm,発酵食品は、発酵過程で生まれる酵素が代謝を高め、体を温める作用があります。,
-fish,魚,attaka_navi,warm,酒粕（発酵食品）＋鮭（温性の魚）＋にんじん・かぶ（温性の根菜）を使った粕汁は、北陸や東北で昔から冬の定番とされてきた温活メニューです。,
-garlic,にんにく,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,
-garlic ajillo,にんにくたっぷりのアヒージョ,attaka_navi,warm,エビ（温性）やきのこ（平性）を加えた温活アヒージョは、パーティーメニューとしてもおしゃれです。,
-ginger,生姜,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,
-ginger takikomi rice,生姜炊き込みご飯,attaka_navi,warm,生姜を加熱することでショウガオールが生まれ、体の芯から温まります。,
+きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ",,
+fermented food,発酵食品,attaka_navi,warm,発酵食品は、発酵過程で生まれる酵素が代謝を高め、体を温める作用があります。,,category
+fish,魚,attaka_navi,warm,酒粕（発酵食品）＋鮭（温性の魚）＋にんじん・かぶ（温性の根菜）を使った粕汁は、北陸や東北で昔から冬の定番とされてきた温活メニューです。,,category
+garlic,にんにく,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,,
+garlic ajillo,にんにくたっぷりのアヒージョ,attaka_navi,warm,エビ（温性）やきのこ（平性）を加えた温活アヒージョは、パーティーメニューとしてもおしゃれです。,,dish
+ginger,生姜,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,,
+ginger takikomi rice,生姜炊き込みご飯,attaka_navi,warm,生姜を加熱することでショウガオールが生まれ、体の芯から温まります。,,dish
 grape,ぶどう,attaka_navi,warm,"温める食材：
-りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",
-green onion,ねぎ,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,
+りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",,
+green onion,ねぎ,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,,
 honey,はちみつ,attaka_navi,neutral,"どちらでもない：
-塩、はちみつ",
-kasujiru with salmon and root vegetables,鮭と根菜の粕汁,attaka_navi,warm,北陸や東北で昔から冬の定番とされてきた温活メニューです。,
+塩、はちみつ",,
+kasujiru with salmon and root vegetables,鮭と根菜の粕汁,attaka_navi,warm,北陸や東北で昔から冬の定番とされてきた温活メニューです。,,dish
 kimchi,キムチ,attaka_navi,warm,"温める食材：
-味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",
-kimchi hot pot,キムチ鍋,attaka_navi,warm,温活食材が勢ぞろいする最強の鍋です。,
-kimchi-based hot pot,キムチベース,attaka_navi,warm,味噌ベース、キムチベース、酒粕ベースの鍋は、発酵食品の温め効果がプラスされます。,
-lamb,羊肉,attaka_navi,warm,特に羊肉（ラム）は体を温める効果が非常に高い肉類です。,
+味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",,
+kimchi hot pot,キムチ鍋,attaka_navi,warm,温活食材が勢ぞろいする最強の鍋です。,,dish
+kimchi-based hot pot,キムチベース,attaka_navi,warm,味噌ベース、キムチベース、酒粕ベースの鍋は、発酵食品の温め効果がプラスされます。,,dish
+lamb,羊肉,attaka_navi,warm,特に羊肉（ラム）は体を温める効果が非常に高い肉類です。,,
 lettuce,レタス,attaka_navi,cool,"冷やす食材：
-きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ",
+きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ",,
 lotus root,れんこん,attaka_navi,warm,"温める食材：
-生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",
+生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",,
 mango,マンゴー,attaka_navi,cool,"冷やす食材：
-バナナ、パイナップル、マンゴー、梨、柿、スイカ",
+バナナ、パイナップル、マンゴー、梨、柿、スイカ",,
 mayonnaise,マヨネーズ,attaka_navi,cool,"冷やす食材：
-酢、マヨネーズ、白砂糖",
+酢、マヨネーズ、白砂糖",,
 miso,味噌,attaka_navi,warm,"温める食材：
-味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",
-miso soup with ginger,生姜たっぷりの味噌汁,attaka_navi,warm,毎朝の習慣として最も取り入れやすい温活メニューです。,
-miso-based hot pot,味噌ベース,attaka_navi,warm,味噌ベース、キムチベース、酒粕ベースの鍋は、発酵食品の温め効果がプラスされます。,
-mizuna,水菜,attaka_navi,cool,白菜、大根、豆腐、もやし、水菜…。鍋の定番具材ですが、薬膳的にはすべて「涼性〜寒性」の食材です。,
+味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",,
+miso soup with ginger,生姜たっぷりの味噌汁,attaka_navi,warm,毎朝の習慣として最も取り入れやすい温活メニューです。,,dish
+miso-based hot pot,味噌ベース,attaka_navi,warm,味噌ベース、キムチベース、酒粕ベースの鍋は、発酵食品の温め効果がプラスされます。,,dish
+mizuna,水菜,attaka_navi,cool,白菜、大根、豆腐、もやし、水菜…。鍋の定番具材ですが、薬膳的にはすべて「涼性〜寒性」の食材です。,,
 mushroom,きのこ類,attaka_navi,neutral,"どちらでもない：
-じゃがいも、さつまいも、長いも、とうもろこし、きのこ類",
+じゃがいも、さつまいも、長いも、とうもろこし、きのこ類",,category
 nagaimo,長いも,attaka_navi,neutral,"どちらでもない：
-じゃがいも、さつまいも、長いも、とうもろこし、きのこ類",
+じゃがいも、さつまいも、長いも、とうもろこし、きのこ類",,
 natto,納豆,attaka_navi,warm,"納豆
-（大豆を発酵） → 温性（体を温める）",
+（大豆を発酵） → 温性（体を温める）",,
 nira,にら,attaka_navi,warm,"温める食材：
-生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",
+生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",,
 octopus,タコ,attaka_navi,cool,"冷やす食材：
-タコ、カニ、アサリ、牡蠣",
+タコ、カニ、アサリ、牡蠣",,
 oyster,牡蠣,attaka_navi,cool,"冷やす食材：
-タコ、カニ、アサリ、牡蠣",
+タコ、カニ、アサリ、牡蠣",,
 peach,桃,attaka_navi,warm,"温める食材：
-りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",
+りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",,
 pear,梨,attaka_navi,cool,"冷やす食材：
-バナナ、パイナップル、マンゴー、梨、柿、スイカ",
+バナナ、パイナップル、マンゴー、梨、柿、スイカ",,
 perilla,しそ,attaka_navi,warm,"温める食材：
-生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",
+生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",,
 persimmon,柿,attaka_navi,cool,"冷やす食材：
-バナナ、パイナップル、マンゴー、梨、柿、スイカ",生
+バナナ、パイナップル、マンゴー、梨、柿、スイカ",生,
 pine nut,松の実,attaka_navi,warm,"温める食材：
-りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",
+りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",,
 pineapple,パイナップル,attaka_navi,cool,"冷やす食材：
-バナナ、パイナップル、マンゴー、梨、柿、スイカ",
+バナナ、パイナップル、マンゴー、梨、柿、スイカ",,
 pork,豚肉,attaka_navi,neutral,"どちらでもない：
-豚肉、牛肉、イカ、卵",
+豚肉、牛肉、イカ、卵",,
 pork liver,レバー,attaka_navi,warm,"温める食材：
-鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー",
-potato,じゃがいも,attaka_navi,neutral,— 温めも冷やしもしない（米、大豆、じゃがいも、卵など）,
+鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー",,
+potato,じゃがいも,attaka_navi,neutral,— 温めも冷やしもしない（米、大豆、じゃがいも、卵など）,,
 prune,プルーン,attaka_navi,warm,"温める食材：
-りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",
+りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",,
 pumpkin,かぼちゃ,attaka_navi,warm,"温める食材：
-生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",
-raw vegetables,生野菜,attaka_navi,cool,生野菜は体を冷やす食材が多く、しかも生のまま食べると冷えやすくなります。温活中はサラダよりも温野菜や蒸し野菜にするのがおすすめです。,
+生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",,
+raw vegetables,生野菜,attaka_navi,cool,生野菜は体を冷やす食材が多く、しかも生のまま食べると冷えやすくなります。温活中はサラダよりも温野菜や蒸し野菜にするのがおすすめです。,,category
 red meat and fish,赤身肉,attaka_navi,warm,"3. 暖色系の色をしているもの
-赤やオレンジ、黄色など暖色系の食材は体を温める傾向があります。にんじん、かぼちゃ、鮭、エビ、赤身肉などが該当します。",
-root vegetables,根菜,attaka_navi,warm,具材にはにんじんやかぶなどの温性の根菜を入れると、さらに効果的です。,
+赤やオレンジ、黄色など暖色系の食材は体を温める傾向があります。にんじん、かぼちゃ、鮭、エビ、赤身肉などが該当します。",,category
+root vegetables,根菜,attaka_navi,warm,具材にはにんじんやかぶなどの温性の根菜を入れると、さらに効果的です。,,category
 sake,日本酒,attaka_navi,warm,"温める食材：
-味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",
+味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",,
 sake lees,酒粕,attaka_navi,warm,"温める食材：
-味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",
-sake lees-based hot pot,酒粕ベース,attaka_navi,warm,味噌ベース、キムチベース、酒粕ベースの鍋は、発酵食品の温め効果がプラスされます。,
+味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",,
+sake lees-based hot pot,酒粕ベース,attaka_navi,warm,味噌ベース、キムチベース、酒粕ベースの鍋は、発酵食品の温め効果がプラスされます。,,dish
 salmon,鮭,attaka_navi,warm,"温める食材：
-鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー",
+鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー",,
 salt,塩,attaka_navi,neutral,"どちらでもない：
-塩、はちみつ",
-sansho,山椒,attaka_navi,warm,— 体を強く温める（唐辛子、シナモン、山椒など）,
+塩、はちみつ",,
+sansho,山椒,attaka_navi,warm,— 体を強く温める（唐辛子、シナモン、山椒など）,,
 shaoxing wine,紹興酒,attaka_navi,warm,"温める食材：
-味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",
-shrimp,エビ,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,
-soy products,大豆製品,attaka_navi,warm,鶏肉、魚、卵、大豆製品などを積極的に摂ることで、「食べるだけで温まる体」を目指せます。,
+味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",,
+shrimp,エビ,attaka_navi,warm,— 体を穏やかに温める（生姜、にんにく、ねぎ、鶏肉、エビなど）,,
+soy products,大豆製品,attaka_navi,warm,鶏肉、魚、卵、大豆製品などを積極的に摂ることで、「食べるだけで温まる体」を目指せます。,,category
 soy sauce,醤油,attaka_navi,warm,"温める食材：
-味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",
-soybean,大豆,attaka_navi,neutral,— 温めも冷やしもしない（米、大豆、じゃがいも、卵など）,
-spinach,ほうれん草,attaka_navi,cool,— 体を穏やかに冷やす（大根、白菜、ほうれん草など）,
+味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒",,
+soybean,大豆,attaka_navi,neutral,— 温めも冷やしもしない（米、大豆、じゃがいも、卵など）,,
+spinach,ほうれん草,attaka_navi,cool,— 体を穏やかに冷やす（大根、白菜、ほうれん草など）,,
 squid,イカ,attaka_navi,neutral,"どちらでもない：
-豚肉、牛肉、イカ、卵",
+豚肉、牛肉、イカ、卵",,
 sweet potato,さつまいも,attaka_navi,neutral,"どちらでもない：
-じゃがいも、さつまいも、長いも、とうもろこし、きのこ類",
+じゃがいも、さつまいも、長いも、とうもろこし、きのこ類",,
 tofu,豆腐,attaka_navi,cool,"豆腐
-（大豆を加工） → 寒性（体を冷やす）",
-tomato,トマト,attaka_navi,cool,— 体を強く冷やす（きゅうり、トマト、スイカ、バナナなど）,
-tropical fruit,南国フルーツ,attaka_navi,cool,バナナ、パイナップル、マンゴーなどの南国フルーツは体を冷やす性質が強いです。,
+（大豆を加工） → 寒性（体を冷やす）",,
+tomato,トマト,attaka_navi,cool,— 体を強く冷やす（きゅうり、トマト、スイカ、バナナなど）,,
+tropical fruit,南国フルーツ,attaka_navi,cool,バナナ、パイナップル、マンゴーなどの南国フルーツは体を冷やす性質が強いです。,,category
 tuna,マグロ,attaka_navi,warm,"温める食材：
-鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー",
+鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー",,
 turnip,かぶ,attaka_navi,warm,"温める食材：
-生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",
+生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ",,
 vinegar,酢,attaka_navi,cool,"冷やす食材：
-酢、マヨネーズ、白砂糖",
+酢、マヨネーズ、白砂糖",,
 walnut,くるみ,attaka_navi,warm,"温める食材：
-りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",
-watermelon,スイカ,attaka_navi,cool,— 体を強く冷やす（きゅうり、トマト、スイカ、バナナなど）,
-white rice,米,attaka_navi,neutral,— 温めも冷やしもしない（米、大豆、じゃがいも、卵など）,
-white sugar,白砂糖,attaka_navi,cool,白砂糖は体を冷やす性質があるとされています。,
+りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実",,
+watermelon,スイカ,attaka_navi,cool,— 体を強く冷やす（きゅうり、トマト、スイカ、バナナなど）,,
+white rice,米,attaka_navi,neutral,— 温めも冷やしもしない（米、大豆、じゃがいも、卵など）,,
+white sugar,白砂糖,attaka_navi,cool,白砂糖は体を冷やす性質があるとされています。,,
 yellowtail,ブリ,attaka_navi,warm,"温める食材：
-鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー",
+鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー",,
 apple,リンゴ,basefood,warm,"リンゴやブドウ、プルーンなど、冬が旬のもの
-が体を冷やしにくく温活中にもおすすめです。",
-aromatics,薬味,basefood,warm,スパイスや薬味は温活と相性のよい食材です,
-banana,バナナ,basefood,cool,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,
-beef,牛肉,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,
+が体を冷やしにくく温活中にもおすすめです。",,
+aromatics,薬味,basefood,warm,スパイスや薬味は温活と相性のよい食材です,,category
+banana,バナナ,basefood,cool,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,,
+beef,牛肉,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,,
 black tea,紅茶,basefood,warm,"とくに紅茶やウーロン茶のような発酵茶は体を温めやすい性質
-があります。",
-bonito,カツオ,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,
-burdock,ゴボウ,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,
-carrot,ニンジン,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,
-chicken,鶏肉,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,
-chili pepper,唐辛子,basefood,warm,発汗や一時的な体温上昇を促し,
-cinnamon,シナモン,basefood,warm,日常的な温活をサポート,
-cocoa,ココア,basefood,warm,飲み物の選び方も、温活を進めるうえで大切なポイントです。温活向きの飲み物には、ほうじ茶や紅茶、ウーロン茶、ココア、生姜湯などがあります。,
-coffee,コーヒー,basefood,cool,温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため、常温や温かい状態で飲む、シナモンや生姜を加えるなどの工夫を取り入れることがおすすめです。,
-dried fruit,ドライフルーツ,basefood,warm,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,
-egg,卵,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,
-fermented foods,発酵食品,basefood,warm,発酵食品である味噌は体温維持に役立ち,
-fish,魚,basefood,warm,さらに、主食だけで済ませず、肉・魚・卵・大豆製品などのたんぱく質源を組みあわせることも大切です。,
-garlic,ニンニク,basefood,warm,スパイスや薬味は温活と相性のよい食材です,
-ginger,生姜,basefood,warm,体の深部から温まりやすくなる,
+があります。",,
+bonito,カツオ,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,,
+burdock,ゴボウ,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,,
+carrot,ニンジン,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,,
+chicken,鶏肉,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,,
+chili pepper,唐辛子,basefood,warm,発汗や一時的な体温上昇を促し,,
+cinnamon,シナモン,basefood,warm,日常的な温活をサポート,,
+cocoa,ココア,basefood,warm,飲み物の選び方も、温活を進めるうえで大切なポイントです。温活向きの飲み物には、ほうじ茶や紅茶、ウーロン茶、ココア、生姜湯などがあります。,,
+coffee,コーヒー,basefood,cool,温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため、常温や温かい状態で飲む、シナモンや生姜を加えるなどの工夫を取り入れることがおすすめです。,,
+dried fruit,ドライフルーツ,basefood,warm,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,,category
+egg,卵,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,,
+fermented foods,発酵食品,basefood,warm,発酵食品である味噌は体温維持に役立ち,,category
+fish,魚,basefood,warm,さらに、主食だけで済ませず、肉・魚・卵・大豆製品などのたんぱく質源を組みあわせることも大切です。,,category
+garlic,ニンニク,basefood,warm,スパイスや薬味は温活と相性のよい食材です,,
+ginger,生姜,basefood,warm,体の深部から温まりやすくなる,,
 grape,ブドウ,basefood,warm,"リンゴやブドウ、プルーンなど、冬が旬のもの
-が体を冷やしにくく温活中にもおすすめです。",
-green onion,ねぎ,basefood,warm,風味を楽しみながら温活効果も高められます,
-green tea,緑茶,basefood,cool,温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため、常温や温かい状態で飲む、シナモンや生姜を加えるなどの工夫を取り入れることがおすすめです。,
-grilled banana,焼きバナナ,basefood,warm,温活を意識する場合は、焼きバナナのように加熱して取り入れる方法もおすすめです。,
-hojicha,ほうじ茶,basefood,warm,飲み物の選び方も、温活を進めるうえで大切なポイントです。温活向きの飲み物には、ほうじ茶や紅茶、ウーロン茶、ココア、生姜湯などがあります。,
-kimchi,キムチ,basefood,warm,効率的に体を温める代表的な食べ物を紹介,
-lotus root,れんこん,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,
-mango,マンゴー,basefood,cool,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,
-meat,肉,basefood,warm,さらに、主食だけで済ませず、肉・魚・卵・大豆製品などのたんぱく質源を組みあわせることも大切です。,
-miso,味噌,basefood,warm,熟成期間の長い赤味噌はとくに温活に適している,
-miso soup,味噌汁,basefood,warm,味噌汁やスパイスの効いた料理がおすすめ,
-mugicha,麦茶,basefood,cool,温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため、常温や温かい状態で飲む、シナモンや生姜を加えるなどの工夫を取り入れることがおすすめです。,
-natto,納豆,basefood,warm,効率的に体を温める代表的な食べ物を紹介,
+が体を冷やしにくく温活中にもおすすめです。",,
+green onion,ねぎ,basefood,warm,風味を楽しみながら温活効果も高められます,,
+green tea,緑茶,basefood,cool,温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため、常温や温かい状態で飲む、シナモンや生姜を加えるなどの工夫を取り入れることがおすすめです。,,
+grilled banana,焼きバナナ,basefood,warm,温活を意識する場合は、焼きバナナのように加熱して取り入れる方法もおすすめです。,,dish
+hojicha,ほうじ茶,basefood,warm,飲み物の選び方も、温活を進めるうえで大切なポイントです。温活向きの飲み物には、ほうじ茶や紅茶、ウーロン茶、ココア、生姜湯などがあります。,,
+kimchi,キムチ,basefood,warm,効率的に体を温める代表的な食べ物を紹介,,
+lotus root,れんこん,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,,
+mango,マンゴー,basefood,cool,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,,
+meat,肉,basefood,warm,さらに、主食だけで済ませず、肉・魚・卵・大豆製品などのたんぱく質源を組みあわせることも大切です。,,category
+miso,味噌,basefood,warm,熟成期間の長い赤味噌はとくに温活に適している,,
+miso soup,味噌汁,basefood,warm,味噌汁やスパイスの効いた料理がおすすめ,,dish
+mugicha,麦茶,basefood,cool,温活で控えた方がよい飲み物は、コーヒーや緑茶、麦茶などです。体を冷やしやすい側面があるため、常温や温かい状態で飲む、シナモンや生姜を加えるなどの工夫を取り入れることがおすすめです。,,
+natto,納豆,basefood,warm,効率的に体を温める代表的な食べ物を紹介,,
 oolong tea,ウーロン茶,basefood,warm,"とくに紅茶やウーロン茶のような発酵茶は体を温めやすい性質
-があります。",
-pineapple,パイナップル,basefood,cool,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,
-pork,豚肉,basefood,warm,豚肉はたんぱく質とビタミンB1を含み、温活に役立つ食べ物,
-pork miso soup,豚汁,basefood,warm,コンビニで買える温活メニューは、豚汁やおでんなどがおすすめ,
-potato,ジャガイモ,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,
+があります。",,
+pineapple,パイナップル,basefood,cool,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,,
+pork,豚肉,basefood,warm,豚肉はたんぱく質とビタミンB1を含み、温活に役立つ食べ物,,
+pork miso soup,豚汁,basefood,warm,コンビニで買える温活メニューは、豚汁やおでんなどがおすすめ,,dish
+potato,ジャガイモ,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,,
 prune,プルーン,basefood,warm,"リンゴやブドウ、プルーンなど、冬が旬のもの
-が体を冷やしにくく温活中にもおすすめです。",
-pumpkin,カボチャ,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,
-raw vegetables,生野菜,basefood,cool,生野菜を過剰に摂る習慣も、水分量の多さから体温低下を招きやすくなるため、加熱調理を取り入れる工夫が、温活を進めるうえで効果的です。,
-root vegetables,根菜,basefood,warm,根菜や発酵食品、スパイスを組みあわせた食事は、巡りを整え体温維持に役立ちます,
-salmon,鮭,basefood,warm,鮭の豊富なたんぱく質が体の熱産生を支え,
-soy products,大豆製品,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,
-spices,香辛料,basefood,warm,さらに生姜や唐辛子などの香辛料を加えると、体の内側から温まりやすくなります。,
-taro,サトイモ,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,
-tropical fruits,南国系フルーツ,basefood,cool,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,
-tuna,マグロ,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,
-vegetables,野菜,basefood,warm,冬が旬の野菜は体を温める効果が期待できるものが多いため,
-white sugar,白砂糖,basefood,cool,とくに白砂糖は血糖値の急激な上昇を招きやすく、その後の変動によって自律神経が乱れやすくなり、冷えを感じやすくなる場合があります。,
-apple,リンゴ,esse,warm,リンゴ,
-banana,バナナ,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,
-bean sprouts,モヤシ,esse,cool,モヤシ,
-beer,ビール,esse,cool,ビール,
-black tea,紅茶,esse,warm,紅茶,
-brown rice,玄米,esse,warm,玄米,
-brown sugar,黒砂糖,esse,warm,黒砂糖,
-buckwheat,そば,esse,warm,そば,
-burdock,ゴボウ,esse,warm,ゴボウ,
-carrot,ニンジン,esse,warm,ニンジン,
-cherry,サクランボ,esse,warm,サクランボ,
-cocoa,ココア,esse,warm,ココア,
-coffee,コーヒー,esse,cool,コーヒー,
-cucumber,キュウリ,esse,cool,キュウリ,
-eggplant,ナス,esse,cool,ナス,
-fatty meat,脂身,esse,cool,脂身,
-grape,ブドウ,esse,warm,ブドウ,
-grapefruit,グレープフルーツ,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,
-green tea,緑茶,esse,cool,飲み物：緑茶、コーヒー、牛乳、ビール、白ワイン,
-ketchup,ケチャップ,esse,cool,ケチャップ,
-kiwi,キウイ,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,
-leafy greens,葉野菜,esse,cool,葉野菜,
-mango,マンゴー,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,
-mayonnaise,マヨネーズ,esse,cool,マヨネーズ,
-melon,メロン,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,
-milk,牛乳,esse,cool,牛乳,
-miso,みそ,esse,warm,みそ,
-natto,納豆,esse,warm,納豆,
-octopus,タコ,esse,warm,タコ,
-pasta,パスタ,esse,cool,パスタ,
-pineapple,パイナップル,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,
-prune,プルーン,esse,warm,プルーン,
-pumpkin,カボチャ,esse,warm,カボチャ,
-red meat and fish,赤身,esse,warm,タンパク質：赤身（肉·魚）、エビ、タコ、貝類、小魚、納豆,
-red wine,赤ワイン,esse,warm,赤ワイン,
-root vegetables,根菜類,esse,warm,根菜類,
-sake,日本酒,esse,warm,日本酒,
-salt,塩,esse,warm,塩,
-shellfish,貝類,esse,warm,貝類,
-shrimp,エビ,esse,warm,エビ,
-small fish,小魚,esse,warm,小魚,
-soy sauce,しょうゆ,esse,warm,しょうゆ,
-tofu,豆腐,esse,cool,豆腐,
-tomato,トマト,esse,cool,トマト,
-udon,うどん,esse,cool,うどん,
-umeboshi,梅干し,esse,warm,梅干し,
-vinegar,酢,esse,cool,酢,
-white bread,白パン,esse,cool,白パン,
-white fish,白身の魚,esse,cool,白身の魚,
-white rice,白米,esse,cool,白米,
-white sesame,白ゴマ,esse,cool,白ゴマ,
-white sugar,白砂糖,esse,cool,白砂糖,
-white wine,白ワイン,esse,cool,白ワイン,
-whole grain bread,全粒粉パン,esse,warm,全粒粉パン,
+が体を冷やしにくく温活中にもおすすめです。",,
+pumpkin,カボチャ,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,,
+raw vegetables,生野菜,basefood,cool,生野菜を過剰に摂る習慣も、水分量の多さから体温低下を招きやすくなるため、加熱調理を取り入れる工夫が、温活を進めるうえで効果的です。,,category
+root vegetables,根菜,basefood,warm,根菜や発酵食品、スパイスを組みあわせた食事は、巡りを整え体温維持に役立ちます,,category
+salmon,鮭,basefood,warm,鮭の豊富なたんぱく質が体の熱産生を支え,,
+soy products,大豆製品,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,,category
+spices,香辛料,basefood,warm,さらに生姜や唐辛子などの香辛料を加えると、体の内側から温まりやすくなります。,,category
+taro,サトイモ,basefood,warm,地中で育つ根菜類は、一般的に、冬の寒い時期に旬を迎えるものや色が濃いものは、体を温める性質が強いとされています。,,
+tropical fruits,南国系フルーツ,basefood,cool,またドライフルーツは水分量が少なく栄養が凝縮されているため、生の果物に比べて体を冷やしにくい特徴があります。一方、バナナやマンゴー、パイナップルなどの南国系フルーツは水分が多く、体の熱を落ち着かせる性質があるため、冷えが気になるときは控えましょう。,,category
+tuna,マグロ,basefood,warm,たんぱく質は熱産生を支える中心的な栄養素であり、温活を支える土台となります,,
+vegetables,野菜,basefood,warm,冬が旬の野菜は体を温める効果が期待できるものが多いため,,category
+white sugar,白砂糖,basefood,cool,とくに白砂糖は血糖値の急激な上昇を招きやすく、その後の変動によって自律神経が乱れやすくなり、冷えを感じやすくなる場合があります。,,
+apple,リンゴ,esse,warm,リンゴ,,
+banana,バナナ,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,,
+bean sprouts,モヤシ,esse,cool,モヤシ,,
+beer,ビール,esse,cool,ビール,,
+black tea,紅茶,esse,warm,紅茶,,
+brown rice,玄米,esse,warm,玄米,,
+brown sugar,黒砂糖,esse,warm,黒砂糖,,
+buckwheat,そば,esse,warm,そば,,
+burdock,ゴボウ,esse,warm,ゴボウ,,
+carrot,ニンジン,esse,warm,ニンジン,,
+cherry,サクランボ,esse,warm,サクランボ,,
+cocoa,ココア,esse,warm,ココア,,
+coffee,コーヒー,esse,cool,コーヒー,,
+cucumber,キュウリ,esse,cool,キュウリ,,
+eggplant,ナス,esse,cool,ナス,,
+fatty meat,脂身,esse,cool,脂身,,
+grape,ブドウ,esse,warm,ブドウ,,
+grapefruit,グレープフルーツ,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,,
+green tea,緑茶,esse,cool,飲み物：緑茶、コーヒー、牛乳、ビール、白ワイン,,
+ketchup,ケチャップ,esse,cool,ケチャップ,,
+kiwi,キウイ,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,,
+leafy greens,葉野菜,esse,cool,葉野菜,,category
+mango,マンゴー,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,,
+mayonnaise,マヨネーズ,esse,cool,マヨネーズ,,
+melon,メロン,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,,
+milk,牛乳,esse,cool,牛乳,,
+miso,みそ,esse,warm,みそ,,
+natto,納豆,esse,warm,納豆,,
+octopus,タコ,esse,warm,タコ,,
+pasta,パスタ,esse,cool,パスタ,,
+pineapple,パイナップル,esse,cool,果物：バナナ、パイナップル、マンゴー、キウイ、メロン、グレープフルーツ,,
+prune,プルーン,esse,warm,プルーン,,
+pumpkin,カボチャ,esse,warm,カボチャ,,
+red meat and fish,赤身,esse,warm,タンパク質：赤身（肉·魚）、エビ、タコ、貝類、小魚、納豆,,category
+red wine,赤ワイン,esse,warm,赤ワイン,,
+root vegetables,根菜類,esse,warm,根菜類,,category
+sake,日本酒,esse,warm,日本酒,,
+salt,塩,esse,warm,塩,,
+shellfish,貝類,esse,warm,貝類,,category
+shrimp,エビ,esse,warm,エビ,,
+small fish,小魚,esse,warm,小魚,,category
+soy sauce,しょうゆ,esse,warm,しょうゆ,,
+tofu,豆腐,esse,cool,豆腐,,
+tomato,トマト,esse,cool,トマト,,
+udon,うどん,esse,cool,うどん,,
+umeboshi,梅干し,esse,warm,梅干し,,
+vinegar,酢,esse,cool,酢,,
+white bread,白パン,esse,cool,白パン,,
+white fish,白身の魚,esse,cool,白身の魚,,category
+white rice,白米,esse,cool,白米,,
+white sesame,白ゴマ,esse,cool,白ゴマ,,
+white sugar,白砂糖,esse,cool,白砂糖,,
+white wine,白ワイン,esse,cool,白ワイン,,
+whole grain bread,全粒粉パン,esse,warm,全粒粉パン,,
 adzuki bean,小豆,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
-豆　類　：　ひよこ豆・大豆・小豆・黒豆",autumn-winter
+豆　類　：　ひよこ豆・大豆・小豆・黒豆",autumn-winter,
 agar,寒天,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）
 豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）
-海藻 ： わかめ・のり・寒天",spring-summer
+海藻 ： わかめ・のり・寒天",spring-summer,
 amaranth,アマランサス,gveggie,cool,"春夏向きの食べ物
-穀　物 　：　麦類・とうもろこし・キヌア・アマランサス",spring-summer
+穀　物 　：　麦類・とうもろこし・キヌア・アマランサス",spring-summer,
 arame,あらめ,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
 豆　類　：　ひよこ豆・大豆・小豆・黒豆
 豆の加工品　：　豆腐（温かい）・おから・高野豆腐
-海藻：　あらめ・　ひじき　・　昆布",autumn-winter
+海藻：　あらめ・　ひじき　・　昆布",autumn-winter,
 barley,麦類,gveggie,cool,"春夏向きの食べ物
-穀　物 　：　麦類・とうもろこし・キヌア・アマランサス",spring-summer
+穀　物 　：　麦類・とうもろこし・キヌア・アマランサス",spring-summer,category
 black soybean,黒豆,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
-豆　類　：　ひよこ豆・大豆・小豆・黒豆",autumn-winter
+豆　類　：　ひよこ豆・大豆・小豆・黒豆",autumn-winter,
 brown rice,玄米,gveggie,warm,"秋冬向きの食べ物
-穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter
+穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter,
 buckwheat,そば,gveggie,warm,"秋冬向きの食べ物
-穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter
+穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter,
 chickpea,ひよこ豆,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
-豆　類　：　ひよこ豆・大豆・小豆・黒豆",autumn-winter
+豆　類　：　ひよこ豆・大豆・小豆・黒豆",autumn-winter,
 corn,とうもろこし,gveggie,cool,"春夏向きの食べ物
-穀　物 　：　麦類・とうもろこし・キヌア・アマランサス",spring-summer
+穀　物 　：　麦類・とうもろこし・キヌア・アマランサス",spring-summer,
 edamame,いんげん豆,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
-豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）",spring-summer
+豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）",spring-summer,
 freeze-dried tofu,高野豆腐,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
 豆　類　：　ひよこ豆・大豆・小豆・黒豆
-豆の加工品　：　豆腐（温かい）・おから・高野豆腐",autumn-winter
+豆の加工品　：　豆腐（温かい）・おから・高野豆腐",autumn-winter,
 glutinous rice,もち米,gveggie,warm,"秋冬向きの食べ物
-穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter
+穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter,
 hijiki,ひじき,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
 豆　類　：　ひよこ豆・大豆・小豆・黒豆
 豆の加工品　：　豆腐（温かい）・おから・高野豆腐
-海藻：　あらめ・　ひじき　・　昆布",autumn-winter
+海藻：　あらめ・　ひじき　・　昆布",autumn-winter,
 kombu,昆布,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
 豆　類　：　ひよこ豆・大豆・小豆・黒豆
 豆の加工品　：　豆腐（温かい）・おから・高野豆腐
-海藻：　あらめ・　ひじき　・　昆布",autumn-winter
+海藻：　あらめ・　ひじき　・　昆布",autumn-winter,
 lentil,レンズ豆,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
-豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）",spring-summer
+豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）",spring-summer,
 mixed grains,雑穀,gveggie,warm,"秋冬向きの食べ物
-穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter
+穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter,category
 natto,納豆,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）
-豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）",spring-summer
+豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）",spring-summer,
 nori,のり,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）
 豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）
-海藻 ： わかめ・のり・寒天",spring-summer
+海藻 ： わかめ・のり・寒天",spring-summer,
 okara,おから,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
 豆　類　：　ひよこ豆・大豆・小豆・黒豆
-豆の加工品　：　豆腐（温かい）・おから・高野豆腐",autumn-winter
+豆の加工品　：　豆腐（温かい）・おから・高野豆腐",autumn-winter,
 quinoa,キヌア,gveggie,cool,"春夏向きの食べ物
-穀　物 　：　麦類・とうもろこし・キヌア・アマランサス",spring-summer
+穀　物 　：　麦類・とうもろこし・キヌア・アマランサス",spring-summer,
 rice cake,もち,gveggie,warm,"秋冬向きの食べ物
-穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter
+穀　物　：　雑穀・もち米・玄米・もち・そば",autumn-winter,
 runner bean,花豆,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
-豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）",spring-summer
+豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）",spring-summer,
 soybean,大豆,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
-豆　類　：　ひよこ豆・大豆・小豆・黒豆",autumn-winter
+豆　類　：　ひよこ豆・大豆・小豆・黒豆",autumn-winter,
 tempeh,テンペ,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）
-豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）",spring-summer
+豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）",spring-summer,
 tofu,豆腐（冷たい）,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）
-豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）",spring-summer
+豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）",spring-summer,
 tofu,豆腐（温かい）,gveggie,warm,"秋冬向きの食べ物
 穀　物　：　雑穀・もち米・玄米・もち・そば
 豆　類　：　ひよこ豆・大豆・小豆・黒豆
-豆の加工品　：　豆腐（温かい）・おから・高野豆腐",autumn-winter
+豆の加工品　：　豆腐（温かい）・おから・高野豆腐",autumn-winter,
 wakame,わかめ,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）
 豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）
-海藻 ： わかめ・のり・寒天",spring-summer
+海藻 ： わかめ・のり・寒天",spring-summer,
 yuba,ゆば,gveggie,cool,"春夏向きの食べ物
 穀　物 　：　麦類・とうもろこし・キヌア・アマランサス
 豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）
-豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）",spring-summer
-apple,りんご,hiesyo_com,warm,体を冷やさない果物はりんごや柿,
-bamboo shoot,たけのこ,hiesyo_com,cool,春に延びゆくたけのこや山菜、水分が多いスイカやなしなどの果物も陰性食品です,
-banana,バナナ,hiesyo_com,cool,南の国で穫れるバナナやパイナップルは陰性食品,
-brown rice,玄米,hiesyo_com,neutral,玄米や全粒粉の天然酵母パンなどは中庸です,黒焼き
+豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）",spring-summer,
+apple,りんご,hiesyo_com,warm,体を冷やさない果物はりんごや柿,,
+bamboo shoot,たけのこ,hiesyo_com,cool,春に延びゆくたけのこや山菜、水分が多いスイカやなしなどの果物も陰性食品です,,
+banana,バナナ,hiesyo_com,cool,南の国で穫れるバナナやパイナップルは陰性食品,,
+brown rice,玄米,hiesyo_com,neutral,玄米や全粒粉の天然酵母パンなどは中庸です,黒焼き,
 brown rice,黒焼き玄米,hiesyo_com,warm,"鉄火味噌や黒焼き梅干し、黒焼き玄米などは
 極陽性
-です。",黒焼き
-burdock,ごぼう,hiesyo_com,warm,地面に向かって伸びていくごぼうやにんじんは陽性食品,
-carrot,にんじん,hiesyo_com,warm,地面に向かって伸びていくごぼうやにんじんは陽性食品,
-chemical seasonings,化学調味料,hiesyo_com,cool,ただし、化学調味料は極陰性ですので,
-chicken,鶏肉,hiesyo_com,warm,陽性の強い肉の中でもよく動き体温の高い鶏肉は極陽です,
-dried persimmon,干し柿,hiesyo_com,cool,柿は干し柿にすると陰性になります,干し柿
-eggplant,ナス,hiesyo_com,cool,夏にできるナスやトマトも陰性食品です,
+です。",黒焼き,
+burdock,ごぼう,hiesyo_com,warm,地面に向かって伸びていくごぼうやにんじんは陽性食品,,
+carrot,にんじん,hiesyo_com,warm,地面に向かって伸びていくごぼうやにんじんは陽性食品,,
+chemical seasonings,化学調味料,hiesyo_com,cool,ただし、化学調味料は極陰性ですので,,category
+chicken,鶏肉,hiesyo_com,warm,陽性の強い肉の中でもよく動き体温の高い鶏肉は極陽です,,
+dried persimmon,干し柿,hiesyo_com,cool,柿は干し柿にすると陰性になります,干し柿,
+eggplant,ナス,hiesyo_com,cool,夏にできるナスやトマトも陰性食品です,,
 food additives,食品添加物,hiesyo_com,cool,"そして世のなかで一番体を冷やすのは食品そのものではありません。
-それは、食品添加物や化学調味料、そして白いお砂糖。白砂糖は食品ではなく薬だと思っています。",
+それは、食品添加物や化学調味料、そして白いお砂糖。白砂糖は食品ではなく薬だと思っています。",,
 fruit,果物,hiesyo_com,cool,"水分が多いスイカやなしなどの果物も
 陰性食品
-です。",
-horse mackerel,アジの開き,hiesyo_com,warm,アジの開きや塩サケはしっかり体を温めます,干物（開き）
+です。",,category
+horse mackerel,アジの開き,hiesyo_com,warm,アジの開きや塩サケはしっかり体を温めます,干物（開き）,
 miso,鉄火味噌,hiesyo_com,warm,"鉄火味噌や黒焼き梅干し、黒焼き玄米などは
 極陽性
-です。",鉄火味噌（黒焼き）
+です。",鉄火味噌（黒焼き）,dish
 mountain vegetables,山菜,hiesyo_com,cool,"春に延びゆくたけのこや山菜、水分が多いスイカやなしなどの果物も
 陰性食品
-です。",
-natural yeast bread,天然酵母パン,hiesyo_com,neutral,玄米や全粒粉の天然酵母パンなどは中庸です,
+です。",,category
+natural yeast bread,天然酵母パン,hiesyo_com,neutral,玄米や全粒粉の天然酵母パンなどは中庸です,,dish
 pear,なし,hiesyo_com,cool,"水分が多いスイカやなしなどの果物も
 陰性食品
-です。",
-persimmon,柿,hiesyo_com,warm,体を冷やさない果物はりんごや柿,
+です。",,
+persimmon,柿,hiesyo_com,warm,体を冷やさない果物はりんごや柿,,
 pineapple,パイナップル,hiesyo_com,cool,"南の国で穫れるバナナやパイナップルは
-陰性食品",
-potato,ジャガイモ,hiesyo_com,cool,陰性のジャガイモですが,油で揚げて塩をまぶした（ポテトチップス）
-potato,ポテトチップス,hiesyo_com,warm,油で揚げて塩をまぶしたポテトチップスは陽性です,油で揚げて塩をまぶした（ポテトチップス）
-raw vegetables,生野菜,hiesyo_com,cool,生野菜は陰性で体を冷やしますが,
-salmon,塩サケ,hiesyo_com,warm,だからアジの開きや塩サケはしっかり体を温めます,塩漬け（塩サケ）
-seaweed,海藻,hiesyo_com,neutral,海藻はおおむね中庸(真ん中）ですし,
+陰性食品",,
+potato,ジャガイモ,hiesyo_com,cool,陰性のジャガイモですが,油で揚げて塩をまぶした（ポテトチップス）,
+potato,ポテトチップス,hiesyo_com,warm,油で揚げて塩をまぶしたポテトチップスは陽性です,油で揚げて塩をまぶした（ポテトチップス）,
+raw vegetables,生野菜,hiesyo_com,cool,生野菜は陰性で体を冷やしますが,,category
+salmon,塩サケ,hiesyo_com,warm,だからアジの開きや塩サケはしっかり体を温めます,塩漬け（塩サケ）,
+seaweed,海藻,hiesyo_com,neutral,海藻はおおむね中庸(真ん中）ですし,,category
 tomato,トマト,hiesyo_com,cool,"夏にできるナスやトマトも
-陰性食品",
+陰性食品",,
 umeboshi,黒焼き梅干し,hiesyo_com,warm,"鉄火味噌や黒焼き梅干し、黒焼き玄米などは
 極陽性
-です。",黒焼き
-watermelon,スイカ,hiesyo_com,cool,水分が多いスイカやなしなどの果物も陰性食品です,
+です。",黒焼き,
+watermelon,スイカ,hiesyo_com,cool,水分が多いスイカやなしなどの果物も陰性食品です,,
 white sugar,白砂糖,hiesyo_com,cool,"そして世のなかで一番体を冷やすのは食品そのものではありません。
-それは、食品添加物や化学調味料、そして白いお砂糖。白砂糖は食品ではなく薬だと思っています。",
-animal foods,動物性食品,jsfca,warm,加工された食品や動物性食品は陽性,
-asparagus,アスパラガス,jsfca,cool,陰性の食材として、アスパラガスや菜の花、若竹が適しており、デトックス効果があります。,春
-banana,バナナ,jsfca,cool,次に、果物では、スイカやメロン、バナナが陰性で、特に夏におすすめです。,
-barley,大麦,jsfca,warm,穀物では、玄米や大麦が陽性食材としておすすめです。,
-beef,牛肉,jsfca,warm,まず、肉類では、鶏肉や牛肉、豚肉が陽性です。,
-brown rice,玄米,jsfca,warm,穀物では、玄米や大麦が陽性食材としておすすめです。,
-carrot,人参,jsfca,cool,これらは陰性ですが、スープにすることで体を温めます。,
-chicken,鶏肉,jsfca,warm,まず、肉類では、鶏肉や牛肉、豚肉が陽性です。,
-chili pepper,唐辛子,jsfca,warm,スパイスも陽性の代表で、しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり、しょうがはお茶やスープに入れると良いでしょう。,
-cucumber,きゅうり,jsfca,cool,まず、野菜では、ほうれん草や大根、きゅうりは陰性になります。,
-daikon,大根,jsfca,cool,まず、野菜では、ほうれん草や大根、きゅうりは陰性になります。,
-fish,魚,jsfca,warm,野菜は一般的に陰、肉や魚は陽とされます。,
-fruit,果物,jsfca,cool,野菜や果物は陰,
-garlic,にんにく,jsfca,warm,しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり,
-ginger,しょうが,jsfca,warm,しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり,
-grains,穀物,jsfca,cool,穀物や野菜は陰性とされます。,
-leafy greens,葉物野菜,jsfca,cool,葉物野菜は陰性に分類されます。,
-legumes,豆類,jsfca,cool,陰の根菜や豆類を多く摂取し,
-lightly simmered dish,軽い煮物,jsfca,cool,例えば、夏野菜や冷たい果物、軽い煮物などを選ぶと良いでしょう。,
-meat,肉,jsfca,warm,野菜は一般的に陰、肉や魚は陽とされます。,
-meat dish,肉料理,jsfca,warm,温かい陽性の肉料理には、冷たい陰性のサラダを添えると良いでしょう。,
-melon,メロン,jsfca,cool,次に、果物では、スイカやメロン、バナナが陰性で、特に夏におすすめです。,
-mozuku seaweed,もずく,jsfca,cool,わかめやもずくは、味噌汁やサラダに加えることで栄養を摂取できます,
-natural foods,自然食品,jsfca,cool,未加工の自然食品、穀物や野菜は陰性とされます,
-nuts,ナッツ類,jsfca,warm,小麦製品やナッツ類は陽性,
-oatmeal,オートミール,jsfca,cool,また、穀物では、白米やオートミールが陰性で、これらを主食にすることでバランスを保てます。,
-onion,玉ねぎ,jsfca,cool,これらは陰性ですが、スープにすることで体を温めます。,
+それは、食品添加物や化学調味料、そして白いお砂糖。白砂糖は食品ではなく薬だと思っています。",,
+animal foods,動物性食品,jsfca,warm,加工された食品や動物性食品は陽性,,category
+asparagus,アスパラガス,jsfca,cool,陰性の食材として、アスパラガスや菜の花、若竹が適しており、デトックス効果があります。,春,
+banana,バナナ,jsfca,cool,次に、果物では、スイカやメロン、バナナが陰性で、特に夏におすすめです。,,
+barley,大麦,jsfca,warm,穀物では、玄米や大麦が陽性食材としておすすめです。,,
+beef,牛肉,jsfca,warm,まず、肉類では、鶏肉や牛肉、豚肉が陽性です。,,
+brown rice,玄米,jsfca,warm,穀物では、玄米や大麦が陽性食材としておすすめです。,,
+carrot,人参,jsfca,cool,これらは陰性ですが、スープにすることで体を温めます。,,
+chicken,鶏肉,jsfca,warm,まず、肉類では、鶏肉や牛肉、豚肉が陽性です。,,
+chili pepper,唐辛子,jsfca,warm,スパイスも陽性の代表で、しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり、しょうがはお茶やスープに入れると良いでしょう。,,
+cucumber,きゅうり,jsfca,cool,まず、野菜では、ほうれん草や大根、きゅうりは陰性になります。,,
+daikon,大根,jsfca,cool,まず、野菜では、ほうれん草や大根、きゅうりは陰性になります。,,
+fish,魚,jsfca,warm,野菜は一般的に陰、肉や魚は陽とされます。,,category
+fruit,果物,jsfca,cool,野菜や果物は陰,,category
+garlic,にんにく,jsfca,warm,しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり,,
+ginger,しょうが,jsfca,warm,しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり,,
+grains,穀物,jsfca,cool,穀物や野菜は陰性とされます。,,category
+leafy greens,葉物野菜,jsfca,cool,葉物野菜は陰性に分類されます。,,category
+legumes,豆類,jsfca,cool,陰の根菜や豆類を多く摂取し,,category
+lightly simmered dish,軽い煮物,jsfca,cool,例えば、夏野菜や冷たい果物、軽い煮物などを選ぶと良いでしょう。,,dish
+meat,肉,jsfca,warm,野菜は一般的に陰、肉や魚は陽とされます。,,category
+meat dish,肉料理,jsfca,warm,温かい陽性の肉料理には、冷たい陰性のサラダを添えると良いでしょう。,,dish
+melon,メロン,jsfca,cool,次に、果物では、スイカやメロン、バナナが陰性で、特に夏におすすめです。,,
+mozuku seaweed,もずく,jsfca,cool,わかめやもずくは、味噌汁やサラダに加えることで栄養を摂取できます,,
+natural foods,自然食品,jsfca,cool,未加工の自然食品、穀物や野菜は陰性とされます,,category
+nuts,ナッツ類,jsfca,warm,小麦製品やナッツ類は陽性,,category
+oatmeal,オートミール,jsfca,cool,また、穀物では、白米やオートミールが陰性で、これらを主食にすることでバランスを保てます。,,
+onion,玉ねぎ,jsfca,cool,これらは陰性ですが、スープにすることで体を温めます。,,
 pepper,黒胡椒,jsfca,warm,"冬は、寒さに備えるため、陽性の食材が重要です。
-鶏肉や赤身肉、しょうがや黒胡椒を使った温かい料理が最適です。",冬
-pork,豚肉,jsfca,warm,まず、肉類では、鶏肉や牛肉、豚肉が陽性です。,
-potato,じゃがいも,jsfca,cool,これらは陰性ですが、スープにすることで体を温めます。,
-pumpkin,かぼちゃ,jsfca,warm,さつまいもやかぼちゃやナッツ類を取り入れ、体を温める食材を意識的に選ぶと良いでしょう。,秋
-rapeseed flowers,菜の花,jsfca,cool,陰性の食材として、アスパラガスや菜の花、若竹が適しており,春
-raw vegetables,生野菜,jsfca,cool,生野菜や果物、海藻は陰性です。,
+鶏肉や赤身肉、しょうがや黒胡椒を使った温かい料理が最適です。",冬,
+pork,豚肉,jsfca,warm,まず、肉類では、鶏肉や牛肉、豚肉が陽性です。,,
+potato,じゃがいも,jsfca,cool,これらは陰性ですが、スープにすることで体を温めます。,,
+pumpkin,かぼちゃ,jsfca,warm,さつまいもやかぼちゃやナッツ類を取り入れ、体を温める食材を意識的に選ぶと良いでしょう。,秋,
+rapeseed flowers,菜の花,jsfca,cool,陰性の食材として、アスパラガスや菜の花、若竹が適しており,春,
+raw vegetables,生野菜,jsfca,cool,生野菜や果物、海藻は陰性です。,,category
 red meat and fish,赤身肉,jsfca,warm,"冬は、寒さに備えるため、陽性の食材が重要です。
-鶏肉や赤身肉、しょうがや黒胡椒を使った温かい料理が最適です。",冬
-root vegetable soup,根菜のスープ,jsfca,warm,このスープは、陰性の根菜を使いつつ温かい料理で体を温め、陰陽のバランスが取れた一品になります。,
-root vegetables,根菜,jsfca,cool,陰性の食材には根菜や海藻、果物があり,
-salmon,鮭,jsfca,warm,次に、魚類では、鮭やマグロなどが陽性で、グリルや煮付けにすると美味しく食べられます。,
-seaweed,海藻,jsfca,cool,海藻は陰性です。,
-soup,スープ,jsfca,warm,このスープは、陰性の根菜を使いつつ温かい料理で体を温め、陰陽のバランスが取れた一品になります。,
-spices,香辛料,jsfca,warm,香辛料は陽性とされ,
-spinach,ほうれん草,jsfca,cool,まず、野菜では、ほうれん草や大根、きゅうりは陰性になります。,
+鶏肉や赤身肉、しょうがや黒胡椒を使った温かい料理が最適です。",冬,category
+root vegetable soup,根菜のスープ,jsfca,warm,このスープは、陰性の根菜を使いつつ温かい料理で体を温め、陰陽のバランスが取れた一品になります。,,dish
+root vegetables,根菜,jsfca,cool,陰性の食材には根菜や海藻、果物があり,,category
+salmon,鮭,jsfca,warm,次に、魚類では、鮭やマグロなどが陽性で、グリルや煮付けにすると美味しく食べられます。,,
+seaweed,海藻,jsfca,cool,海藻は陰性です。,,category
+soup,スープ,jsfca,warm,このスープは、陰性の根菜を使いつつ温かい料理で体を温め、陰陽のバランスが取れた一品になります。,,dish
+spices,香辛料,jsfca,warm,香辛料は陽性とされ,,category
+spinach,ほうれん草,jsfca,cool,まず、野菜では、ほうれん草や大根、きゅうりは陰性になります。,,
 summer vegetables,夏野菜,jsfca,cool,"陽性体質の人は、体を冷やす食材や調理法を取り入れることで、バランスを保てます。
-例えば、夏野菜や冷たい果物、軽い煮物などを選ぶと良いでしょう。",
-sweet potato,さつまいも,jsfca,warm,さつまいもやかぼちゃやナッツ類を取り入れ、体を温める食材を意識的に選ぶと良いでしょう,秋
-tofu,豆腐,jsfca,cool,柔らかくて軽い豆腐や葉物野菜は陰性に分類されます,
-tomato,トマト,jsfca,cool,トマトやスイカ、きゅうりなどの水分が多い果物や野菜を摂り、体をクールダウンさせましょう。,
-tuna,マグロ,jsfca,warm,次に、魚類では、鮭やマグロなどが陽性で、グリルや煮付けにすると美味しく食べられます。,
-vegetables,野菜,jsfca,cool,野菜は一般的に陰、肉や魚は陽とされます。,
-wakame,わかめ,jsfca,cool,海藻も陰性食材の一つで、わかめやもずくは、味噌汁やサラダに加えることで栄養を摂取できます。,
-watermelon,スイカ,jsfca,cool,次に、果物では、スイカやメロン、バナナが陰性で、特に夏におすすめです。,
-wheat,小麦製品,jsfca,warm,小麦製品やナッツ類は陽性,
-white rice,白米,jsfca,cool,また、穀物では、白米やオートミールが陰性で、これらを主食にすることでバランスを保てます。,
-young bamboo,若竹,jsfca,cool,陰性の食材として、アスパラガスや菜の花、若竹が適しており、デトックス効果があります。,春
-amazake,甘酒,karada_onkatsu,warm,よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです,
-aromatic condiments,薬味,karada_onkatsu,warm,スパイス・薬味・その他,
-banana,バナナ,karada_onkatsu,cool,南国の果物は体を冷やしやすいとされています。,
-black tea,紅茶,karada_onkatsu,warm,紅茶（体を温める）が特におすすめです,
-brown sugar,黒砂糖,karada_onkatsu,warm,白砂糖（体を冷やす）の代わりに使える天然甘味料,
-burdock,ごぼう,karada_onkatsu,warm,体を温める根菜・いも類,
-carrot,にんじん,karada_onkatsu,warm,加熱するとより温め効果が高まりやすくなります,
-chicken,鶏肉,karada_onkatsu,warm,体を温める性質の肉類。,
-chili pepper,唐辛子,karada_onkatsu,warm,料理にプラスするだけで温め効果アップ,
-cinnamon,シナモン,karada_onkatsu,warm,血行を促進し体を温める効果が高いとされるスパイス,
-coffee,コーヒー,karada_onkatsu,cool,緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされているため,
-cucumber,きゅうり,karada_onkatsu,cool,夏が旬の野菜は体を冷やす性質。,
-daikon,大根,karada_onkatsu,cool,大根は根菜ですが水分が多く冷やしやすい性質を持ちます,
-eggplant,なす,karada_onkatsu,cool,夏が旬の野菜は体を冷やす性質。,
-fermented foods,発酵食品,karada_onkatsu,warm,4. 発酵食品｜腸から体を温める,
-garlic,にんにく,karada_onkatsu,warm,硫化アリルが血行を促進し体を温める作用があるとされています,
-ginger,しょうが,karada_onkatsu,warm,「冷えているなと感じたら根菜・しょうが・発酵食品」この3つを意識するだけで体が変わってきます🥕,
-green onion,ネギ,karada_onkatsu,warm,いつもの料理にしょうが・ネギ・七味を加えるだけで温め効果がアップします。,
-green tea,緑茶,karada_onkatsu,cool,緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされているため,
-hojicha,ほうじ茶,karada_onkatsu,warm,よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです。,
-kimchi,キムチ,karada_onkatsu,warm,キムチの唐辛子は血行を促進する効果も,
-lamb,羊肉,karada_onkatsu,warm,特に羊肉は温め効果が高いとされています。,
+例えば、夏野菜や冷たい果物、軽い煮物などを選ぶと良いでしょう。",,category
+sweet potato,さつまいも,jsfca,warm,さつまいもやかぼちゃやナッツ類を取り入れ、体を温める食材を意識的に選ぶと良いでしょう,秋,
+tofu,豆腐,jsfca,cool,柔らかくて軽い豆腐や葉物野菜は陰性に分類されます,,
+tomato,トマト,jsfca,cool,トマトやスイカ、きゅうりなどの水分が多い果物や野菜を摂り、体をクールダウンさせましょう。,,
+tuna,マグロ,jsfca,warm,次に、魚類では、鮭やマグロなどが陽性で、グリルや煮付けにすると美味しく食べられます。,,
+vegetables,野菜,jsfca,cool,野菜は一般的に陰、肉や魚は陽とされます。,,category
+wakame,わかめ,jsfca,cool,海藻も陰性食材の一つで、わかめやもずくは、味噌汁やサラダに加えることで栄養を摂取できます。,,
+watermelon,スイカ,jsfca,cool,次に、果物では、スイカやメロン、バナナが陰性で、特に夏におすすめです。,,
+wheat,小麦製品,jsfca,warm,小麦製品やナッツ類は陽性,,category
+white rice,白米,jsfca,cool,また、穀物では、白米やオートミールが陰性で、これらを主食にすることでバランスを保てます。,,
+young bamboo,若竹,jsfca,cool,陰性の食材として、アスパラガスや菜の花、若竹が適しており、デトックス効果があります。,春,
+amazake,甘酒,karada_onkatsu,warm,よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです,,
+aromatic condiments,薬味,karada_onkatsu,warm,スパイス・薬味・その他,,category
+banana,バナナ,karada_onkatsu,cool,南国の果物は体を冷やしやすいとされています。,,
+black tea,紅茶,karada_onkatsu,warm,紅茶（体を温める）が特におすすめです,,
+brown sugar,黒砂糖,karada_onkatsu,warm,白砂糖（体を冷やす）の代わりに使える天然甘味料,,
+burdock,ごぼう,karada_onkatsu,warm,体を温める根菜・いも類,,
+carrot,にんじん,karada_onkatsu,warm,加熱するとより温め効果が高まりやすくなります,,
+chicken,鶏肉,karada_onkatsu,warm,体を温める性質の肉類。,,
+chili pepper,唐辛子,karada_onkatsu,warm,料理にプラスするだけで温め効果アップ,,
+cinnamon,シナモン,karada_onkatsu,warm,血行を促進し体を温める効果が高いとされるスパイス,,
+coffee,コーヒー,karada_onkatsu,cool,緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされているため,,
+cucumber,きゅうり,karada_onkatsu,cool,夏が旬の野菜は体を冷やす性質。,,
+daikon,大根,karada_onkatsu,cool,大根は根菜ですが水分が多く冷やしやすい性質を持ちます,,
+eggplant,なす,karada_onkatsu,cool,夏が旬の野菜は体を冷やす性質。,,
+fermented foods,発酵食品,karada_onkatsu,warm,4. 発酵食品｜腸から体を温める,,category
+garlic,にんにく,karada_onkatsu,warm,硫化アリルが血行を促進し体を温める作用があるとされています,,
+ginger,しょうが,karada_onkatsu,warm,「冷えているなと感じたら根菜・しょうが・発酵食品」この3つを意識するだけで体が変わってきます🥕,,
+green onion,ネギ,karada_onkatsu,warm,いつもの料理にしょうが・ネギ・七味を加えるだけで温め効果がアップします。,,
+green tea,緑茶,karada_onkatsu,cool,緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされているため,,
+hojicha,ほうじ茶,karada_onkatsu,warm,よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです。,,
+kimchi,キムチ,karada_onkatsu,warm,キムチの唐辛子は血行を促進する効果も,,
+lamb,羊肉,karada_onkatsu,warm,特に羊肉は温め効果が高いとされています。,,
 leafy vegetables,葉物,karada_onkatsu,cool,"❄️ 体を冷やしやすい食材の特徴
-地面の上で育つもの（葉物・夏野菜）",
-lotus root,れんこん,karada_onkatsu,warm,血行促進・体を温める作用があるとされる食材,
-meat,肉類,karada_onkatsu,warm,体を温める性質の肉類。,
-melon,メロン,karada_onkatsu,cool,南国の果物は体を冷やしやすいとされています。,
-milk,牛乳,karada_onkatsu,cool,牛乳は冷やすが、ヨーグルトは中性〜温め寄りに変化します。,
-miso,味噌,karada_onkatsu,warm,体を温める発酵食品,
-miso soup,味噌汁,karada_onkatsu,warm,朝の味噌汁は体温を上げる最高の習慣,
-mugicha,麦茶,karada_onkatsu,cool,緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされているため,
-mugwort tea,よもぎ茶,karada_onkatsu,warm,よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです。,
-natto,納豆,karada_onkatsu,warm,納豆は温める,
-nira,にら,karada_onkatsu,warm,体を温め、免疫アップにも関わる食材。,
-nukazuke,ぬか漬け,karada_onkatsu,warm,体を温める発酵食品,
-onion,たまねぎ,karada_onkatsu,warm,硫化アリルが血行を促進し体を温める作用があるとされています,
-pumpkin,かぼちゃ,karada_onkatsu,warm,血行促進に関わる栄養素が多い温活向き食材,
-refined foods,精白食品,karada_onkatsu,cool,精白・加工されたものは体を冷やしやすい。,
-rooibos tea,ルイボスティー,karada_onkatsu,warm,よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです。,
+地面の上で育つもの（葉物・夏野菜）",,category
+lotus root,れんこん,karada_onkatsu,warm,血行促進・体を温める作用があるとされる食材,,
+meat,肉類,karada_onkatsu,warm,体を温める性質の肉類。,,category
+melon,メロン,karada_onkatsu,cool,南国の果物は体を冷やしやすいとされています。,,
+milk,牛乳,karada_onkatsu,cool,牛乳は冷やすが、ヨーグルトは中性〜温め寄りに変化します。,,
+miso,味噌,karada_onkatsu,warm,体を温める発酵食品,,
+miso soup,味噌汁,karada_onkatsu,warm,朝の味噌汁は体温を上げる最高の習慣,,dish
+mugicha,麦茶,karada_onkatsu,cool,緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされているため,,
+mugwort tea,よもぎ茶,karada_onkatsu,warm,よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです。,,
+natto,納豆,karada_onkatsu,warm,納豆は温める,,
+nira,にら,karada_onkatsu,warm,体を温め、免疫アップにも関わる食材。,,
+nukazuke,ぬか漬け,karada_onkatsu,warm,体を温める発酵食品,,
+onion,たまねぎ,karada_onkatsu,warm,硫化アリルが血行を促進し体を温める作用があるとされています,,
+pumpkin,かぼちゃ,karada_onkatsu,warm,血行促進に関わる栄養素が多い温活向き食材,,
+refined foods,精白食品,karada_onkatsu,cool,精白・加工されたものは体を冷やしやすい。,,category
+rooibos tea,ルイボスティー,karada_onkatsu,warm,よもぎ茶・ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです。,,
 root vegetables,根菜,karada_onkatsu,warm,"🔥 体を温めやすい食材の特徴
-土の中・地下で育つもの（根菜・いも類）",
-root vegetables and tubers,根菜・いも類,karada_onkatsu,warm,体を温める根菜・いも類,
-shichimi pepper,七味,karada_onkatsu,warm,いつもの料理にしょうが・ネギ・七味を加えるだけで温め効果がアップします,
-spices,スパイス,karada_onkatsu,warm,5. その他の温め食材,
-spices and seasonings,スパイス・薬味・その他,karada_onkatsu,warm,料理にプラスするだけで温め効果アップ,
+土の中・地下で育つもの（根菜・いも類）",,category
+root vegetables and tubers,根菜・いも類,karada_onkatsu,warm,体を温める根菜・いも類,,category
+shichimi pepper,七味,karada_onkatsu,warm,いつもの料理にしょうが・ネギ・七味を加えるだけで温め効果がアップします,,
+spices,スパイス,karada_onkatsu,warm,5. その他の温め食材,,category
+spices and seasonings,スパイス・薬味・その他,karada_onkatsu,warm,料理にプラスするだけで温め効果アップ,,category
 summer vegetables,夏野菜,karada_onkatsu,cool,"❄️ 体を冷やしやすい食材の特徴
-地面の上で育つもの（葉物・夏野菜）",
-sweet potato,さつまいも,karada_onkatsu,warm,体を温める根菜・いも類,
-tofu,豆腐,karada_onkatsu,cool,発酵前の乳製品・豆腐は冷やしやすい性質。,
-tomato,トマト,karada_onkatsu,cool,夏が旬の野菜は体を冷やす性質。,
-tropical fruits,南国の果物,karada_onkatsu,cool,南国の果物は体を冷やしやすいとされています,
+地面の上で育つもの（葉物・夏野菜）",,category
+sweet potato,さつまいも,karada_onkatsu,warm,体を温める根菜・いも類,,
+tofu,豆腐,karada_onkatsu,cool,発酵前の乳製品・豆腐は冷やしやすい性質。,,
+tomato,トマト,karada_onkatsu,cool,夏が旬の野菜は体を冷やす性質。,,
+tropical fruits,南国の果物,karada_onkatsu,cool,南国の果物は体を冷やしやすいとされています,,category
 tubers (potatoes/yams),いも類,karada_onkatsu,warm,"🔥 体を温めやすい食材の特徴
-土の中・地下で育つもの（根菜・いも類）",
-tubers/potatoes,いも類,karada_onkatsu,warm,根菜・いも類は温活の基本食材。,
-underground bulb vegetables,地下鱗茎類,karada_onkatsu,warm,硫化アリルが血行を促進し体を温める作用があるとされています。,
-unfermented dairy products,発酵前の乳製品,karada_onkatsu,cool,発酵前の乳製品・豆腐は冷やしやすい性質。,
-watermelon,スイカ,karada_onkatsu,cool,南国の果物は体を冷やしやすいとされています。,
-white rice,白米,karada_onkatsu,cool,精白・加工されたものは体を冷やしやすい。,
-white sugar,白砂糖,karada_onkatsu,cool,白砂糖・精白されたもの,
-yogurt,ヨーグルト,karada_onkatsu,neutral,ヨーグルトは中性〜温め寄りに変化します。,
-apple,りんご,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,
-apricot,あんず,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,
-aromatic condiments,薬味,kawashimaya,warm,ネギなどの薬味を加えれば、さらに温活効果がアップ,
-aromatic vegetables,香味野菜,kawashimaya,warm,香味野菜やスパイスは、即効性のある温活食材です。,
-atsuage,厚揚げ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-banana,バナナ,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,
-beef,牛肉,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-bell pepper,ピーマン,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,
-burdock,ごぼう,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,
-carrot,にんじん,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,
-cherry,さくらんぼ,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,
-chicken,鶏肉,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-chili pepper,唐辛子,kawashimaya,warm,しょうが／にんにく／ねぎ／唐辛子／シナモン,
-cinnamon,シナモン,kawashimaya,warm,しょうが／にんにく／ねぎ／唐辛子／シナモン,
-cold-region fruits,寒冷地の果物,kawashimaya,warm,りんごやぶどうなど寒い地域で育つ果物は、温活をサポートしてくれる食材です。,
-cucumber,きゅうり,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,
-daikon,だいこん,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,
-egg,卵,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-eggplant,ナス,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,
-fermented foods,発酵食品,kawashimaya,warm,味噌や納豆などの発酵食品も温活におすすめの食材です。,
-fish,魚類,kawashimaya,warm,魚類：鮭、サバ、アジ、イワシ、マグロ,
-garlic,にんにく,kawashimaya,warm,しょうが／にんにく／ねぎ／唐辛子／シナモン,
-ginger,生姜,kawashimaya,warm,生姜には体を温める成分「ショウガオール」が豊富に含まれています。豚肉は良質なたんぱく質源で、ビタミンB1も豊富。疲労回復効果も期待できる、温活にも健康にも嬉しい定番おかずです。,
+土の中・地下で育つもの（根菜・いも類）",,category
+tubers/potatoes,いも類,karada_onkatsu,warm,根菜・いも類は温活の基本食材。,,category
+underground bulb vegetables,地下鱗茎類,karada_onkatsu,warm,硫化アリルが血行を促進し体を温める作用があるとされています。,,category
+unfermented dairy products,発酵前の乳製品,karada_onkatsu,cool,発酵前の乳製品・豆腐は冷やしやすい性質。,,category
+watermelon,スイカ,karada_onkatsu,cool,南国の果物は体を冷やしやすいとされています。,,
+white rice,白米,karada_onkatsu,cool,精白・加工されたものは体を冷やしやすい。,,
+white sugar,白砂糖,karada_onkatsu,cool,白砂糖・精白されたもの,,
+yogurt,ヨーグルト,karada_onkatsu,neutral,ヨーグルトは中性〜温め寄りに変化します。,,
+apple,りんご,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,,
+apricot,あんず,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,,
+aromatic condiments,薬味,kawashimaya,warm,ネギなどの薬味を加えれば、さらに温活効果がアップ,,category
+aromatic vegetables,香味野菜,kawashimaya,warm,香味野菜やスパイスは、即効性のある温活食材です。,,category
+atsuage,厚揚げ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+banana,バナナ,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,,
+beef,牛肉,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+bell pepper,ピーマン,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,,
+burdock,ごぼう,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,,
+carrot,にんじん,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,,
+cherry,さくらんぼ,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,,
+chicken,鶏肉,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+chili pepper,唐辛子,kawashimaya,warm,しょうが／にんにく／ねぎ／唐辛子／シナモン,,
+cinnamon,シナモン,kawashimaya,warm,しょうが／にんにく／ねぎ／唐辛子／シナモン,,
+cold-region fruits,寒冷地の果物,kawashimaya,warm,りんごやぶどうなど寒い地域で育つ果物は、温活をサポートしてくれる食材です。,,category
+cucumber,きゅうり,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,,
+daikon,だいこん,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,,
+egg,卵,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+eggplant,ナス,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,,
+fermented foods,発酵食品,kawashimaya,warm,味噌や納豆などの発酵食品も温活におすすめの食材です。,,category
+fish,魚類,kawashimaya,warm,魚類：鮭、サバ、アジ、イワシ、マグロ,,category
+garlic,にんにく,kawashimaya,warm,しょうが／にんにく／ねぎ／唐辛子／シナモン,,
+ginger,生姜,kawashimaya,warm,生姜には体を温める成分「ショウガオール」が豊富に含まれています。豚肉は良質なたんぱく質源で、ビタミンB1も豊富。疲労回復効果も期待できる、温活にも健康にも嬉しい定番おかずです。,,
 ginger pork,生姜焼き,kawashimaya,warm,"生姜焼き
-生姜には体を温める成分「ショウガオール」が豊富に含まれています。豚肉は良質なたんぱく質源で、ビタミンB1も豊富。疲労回復効果も期待できる、温活にも健康にも嬉しい定番おかずです。",
-grape,ぶどう,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,
-green onion,ねぎ,kawashimaya,warm,しょうが／にんにく／ねぎ／唐辛子／シナモン,
-horse mackerel,アジ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-kimchi,キムチ,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,
-lamb,羊肉,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-lettuce,レタス,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,
-lotus root,れんこん,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,
-mackerel,サバ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-mango,マンゴー,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,
-meats,肉類,kawashimaya,warm,肉類：鶏肉、牛肉、豚肉、羊肉,
-melon,メロン,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,
-miso,味噌,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,
+生姜には体を温める成分「ショウガオール」が豊富に含まれています。豚肉は良質なたんぱく質源で、ビタミンB1も豊富。疲労回復効果も期待できる、温活にも健康にも嬉しい定番おかずです。",,dish
+grape,ぶどう,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,,
+green onion,ねぎ,kawashimaya,warm,しょうが／にんにく／ねぎ／唐辛子／シナモン,,
+horse mackerel,アジ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+kimchi,キムチ,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,,
+lamb,羊肉,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+lettuce,レタス,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,,
+lotus root,れんこん,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,,
+mackerel,サバ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+mango,マンゴー,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,,
+meats,肉類,kawashimaya,warm,肉類：鶏肉、牛肉、豚肉、羊肉,,category
+melon,メロン,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,,
+miso,味噌,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,,
 miso simmered udon,味噌煮込みうどん,kawashimaya,warm,"味噌煮込みうどん
-愛知の郷土料理として知られる味噌煮込みうどんは、濃厚な味噌ベースのスープが体を芯から温めてくれます。",
-natto,納豆,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,
-peach,もも,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,
-pineapple,パイナップル,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,
-pork,豚肉,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
+愛知の郷土料理として知られる味噌煮込みうどんは、濃厚な味噌ベースのスープが体を芯から温めてくれます。",,dish
+natto,納豆,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,,
+peach,もも,kawashimaya,warm,りんご／ぶどう／さくらんぼ／もも／あんず,,
+pineapple,パイナップル,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,,
+pork,豚肉,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
 pork miso soup,豚汁,kawashimaya,warm,"豚汁
 豚肉のたんぱく質と根菜類がたっぷり入った、栄養バランス抜群の一品です。
-味噌と生姜を加えると、体の芯から温まります。野菜もたくさん摂れるので、毎日の温活メニューに最適です。",
-protein-rich foods,たんぱく質が多い食材,kawashimaya,warm,たんぱく質を多く含む食材は、消化の際に多くのエネルギーを使い熱を生み出すため、温活に効果的です。,
-pumpkin,かぼちゃ,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,
-root vegetables,根菜,kawashimaya,warm,毎食どこかに、根菜・発酵食品・たんぱく質・香味野菜を少量ずつ入れていくイメージで取り入れましょう。,
-root vegetables and other winter vegetables,根菜類などの冬野菜,kawashimaya,warm,厳しい環境で育った冬野菜は、体を温める代表的な食材です。,
-salmon,鮭,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-sardine,イワシ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-soy products,大豆製品,kawashimaya,warm,大豆製品：豆腐、厚揚げ,
-soy sauce,醤油,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,
-spices,スパイス,kawashimaya,warm,香味野菜やスパイスは、即効性のある温活食材です。,
-summer vegetables,夏野菜,kawashimaya,cool,夏野菜は生のままでも美味しく食べられるため、気が付かない内に胃腸から冷えてしまう場合もあります。また、夏野菜の多くはカリウムが豊富です。カリウムの持つ利尿作用により、尿と一緒に熱も排出されるため、体を冷やしやすいという特長があります。,
-tofu,豆腐,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-tomato,トマト,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,
-tropical fruit,南国の果物,kawashimaya,cool,暖かい地域で採れる果物は体を冷やす傾向があり、温活中の摂りすぎには注意が必要です。,
-tsukemono,漬物,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,
-tuna,マグロ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,
-watermelon,スイカ,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,
-winter vegetables,冬野菜,kawashimaya,warm,厳しい環境で育った冬野菜は、体を温める代表的な食材です。,
-zucchini,ズッキーニ,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,
-apple,りんご,kracie,warm,りんご、桃等,
-banana,バナナ,kracie,cool,バナナ、スイカ等の南国フルーツ,
-black tea,紅茶,kracie,warm,白湯、生姜湯、紅茶、ほうじ茶等,
-carrot,人参,kracie,warm,玉ねぎ、人参、等の根菜類、,
-coffee,コーヒー,kracie,cool,コーヒー、牛乳、緑茶等,
-cucumber,きゅうり,kracie,cool,きゅうり等の水分の多い夏野菜,
-eggplant,ナス,kracie,cool,レタス、トマト、ナス、,
-fermented foods,発酵食品,kracie,warm,腸内を温めるには発酵食品がおススメ。,
-fruit grown in cold regions,寒い地方で採れるフルーツ,kracie,warm,寒い地方で採れるフルーツ,
-ginger,加熱した生姜,kracie,warm,冬野菜、加熱した生姜,加熱
-green tea,緑茶,kracie,cool,コーヒー、牛乳、緑茶等,
-hojicha,ほうじ茶,kracie,warm,白湯、生姜湯、紅茶、ほうじ茶等,
-lettuce,レタス,kracie,cool,レタス、トマト、ナス、,
-milk,牛乳,kracie,cool,コーヒー、牛乳、緑茶等,
-onion,玉ねぎ,kracie,warm,玉ねぎ、人参、等の根菜類、,
-peach,桃,kracie,warm,りんご、桃等,
-root vegetables,根菜類,kracie,warm,玉ねぎ、人参、等の根菜類、,
-tomato,トマト,kracie,cool,レタス、トマト、ナス、,
-tropical fruit,南国フルーツ,kracie,cool,バナナ、スイカ等の南国フルーツ,
-watermelon,スイカ,kracie,cool,バナナ、スイカ等の南国フルーツ,
-winter vegetables,冬野菜,kracie,warm,冬野菜、加熱した生姜,
-apple,りんご,macaroni,warm,例えば、りんご・さくらんぼ・ぶどうなどが挙げられますよ。,
-banana,バナナ,macaroni,cool,マンゴーやバナナ・パイナップルなどの暑い環境で育つ南国の果物も、体を冷やすはたらきがあります。,
-beer,ビール,macaroni,cool,また、飲み物であるビールやコーヒー・緑茶も体を冷やします。,
-black tea,紅茶,macaroni,warm,みそや日本酒・紅茶は発酵食品なので、積極的に摂りたい食材ですね。,
-burdock,ごぼう,macaroni,warm,ごぼう,
-cabbage,キャベツ,macaroni,cool,体を冷やす野菜,
-carrot,にんじん,macaroni,warm,にんじん,
-cherry,さくらんぼ,macaroni,warm,例えば、りんご・さくらんぼ・ぶどうなどが挙げられますよ。,
-chili pepper,唐辛子,macaroni,warm,唐辛子やこしょうなどの香辛料は、血行を良くし体を温めてくれる作用がありますよ。,
-chinese cabbage,白菜,macaroni,cool,体を冷やす野菜,
-coffee,コーヒー,macaroni,cool,また、飲み物であるビールやコーヒー・緑茶も体を冷やします。,
-cucumber,きゅうり,macaroni,cool,夏野菜の代表であるきゅうり・トマト・なすをはじめ,
-eggplant,なす,macaroni,cool,夏野菜の代表であるきゅうり・トマト・なすをはじめ、レタスやほうれんそうが挙げられます。,
-fermented foods,発酵食品,macaroni,warm,未精製の食材や発酵食品も体を温めるのに役立つ食材です,
-ginger,しょうが,macaroni,warm,特にしょうがは体を温める食材として広く知られていますが、これはショウガオールという成分が含まれているためです。,
-grape,ぶどう,macaroni,warm,例えば、りんご・さくらんぼ・ぶどうなどが挙げられますよ。,
-green onion,ねぎ,macaroni,warm,ねぎ,
-green tea,緑茶,macaroni,cool,また、飲み物であるビールやコーヒー・緑茶も体を冷やします。,
-komatsuna,小松菜,macaroni,cool,体を冷やす野菜,
-leafy greens,葉物野菜,macaroni,cool,また土の上にでき、白・青・緑（冷色）の葉物野菜が豊富です。,
-lettuce,レタス,macaroni,cool,レタスやほうれんそうが挙げられます,
-lotus root,れんこん,macaroni,warm,れんこん,
-mango,マンゴー,macaroni,cool,マンゴーやバナナ・パイナップルなどの暑い環境で育つ南国の果物も、体を冷やすはたらきがあります。,
-mayonnaise,マヨネーズ,macaroni,cool,マヨネーズ,
-melon,メロン,macaroni,cool,そのほかにも、スイカやメロンといった夏が旬の果物も、体を冷やす果物に分類されます。,
-miso,みそ,macaroni,warm,みそや日本酒・紅茶は発酵食品なので、積極的に摂りたい食材ですね。,
-onion,たまねぎ,macaroni,warm,たまねぎ,
-orange,オレンジ,macaroni,warm,オレンジ,
-pepper,こしょう,macaroni,warm,唐辛子やこしょうなどの香辛料は、血行を良くし体を温めてくれる作用がありますよ。,
-pineapple,パイナップル,macaroni,cool,マンゴーやバナナ・パイナップルなどの暑い環境で育つ南国の果物も、体を冷やすはたらきがあります。,
-prune,プルーン,macaroni,warm,プルーン,
-pumpkin,かぼちゃ,macaroni,warm,かぼちゃ,
-root vegetables,地面より下にできる野菜,macaroni,warm,地面より下にできる野菜も体を温めるはたらきがありますよ,
-sake,日本酒,macaroni,warm,みそや日本酒・紅茶は発酵食品なので、積極的に摂りたい食材ですね。,
-spices,香辛料,macaroni,warm,唐辛子やこしょうなどの香辛料は、血行を良くし体を温めてくれる作用がありますよ。,
-spinach,ほうれんそう,macaroni,cool,レタスやほうれんそうが挙げられます,
-summer vegetables,夏野菜,macaroni,cool,夏野菜の代表であるきゅうり・トマト・なすをはじめ、レタスやほうれんそうが挙げられます。,
-tomato,トマト,macaroni,cool,夏野菜の代表であるきゅうり・トマト・なすをはじめ,
-vinegar,酢,macaroni,cool,実は、酢には体を冷やしてくれる作用があります。,
-watermelon,スイカ,macaroni,cool,そのほかにも、スイカやメロンといった夏が旬の果物も、体を冷やす果物に分類されます。,
+味噌と生姜を加えると、体の芯から温まります。野菜もたくさん摂れるので、毎日の温活メニューに最適です。",,dish
+protein-rich foods,たんぱく質が多い食材,kawashimaya,warm,たんぱく質を多く含む食材は、消化の際に多くのエネルギーを使い熱を生み出すため、温活に効果的です。,,category
+pumpkin,かぼちゃ,kawashimaya,warm,にんじん／ごぼう／れんこん／だいこん／かぼちゃ,,
+root vegetables,根菜,kawashimaya,warm,毎食どこかに、根菜・発酵食品・たんぱく質・香味野菜を少量ずつ入れていくイメージで取り入れましょう。,,category
+root vegetables and other winter vegetables,根菜類などの冬野菜,kawashimaya,warm,厳しい環境で育った冬野菜は、体を温める代表的な食材です。,,category
+salmon,鮭,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+sardine,イワシ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+soy products,大豆製品,kawashimaya,warm,大豆製品：豆腐、厚揚げ,,category
+soy sauce,醤油,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,,
+spices,スパイス,kawashimaya,warm,香味野菜やスパイスは、即効性のある温活食材です。,,category
+summer vegetables,夏野菜,kawashimaya,cool,夏野菜は生のままでも美味しく食べられるため、気が付かない内に胃腸から冷えてしまう場合もあります。また、夏野菜の多くはカリウムが豊富です。カリウムの持つ利尿作用により、尿と一緒に熱も排出されるため、体を冷やしやすいという特長があります。,,category
+tofu,豆腐,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+tomato,トマト,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,,
+tropical fruit,南国の果物,kawashimaya,cool,暖かい地域で採れる果物は体を冷やす傾向があり、温活中の摂りすぎには注意が必要です。,,category
+tsukemono,漬物,kawashimaya,warm,納豆／味噌／醤油／漬物／キムチ,,
+tuna,マグロ,kawashimaya,warm,鶏肉／牛肉／豚肉／羊肉／鮭／サバ／アジ／イワシ／マグロ／卵／豆腐／厚揚げ,,
+watermelon,スイカ,kawashimaya,cool,バナナ／パイナップル／マンゴー／スイカ／メロン,,
+winter vegetables,冬野菜,kawashimaya,warm,厳しい環境で育った冬野菜は、体を温める代表的な食材です。,,category
+zucchini,ズッキーニ,kawashimaya,cool,きゅうり／トマト／ナス／レタス／ピーマン／ズッキーニ,,
+apple,りんご,kracie,warm,りんご、桃等,,
+banana,バナナ,kracie,cool,バナナ、スイカ等の南国フルーツ,,
+black tea,紅茶,kracie,warm,白湯、生姜湯、紅茶、ほうじ茶等,,
+carrot,人参,kracie,warm,玉ねぎ、人参、等の根菜類、,,
+coffee,コーヒー,kracie,cool,コーヒー、牛乳、緑茶等,,
+cucumber,きゅうり,kracie,cool,きゅうり等の水分の多い夏野菜,,
+eggplant,ナス,kracie,cool,レタス、トマト、ナス、,,
+fermented foods,発酵食品,kracie,warm,腸内を温めるには発酵食品がおススメ。,,category
+fruit grown in cold regions,寒い地方で採れるフルーツ,kracie,warm,寒い地方で採れるフルーツ,,category
+ginger,加熱した生姜,kracie,warm,冬野菜、加熱した生姜,加熱,
+green tea,緑茶,kracie,cool,コーヒー、牛乳、緑茶等,,
+hojicha,ほうじ茶,kracie,warm,白湯、生姜湯、紅茶、ほうじ茶等,,
+lettuce,レタス,kracie,cool,レタス、トマト、ナス、,,
+milk,牛乳,kracie,cool,コーヒー、牛乳、緑茶等,,
+onion,玉ねぎ,kracie,warm,玉ねぎ、人参、等の根菜類、,,
+peach,桃,kracie,warm,りんご、桃等,,
+root vegetables,根菜類,kracie,warm,玉ねぎ、人参、等の根菜類、,,category
+tomato,トマト,kracie,cool,レタス、トマト、ナス、,,
+tropical fruit,南国フルーツ,kracie,cool,バナナ、スイカ等の南国フルーツ,,category
+watermelon,スイカ,kracie,cool,バナナ、スイカ等の南国フルーツ,,
+winter vegetables,冬野菜,kracie,warm,冬野菜、加熱した生姜,,category
+apple,りんご,macaroni,warm,例えば、りんご・さくらんぼ・ぶどうなどが挙げられますよ。,,
+banana,バナナ,macaroni,cool,マンゴーやバナナ・パイナップルなどの暑い環境で育つ南国の果物も、体を冷やすはたらきがあります。,,
+beer,ビール,macaroni,cool,また、飲み物であるビールやコーヒー・緑茶も体を冷やします。,,
+black tea,紅茶,macaroni,warm,みそや日本酒・紅茶は発酵食品なので、積極的に摂りたい食材ですね。,,
+burdock,ごぼう,macaroni,warm,ごぼう,,
+cabbage,キャベツ,macaroni,cool,体を冷やす野菜,,
+carrot,にんじん,macaroni,warm,にんじん,,
+cherry,さくらんぼ,macaroni,warm,例えば、りんご・さくらんぼ・ぶどうなどが挙げられますよ。,,
+chili pepper,唐辛子,macaroni,warm,唐辛子やこしょうなどの香辛料は、血行を良くし体を温めてくれる作用がありますよ。,,
+chinese cabbage,白菜,macaroni,cool,体を冷やす野菜,,
+coffee,コーヒー,macaroni,cool,また、飲み物であるビールやコーヒー・緑茶も体を冷やします。,,
+cucumber,きゅうり,macaroni,cool,夏野菜の代表であるきゅうり・トマト・なすをはじめ,,
+eggplant,なす,macaroni,cool,夏野菜の代表であるきゅうり・トマト・なすをはじめ、レタスやほうれんそうが挙げられます。,,
+fermented foods,発酵食品,macaroni,warm,未精製の食材や発酵食品も体を温めるのに役立つ食材です,,category
+ginger,しょうが,macaroni,warm,特にしょうがは体を温める食材として広く知られていますが、これはショウガオールという成分が含まれているためです。,,
+grape,ぶどう,macaroni,warm,例えば、りんご・さくらんぼ・ぶどうなどが挙げられますよ。,,
+green onion,ねぎ,macaroni,warm,ねぎ,,
+green tea,緑茶,macaroni,cool,また、飲み物であるビールやコーヒー・緑茶も体を冷やします。,,
+komatsuna,小松菜,macaroni,cool,体を冷やす野菜,,
+leafy greens,葉物野菜,macaroni,cool,また土の上にでき、白・青・緑（冷色）の葉物野菜が豊富です。,,category
+lettuce,レタス,macaroni,cool,レタスやほうれんそうが挙げられます,,
+lotus root,れんこん,macaroni,warm,れんこん,,
+mango,マンゴー,macaroni,cool,マンゴーやバナナ・パイナップルなどの暑い環境で育つ南国の果物も、体を冷やすはたらきがあります。,,
+mayonnaise,マヨネーズ,macaroni,cool,マヨネーズ,,
+melon,メロン,macaroni,cool,そのほかにも、スイカやメロンといった夏が旬の果物も、体を冷やす果物に分類されます。,,
+miso,みそ,macaroni,warm,みそや日本酒・紅茶は発酵食品なので、積極的に摂りたい食材ですね。,,
+onion,たまねぎ,macaroni,warm,たまねぎ,,
+orange,オレンジ,macaroni,warm,オレンジ,,
+pepper,こしょう,macaroni,warm,唐辛子やこしょうなどの香辛料は、血行を良くし体を温めてくれる作用がありますよ。,,
+pineapple,パイナップル,macaroni,cool,マンゴーやバナナ・パイナップルなどの暑い環境で育つ南国の果物も、体を冷やすはたらきがあります。,,
+prune,プルーン,macaroni,warm,プルーン,,
+pumpkin,かぼちゃ,macaroni,warm,かぼちゃ,,
+root vegetables,地面より下にできる野菜,macaroni,warm,地面より下にできる野菜も体を温めるはたらきがありますよ,,category
+sake,日本酒,macaroni,warm,みそや日本酒・紅茶は発酵食品なので、積極的に摂りたい食材ですね。,,
+spices,香辛料,macaroni,warm,唐辛子やこしょうなどの香辛料は、血行を良くし体を温めてくれる作用がありますよ。,,category
+spinach,ほうれんそう,macaroni,cool,レタスやほうれんそうが挙げられます,,
+summer vegetables,夏野菜,macaroni,cool,夏野菜の代表であるきゅうり・トマト・なすをはじめ、レタスやほうれんそうが挙げられます。,,category
+tomato,トマト,macaroni,cool,夏野菜の代表であるきゅうり・トマト・なすをはじめ,,
+vinegar,酢,macaroni,cool,実は、酢には体を冷やしてくれる作用があります。,,
+watermelon,スイカ,macaroni,cool,そのほかにも、スイカやメロンといった夏が旬の果物も、体を冷やす果物に分類されます。,,
 white sugar,白砂糖,macaroni,cool,"実はチョコレートに多く含まれる白砂糖は
 体を冷やす食材
-に分類されます。",
-adzuki bean,小豆,macrobiotic_rashinban,neutral,小豆,
-alcohol,アルコール,macrobiotic_rashinban,cool,アルコール,
-atsuage,油揚げ,macrobiotic_rashinban,neutral,油揚げ,
-avocado,アボガド,macrobiotic_rashinban,cool,アボガド,
-bamboo shoot,タケノコ,macrobiotic_rashinban,cool,タケノコはとても短い間に上に伸びるので陰性で,
-banana,バナナ,macrobiotic_rashinban,cool,バナナ,
-beef,牛,macrobiotic_rashinban,warm,牛,
-black tea,紅茶,macrobiotic_rashinban,cool,紅茶,
-brown rice,玄米,macrobiotic_rashinban,neutral,もっともバランスがとれているはずの「玄米」,
-burdock,ごぼう,macrobiotic_rashinban,warm,ごぼう,
-cabbage,キャベツ,macrobiotic_rashinban,neutral,キャベツ,
-canned food,缶詰,macrobiotic_rashinban,cool,缶詰,
-carrot,人参,macrobiotic_rashinban,warm,人参,
-cheese,チーズ,macrobiotic_rashinban,warm,チーズ,
-chicken,鶏,macrobiotic_rashinban,warm,鶏,
-chinese cabbage,白菜,macrobiotic_rashinban,neutral,白菜,
-coffee,コーヒー,macrobiotic_rashinban,cool,コーヒー,
-cream,クリーム,macrobiotic_rashinban,cool,クリーム,
-cucumber,きゅうり,macrobiotic_rashinban,cool,きゅうり,
-daikon,大根,macrobiotic_rashinban,neutral,大根,
-daikon leaves,大根の葉,macrobiotic_rashinban,neutral,大根の葉,
-duck meat,鴨,macrobiotic_rashinban,warm,鴨,
-egg,卵,macrobiotic_rashinban,warm,卵,
-eggplant,ナス,macrobiotic_rashinban,cool,ナス,
-freeze-dried tofu,高野豆腐,macrobiotic_rashinban,neutral,高野豆腐,
-frozen food,冷凍食品,macrobiotic_rashinban,cool,冷凍食品,
-ganmodoki (fried tofu fritter),がんもどき,macrobiotic_rashinban,neutral,がんもどき,
-green onion,ネギ,macrobiotic_rashinban,neutral,ネギ,
-hijiki,ひじき,macrobiotic_rashinban,neutral,ひじき,
-hojicha,三年番茶,macrobiotic_rashinban,neutral,三年番茶,
-ice cream,アイスクリーム,macrobiotic_rashinban,cool,アイスクリーム,
-jinenjo,ジネンジョ,macrobiotic_rashinban,warm,ジネンジョ,
-komatsuna,小松菜,macrobiotic_rashinban,neutral,小松菜,
-kombu,昆布,macrobiotic_rashinban,neutral,昆布,
-leafy vegetable,葉菜,macrobiotic_rashinban,neutral,葉菜,
-legumes,豆類,macrobiotic_rashinban,neutral,豆類,
-lotus root,蓮根,macrobiotic_rashinban,neutral,蓮根,
-malt syrup,麦あめ,macrobiotic_rashinban,neutral,麦あめ,
-mango,マンゴー,macrobiotic_rashinban,cool,マンゴー,
-mild (low-stimulant) beverages,刺激の強くない飲み物,macrobiotic_rashinban,neutral,刺激の強くない飲み物,
-milk,牛乳,macrobiotic_rashinban,cool,牛乳,
-miso,味噌,macrobiotic_rashinban,neutral,味噌,
-nightshade family,ナス科,macrobiotic_rashinban,cool,ナス科,
-nori,のり,macrobiotic_rashinban,neutral,のり,
-nuts,ナッツ類,macrobiotic_rashinban,neutral,ナッツ類,
-onion,玉ねぎ,macrobiotic_rashinban,warm,玉ねぎ,
-papaya,パパイヤ,macrobiotic_rashinban,cool,パパイヤ,
-pheasant,きじ,macrobiotic_rashinban,warm,きじ,
-pork,豚,macrobiotic_rashinban,warm,豚,
-potato,ジャガイモ,macrobiotic_rashinban,cool,ジャガイモ,
-pumpkin,カボチャ,macrobiotic_rashinban,warm,北海道のカボチャが一番陽性なのです,
-refined grains,精製した穀物,macrobiotic_rashinban,cool,精製した穀物,
-refined sweeteners,精製した甘味料,macrobiotic_rashinban,cool,精製した甘味料,
-rice syrup,米あめ,macrobiotic_rashinban,neutral,米あめ,
-root vegetable,根菜,macrobiotic_rashinban,warm,下に向かって育つにんじんは陽性と言えます。この性質から、一般的に根菜類は陽性と言えます。,
-salt,あら塩,macrobiotic_rashinban,neutral,あら塩,
-salt,精製塩,macrobiotic_rashinban,warm,精製塩,
-seafood,魚介,macrobiotic_rashinban,warm,魚介,
-sesame,胡麻,macrobiotic_rashinban,neutral,胡麻,
-soy sauce,醤油,macrobiotic_rashinban,neutral,醤油,
-spices,香辛料,macrobiotic_rashinban,cool,香辛料,
+に分類されます。",,
+adzuki bean,小豆,macrobiotic_rashinban,neutral,小豆,,
+alcohol,アルコール,macrobiotic_rashinban,cool,アルコール,,category
+atsuage,油揚げ,macrobiotic_rashinban,neutral,油揚げ,,
+avocado,アボガド,macrobiotic_rashinban,cool,アボガド,,
+bamboo shoot,タケノコ,macrobiotic_rashinban,cool,タケノコはとても短い間に上に伸びるので陰性で,,
+banana,バナナ,macrobiotic_rashinban,cool,バナナ,,
+beef,牛,macrobiotic_rashinban,warm,牛,,
+black tea,紅茶,macrobiotic_rashinban,cool,紅茶,,
+brown rice,玄米,macrobiotic_rashinban,neutral,もっともバランスがとれているはずの「玄米」,,
+burdock,ごぼう,macrobiotic_rashinban,warm,ごぼう,,
+cabbage,キャベツ,macrobiotic_rashinban,neutral,キャベツ,,
+canned food,缶詰,macrobiotic_rashinban,cool,缶詰,,category
+carrot,人参,macrobiotic_rashinban,warm,人参,,
+cheese,チーズ,macrobiotic_rashinban,warm,チーズ,,
+chicken,鶏,macrobiotic_rashinban,warm,鶏,,
+chinese cabbage,白菜,macrobiotic_rashinban,neutral,白菜,,
+coffee,コーヒー,macrobiotic_rashinban,cool,コーヒー,,
+cream,クリーム,macrobiotic_rashinban,cool,クリーム,,
+cucumber,きゅうり,macrobiotic_rashinban,cool,きゅうり,,
+daikon,大根,macrobiotic_rashinban,neutral,大根,,
+daikon leaves,大根の葉,macrobiotic_rashinban,neutral,大根の葉,,
+duck meat,鴨,macrobiotic_rashinban,warm,鴨,,
+egg,卵,macrobiotic_rashinban,warm,卵,,
+eggplant,ナス,macrobiotic_rashinban,cool,ナス,,
+freeze-dried tofu,高野豆腐,macrobiotic_rashinban,neutral,高野豆腐,,
+frozen food,冷凍食品,macrobiotic_rashinban,cool,冷凍食品,,category
+ganmodoki (fried tofu fritter),がんもどき,macrobiotic_rashinban,neutral,がんもどき,,
+green onion,ネギ,macrobiotic_rashinban,neutral,ネギ,,
+hijiki,ひじき,macrobiotic_rashinban,neutral,ひじき,,
+hojicha,三年番茶,macrobiotic_rashinban,neutral,三年番茶,,
+ice cream,アイスクリーム,macrobiotic_rashinban,cool,アイスクリーム,,
+jinenjo,ジネンジョ,macrobiotic_rashinban,warm,ジネンジョ,,
+komatsuna,小松菜,macrobiotic_rashinban,neutral,小松菜,,
+kombu,昆布,macrobiotic_rashinban,neutral,昆布,,
+leafy vegetable,葉菜,macrobiotic_rashinban,neutral,葉菜,,category
+legumes,豆類,macrobiotic_rashinban,neutral,豆類,,category
+lotus root,蓮根,macrobiotic_rashinban,neutral,蓮根,,
+malt syrup,麦あめ,macrobiotic_rashinban,neutral,麦あめ,,
+mango,マンゴー,macrobiotic_rashinban,cool,マンゴー,,
+mild (low-stimulant) beverages,刺激の強くない飲み物,macrobiotic_rashinban,neutral,刺激の強くない飲み物,,category
+milk,牛乳,macrobiotic_rashinban,cool,牛乳,,
+miso,味噌,macrobiotic_rashinban,neutral,味噌,,
+nightshade family,ナス科,macrobiotic_rashinban,cool,ナス科,,category
+nori,のり,macrobiotic_rashinban,neutral,のり,,
+nuts,ナッツ類,macrobiotic_rashinban,neutral,ナッツ類,,category
+onion,玉ねぎ,macrobiotic_rashinban,warm,玉ねぎ,,
+papaya,パパイヤ,macrobiotic_rashinban,cool,パパイヤ,,
+pheasant,きじ,macrobiotic_rashinban,warm,きじ,,
+pork,豚,macrobiotic_rashinban,warm,豚,,
+potato,ジャガイモ,macrobiotic_rashinban,cool,ジャガイモ,,
+pumpkin,カボチャ,macrobiotic_rashinban,warm,北海道のカボチャが一番陽性なのです,,
+refined grains,精製した穀物,macrobiotic_rashinban,cool,精製した穀物,,category
+refined sweeteners,精製した甘味料,macrobiotic_rashinban,cool,精製した甘味料,,category
+rice syrup,米あめ,macrobiotic_rashinban,neutral,米あめ,,
+root vegetable,根菜,macrobiotic_rashinban,warm,下に向かって育つにんじんは陽性と言えます。この性質から、一般的に根菜類は陽性と言えます。,,category
+salt,あら塩,macrobiotic_rashinban,neutral,あら塩,,
+salt,精製塩,macrobiotic_rashinban,warm,精製塩,,
+seafood,魚介,macrobiotic_rashinban,warm,魚介,,category
+sesame,胡麻,macrobiotic_rashinban,neutral,胡麻,,
+soy sauce,醤油,macrobiotic_rashinban,neutral,醤油,,
+spices,香辛料,macrobiotic_rashinban,cool,香辛料,,category
 spinach,ほうれん草,macrobiotic_rashinban,cool,"「ナトリウムを消す」（＝食べると
-陰性になってしまう）",
-sweet potato,さつまいも,macrobiotic_rashinban,cool,さつまいも,
-taro,里芋,macrobiotic_rashinban,cool,里芋,
-temperate fruits,温帯性の果物,macrobiotic_rashinban,neutral,温帯性の果物,
-tofu,豆腐,macrobiotic_rashinban,neutral,豆腐,
-tomato,トマト,macrobiotic_rashinban,cool,トマト,
-tsukemono,たくあん,macrobiotic_rashinban,neutral,たくあん,
-tuber vegetable,いも類,macrobiotic_rashinban,cool,いも類やナス科の植物は陰性が強い,
-umeboshi,梅干し,macrobiotic_rashinban,neutral,梅干し,
-unrefined natural sweeteners,精製していない自然甘味料,macrobiotic_rashinban,neutral,精製していない自然甘味料,
-vegetable oil,植物油,macrobiotic_rashinban,neutral,植物油,
-vinegar,酢,macrobiotic_rashinban,cool,香辛料をきかせたり酢を使ったりすると陰性になります,
-wakame,わかめ,macrobiotic_rashinban,neutral,わかめ,
-watermelon,スイカ,macrobiotic_rashinban,cool,スイカやキュウリなど、暑くなると自然に食べたくなるものは陰性であることが多いです,
-white rice,白米,macrobiotic_rashinban,cool,白米,
-white sugar,砂糖,macrobiotic_rashinban,cool,砂糖,
-whole grains,全粒穀物,macrobiotic_rashinban,neutral,全粒穀物,
-yogurt,ヨーグルト,macrobiotic_rashinban,cool,ヨーグルト,
-almond,アーモンド,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
-amazake,甘酒,oitr,warm,味噌・納豆・甘酒・キムチ・ぬか漬け・塩麹,
-apple,りんご,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
-aromatic condiments,薬味,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）,
-aromatic vegetables,香味野菜,oitr,warm,薬味・香味野菜,
-aromatic vegetables and flavorings,薬味・香味野菜,oitr,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材,
+陰性になってしまう）",,
+sweet potato,さつまいも,macrobiotic_rashinban,cool,さつまいも,,
+taro,里芋,macrobiotic_rashinban,cool,里芋,,
+temperate fruits,温帯性の果物,macrobiotic_rashinban,neutral,温帯性の果物,,category
+tofu,豆腐,macrobiotic_rashinban,neutral,豆腐,,
+tomato,トマト,macrobiotic_rashinban,cool,トマト,,
+tsukemono,たくあん,macrobiotic_rashinban,neutral,たくあん,,
+tuber vegetable,いも類,macrobiotic_rashinban,cool,いも類やナス科の植物は陰性が強い,,category
+umeboshi,梅干し,macrobiotic_rashinban,neutral,梅干し,,
+unrefined natural sweeteners,精製していない自然甘味料,macrobiotic_rashinban,neutral,精製していない自然甘味料,,category
+vegetable oil,植物油,macrobiotic_rashinban,neutral,植物油,,category
+vinegar,酢,macrobiotic_rashinban,cool,香辛料をきかせたり酢を使ったりすると陰性になります,,
+wakame,わかめ,macrobiotic_rashinban,neutral,わかめ,,
+watermelon,スイカ,macrobiotic_rashinban,cool,スイカやキュウリなど、暑くなると自然に食べたくなるものは陰性であることが多いです,,
+white rice,白米,macrobiotic_rashinban,cool,白米,,
+white sugar,砂糖,macrobiotic_rashinban,cool,砂糖,,
+whole grains,全粒穀物,macrobiotic_rashinban,neutral,全粒穀物,,category
+yogurt,ヨーグルト,macrobiotic_rashinban,cool,ヨーグルト,,
+almond,アーモンド,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category:寒冷地の果物・ナッツ
+amazake,甘酒,oitr,warm,味噌・納豆・甘酒・キムチ・ぬか漬け・塩麹,,
+apple,りんご,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category:寒冷地の果物・ナッツ
+aromatic condiments,薬味,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）,,category
+aromatic vegetables,香味野菜,oitr,warm,薬味・香味野菜,,category
+aromatic vegetables and flavorings,薬味・香味野菜,oitr,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材,,category
 banana,バナナ,oitr,cool,"❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）
-→ 温かい地域の果物は陰性食品に分類される。",
+→ 温かい地域の果物は陰性食品に分類される。",,
 bitter melon,ゴーヤ,oitr,cool,"❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）
-→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",
-black sesame,黒ごま,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
-burdock,ごぼう,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,
-canned sardine,いわし缶,oitr,warm,🐟 サバ缶・いわし缶,
-carrot,にんじん,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,
-chicken,鶏肉,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,
-chicken breast,むね肉,oitr,warm,鶏肉（特にむね肉）・卵・大豆製品（豆腐・納豆）・サバやイワシなどの青魚が特におすすめです。,
-chili pepper,唐辛子,oitr,warm,唐辛子に含まれるカプサイシンは、体を内側からアクティブに温める働きが注目されており、体が温まりやすいのが特徴です。,
-cinnamon,シナモン,oitr,warm,シナモンは香りで満足感が得やすく、体を温める食材として親しまれており、紅茶・コーヒー・ヨーグルトにかけるだけで手軽に取り入れられます。,
-cold-region fruit,寒冷地の果物,oitr,warm,寒冷地の果物・ナッツ,
-cold-region fruits and nuts,寒冷地の果物・ナッツ,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
+→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",,
+black sesame,黒ごま,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category:寒冷地の果物・ナッツ
+burdock,ごぼう,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,,
+canned sardine,いわし缶,oitr,warm,🐟 サバ缶・いわし缶,,dish
+carrot,にんじん,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,,
+chicken,鶏肉,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,,
+chicken breast,むね肉,oitr,warm,鶏肉（特にむね肉）・卵・大豆製品（豆腐・納豆）・サバやイワシなどの青魚が特におすすめです。,,category:たんぱく質
+chili pepper,唐辛子,oitr,warm,唐辛子に含まれるカプサイシンは、体を内側からアクティブに温める働きが注目されており、体が温まりやすいのが特徴です。,,
+cinnamon,シナモン,oitr,warm,シナモンは香りで満足感が得やすく、体を温める食材として親しまれており、紅茶・コーヒー・ヨーグルトにかけるだけで手軽に取り入れられます。,,
+cold-region fruit,寒冷地の果物,oitr,warm,寒冷地の果物・ナッツ,,category
+cold-region fruits and nuts,寒冷地の果物・ナッツ,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category
 cucumber,きゅうり,oitr,cool,"❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）
-→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",
-cup miso soup,カップ味噌汁,oitr,warm,🍵 カップ味噌汁・即席スープ,
-curry powder,カレー粉,oitr,warm,体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます。,
-daikon,大根,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,
-egg,卵,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,
+→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",,
+cup miso soup,カップ味噌汁,oitr,warm,🍵 カップ味噌汁・即席スープ,,dish
+curry powder,カレー粉,oitr,warm,体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます。,,category:スパイス・調味料
+daikon,大根,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,,
+egg,卵,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,,
 eggplant,なす,oitr,cool,"❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）
-→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",
-fermented foods,発酵食品,oitr,warm,「色が濃い・辛い・発酵している」食材は体を温めやすいとされています。,
-garlic,にんにく,oitr,warm,生姜・にんにく・ねぎ・玉ねぎ・にら・みょうが,
-ginger,生姜,oitr,warm,生姜に含まれるジンゲロール（生の状態）とショウガオール（加熱・乾燥後）は体を内側からぽかぽかに温める働きが期待されています。,
-grape,ぶどう,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
-green onion,ねぎ,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,
-instant soup,即席スープ,oitr,warm,🍵 カップ味噌汁・即席スープ,
-jujube,なつめ,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
-kimchi,キムチ,oitr,warm,温活食材の中でも「腸活×温活」の相乗効果が期待できるカテゴリです。,
+→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",,
+fermented foods,発酵食品,oitr,warm,「色が濃い・辛い・発酵している」食材は体を温めやすいとされています。,,category
+garlic,にんにく,oitr,warm,生姜・にんにく・ねぎ・玉ねぎ・にら・みょうが,,
+ginger,生姜,oitr,warm,生姜に含まれるジンゲロール（生の状態）とショウガオール（加熱・乾燥後）は体を内側からぽかぽかに温める働きが期待されています。,,
+grape,ぶどう,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category:寒冷地の果物・ナッツ
+green onion,ねぎ,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,,
+instant soup,即席スープ,oitr,warm,🍵 カップ味噌汁・即席スープ,,dish
+jujube,なつめ,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category:寒冷地の果物・ナッツ
+kimchi,キムチ,oitr,warm,温活食材の中でも「腸活×温活」の相乗効果が期待できるカテゴリです。,,category:発酵食品
 kiwi,キウイ,oitr,cool,"❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）
-→ 温かい地域の果物は陰性食品に分類される。",
-lotus root,れんこん,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,
-mackerel,サバ,oitr,warm,鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）,
+→ 温かい地域の果物は陰性食品に分類される。",,
+lotus root,れんこん,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,,
+mackerel,サバ,oitr,warm,鶏肉・豚肉・サバ・イワシ・卵・大豆製品（豆腐・納豆）,,
 mango,マンゴー,oitr,cool,"❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）
-→ 温かい地域の果物は陰性食品に分類される。",
-miso,味噌,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,
-mixed nuts,ミックスナッツ,oitr,warm,🥜 ミックスナッツ,
-myoga,みょうが,oitr,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材,
-natto,納豆,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,
-nira,にら,oitr,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材,
-nukazuke,ぬか漬け,oitr,warm,温活食材の中でも「腸活×温活」の相乗効果が期待できるカテゴリです。,
-nuts,ナッツ,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
-oily/blue-backed fish,青魚,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,
-onion,玉ねぎ,oitr,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材,
-pepper,こしょう,oitr,warm,シナモン・唐辛子・こしょう・カレー粉・山椒・ごま,
+→ 温かい地域の果物は陰性食品に分類される。",,
+miso,味噌,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,,
+mixed nuts,ミックスナッツ,oitr,warm,🥜 ミックスナッツ,,
+myoga,みょうが,oitr,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材,,category:薬味・香味野菜
+natto,納豆,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,,
+nira,にら,oitr,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材,,category:薬味・香味野菜
+nukazuke,ぬか漬け,oitr,warm,温活食材の中でも「腸活×温活」の相乗効果が期待できるカテゴリです。,,category:発酵食品
+nuts,ナッツ,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category:寒冷地の果物・ナッツ
+oily/blue-backed fish,青魚,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,,category
+onion,玉ねぎ,oitr,warm,生姜のジンゲロール・ショウガオールは内側からのめぐりが期待される代表的な温活食材,,category:薬味・香味野菜
+pepper,こしょう,oitr,warm,シナモン・唐辛子・こしょう・カレー粉・山椒・ごま,,
 pineapple,パイナップル,oitr,cool,"❄️ 南国の果物（バナナ・マンゴー・パイナップル・キウイ）
-→ 温かい地域の果物は陰性食品に分類される。",
-pork,豚肉,oitr,warm,筋肉量を維持するために良質なたんぱく質を毎日摂ることが、長期的な温活の土台になります。,
-protein-rich foods,たんぱく質,oitr,warm,温活食材の基本は根菜・生姜・発酵食品・スパイス・たんぱく質の5カテゴリ,
-pumpkin,かぼちゃ,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,
-quality protein,良質なたんぱく質,oitr,warm,筋肉量を維持するために良質なたんぱく質を毎日摂ることが、長期的な温活の土台になります。,
+→ 温かい地域の果物は陰性食品に分類される。",,
+pork,豚肉,oitr,warm,筋肉量を維持するために良質なたんぱく質を毎日摂ることが、長期的な温活の土台になります。,,category:たんぱく質
+protein-rich foods,たんぱく質,oitr,warm,温活食材の基本は根菜・生姜・発酵食品・スパイス・たんぱく質の5カテゴリ,,category
+pumpkin,かぼちゃ,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,,
+quality protein,良質なたんぱく質,oitr,warm,筋肉量を維持するために良質なたんぱく質を毎日摂ることが、長期的な温活の土台になります。,,category
 refined foods,精製食品,oitr,cool,"❄️ 白砂糖・精製食品
-→ 過剰摂取が血糖値の急上昇→急降下を招き、血行・体温調節に影響するとされる",
-root and winter vegetables,根菜・冬野菜,oitr,warm,「寒い地域・季節に育つもの（根菜・冬野菜）は温め」,
-root vegetables,根菜,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,
-salad chicken,サラダチキン,oitr,warm,🥚 ゆで卵・サラダチキン,
-sansho,山椒,oitr,warm,体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます。,
-sardine,イワシ,oitr,warm,筋肉量を維持するために良質なたんぱく質を毎日摂ることが、長期的な温活の土台になります。,
-seasonings,調味料,oitr,warm,スパイス・調味料,
-seeds and nuts,種実類,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
-sesame,ごま,oitr,warm,体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます。,
-shio koji,塩麹,oitr,warm,温活食材の中でも「腸活×温活」の相乗効果が期待できるカテゴリです。,
-spices,スパイス,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,
-spices and seasonings,スパイス・調味料,oitr,warm,体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます。,
+→ 過剰摂取が血糖値の急上昇→急降下を招き、血行・体温調節に影響するとされる",,category
+root and winter vegetables,根菜・冬野菜,oitr,warm,「寒い地域・季節に育つもの（根菜・冬野菜）は温め」,,category
+root vegetables,根菜,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,,category
+salad chicken,サラダチキン,oitr,warm,🥚 ゆで卵・サラダチキン,,dish
+sansho,山椒,oitr,warm,体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます。,,category:スパイス・調味料
+sardine,イワシ,oitr,warm,筋肉量を維持するために良質なたんぱく質を毎日摂ることが、長期的な温活の土台になります。,,category:たんぱく質
+seasonings,調味料,oitr,warm,スパイス・調味料,,category
+seeds and nuts,種実類,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category
+sesame,ごま,oitr,warm,体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます。,,category:スパイス・調味料
+shio koji,塩麹,oitr,warm,温活食材の中でも「腸活×温活」の相乗効果が期待できるカテゴリです。,,category:発酵食品
+spices,スパイス,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,,category
+spices and seasonings,スパイス・調味料,oitr,warm,体を温める食材は薬膳の考え方に基づき「陽性食品」と分類されます。,,category
 summer vegetables,夏野菜,oitr,cool,"❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）
-→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",
-sweet potato,さつまいも,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,
-tofu,豆腐,oitr,warm,筋肉量を維持するために良質なたんぱく質を毎日摂ることが、長期的な温活の土台になります。,
+→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",,category
+sweet potato,さつまいも,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,,
+tofu,豆腐,oitr,warm,筋肉量を維持するために良質なたんぱく質を毎日摂ることが、長期的な温活の土台になります。,,category:たんぱく質
 tomato,トマト,oitr,cool,"❄️ 夏野菜（トマト・きゅうり・なす・ゴーヤ）
-→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",
-tropical fruits,南国果物,oitr,cool,「暑い地域・季節に育つもの（夏野菜・南国果物）は冷やす」という傾向があります,
-walnut,くるみ,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,
+→ 暑い地域・季節に育つ野菜は体を冷やす傾向がある。",,
+tropical fruits,南国果物,oitr,cool,「暑い地域・季節に育つもの（夏野菜・南国果物）は冷やす」という傾向があります,,category
+walnut,くるみ,oitr,warm,寒い地域で育つ果物・種実類は体を温めるとされる。ビタミンEも豊富で内側からのめぐりをサポート,,category:寒冷地の果物・ナッツ
 white sugar,白砂糖,oitr,cool,"❄️ 白砂糖・精製食品
-→ 過剰摂取が血糖値の急上昇→急降下を招き、血行・体温調節に影響するとされる",
-winter vegetables,冬野菜,oitr,warm,寒い地域・季節に育つもの（根菜・冬野菜）は温め,
-adzuki bean,小豆,onkatsu_note,warm,└小豆・黒豆・かぼちゃ・にんじん・ひじきなど,
-alcohol,アルコール,onkatsu_note,cool,アルコール自体は一時的に温かく感じても深部体温を下げることがあるため、飲みすぎには注意が必要です。,
-amazake,甘酒,onkatsu_note,warm,冷え対策に向いている飲み物,
+→ 過剰摂取が血糖値の急上昇→急降下を招き、血行・体温調節に影響するとされる",,
+winter vegetables,冬野菜,oitr,warm,寒い地域・季節に育つもの（根菜・冬野菜）は温め,,category
+adzuki bean,小豆,onkatsu_note,warm,└小豆・黒豆・かぼちゃ・にんじん・ひじきなど,,
+alcohol,アルコール,onkatsu_note,cool,アルコール自体は一時的に温かく感じても深部体温を下げることがあるため、飲みすぎには注意が必要です。,,category
+amazake,甘酒,onkatsu_note,warm,冷え対策に向いている飲み物,,
 banana,バナナ,onkatsu_note,cool,"南国育ちの食材（バナナ・マンゴー・きゅうり・トマトなど）は体を冷やす性質がある
-とされています。夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です。季節に合わせた旬の食材選びが、自然な温活につながります。",
-beer,ビール,onkatsu_note,cool,ビールや炭酸系カクテルは体を冷やしやすい,
+とされています。夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です。季節に合わせた旬の食材選びが、自然な温活につながります。",,
+beer,ビール,onkatsu_note,cool,ビールや炭酸系カクテルは体を冷やしやすい,,
 black soybean,黒豆,onkatsu_note,warm,"温める性質があるとされる食材の色の目安
 赤・黒・オレンジ
 └小豆・黒豆・かぼちゃ・にんじん・ひじきなど
 発酵食品
-└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",
-black soybean tea,黒豆茶,onkatsu_note,warm,冷え対策に向いている飲み物,
+└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",,
+black soybean tea,黒豆茶,onkatsu_note,warm,冷え対策に向いている飲み物,,
 burdock,ごぼう,onkatsu_note,warm,"おすすめの根菜類
-にんじん・ごぼう・れんこん・大根・山芋・さつまいも",
-carbonated cocktail,炭酸系カクテル,onkatsu_note,cool,ビールや炭酸系カクテルは体を冷やしやすい,
+にんじん・ごぼう・れんこん・大根・山芋・さつまいも",,
+carbonated cocktail,炭酸系カクテル,onkatsu_note,cool,ビールや炭酸系カクテルは体を冷やしやすい,,category
 carrot,にんじん,onkatsu_note,warm,"土の中で育つ野菜は体を温める「陽」の性質を持つとされています。代表的な食材と活用方法を紹介します。
 おすすめの根菜類
-にんじん・ごぼう・れんこん・大根・山芋・さつまいも",
+にんじん・ごぼう・れんこん・大根・山芋・さつまいも",,
 cucumber,きゅうり,onkatsu_note,cool,"南国育ちの食材（バナナ・マンゴー・きゅうり・トマトなど）は体を冷やす性質がある
-とされています。夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です。季節に合わせた旬の食材選びが、自然な温活につながります。",
+とされています。夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です。季節に合わせた旬の食材選びが、自然な温活につながります。",,
 daikon,大根,onkatsu_note,warm,"おすすめの根菜類
-にんじん・ごぼう・れんこん・大根・山芋・さつまいも",
-egg,ゆでたまご,onkatsu_note,warm,コンビニ温活フードの選び方,
-fennel,フェンネル,onkatsu_note,warm,血行をサポートするスパイスも、冷え対策に役立つとされています。,
-fermented foods,発酵食品,onkatsu_note,warm,発酵食品・腸活で体の内側から温活をサポートする,
-fried food,揚げ物,onkatsu_note,cool,揚げ物・スイーツ・アイス類は内臓を冷やしやすい,
-garlic,にんにく,onkatsu_note,warm,血行をサポートする食材（生姜・にんにく・ビタミンE）,
-ginger,生姜,onkatsu_note,warm,生姜は生で食べるよりも加熱することで温め成分が増すとされています。生の生姜に含まれる「ジンゲロール」は加熱により「ショウガオール」に変化し、体の芯から温める働きがあるとされています。,
+にんじん・ごぼう・れんこん・大根・山芋・さつまいも",,
+egg,ゆでたまご,onkatsu_note,warm,コンビニ温活フードの選び方,,
+fennel,フェンネル,onkatsu_note,warm,血行をサポートするスパイスも、冷え対策に役立つとされています。,,
+fermented foods,発酵食品,onkatsu_note,warm,発酵食品・腸活で体の内側から温活をサポートする,,category
+fried food,揚げ物,onkatsu_note,cool,揚げ物・スイーツ・アイス類は内臓を冷やしやすい,,category
+garlic,にんにく,onkatsu_note,warm,血行をサポートする食材（生姜・にんにく・ビタミンE）,,
+ginger,生姜,onkatsu_note,warm,生姜は生で食べるよりも加熱することで温め成分が増すとされています。生の生姜に含まれる「ジンゲロール」は加熱により「ショウガオール」に変化し、体の芯から温める働きがあるとされています。,,
 hijiki,ひじき,onkatsu_note,warm,"温める性質があるとされる食材の色の目安
 赤・黒・オレンジ
 └小豆・黒豆・かぼちゃ・にんじん・ひじきなど
 発酵食品
-└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",
-hojicha,ほうじ茶,onkatsu_note,warm,冷え対策に向いている飲み物,
-kombu,昆布,onkatsu_note,warm,具材は鮭・梅干し・昆布など陽性のものを,
-long pepper,ヒハツ,onkatsu_note,warm,血行をサポートするスパイスも、冷え対策に役立つとされています。,
+└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",,
+hojicha,ほうじ茶,onkatsu_note,warm,冷え対策に向いている飲み物,,
+kombu,昆布,onkatsu_note,warm,具材は鮭・梅干し・昆布など陽性のものを,,
+long pepper,ヒハツ,onkatsu_note,warm,血行をサポートするスパイスも、冷え対策に役立つとされています。,,
 lotus root,れんこん,onkatsu_note,warm,"おすすめの根菜類
-にんじん・ごぼう・れんこん・大根・山芋・さつまいも",
+にんじん・ごぼう・れんこん・大根・山芋・さつまいも",,
 mango,マンゴー,onkatsu_note,cool,"南国育ちの食材（バナナ・マンゴー・きゅうり・トマトなど）は体を冷やす性質がある
-とされています。夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です。季節に合わせた旬の食材選びが、自然な温活につながります。",
-miso,味噌,onkatsu_note,warm,└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）,
+とされています。夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です。季節に合わせた旬の食材選びが、自然な温活につながります。",,
+miso,味噌,onkatsu_note,warm,└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）,,
 natto,納豆,onkatsu_note,warm,"温める性質があるとされる食材の色の目安
 赤・黒・オレンジ
 └小豆・黒豆・かぼちゃ・にんじん・ひじきなど
 発酵食品
-└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",
+└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",,
 nukazuke,ぬか漬け,onkatsu_note,warm,"温める性質があるとされる食材の色の目安
 赤・黒・オレンジ
 └小豆・黒豆・かぼちゃ・にんじん・ひじきなど
 発酵食品
-└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",
-pork,豚肉,onkatsu_note,warm,豚汁の温活食材の組み合わせ例,
-pork miso soup,豚汁,onkatsu_note,warm,豚肉のビタミンB群・根菜の食物繊維・味噌の発酵成分が揃う豚汁は、一度に多くの温活食材を摂れる一品,
+└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",,
+pork,豚肉,onkatsu_note,warm,豚汁の温活食材の組み合わせ例,,
+pork miso soup,豚汁,onkatsu_note,warm,豚肉のビタミンB群・根菜の食物繊維・味噌の発酵成分が揃う豚汁は、一度に多くの温活食材を摂れる一品,,dish
 pumpkin,かぼちゃ,onkatsu_note,warm,"温める性質があるとされる食材の色の目安
 赤・黒・オレンジ
 └小豆・黒豆・かぼちゃ・にんじん・ひじきなど
 発酵食品
-└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",
-red wine,赤ワイン,onkatsu_note,warm,アミノ酸を含む日本酒や、ポリフェノール豊富な赤ワインが比較的向いている,
-rice ball,おにぎり,onkatsu_note,warm,コンビニ温活フードの選び方,
-root vegetable soup,根菜スープ,onkatsu_note,warm,お米・根菜スープ・ゆでたまご,
-root vegetables,根菜,onkatsu_note,warm,根菜の温め効果,
-sake,日本酒,onkatsu_note,warm,アミノ酸を含む日本酒や、ポリフェノール豊富な赤ワインが比較的向いている,
-salmon,鮭,onkatsu_note,warm,具材は鮭・梅干し・昆布など陽性のものを,
+└味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）",,
+red wine,赤ワイン,onkatsu_note,warm,アミノ酸を含む日本酒や、ポリフェノール豊富な赤ワインが比較的向いている,,
+rice ball,おにぎり,onkatsu_note,warm,コンビニ温活フードの選び方,,dish
+root vegetable soup,根菜スープ,onkatsu_note,warm,お米・根菜スープ・ゆでたまご,,dish
+root vegetables,根菜,onkatsu_note,warm,根菜の温め効果,,category
+sake,日本酒,onkatsu_note,warm,アミノ酸を含む日本酒や、ポリフェノール豊富な赤ワインが比較的向いている,,
+salmon,鮭,onkatsu_note,warm,具材は鮭・梅干し・昆布など陽性のものを,,
 sansho,山椒,onkatsu_note,warm,"山椒
-└胃腸を温めて消化をサポートするとされています。鍋料理・焼き魚・汁物に◎",
-spices,スパイス,onkatsu_note,warm,血行をサポートするスパイスも、冷え対策に役立つとされています。,
-star anise,八角,onkatsu_note,warm,血行をサポートするスパイスも、冷え対策に役立つとされています。,
-summer vegetables,夏野菜,onkatsu_note,cool,夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です,
+└胃腸を温めて消化をサポートするとされています。鍋料理・焼き魚・汁物に◎",,
+spices,スパイス,onkatsu_note,warm,血行をサポートするスパイスも、冷え対策に役立つとされています。,,category
+star anise,八角,onkatsu_note,warm,血行をサポートするスパイスも、冷え対策に役立つとされています。,,
+summer vegetables,夏野菜,onkatsu_note,cool,夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です,,category
 sweet potato,さつまいも,onkatsu_note,warm,"おすすめの根菜類
-にんじん・ごぼう・れんこん・大根・山芋・さつまいも",
-sweets,スイーツ,onkatsu_note,cool,揚げ物・スイーツ・アイス類は内臓を冷やしやすい,
+にんじん・ごぼう・れんこん・大根・山芋・さつまいも",,
+sweets,スイーツ,onkatsu_note,cool,揚げ物・スイーツ・アイス類は内臓を冷やしやすい,,category
 tomato,トマト,onkatsu_note,cool,"南国育ちの食材（バナナ・マンゴー・きゅうり・トマトなど）は体を冷やす性質がある
-とされています。夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です。季節に合わせた旬の食材選びが、自然な温活につながります。",
-umeboshi,梅干し,onkatsu_note,warm,具材は鮭・梅干し・昆布など陽性のものを,
-white rice,お米,onkatsu_note,warm,お米は体を温める性質があるとされています,
+とされています。夏野菜は食べる量を控えめにするか、加熱して食べるなどの工夫が必要です。季節に合わせた旬の食材選びが、自然な温活につながります。",,
+umeboshi,梅干し,onkatsu_note,warm,具材は鮭・梅干し・昆布など陽性のものを,,
+white rice,お米,onkatsu_note,warm,お米は体を温める性質があるとされています,,
 yam,山芋,onkatsu_note,warm,"おすすめの根菜類
-にんじん・ごぼう・れんこん・大根・山芋・さつまいも",
-acerola,アセロラ,prezo,warm,アセロラ,
-almond,アーモンド,prezo,warm,アーモンド,
-apple,りんご,prezo,warm,かぼちゃやにんじん、りんごなどは暖色系で体を温める代表的な食べ物,
-aromatic garnish vegetables,薬味野菜,prezo,warm,薬味野菜（ねぎやしょうがなど）,
-banana,バナナ,prezo,cool,バナナやマンゴーなどは南国原産のフルーツで、水分量も多く体を冷やす食べ物ですが、,
+にんじん・ごぼう・れんこん・大根・山芋・さつまいも",,
+acerola,アセロラ,prezo,warm,アセロラ,,
+almond,アーモンド,prezo,warm,アーモンド,,
+apple,りんご,prezo,warm,かぼちゃやにんじん、りんごなどは暖色系で体を温める代表的な食べ物,,
+aromatic garnish vegetables,薬味野菜,prezo,warm,薬味野菜（ねぎやしょうがなど）,,category
+banana,バナナ,prezo,cool,バナナやマンゴーなどは南国原産のフルーツで、水分量も多く体を冷やす食べ物ですが、,,
 bancha,番茶,prezo,warm,"ほうじ茶（番茶）
-などは寝る前に飲むと体が温まり",
-beef,牛肉,prezo,warm,牛肉,
-bell pepper,パプリカ,prezo,warm,パプリカ,
+などは寝る前に飲むと体が温まり",,
+beef,牛肉,prezo,warm,牛肉,,
+bell pepper,パプリカ,prezo,warm,パプリカ,,
 black tea,紅茶,prezo,warm,"紅茶や中国茶、
 ほうじ茶（番茶）
-などは寝る前に飲むと体が温まり、眠りやすくなるとされています。",
-blue-skinned fish,青魚,prezo,warm,青魚（あじなど）,
-broccoli,ブロッコリー,prezo,warm,ブロッコリー,
-brown rice,玄米,prezo,warm,玄米,
-buckwheat,そば,prezo,warm,そば,
-burdock,ごぼう,prezo,warm,にんじんやごぼうなどは体を温める代表的な根菜類です。,
-cabbage,キャベツ,prezo,cool,それに対してレタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります,
-carrot,にんじん,prezo,warm,にんじん,
-cheese,チーズ,prezo,warm,たとえば、さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです。,
-chemical seasonings,化学調味料,prezo,cool,化学調味料,
-cherry,さくらんぼ,prezo,warm,さくらんぼ,
-chicken,鶏肉,prezo,warm,鶏肉,
-chili pepper,とうがらし,prezo,warm,とうがらし,
-chinese cabbage,白菜,prezo,cool,それに対してレタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります,
+などは寝る前に飲むと体が温まり、眠りやすくなるとされています。",,
+blue-skinned fish,青魚,prezo,warm,青魚（あじなど）,,category
+broccoli,ブロッコリー,prezo,warm,ブロッコリー,,
+brown rice,玄米,prezo,warm,玄米,,
+buckwheat,そば,prezo,warm,そば,,
+burdock,ごぼう,prezo,warm,にんじんやごぼうなどは体を温める代表的な根菜類です。,,
+cabbage,キャベツ,prezo,cool,それに対してレタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります,,
+carrot,にんじん,prezo,warm,にんじん,,
+cheese,チーズ,prezo,warm,たとえば、さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです。,,
+chemical seasonings,化学調味料,prezo,cool,化学調味料,,category
+cherry,さくらんぼ,prezo,warm,さくらんぼ,,
+chicken,鶏肉,prezo,warm,鶏肉,,
+chili pepper,とうがらし,prezo,warm,とうがらし,,
+chinese cabbage,白菜,prezo,cool,それに対してレタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります,,
 chinese tea,中国茶,prezo,warm,"紅茶や中国茶、
 ほうじ茶（番茶）
-などは寝る前に飲むと体が温まり、眠りやすくなるとされています。",
-cinnamon,シナモン,prezo,warm,シナモン,
-citrus,柑橘類,prezo,warm,柑橘類,
-cocoa,ココア,prezo,warm,ココア,
-cucumber,きゅうり,prezo,cool,きゅうり,
-daikon,大根,prezo,cool,大根は冬が旬の根菜類ですが、水分が多いため体を冷やす食べ物に分類されます。,
-dried daikon,切り干し大根,prezo,warm,柿は干し柿に、大根は切り干し大根に加工することで、体を冷やす食べ物から体を温める食べ物に変わります。,
-dried fish,干物,prezo,warm,干物や乾物は体を温める特徴を持っていることがあります。,
-dried goods,乾物,prezo,warm,干物や乾物は体を温める特徴を持っていることがあります。,
-dried persimmon,干し柿,prezo,warm,柿は干し柿に、大根は切り干し大根に加工することで、体を冷やす食べ物から体を温める食べ物に変わります。,
-eel,うなぎ,prezo,warm,うなぎ,
-egg,卵,prezo,warm,卵,
-eggplant,なす,prezo,cool,それに対してレタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります,
-fermented foods,発酵食品,prezo,warm,根菜類や発酵食品は体を温めるものが多い,
-fermented products,発酵商品,prezo,warm,根菜類や発酵商品は体を温める食べ物が多いので,
-flaxseed oil,あまに油,prezo,warm,あまに油,
-ginger,しょうが,prezo,warm,しょうがには発汗を促す作用があり体の芯から温めてくれます,
-ginger black tea,ジンジャー入り紅茶,prezo,warm,ジンジャー入り紅茶,
-ginger tea,しょうが紅茶,prezo,warm,しょうが紅茶,
-grape,ぶどう,prezo,warm,ぶどう,
-green onion,ねぎ,prezo,warm,薬味野菜（ねぎやしょうがなど）,
-grilled fish,焼き魚,prezo,warm,体を温めるおすすめの料理には次のものがあります,
+などは寝る前に飲むと体が温まり、眠りやすくなるとされています。",,category
+cinnamon,シナモン,prezo,warm,シナモン,,
+citrus,柑橘類,prezo,warm,柑橘類,,category
+cocoa,ココア,prezo,warm,ココア,,
+cucumber,きゅうり,prezo,cool,きゅうり,,
+daikon,大根,prezo,cool,大根は冬が旬の根菜類ですが、水分が多いため体を冷やす食べ物に分類されます。,,
+dried daikon,切り干し大根,prezo,warm,柿は干し柿に、大根は切り干し大根に加工することで、体を冷やす食べ物から体を温める食べ物に変わります。,,
+dried fish,干物,prezo,warm,干物や乾物は体を温める特徴を持っていることがあります。,,category
+dried goods,乾物,prezo,warm,干物や乾物は体を温める特徴を持っていることがあります。,,category
+dried persimmon,干し柿,prezo,warm,柿は干し柿に、大根は切り干し大根に加工することで、体を冷やす食べ物から体を温める食べ物に変わります。,,
+eel,うなぎ,prezo,warm,うなぎ,,
+egg,卵,prezo,warm,卵,,
+eggplant,なす,prezo,cool,それに対してレタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります,,
+fermented foods,発酵食品,prezo,warm,根菜類や発酵食品は体を温めるものが多い,,category
+fermented products,発酵商品,prezo,warm,根菜類や発酵商品は体を温める食べ物が多いので,,category
+flaxseed oil,あまに油,prezo,warm,あまに油,,
+ginger,しょうが,prezo,warm,しょうがには発汗を促す作用があり体の芯から温めてくれます,,
+ginger black tea,ジンジャー入り紅茶,prezo,warm,ジンジャー入り紅茶,,dish
+ginger tea,しょうが紅茶,prezo,warm,しょうが紅茶,,dish
+grape,ぶどう,prezo,warm,ぶどう,,
+green onion,ねぎ,prezo,warm,薬味野菜（ねぎやしょうがなど）,,
+grilled fish,焼き魚,prezo,warm,体を温めるおすすめの料理には次のものがあります,,dish
 hojicha,ほうじ茶,prezo,warm,"紅茶や中国茶、
 ほうじ茶（番茶）
-などは寝る前に飲むと体が温まり、眠りやすくなるとされています。",
-horse mackerel,あじ,prezo,warm,青魚（あじなど）,
-horse meat,馬肉,prezo,cool,豚肉や馬肉は体を冷やす傾向にあります,
-kimchi,キムチ,prezo,warm,チーズやキムチも体を温める発酵食品のひとつです。,
-komatsuna,小松菜,prezo,warm,たとえば、さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです。,
-lamb,羊肉,prezo,warm,羊肉は体を温める肉の代表,
-lettuce,レタス,prezo,cool,レタス,
-lotus root,れんこん,prezo,warm,れんこん,
-mandarin orange,みかん,prezo,warm,オレンジ、みかん,
-mango,マンゴー,prezo,cool,バナナやマンゴーなどは南国原産のフルーツで、水分量も多く体を冷やす食べ物ですが、,
-meat,肉,prezo,warm,そのため肉は全般的に体を温める食べ物ですが,
-melon,メロン,prezo,cool,体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です,
-milk,牛乳,prezo,cool,牛乳,
-miso,味噌,prezo,warm,発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります。,
-miso soup,みそ汁,prezo,warm,みそ汁,
-natto,納豆,prezo,warm,発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります,
-nira,にら,prezo,warm,たとえば、さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです。,
-nuts,ナッツ類,prezo,warm,ナッツ類,
-onion,たまねぎ,prezo,warm,たまねぎ,
-orange,オレンジ,prezo,warm,オレンジ、みかん,
-persimmon,柿,prezo,cool,ただし、トマトや柿は体を冷やす特徴があり、暖色系の食べ物でも例外はあります。,
-pineapple,パイナップル,prezo,cool,体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です,
-pork,豚肉,prezo,cool,豚肉や馬肉は体を冷やす傾向にあります,
-potato,じゃがいも,prezo,warm,じゃがいも,
-pu-erh tea,プーアール茶,prezo,warm,プーアール茶,
-pumpkin,かぼちゃ,prezo,warm,かぼちゃやにんじん、りんごなどは暖色系で体を温める代表的な食べ物,
-rapeseed oil,なたね油,prezo,warm,なたね油,
-red wine,赤ワイン,prezo,warm,赤ワイン,
-red-fleshed fish,赤身魚,prezo,warm,赤身魚（まぐろなど）,
-rooibos tea,ルイボスティー,prezo,warm,ルイボスティー,
-root vegetable soup,根菜の入ったスープ,prezo,warm,根菜の入ったスープ,
-root vegetables,根菜類,prezo,warm,根菜類や発酵食品は体を温めるものが多い,
-sake,日本酒,prezo,warm,日本酒,
-sansho,山椒,prezo,warm,山椒,
-soy sauce,醤油,prezo,warm,発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります。,
-soybean,大豆,prezo,neutral,大豆には体を温める・冷やす作用はありませんが、,
-spices,香辛料,prezo,warm,少量で体を温めてくれる,
-sweet potato,さつまいも,prezo,warm,さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです,
-tomato,トマト,prezo,cool,ただし、トマトや柿は体を冷やす特徴があり、暖色系の食べ物でも例外はあります。,
-tuna,まぐろ,prezo,warm,赤身魚（まぐろなど）,
-watermelon,スイカ,prezo,cool,体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です,
-white fish,白身魚,prezo,neutral,白身魚は温めも冷やしもしないとされています,
-white rice,白米,prezo,warm,白米のアミノ酸には血管を拡張して体を温めるはたらきがあります,
-white sugar,白砂糖,prezo,cool,白砂糖,
-yam,山芋,prezo,warm,山芋,
-yellow-green vegetables,緑黄色野菜,prezo,warm,緑黄色野菜,
-animal fat,動物性脂肪,yomeishu,cool,肉 ...... 馬肉、鴨肉、動物性脂肪など,
-asari clam,あさり,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-banana,バナナ,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,
-barley,大麦,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,
-beet sugar,てんさい糖,yomeishu,warm,ただし、色が濃い玄米や黒糖、てんさい糖、ハチミツなどは陽性の食材です。,
-bitter melon,ゴーヤ,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-bok choy,チンゲン菜,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-brown rice,玄米,yomeishu,warm,見分け方: 色が濃い玄米は陽性,
-brown sugar,黒糖,yomeishu,warm,ただし、色が濃い玄米や黒糖、てんさい糖、ハチミツなどは陽性の食材です。,
-buckwheat,そば,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,
-burdock,ごぼう,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,
-carrot,人参,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,
-celery,セロリ,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-chicken,鶏むね肉,yomeishu,warm,冷え性を改善する体を温める食べ物には、生姜やねぎ、タンパク質を含んだ鶏むね肉や、ビタミンEを含んだかぼちゃなどが挙げられます。,
-chinese cabbage,白菜,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-crab,カニ,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-cucumber,きゅうり,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-duck meat,鴨肉,yomeishu,cool,肉 ...... 馬肉、鴨肉、動物性脂肪など,
-edamame,枝豆,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,
-eggplant,なす,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-ginger,生姜,yomeishu,warm,生姜を加熱すると、ジンゲロールの一部がショウガオールという成分に変化し、体を温める効果が高くなります。,
-green onion,ねぎ,yomeishu,warm,ねぎの香りに含まれる成分には体温を上昇させる効果があります。,
-hamaguri clam,はまぐり,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-hijiki,ひじき,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-honey,ハチミツ,yomeishu,warm,ただし、色が濃い玄米や黒糖、てんさい糖、ハチミツなどは陽性の食材です。,
-horse meat,馬肉,yomeishu,cool,肉 ...... 馬肉、鴨肉、動物性脂肪など,
-kiwi,キウイ,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,
-konjac,こんにゃく,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,
-mandarin orange,みかん,yomeishu,warm,体を温める食べ物と栄養素,
-mango,マンゴー,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,
-meat,肉,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,
-melon,メロン,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,
-miso,味噌,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,
-mung bean,緑豆,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,
-nori,のり,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-octopus,タコ,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-oyster,牡蠣,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-oyster sauce,オイスターソース,yomeishu,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど,
-pear,梨,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,
-persimmon,柿,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,
-pork liver,豚レバー,yomeishu,warm,体を温める食べ物と栄養素,
-pumpkin,かぼちゃ,yomeishu,warm,冷え性を改善する体を温める食べ物には、生姜やねぎ、タンパク質を含んだ鶏むね肉や、ビタミンEを含んだかぼちゃなどが挙げられます。,
-radish sprouts,かいわれ大根,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-rapeseed oil,菜種油,yomeishu,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど,
-raw vegetables,生野菜,yomeishu,cool,生野菜も体を冷やしやすいので加熱調理がおすすめです。,
-root vegetables,根菜類,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,
-sesame oil,ごま油,yomeishu,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど,
-shijimi clam,しじみ,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-spinach,ほうれん草,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-strawberry,いちご,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,
-summer vegetables,夏が旬の野菜,yomeishu,cool,「体を温める食べ物」とは対照的に、暑い地域でとれるもの、夏が旬の野菜、土より上に育つもの、白米や砂糖など白や黄色といった色が薄いものが当てはまります。,
-tofu,豆腐,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,
-tomato,トマト,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
-vinegar,酢,yomeishu,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど,
-wakame,わかめ,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,
-watermelon,スイカ,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,
-wheat,小麦,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,
-white rice,白米,yomeishu,cool,白米や砂糖など白や黄色といった色が薄いものが当てはまります。,
-white sugar,砂糖,yomeishu,cool,白米や砂糖など白や黄色といった色が薄いものが当てはまります。,
-winter melon,冬瓜,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,
+などは寝る前に飲むと体が温まり、眠りやすくなるとされています。",,
+horse mackerel,あじ,prezo,warm,青魚（あじなど）,,
+horse meat,馬肉,prezo,cool,豚肉や馬肉は体を冷やす傾向にあります,,
+kimchi,キムチ,prezo,warm,チーズやキムチも体を温める発酵食品のひとつです。,,
+komatsuna,小松菜,prezo,warm,たとえば、さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです。,,
+lamb,羊肉,prezo,warm,羊肉は体を温める肉の代表,,
+lettuce,レタス,prezo,cool,レタス,,
+lotus root,れんこん,prezo,warm,れんこん,,
+mandarin orange,みかん,prezo,warm,オレンジ、みかん,,
+mango,マンゴー,prezo,cool,バナナやマンゴーなどは南国原産のフルーツで、水分量も多く体を冷やす食べ物ですが、,,
+meat,肉,prezo,warm,そのため肉は全般的に体を温める食べ物ですが,,category
+melon,メロン,prezo,cool,体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です,,
+milk,牛乳,prezo,cool,牛乳,,
+miso,味噌,prezo,warm,発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります。,,
+miso soup,みそ汁,prezo,warm,みそ汁,,dish
+natto,納豆,prezo,warm,発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります,,
+nira,にら,prezo,warm,たとえば、さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです。,,
+nuts,ナッツ類,prezo,warm,ナッツ類,,category
+onion,たまねぎ,prezo,warm,たまねぎ,,
+orange,オレンジ,prezo,warm,オレンジ、みかん,,
+persimmon,柿,prezo,cool,ただし、トマトや柿は体を冷やす特徴があり、暖色系の食べ物でも例外はあります。,,
+pineapple,パイナップル,prezo,cool,体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です,,
+pork,豚肉,prezo,cool,豚肉や馬肉は体を冷やす傾向にあります,,
+potato,じゃがいも,prezo,warm,じゃがいも,,
+pu-erh tea,プーアール茶,prezo,warm,プーアール茶,,
+pumpkin,かぼちゃ,prezo,warm,かぼちゃやにんじん、りんごなどは暖色系で体を温める代表的な食べ物,,
+rapeseed oil,なたね油,prezo,warm,なたね油,,
+red wine,赤ワイン,prezo,warm,赤ワイン,,
+red-fleshed fish,赤身魚,prezo,warm,赤身魚（まぐろなど）,,category
+rooibos tea,ルイボスティー,prezo,warm,ルイボスティー,,
+root vegetable soup,根菜の入ったスープ,prezo,warm,根菜の入ったスープ,,dish
+root vegetables,根菜類,prezo,warm,根菜類や発酵食品は体を温めるものが多い,,category
+sake,日本酒,prezo,warm,日本酒,,
+sansho,山椒,prezo,warm,山椒,,
+soy sauce,醤油,prezo,warm,発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります。,,
+soybean,大豆,prezo,neutral,大豆には体を温める・冷やす作用はありませんが、,,
+spices,香辛料,prezo,warm,少量で体を温めてくれる,,category
+sweet potato,さつまいも,prezo,warm,さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです,,
+tomato,トマト,prezo,cool,ただし、トマトや柿は体を冷やす特徴があり、暖色系の食べ物でも例外はあります。,,
+tuna,まぐろ,prezo,warm,赤身魚（まぐろなど）,,
+watermelon,スイカ,prezo,cool,体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です,,
+white fish,白身魚,prezo,neutral,白身魚は温めも冷やしもしないとされています,,category
+white rice,白米,prezo,warm,白米のアミノ酸には血管を拡張して体を温めるはたらきがあります,,
+white sugar,白砂糖,prezo,cool,白砂糖,,
+yam,山芋,prezo,warm,山芋,,
+yellow-green vegetables,緑黄色野菜,prezo,warm,緑黄色野菜,,category
+animal fat,動物性脂肪,yomeishu,cool,肉 ...... 馬肉、鴨肉、動物性脂肪など,,category
+asari clam,あさり,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+banana,バナナ,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,,
+barley,大麦,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,,
+beet sugar,てんさい糖,yomeishu,warm,ただし、色が濃い玄米や黒糖、てんさい糖、ハチミツなどは陽性の食材です。,,
+bitter melon,ゴーヤ,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+bok choy,チンゲン菜,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+brown rice,玄米,yomeishu,warm,見分け方: 色が濃い玄米は陽性,,
+brown sugar,黒糖,yomeishu,warm,ただし、色が濃い玄米や黒糖、てんさい糖、ハチミツなどは陽性の食材です。,,
+buckwheat,そば,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,,
+burdock,ごぼう,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,,
+carrot,人参,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,,
+celery,セロリ,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+chicken,鶏むね肉,yomeishu,warm,冷え性を改善する体を温める食べ物には、生姜やねぎ、タンパク質を含んだ鶏むね肉や、ビタミンEを含んだかぼちゃなどが挙げられます。,,
+chinese cabbage,白菜,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+crab,カニ,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+cucumber,きゅうり,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+duck meat,鴨肉,yomeishu,cool,肉 ...... 馬肉、鴨肉、動物性脂肪など,,
+edamame,枝豆,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,,
+eggplant,なす,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+ginger,生姜,yomeishu,warm,生姜を加熱すると、ジンゲロールの一部がショウガオールという成分に変化し、体を温める効果が高くなります。,,
+green onion,ねぎ,yomeishu,warm,ねぎの香りに含まれる成分には体温を上昇させる効果があります。,,
+hamaguri clam,はまぐり,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+hijiki,ひじき,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+honey,ハチミツ,yomeishu,warm,ただし、色が濃い玄米や黒糖、てんさい糖、ハチミツなどは陽性の食材です。,,
+horse meat,馬肉,yomeishu,cool,肉 ...... 馬肉、鴨肉、動物性脂肪など,,
+kiwi,キウイ,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,,
+konjac,こんにゃく,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,,
+mandarin orange,みかん,yomeishu,warm,体を温める食べ物と栄養素,,
+mango,マンゴー,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,,
+meat,肉,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,,category
+melon,メロン,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,,
+miso,味噌,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,,
+mung bean,緑豆,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,,
+nori,のり,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+octopus,タコ,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+oyster,牡蠣,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+oyster sauce,オイスターソース,yomeishu,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど,,
+pear,梨,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,,
+persimmon,柿,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,,
+pork liver,豚レバー,yomeishu,warm,体を温める食べ物と栄養素,,
+pumpkin,かぼちゃ,yomeishu,warm,冷え性を改善する体を温める食べ物には、生姜やねぎ、タンパク質を含んだ鶏むね肉や、ビタミンEを含んだかぼちゃなどが挙げられます。,,
+radish sprouts,かいわれ大根,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+rapeseed oil,菜種油,yomeishu,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど,,
+raw vegetables,生野菜,yomeishu,cool,生野菜も体を冷やしやすいので加熱調理がおすすめです。,,category
+root vegetables,根菜類,yomeishu,warm,地中でまっすぐ育つもの、肉や赤身の魚、人参やごぼうなどの根菜類、味噌など色が濃いものも「陽性」に分類されます。,,category
+sesame oil,ごま油,yomeishu,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど,,
+shijimi clam,しじみ,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+spinach,ほうれん草,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+strawberry,いちご,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,,
+summer vegetables,夏が旬の野菜,yomeishu,cool,「体を温める食べ物」とは対照的に、暑い地域でとれるもの、夏が旬の野菜、土より上に育つもの、白米や砂糖など白や黄色といった色が薄いものが当てはまります。,,category
+tofu,豆腐,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,,
+tomato,トマト,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,
+vinegar,酢,yomeishu,cool,調味料 ...... 酢、白砂糖、ごま油、菜種油、オイスターソースなど,,
+wakame,わかめ,yomeishu,cool,魚介類 ...... 牡蠣、あさり、しじみ、はまぐり、カニ、タコ、わかめ、ひじき、のりなど,,
+watermelon,スイカ,yomeishu,cool,果物 ...... いちご、バナナ、スイカ、柿、梨、メロン、キウイ、マンゴーなど,,
+wheat,小麦,yomeishu,cool,穀物・豆類 ...... 小麦、大麦、そば、枝豆、豆腐、緑豆、こんにゃくなど,,
+white rice,白米,yomeishu,cool,白米や砂糖など白や黄色といった色が薄いものが当てはまります。,,
+white sugar,砂糖,yomeishu,cool,白米や砂糖など白や黄色といった色が薄いものが当てはまります。,,
+winter melon,冬瓜,yomeishu,cool,野菜 ...... きゅうり、トマト、白菜、なす、ゴーヤ、ほうれん草、チンゲン菜、セロリ、かいわれ大根、冬瓜など,,

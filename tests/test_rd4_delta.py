@@ -91,9 +91,9 @@ class TestBuildClaims:
 
         inc = pd.DataFrame([
             {"source_id": "s1", "food_ja": "すりおろし生姜", "food_en": "ginger",
-             "direction": "warm", "quote": "q1"},
+             "direction": "warm", "quote": "q1", "sublabels": ""},
             {"source_id": "s1", "food_ja": "生姜", "food_en": "ginger",
-             "direction": "warm", "quote": "q2"},
+             "direction": "warm", "quote": "q2", "sublabels": ""},
         ])
         out = collapse(inc)
         assert len(out) == 1
@@ -106,9 +106,9 @@ class TestBuildClaims:
 
         inc = pd.DataFrame([
             {"source_id": "s1", "food_ja": "豆腐（冷たい）", "food_en": "tofu",
-             "direction": "cool", "quote": "q1"},
+             "direction": "cool", "quote": "q1", "sublabels": ""},
             {"source_id": "s1", "food_ja": "豆腐（温かい）", "food_en": "tofu",
-             "direction": "warm", "quote": "q2"},
+             "direction": "warm", "quote": "q2", "sublabels": ""},
         ])
         assert len(collapse(inc)) == 2
 

@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "77"
+  },
+  "_query": "(mizuna[tiab] OR \"potherb mustard\"[tiab])"
+}

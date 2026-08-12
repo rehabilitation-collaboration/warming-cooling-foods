@@ -1,0 +1,58 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%95%AA%E8%8C%B6&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 番茶 1 json",
+  "description": "CiNii Research all - 番茶 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%95%AA%E8%8C%B6&count=1&format=json"
+  },
+  "dc:date": "2026-08-12T12:00:13.062+09:00",
+  "opensearch:totalResults": 815,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1970867909741680144",
+      "@type": "item",
+      "title": "番茶",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1970867909741680144"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1970867909741680144.json"
+      },
+      "dc:creator": [
+        "川柳番茶會"
+      ],
+      "dc:publisher": "川柳番茶會",
+      "dc:type": "Book",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "AA1209640X"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/AA1209640X#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/AA1209640X#entity"
+        }
+      ]
+    }
+  ],
+  "_query": "番茶"
+}

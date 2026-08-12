@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "count": 92,
+    "db_response_time_ms": 217,
+    "page": 1,
+    "per_page": 1,
+    "groups_count": null,
+    "x_query": {
+      "oql": "works where full text has (\n    (\n      stemmed \"axillary temperature\" or stemmed \"blood flow\"\n      or stemmed \"body temperature\" or stemmed \"cold exposure\"\n      or stemmed \"cold hypersensitivity\" or stemmed \"cold sensitivity\"\n      or stemmed \"cold tolerance\" or stemmed \"core temperature\"\n      or stemmed \"energy expenditure\" or stemmed \"heat production\"\n      or stemmed \"metabolic rate\" or stemmed \"oral temperature\"\n      or stemmed \"peripheral circulation\" or stemmed \"rectal temperature\"\n      or stemmed \"skin temperature\" or stemmed \"thermal comfort\"\n      or stemmed \"thermal sensation\" or stemmed \"thermic effect\"\n      or stemmed \"tympanic temperature\" or microcirculation or thermogenesis\n      or thermoregulation\n    )\n    and (stemmed \"potherb mustard\" or mizuna)\n  )",
+      "oqo": {
+        "get_rows": "works",
+        "filter_rows": [
+          {
+            "join": "or",
+            "filters": [
+              {
+                "column_id": "fulltext.search",
+                "value": "\"axillary temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"blood flow\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"body temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"cold exposure\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"cold hypersensitivity\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"cold sensitivity\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"cold tolerance\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"core temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"energy expenditure\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"heat production\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"metabolic rate\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"oral temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"peripheral circulation\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"rectal temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"skin temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"thermal comfort\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"thermal sensation\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"thermic effect\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "\"tympanic temperature\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "microcirculation",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "thermogenesis",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "thermoregulation",
+                "operator": "has"
+              }
+            ]
+          },
+          {
+            "join": "or",
+            "filters": [
+              {
+                "column_id": "fulltext.search",
+                "value": "\"potherb mustard\"",
+                "operator": "has"
+              },
+              {
+                "column_id": "fulltext.search",
+                "value": "mizuna",
+                "operator": "has"
+              }
+            ]
+          }
+        ]
+      },
+      "url": "/works?filter=fulltext.search:%22axillary temperature%22|%22blood flow%22|%22body temperature%22|%22cold exposure%22|%22cold hypersensitivity%22|%22cold sensitivity%22|%22cold tolerance%22|%22core temperature%22|%22energy expenditure%22|%22heat production%22|%22metabolic rate%22|%22oral temperature%22|%22peripheral circulation%22|%22rectal temperature%22|%22skin temperature%22|%22thermal comfort%22|%22thermal sensation%22|%22thermic effect%22|%22tympanic temperature%22|microcirculation|thermogenesis|thermoregulation,fulltext.search:%22potherb mustard%22|mizuna&per_page=1"
+    },
+    "cost_usd": 0.001
+  },
+  "results": [
+    {
+      "id": "https://openalex.org/W4391004164"
+    }
+  ],
+  "group_by": [],
+  "_query": "(mizuna OR \"potherb mustard\") AND (\"body temperature\" OR \"core temperature\" OR \"skin temperature\" OR \"tympanic temperature\" OR \"axillary temperature\" OR \"rectal temperature\" OR \"oral temperature\" OR thermogenesis OR \"thermic effect\" OR \"heat production\" OR \"energy expenditure\" OR \"metabolic rate\" OR \"peripheral circulation\" OR \"blood flow\" OR microcirculation OR thermoregulation OR \"cold tolerance\" OR \"cold exposure\" OR \"thermal sensation\" OR \"thermal comfort\" OR \"cold sensitivity\" OR \"cold hypersensitivity\")"
+}

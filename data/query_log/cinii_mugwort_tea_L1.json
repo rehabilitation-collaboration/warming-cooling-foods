@@ -1,0 +1,76 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%88%E3%82%82%E3%81%8E%E8%8C%B6&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - よもぎ茶 1 json",
+  "description": "CiNii Research all - よもぎ茶 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%82%88%E3%82%82%E3%81%8E%E8%8C%B6&count=1&format=json"
+  },
+  "dc:date": "2026-08-12T12:03:47.678+09:00",
+  "opensearch:totalResults": 3,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520853835353039744",
+      "@type": "item",
+      "title": "ヨモギの採取時期とヨモギ茶の成分・嗜好性",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520853835353039744"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520853835353039744.json"
+      },
+      "dc:creator": [
+        "園田 純子",
+        "堀 康二"
+      ],
+      "dc:publisher": "宗像 : 福岡教育大学",
+      "dc:type": "Article",
+      "prism:publicationName": "福岡教育大学紀要. 第5分冊, 芸術・保健体育・家政科編 = Bulletin of University of Teacher Education Fukuoka. Part 5, Art, health and physical education, and home economics / 福岡教育大学 編",
+      "prism:issn": "02863243",
+      "prism:number": "49",
+      "prism:startingPage": "61",
+      "prism:endingPage": "65",
+      "prism:publicationDate": "2000",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "5296168"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/5296168"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I5296168"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40004570412"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/5296168"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I5296168"
+        }
+      ]
+    }
+  ],
+  "_query": "よもぎ茶"
+}

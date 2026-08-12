@@ -1,0 +1,63 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%91%E3%83%91%E3%82%A4%E3%83%A4&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - パパイヤ 1 json",
+  "description": "CiNii Research all - パパイヤ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%83%91%E3%83%91%E3%82%A4%E3%83%A4&count=1&format=json"
+  },
+  "dc:date": "2026-08-12T12:04:06.565+09:00",
+  "opensearch:totalResults": 305,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1971712334790599075",
+      "@type": "item",
+      "title": "パパイヤ鈴木の元気がでるダンス",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1971712334790599075"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1971712334790599075.json"
+      },
+      "dc:creator": [
+        "パパイヤ鈴木"
+      ],
+      "dc:publisher": "講談社",
+      "dc:type": "Book",
+      "prism:publicationDate": "2022",
+      "dc:identifier": [
+        {
+          "@type": "cir:NCID",
+          "@value": "BC12397872"
+        },
+        {
+          "@type": "cir:ISBN",
+          "@value": "9784065266533"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ci.nii.ac.jp/ncid/BC12397872#entity"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "https://ci.nii.ac.jp/ncid/BC12397872#entity"
+        }
+      ]
+    }
+  ],
+  "_query": "パパイヤ"
+}

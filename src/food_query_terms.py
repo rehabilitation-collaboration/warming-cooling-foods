@@ -25,6 +25,8 @@ unit-testable. The actual API calls live in ``evidence_mapping.py``.
 
 from __future__ import annotations
 
+import re
+
 # --- Effect vocabulary (Axis B, Layer 2) ---------------------------------
 # The "in the claimed context" filter. One term per outcome the screening
 # protocol will accept, because the two have to be the same width.
@@ -119,7 +121,40 @@ SYNONYMS: dict[str, list[str]] = {
     "adzuki bean": ["azuki bean", "Vigna angularis"],
     "black soybean": ["black soybeans", "Glycine max"],
     "edamame": ["green soybean"],
+    # Route D additions (RD-5). Every term below was checked against PubMed
+    # before being written here, and candidates that returned nothing were
+    # dropped rather than kept: `coarse green tea` (0), `Japanese mustard
+    # green` (0) and `barley malt syrup` (0) are not terms the literature uses,
+    # which is only visible by asking.
+    "daikon leaves": ["radish leaves", "radish greens"],  # `daikon leaves` itself: 0
+    "fennel": ["Foeniculum vulgare"],
+    "mizuna": ["potherb mustard"],
+    "papaya": ["Carica papaya"],
+    "shichimi pepper": ["shichimi", "shichimi togarashi"],  # `shichimi pepper` itself: 0
+    "star anise": ["Illicium verum"],
+    "yogurt": ["yoghurt"],
 }
+
+# Deliberately left on the plain name, with the reason, because each candidate
+# synonym would have measured something other than the food:
+#
+# - `bancha`: `Japanese green tea` (77) covers sencha and gyokuro too, so it
+#   would count tea research generally against 番茶. Unlike hojicha, which maps
+#   one-to-one onto `roasted green tea`, 番茶 has no English term of its own.
+# - `ganmodoki`: returns 0, and so do `fried tofu fritter` and its neighbours.
+#   `fried bean curd` (7) and `deep-fried tofu` (3) are already 厚揚げ's
+#   synonyms — adopting them would give two different foods one measurement.
+#   The zero stands as the measurement.
+# - `mugwort tea`: returns 0. `mugwort` (806) is the plant, not the drink, and
+#   the vocabulary's practice is to not fall back to an ingredient — 麦茶 is
+#   `barley tea`, never `barley`.
+# - `long pepper`: ヒハツ names both Piper longum and Piper retrofractum in
+#   Japanese, so a binomial here would be a guess presented as precision.
+# - `pheasant`: Japanese きじ is Phasianus versicolor, not the P. colchicus
+#   (410) that the English literature mostly means.
+# - `malt syrup` / `rice syrup`: `maltose syrup` (46) is a different product,
+#   and `brown rice syrup` (7) is a subset of `rice syrup` (39), so neither
+#   adds recall for the food actually claimed.
 
 # --- MeSH / scientific-name augmentation (sensitivity only) ---------------
 # High-confidence binomials only. Used to show the main finding is robust to a
@@ -196,7 +231,12 @@ def food_terms(food_en: str, *, with_mesh: bool = False) -> list[str]:
     """
     if food_en in EXCLUDE:
         raise ValueError(f"{food_en!r} is excluded: {EXCLUDE[food_en]}")
-    terms = [food_en]
+    # A parenthetical is a coder's gloss, not part of the name: Route D's
+    # ledger carries `ganmodoki (fried tofu fritter)`, and searching that
+    # literally returns nothing for a food that may simply be unstudied —
+    # exactly the confound this module exists to avoid. The key keeps the gloss
+    # (it is what the ledger recorded); only the query drops it.
+    terms = [re.sub(r"\s*\([^)]*\)", "", food_en).strip() or food_en]
     terms.extend(SYNONYMS.get(food_en, []))
     if with_mesh and food_en in MESH:
         terms.append(MESH[food_en])

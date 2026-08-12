@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "3062"
+  },
+  "_query": "(papaya[tiab] OR \"Carica papaya\"[tiab])"
+}

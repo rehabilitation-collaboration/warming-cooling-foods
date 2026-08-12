@@ -43,7 +43,8 @@ from .definitions import CLAIMS_CSV, CLAIMS_FROZEN_CSV, DATA_DIR
 from .rd4_delta import _norm_en, kata
 
 LEDGER_CSV = DATA_DIR / "claims_ledger.csv"
-COLUMNS = ["food_en", "food_ja", "source_id", "direction", "quote", "condition"]
+COLUMNS = ["food_en", "food_ja", "source_id", "direction", "quote", "condition",
+           "sublabel"]
 
 
 def load_includes(path=LEDGER_CSV) -> pd.DataFrame:
@@ -142,9 +143,22 @@ def collapse(inc: pd.DataFrame) -> pd.DataFrame:
     inc = inc.copy()
     inc["_k"] = inc["food_en"].map(_norm_en)
     inc["_len"] = inc["food_ja"].str.len()
+    # §9.5's sub-label, carried through so Axis B can tell a food from a class.
+    # D30 holds category and dish labels out of the analysis frame because no
+    # single-food query represents them, and D48 decided not to restate that
+    # list on the ledger side — which left the fact recorded in the ledger and
+    # invisible to the code that builds the queries. Measured: 89 category and
+    # dish labels were queried against PubMed before this column existed.
+    # Kept verbatim, because the colon carries the meaning and stripping it
+    # inverts it: bare `category` marks a label that *is* a class (根菜類), while
+    # `category:寒冷地の果物・ナッツ` marks an ordinary food recorded as a *member*
+    # of one — りんご under oitr's cold-region heading. Splitting on ":" makes
+    # apple, onion, tofu and 17 other foods look non-queryable.
+    inc["sublabel"] = inc["sublabels"].astype(str).str.split(";").str[0].str.strip()
     inc = inc.sort_values(["source_id", "_k", "direction", "_len", "food_ja"])
     out = inc.drop_duplicates(["source_id", "_k", "direction"], keep="first")
-    return out[["food_en", "food_ja", "source_id", "direction", "quote"]].copy()
+    return out[["food_en", "food_ja", "source_id", "direction", "quote",
+                "sublabel"]].copy()
 
 
 def attach_condition(claims: pd.DataFrame, frozen_path=CLAIMS_FROZEN_CSV) -> pd.DataFrame:

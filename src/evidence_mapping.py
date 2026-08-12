@@ -178,6 +178,33 @@ def target_foods(
     return tgt.reset_index(drop=True)
 
 
+def class_labels(claims: pd.DataFrame) -> set[str]:
+    """Food keys the ledger recorded as a class rather than as a food.
+
+    §9.5 includes category and dish labels in the ledger — the source really did
+    attribute a direction to 根菜類 — and D30 holds them out of the analysis
+    frame, because no single-food query represents them. Until `claims.csv`
+    carried the sub-label, only the 21 hand-listed labels in
+    `food_query_terms.EXCLUDE` were caught, and 89 further category and dish
+    labels were queried against PubMed as though they were foods.
+
+    Reads bare ``category``/``dish`` only. ``category:寒冷地の果物・ナッツ`` marks
+    an ordinary food recorded as a *member* of a class (oitr's りんご), and
+    treating that as a class removes apple, onion, tofu and 17 other real foods.
+
+    A food counts as a class only where **every** row for it is one. One source
+    naming a class that another source names as a food does not make the food a
+    class: gveggie has 麦類 where jsfca and yomeishu have 大麦, hiesyo_com has
+    鉄火味噌 where eleven sources have 味噌, and requiring only one such row drops
+    barley, miso and wheat from Axis B entirely.
+    """
+    if "sublabel" not in claims.columns:
+        return set()
+    is_class = claims["sublabel"].fillna("").isin(("category", "dish"))
+    by_food = is_class.groupby(claims["food_en"]).all()
+    return set(by_food[by_food].index)
+
+
 def _slug(name: str) -> str:
     """Filesystem-safe token for a food key (for query_log filenames)."""
     return "".join(c if c.isalnum() else "_" for c in name)
@@ -261,13 +288,14 @@ def collect_counts(
         QUERY_LOG_DIR.mkdir(parents=True, exist_ok=True)
     ja_map = representative_food_ja(claims)
     tgt = target_foods(claims, sources)
+    classes = class_labels(claims)
 
     rows: list[dict] = []
     skipped: list[str] = []
     aux_missing: list[str] = []
     for _, t in tgt.iterrows():
         food, n_src, scope = t["food_key"], int(t["n_sources"]), t["scope"]
-        if not is_queryable(food):
+        if food in classes or not is_queryable(food):
             skipped.append(food)
             continue
 

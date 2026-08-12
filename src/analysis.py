@@ -149,7 +149,11 @@ def prepare_scatter_data(
     df["scope"] = df["n_sources"].map(_scope_of)
     df["x"] = df["n_sources"]
     df["y"] = np.log10(df[MEASURE] + 1)
-    df["is_zero"] = df[MEASURE] == 0
+    # NaN is not a measurement. `NaN == 0` is False, so an unscreened food would
+    # otherwise read as "researched" wherever is_zero is counted, while the
+    # model drops it for a missing y — two denominators off one frame. Left as
+    # NA so a count of it has to say what it does with it.
+    df["is_zero"] = (df[MEASURE] == 0).where(df[MEASURE].notna())
     df = df.reset_index(drop=True)
     df.attrs["outside_frame"] = outside
     df.attrs["max_tier"] = max_tier

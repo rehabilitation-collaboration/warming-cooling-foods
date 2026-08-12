@@ -1,0 +1,76 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%B1%B3%E3%81%82%E3%82%81&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 米あめ 1 json",
+  "description": "CiNii Research all - 米あめ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E7%B1%B3%E3%81%82%E3%82%81&count=1&format=json"
+  },
+  "dc:date": "2026-08-12T12:06:20.234+09:00",
+  "opensearch:totalResults": 17,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1522825130586480768",
+      "@type": "item",
+      "title": "インターナショナル・レビュー 南米アメリカ=労働者と環境を脅かすFTAA攻撃を跳ね返そう",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1522825130586480768"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1522825130586480768.json"
+      },
+      "dc:creator": [
+        "ホセ クルーズ"
+      ],
+      "dc:publisher": "東京 : スペース伽耶 ; 1975-2019",
+      "dc:type": "Article",
+      "prism:publicationName": "社会評論 / 小川町企画 編",
+      "prism:issn": "03853217",
+      "prism:volume": "27",
+      "prism:number": "3",
+      "prism:startingPage": "135",
+      "prism:endingPage": "138",
+      "prism:publicationDate": "2001-07",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "5972166"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/5972166"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I5972166"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40004124717"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/5972166"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I5972166"
+        }
+      ]
+    }
+  ],
+  "_query": "米あめ"
+}

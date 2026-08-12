@@ -1,0 +1,76 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%8D%E3%81%98&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - きじ 1 json",
+  "description": "CiNii Research all - きじ 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E3%81%8D%E3%81%98&count=1&format=json"
+  },
+  "dc:date": "2026-08-12T12:04:11.337+09:00",
+  "opensearch:totalResults": 243432,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1040282256860537472",
+      "@type": "item",
+      "title": "キジ目鳥類におけるミトコンドリアゲノム構造とその進化学的および分子系統学的解析",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1040282256860537472"
+      },
+      "dc:creator": [
+        "西堀 正英"
+      ],
+      "dc:type": "Project",
+      "description": "本研究の目的は、1)キジ目鳥類5科についてミトコンドリアゲノム(mitogenome)DNAの全塩基配列の決定、2)mitogenome全塩基配列に基づくキジ目鳥類の分子系統樹の構築、3)mitogenome 13遺伝子について、形態分類群および分子系統におけるクレイドとmitogenome各遺伝子の構造との関連性の解明、である。キジ目5科全てについて、各科1種以上(5科23種29個体)のmitogenome全塩基配列を決定し、それぞれアノテーションをつけてDNA Data Bank(DDBJ)に登録した。決定した29種において、鳥類に特徴的な遺伝子転座(鳥類以外の脊椎動物とはNADH subunit 6(ND6)とCytochrome b(Cytb)の位置が入れ替わる)が見られた。さらにキジ目特有の変異であるとされている「ND3遺伝子における一塩基挿入」とその特異的な編集についても解析した全ての種で観察された。キジ目全科を用いて分子系統樹を作成すると、1)キジ族とシャコ族(Tribe)の分類階層と分子系統樹は矛盾する、2)形態学的に分類されるライチョウ亜科、シチメンチョウ亜科は、分子系統樹ではキジ科内群となり、両亜科はこれまでの分類よりもキジ科に近い位置となった、3)旧大陸ウズラ(ウズラ属)と新大陸ウズラ(ハウズラ科)はキジ科のクレイドが形成される以前に分岐したことが示唆された、の以上3つの点が明らかになり、キジ目の分子系統を明らかにできた。一方、キジ科ヤケイ属について、mitogenome情報に加えて核ゲノム情報をあわせて分子系統学的分析を行った結果、ニワトリ、セキショクヤケイとハイイロヤケイとの雑種の存在が明らかとなり、これまでニワトリ祖先種はセキショクヤケイのみであるされていた説に矛盾する成果が得られた。",
+      "dc:identifier": [
+        {
+          "@type": "cir:KAKEN",
+          "@value": "16580231"
+        },
+        {
+          "@type": "cir:JGN",
+          "@value": "JP16580231"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-16580231/"
+        }
+      ],
+      "dc:subject": [
+        "キジ目",
+        "分子系統",
+        "ミトゲノム",
+        "キジ族シャコ族",
+        "新大陸ウズラ",
+        "ニワトリの祖先種",
+        "ミトコンドリア全塩基配列",
+        "形態分類",
+        "ミトコンドリアDNA",
+        "分子系統樹",
+        "系統",
+        "ツカツクリ",
+        "ヤケイ",
+        "ウズラ"
+      ],
+      "dc:source": [
+        {
+          "@id": "https://kaken.nii.ac.jp/grant/KAKENHI-PROJECT-16580231/",
+          "dc:title": "KAKEN"
+        }
+      ]
+    }
+  ],
+  "_query": "きじ"
+}

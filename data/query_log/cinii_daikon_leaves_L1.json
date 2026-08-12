@@ -1,0 +1,75 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%A4%A7%E6%A0%B9%E3%81%AE%E8%91%89&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 大根の葉 1 json",
+  "description": "CiNii Research all - 大根の葉 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%A4%A7%E6%A0%B9%E3%81%AE%E8%91%89&count=1&format=json"
+  },
+  "dc:date": "2026-08-12T12:05:57.138+09:00",
+  "opensearch:totalResults": 43,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1520009408829567744",
+      "@type": "item",
+      "title": "壺井栄「大根の葉」論--子供と小豆島方言の発見",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1520009408829567744"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1520009408829567744.json"
+      },
+      "dc:creator": [
+        "須浪 敏子"
+      ],
+      "dc:publisher": "善通寺 : 四国学院文化学会",
+      "dc:type": "Article",
+      "prism:publicationName": "四国学院大学論集",
+      "prism:issn": "02880156",
+      "prism:number": "106",
+      "prism:startingPage": "1",
+      "prism:endingPage": "15",
+      "prism:publicationDate": "2001-12",
+      "dc:identifier": [
+        {
+          "@type": "cir:NDL_BIB_ID",
+          "@value": "6047052"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "http://id.ndl.go.jp/bib/6047052"
+        },
+        {
+          "@type": "cir:URI",
+          "@value": "https://ndlsearch.ndl.go.jp/books/R000000004-I6047052"
+        },
+        {
+          "@type": "cir:NAID",
+          "@value": "40001523247"
+        }
+      ],
+      "dc:source": [
+        {
+          "@id": "http://id.ndl.go.jp/bib/6047052"
+        },
+        {
+          "@id": "https://ndlsearch.ndl.go.jp/books/R000000004-I6047052"
+        }
+      ]
+    }
+  ],
+  "_query": "大根の葉"
+}

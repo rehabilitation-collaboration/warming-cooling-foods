@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1444"
+  },
+  "_query": "(fennel[tiab] OR \"Foeniculum vulgare\"[tiab])"
+}

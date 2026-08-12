@@ -1,0 +1,52 @@
+{
+  "@context": {
+    "@vocab": "http://purl.org/rss/1.0/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "prism": "http://prismstandard.org/namespaces/basic/2.0/",
+    "ndl": "http://ndl.go.jp/dcndl/terms",
+    "opensearch": "http://a9.com/-/spec/opensearch/1.1/",
+    "cir": "https://cir.nii.ac.jp/schema/1.0/",
+    "@language": "ja"
+  },
+  "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%85%AB%E8%A7%92&count=1&format=json",
+  "@type": "channel",
+  "title": "CiNii Research all - 八角 1 json",
+  "description": "CiNii Research all - 八角 1 json",
+  "link": {
+    "@id": "https://cir.nii.ac.jp/opensearch/all?q=%E5%85%AB%E8%A7%92&count=1&format=json"
+  },
+  "dc:date": "2026-08-12T12:05:27.729+09:00",
+  "opensearch:totalResults": 1166,
+  "opensearch:startIndex": 1,
+  "opensearch:itemsPerPage": 1,
+  "items": [
+    {
+      "@id": "https://cir.nii.ac.jp/crid/1574231874666891136",
+      "@type": "item",
+      "title": "マルチメディア多重化装置",
+      "link": {
+        "@id": "https://cir.nii.ac.jp/crid/1574231874666891136"
+      },
+      "rdfs:seeAlso": {
+        "@id": "https://cir.nii.ac.jp/crid/1574231874666891136.json"
+      },
+      "dc:creator": [
+        "八角"
+      ],
+      "dc:type": "Article",
+      "prism:publicationName": "National Technical Report",
+      "prism:volume": "40",
+      "prism:number": "6",
+      "prism:startingPage": "41",
+      "dc:identifier": [
+        {
+          "@type": "cir:NAID",
+          "@value": "10011109689"
+        }
+      ]
+    }
+  ],
+  "_query": "八角"
+}

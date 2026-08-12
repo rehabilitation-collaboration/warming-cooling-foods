@@ -1,0 +1,10 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "1908"
+  },
+  "_query": "\"chicken breast\"[tiab]"
+}
