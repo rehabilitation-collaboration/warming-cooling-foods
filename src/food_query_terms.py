@@ -126,7 +126,6 @@ SYNONYMS: dict[str, list[str]] = {
     # dropped rather than kept: `coarse green tea` (0), `Japanese mustard
     # green` (0) and `barley malt syrup` (0) are not terms the literature uses,
     # which is only visible by asking.
-    "daikon leaves": ["radish leaves", "radish greens"],  # `daikon leaves` itself: 0
     "fennel": ["Foeniculum vulgare"],
     "mizuna": ["potherb mustard"],
     "papaya": ["Carica papaya"],

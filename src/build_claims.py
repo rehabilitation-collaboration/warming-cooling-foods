@@ -95,13 +95,20 @@ def canonicalise_food_en(inc: pd.DataFrame, frozen_path=CLAIMS_FROZEN_CSV) -> pd
 # with condition=heated, 塩サケ is `salmon`, アジの開き is `horse mackerel`,
 # ポテトチップス is `potato`, 黒焼き梅干し is `umeboshi`.
 #
-# A preparation earns its own food_en only where the same source gives it the
-# opposite direction from the parent, since folding it would then make the file
-# contradict itself: attaka_navi calls 干し柿 warm and 柿 cool, prezo calls
-# 切り干し大根 warm and 大根 cool, gveggie calls 高野豆腐 warm and 豆腐 cool — which
-# is why those three are separate keys in the frozen vocabulary. Each fold below
-# was checked against that test and carries the parent's direction in the source
-# it appears in.
+# A preparation earns its own food_en on **one** test: does the same source give
+# it the opposite direction from the parent? Folding such a row would make the
+# file assert both directions for one (food, source). attaka_navi calls 干し柿
+# warm and 柿 cool, prezo 切り干し大根 warm and 大根 cool, gveggie 高野豆腐 warm and
+# 豆腐 cool — which is why those three are separate keys in the frozen vocabulary.
+#
+# Not "is it a different cut/part". `pork liver` looks like a counter-example to
+# folding — レバー kept apart from 豚肉 — but it passes the same test rather than a
+# different one: attaka_navi calls レバー warm and 豚肉 neutral. Reading it as a
+# rule about parts is what wrongly kept `daikon leaves` out, where
+# macrobiotic_rashinban calls 大根の葉 and 大根 both neutral.
+#
+# Each fold below was checked against the direction test in the sources it
+# appears in.
 #
 # Without this the foods leave the analysis frame silently: the frame is built
 # from pubmed_counts.csv, so `boiled egg` simply never appears, which the Route D
@@ -109,7 +116,10 @@ def canonicalise_food_en(inc: pd.DataFrame, frozen_path=CLAIMS_FROZEN_CSV) -> pd
 PREP_PARENT: dict[str, str] = {
     "boiled egg": "egg",                    # oitr/onkatsu_note warm; egg warm in oitr
     "canned mackerel": "mackerel",          # oitr warm; mackerel warm in oitr
+    "chicken breast": "chicken",            # oitr warm vs 鶏肉 warm; frozen file already
+                                            # keeps yomeishu's 鶏むね肉 under `chicken`
     "coarse sea salt": "salt",              # a grind of salt, as 塩 is the only salt key
+    "daikon leaves": "daikon",              # macrobiotic_rashinban neutral vs 大根 neutral
     "dried ginger": "ginger",
     "ginger (heated/dried)": "ginger",
     "ginger (raw)": "ginger",

@@ -651,7 +651,6 @@ coffee,コーヒー,macrobiotic_rashinban,cool,コーヒー,,
 cream,クリーム,macrobiotic_rashinban,cool,クリーム,,
 cucumber,きゅうり,macrobiotic_rashinban,cool,きゅうり,,
 daikon,大根,macrobiotic_rashinban,neutral,大根,,
-daikon leaves,大根の葉,macrobiotic_rashinban,neutral,大根の葉,,
 duck meat,鴨,macrobiotic_rashinban,warm,鴨,,
 egg,卵,macrobiotic_rashinban,warm,卵,,
 eggplant,ナス,macrobiotic_rashinban,cool,ナス,,
@@ -726,7 +725,6 @@ burdock,ごぼう,oitr,warm,にんじん・ごぼう・れんこん・かぼち�
 canned sardine,いわし缶,oitr,warm,🐟 サバ缶・いわし缶,,dish
 carrot,にんじん,oitr,warm,にんじん・ごぼう・れんこん・かぼちゃ・さつまいも・大根などの根菜は、地中で育ち冬に旬を迎えるものが多く、体を温める代表的な食材とされています。,,
 chicken,鶏肉,oitr,warm,体を温める食材は根菜・薬味（生姜・ねぎ）・発酵食品（味噌・納豆）・スパイス・たんぱく質（鶏肉・青魚・卵）の5カテゴリが基本です。,,
-chicken breast,むね肉,oitr,warm,鶏肉（特にむね肉）・卵・大豆製品（豆腐・納豆）・サバやイワシなどの青魚が特におすすめです。,,category:たんぱく質
 chili pepper,唐辛子,oitr,warm,唐辛子に含まれるカプサイシンは、体を内側からアクティブに温める働きが注目されており、体が温まりやすいのが特徴です。,,
 cinnamon,シナモン,oitr,warm,シナモンは香りで満足感が得やすく、体を温める食材として親しまれており、紅茶・コーヒー・ヨーグルトにかけるだけで手軽に取り入れられます。,,
 cold-region fruit,寒冷地の果物,oitr,warm,寒冷地の果物・ナッツ,,category
