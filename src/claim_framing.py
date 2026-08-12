@@ -25,7 +25,9 @@ CONTEXT is a real class, not an error branch — two quotes genuinely carry no
 thermal wording and were coded from the surrounding text — so an unmatched quote
 cannot be made to fail loudly. It lands in CONTEXT instead, which is why
 `framing_counts` reports that column: a CONTEXT count that grows is the signal
-that the vocabulary list has fallen behind the data.
+that the input has fallen behind the classifier. That signal fired once already,
+and the cause was the input rather than the vocabulary — see
+`load_framing_claims`.
 """
 
 from __future__ import annotations
@@ -35,7 +37,7 @@ import re
 import pandas as pd
 
 from .claim_mapping import aggregate_axis_a
-from .definitions import TIER_ORG
+from .definitions import CLAIMS_FROZEN_CSV, TIER_ORG
 
 # A stated bodily thermal effect. Mechanism words (発汗 / 血行 / 血流 / 血管を拡張)
 # are deliberately absent: every quote carrying one already carries a term below,
@@ -67,6 +69,61 @@ FRAMINGS = {
 # events per predictor; below that the odds ratio is not worth reporting, so the
 # frame gets described and left unfitted rather than fitted and hedged.
 MIN_EVENTS_TO_FIT = 20
+
+
+def load_framing_claims() -> pd.DataFrame:
+    """The claims this split reads: the frozen hand-coded set, not `claims.csv`.
+
+    `data/claims.csv` is a projection of the Route D ledger, and its ``quote`` is
+    the candidate span a coder judged rather than the sentence the source wrote.
+    105 of the 497 Tier-1 spans are eight characters or fewer (`リンゴ`, `モヤシ`),
+    with the direction stated in the heading above the line, so classifying spans
+    drops 262 of 497 quotes into CONTEXT and agrees with the frozen coding on only
+    35.1% of the 390 (source, food) pairs the two share.
+
+    Classifying the line plus its nearest heading recovers most of it — 85.1%
+    overall and 100% on LABEL, so what broke was the input and not LABEL_PATTERN —
+    but both columns carry source body text verbatim and are deliberately
+    unpublished (`data/candidates.csv` is git-ignored and neither column is in the
+    §9.7 ledger schema), so no reader could re-run the split. Widening to the
+    ancestor headings is worse rather than better: 68.2% for all of them, 72.3%
+    for the nearest three, and 81.8% for a variant that widens only the
+    five-natures pattern, which loses tcm agreement (86.2% to 82.1%) while trying
+    to recover it.
+
+    The frozen file is published, was frozen before Route D began, and carries one
+    sentence per attribution, so the split is computed there. What that costs is a
+    population that is not the analysis frame; `framing_population_gap` measures
+    it rather than leaving it to prose.
+    """
+    return pd.read_csv(CLAIMS_FROZEN_CSV)
+
+
+def framing_population_gap(
+    framing_claims: pd.DataFrame,
+    ledger_claims: pd.DataFrame,
+    sources: pd.DataFrame,
+    *,
+    max_tier: int = TIER_ORG,
+) -> dict[str, int]:
+    """How far the classified coding stands from the coding the frame is built on.
+
+    Reported per (source_id, food_en) pair, because that is the unit a framing
+    label attaches to. ``ledger_only`` pairs carry no framing label at all, so
+    breadth counted within a framing is a floor for them.
+    """
+    tiers = set(sources.loc[sources["tier"] <= max_tier, "source_id"])
+
+    def pairs(df: pd.DataFrame) -> set[tuple[str, str]]:
+        sub = df[df["source_id"].isin(tiers)]
+        return set(zip(sub["source_id"], sub["food_en"]))
+
+    frozen, ledger = pairs(framing_claims), pairs(ledger_claims)
+    return {
+        "shared": len(frozen & ledger),
+        "framing_only": len(frozen - ledger),
+        "ledger_only": len(ledger - frozen),
+    }
 
 
 def classify_claims(claims: pd.DataFrame) -> pd.DataFrame:

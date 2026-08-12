@@ -8,8 +8,12 @@ from src.claim_framing import (
     classify_claims,
     framed_model_frame,
     framing_counts,
+    framing_population_gap,
+    load_framing_claims,
     select_framing,
 )
+from src.claim_mapping import load_claims, load_sources
+from src.definitions import CLAIMS_FROZEN_CSV, TIER_ORG
 
 
 def _sources():
@@ -156,3 +160,56 @@ class TestFramedModelFrame:
         )
         frame = framed_model_frame(claims, _sources(), _counts(), "physio")
         assert int(frame.loc[frame["food_key"] == "ginger", "n_sources"].iloc[0]) == 2
+
+
+class TestFramingInput:
+    def test_the_split_reads_the_frozen_coding(self):
+        assert load_framing_claims().equals(pd.read_csv(CLAIMS_FROZEN_CSV))
+
+    def test_the_classifier_can_actually_read_its_input(self):
+        # The guard that the RD-4 change needed and did not have. The ledger
+        # projection's `quote` is the candidate span a coder judged, not the
+        # sentence the source wrote, so classifying it puts more than half of the
+        # Tier-1 rows in CONTEXT and empties LABEL. Repointing this loader at
+        # data/claims.csv fails both assertions.
+        claims = load_framing_claims()
+        sources = load_sources()
+        tier1 = claims[
+            claims["source_id"].isin(set(sources.loc[sources["tier"] <= TIER_ORG, "source_id"]))
+        ]
+        tagged = classify_claims(tier1)
+        assert tagged["is_context"].mean() < 0.05
+        assert tagged["is_label"].sum() > 0
+
+
+class TestFramingPopulationGap:
+    def _pairs(self, rows):
+        return pd.DataFrame(
+            [{"source_id": s, "food_en": f, "quote": "", "direction": "warm"} for s, f in rows]
+        )
+
+    def test_pairs_are_split_three_ways(self):
+        gap = framing_population_gap(
+            self._pairs([("s_phys", "ginger"), ("s_tcm", "carrot")]),
+            self._pairs([("s_phys", "ginger"), ("s_both", "onion")]),
+            _sources(),
+        )
+        assert gap == {"shared": 1, "framing_only": 1, "ledger_only": 1}
+
+    def test_tier2_pairs_are_outside_the_primary_frame(self):
+        gap = framing_population_gap(
+            self._pairs([("s_tier2", "ginger")]),
+            self._pairs([("s_tier2", "ginger")]),
+            _sources(),
+        )
+        assert gap == {"shared": 0, "framing_only": 0, "ledger_only": 0}
+
+    def test_every_classified_pair_is_accounted_for_on_the_real_data(self):
+        # shared + framing_only must exhaust the frozen coding: a pair may not
+        # fall out of the tally just because the ledger does not carry it.
+        framing_claims, claims, sources = load_framing_claims(), load_claims(), load_sources()
+        gap = framing_population_gap(framing_claims, claims, sources)
+        tiers = set(sources.loc[sources["tier"] <= TIER_ORG, "source_id"])
+        sub = framing_claims[framing_claims["source_id"].isin(tiers)]
+        assert gap["shared"] + gap["framing_only"] == len(set(zip(sub["source_id"], sub["food_en"])))
+        assert gap["shared"] > 0

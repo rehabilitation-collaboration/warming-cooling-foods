@@ -268,7 +268,14 @@ def main() -> None:
     # variable, while Axis B measures a physiological outcome. The identity of
     # those constructs is assumed, not shown, so belief breadth is recounted
     # within each vocabulary and the primary model refit on each.
-    tier1 = claims[claims["source_id"].isin(set(sources.loc[sources["tier"] <= TIER_ORG, "source_id"]))]
+    # Classified on the frozen hand-coded claims, not on the ledger projection the
+    # rest of this script uses: the ledger's quote is a candidate span, which the
+    # vocabularies cannot read. `claim_framing.load_framing_claims` carries the
+    # measurements behind that choice; the population it costs is printed below.
+    framing_claims = claim_framing.load_framing_claims()
+    tier1 = framing_claims[
+        framing_claims["source_id"].isin(set(sources.loc[sources["tier"] <= TIER_ORG, "source_id"]))
+    ]
     tagged = claim_framing.classify_claims(tier1)
     print("[Framing] how each Tier-1 source words the attribution (per quote)")
     print(claim_framing.framing_counts(tier1).to_string(index=False))
@@ -277,10 +284,14 @@ def main() -> None:
           f"both={int((tagged['is_physio'] & tagged['is_tcm']).sum())}  "
           f"label={int(tagged['is_label'].sum())}  "
           f"context={int(tagged['is_context'].sum())}")
+    gap = claim_framing.framing_population_gap(framing_claims, claims, sources)
+    print(f"  classified on the frozen coding — Tier-1 (source, food) pairs: "
+          f"shared with the ledger={gap['shared']}  frozen only={gap['framing_only']}  "
+          f"ledger only (no framing label)={gap['ledger_only']}")
     print(THIN)
     print("[Framing sensitivity] primary model refit within each attribution vocabulary")
     for framing in claim_framing.FRAMINGS:
-        d = claim_framing.framed_model_frame(claims, sources, counts, framing)
+        d = claim_framing.framed_model_frame(framing_claims, sources, counts, framing)
         f = prepare_model_frame(d)
         events = int(f["has_study"].sum())
         z = len(f) - events
