@@ -12696,7 +12696,7 @@ macrobiotic_rashinban,40,ナッツ類,list|prose|wrapped,include,include,False,i
 macrobiotic_rashinban,40,ネギ,list|prose|wrapped,include,include,False,include,,,ネギ,green onion,neutral,ネギ
 macrobiotic_rashinban,40,三年番茶,list|prose|wrapped,include,include,False,include,,,三年番茶,sannen bancha (three-year aged twig tea),neutral,三年番茶
 macrobiotic_rashinban,40,三年番茶など,list|prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
-macrobiotic_rashinban,40,人参,list|prose|wrapped,include,include,False,include,,,人参,carrot,neutral,人参
+macrobiotic_rashinban,40,人参,list|prose|wrapped,include,include,True,include,,,人参,carrot,warm,人参
 macrobiotic_rashinban,40,刺激,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
 macrobiotic_rashinban,40,刺激の強くない飲み物（三年番茶など）,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 macrobiotic_rashinban,40,原料,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
@@ -13026,7 +13026,7 @@ macrobiotic_rashinban,95,ジネンジョ）……,prose|wrapped,exclude,exclude,
 macrobiotic_rashinban,95,根菜（ごぼう,list|prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 macrobiotic_rashinban,95,玉ネギ,list|prose|wrapped,include,include,True,include,,,玉ネギ,onion,warm,玉ネギ
 macrobiotic_rashinban,96,ジネンジョ）……７,wrapped,exclude,exclude,False,exclude,fragment,,,,,
-macrobiotic_rashinban,96,根菜,line|list|prose|wrapped,include,include,True,include,,category,根菜,root vegetable,neutral,根菜（ごぼう、玉ネギ、にんじん、ジネンジョ）
+macrobiotic_rashinban,96,根菜,line|list|prose|wrapped,include,include,True,include,,category,根菜,root vegetable,warm,下に向かって育つにんじんは陽性と言えます。この性質から、一般的に根菜類は陽性と言えます。
 macrobiotic_rashinban,97,分,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 macrobiotic_rashinban,97,大まか,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 macrobiotic_rashinban,97,７と大まかに分,wrapped,exclude,exclude,False,exclude,fragment,,,,,
