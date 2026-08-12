@@ -203,20 +203,53 @@ def table1_expected(claims: pd.DataFrame, sources: pd.DataFrame,
     return expected
 
 
-def table2_expected(ledger: pd.DataFrame, frame: pd.DataFrame, counts: pd.DataFrame,
-                    kappa: dict) -> dict[str, dict[str, object]]:
-    """Screening totals that follow from the published ledger alone.
+# Which pass produced each author ruling. The rulings file records this only in
+# its batch label, so the mapping is spelled out; an unrecognised label fails
+# loudly rather than landing in whichever bucket happens to be checked last.
+ADJUDICATION_PASSES = {
+    "2026-08-07": "divergence",
+    "2026-08-08 recall rebuild": "divergence",
+    "2026-08-12 RD-5": "divergence",
+    "2026-08-08 §2.3 sweep": "sweep",
+    "2026-08-08 §2.3 sweep (kept)": "sweep",
+    "2026-08-12 RD-5 homonym sweep": "homonym",
+    "2026-08-09 third pass": "restoration",
+}
 
-    Deliberately partial. How the adjudications split across passes is recorded
-    in the rulings file's batch labels, and the sweep and third-pass tallies are
-    accounts of work done on a particular day rather than quantities a rerun
-    recomputes. Those rows are left unchecked here and reported as such, rather
-    than given an expectation that would look authoritative without being one.
+
+def adjudication_split(rulings: pd.DataFrame) -> dict[str, int]:
+    """How many rulings each screening pass produced."""
+    unknown = sorted(set(rulings["batch"]) - set(ADJUDICATION_PASSES))
+    if unknown:
+        raise ValueError(f"rulings carry unmapped batch label(s) {unknown}")
+    passes = rulings["batch"].map(ADJUDICATION_PASSES).value_counts()
+    return {name: int(passes.get(name, 0)) for name in set(ADJUDICATION_PASSES.values())}
+
+
+def table2_expected(ledger: pd.DataFrame, frame: pd.DataFrame, counts: pd.DataFrame,
+                    kappa: dict, rulings: pd.DataFrame,
+                    thirdpass: pd.DataFrame) -> dict[str, dict[str, object]]:
+    """Screening totals, including how the author's rulings divide across passes.
+
+    One row stays out: the §2.3 sweep's own tally of records read, excluded and
+    confirmed is an account of work done on a particular day, not a quantity a
+    rerun recomputes, so it is reported as unchecked rather than given an
+    expectation that would look authoritative without being one.
     """
     include = ledger[ledger["final_label"] == INCLUDE]
     reviews = int(include["sublabels"].fillna("").astype(str)
                   .str.split(";").apply(lambda s: "review" in {x.strip() for x in s}).sum())
+    split = adjudication_split(rulings)
     return {
+        "divergences and information-gap": {
+            "Value": [split["divergence"], split["sweep"]]},
+        "reason sweep of agreed exclusions": {"Value": split["homonym"]},
+        "third-pass restoration": {"Value": split["restoration"]},
+        "Third-pass re-screen": {"Value": [
+            len(thirdpass),
+            int(thirdpass["author_ruling"].notna().sum()),
+            int((thirdpass["author_ruling"] == INCLUDE).sum()),
+        ]},
         "L2 records screened": {"Value": len(ledger)},
         "Foods with": {"Value": [int((counts["l2_raw"] > 0).sum()),
                                  int((counts["l2_raw"] == 0).sum())]},
@@ -311,18 +344,39 @@ def table4_ordering(text: str, frame: pd.DataFrame) -> list[str]:
     return problems
 
 
-def report(text: str, claims: pd.DataFrame, sources: pd.DataFrame, frame: pd.DataFrame,
-           counts: pd.DataFrame, ledger: pd.DataFrame, kappa: dict) -> None:
-    """Print every cell-level disagreement, and the checks that found none."""
-    checks = (
-        (TABLE1, table1_expected(claims, sources, frame), False),
-        (TABLE2, table2_expected(ledger, frame, counts, kappa), False),
+def _checks(text: str, inputs: dict) -> tuple:
+    """Each table, its expectations, and whether row labels match exactly."""
+    frame, ledger = inputs["frame"], inputs["ledger"]
+    return (
+        (TABLE1, table1_expected(inputs["claims"], inputs["sources"], frame), False),
+        (TABLE2, table2_expected(ledger, frame, inputs["counts"], inputs["kappa"],
+                                 inputs["rulings"], inputs["thirdpass"]), False),
         (EXCLUSIONS, exclusions_expected(text, ledger), False),
         (TABLE4, table4_expected(frame), True),
         (TABLE5, table5_expected(frame, ledger), True),
     )
+
+
+def expected_numbers(text: str, inputs: dict) -> list[float]:
+    """Every quantity the cell checks expect, flattened.
+
+    The token walk reads this so a cell already checked positionally is not
+    reported a second time as an unmatched token. Without it the strongest
+    checks produce the loudest noise.
+    """
+    out: list[float] = []
+    for _, expected, _ in _checks(text, inputs):
+        for columns in expected.values():
+            for want in columns.values():
+                out.extend(want if isinstance(want, (list, tuple)) else [want])
+    return out
+
+
+def report(text: str, inputs: dict) -> None:
+    """Print every cell-level disagreement, and the checks that found none."""
+    frame = inputs["frame"]
     findings: list[dict] = []
-    for heading, expected, exact in checks:
+    for heading, expected, exact in _checks(text, inputs):
         findings.extend(check_table(text, heading, expected, exact=exact))
 
     print(f"\n[Anchored table cells] {len(findings)} disagreements — each cell "

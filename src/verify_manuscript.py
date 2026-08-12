@@ -26,12 +26,22 @@ from contextlib import redirect_stdout
 
 import pandas as pd
 
-from . import manuscript_tables, verify_stats
+from . import (
+    manuscript_tables,
+    verify_candidate_recall,
+    verify_independent_read,
+    verify_stats,
+)
 from .analysis import _read_counts, prepare_scatter_data
+from .build_ledger import LEDGER_CSV
+from .build_ledger import RULINGS_CSV as LEDGER_RULINGS_CSV
 from .build_screening import RULINGS_CSV, exclusion_breakdown
+from .build_thirdpass import THIRDPASS_CSV
 from .claim_mapping import aggregate_axis_a, load_claims, load_sources
 from .definitions import PROJECT_ROOT, PUBMED_COUNTS_CSV, TIER_ORG
 from .gap_models import prepare_model_frame
+from .ledger import cohen_kappa as ledger_kappa
+from .ledger import exclusion_breakdown as ledger_exclusions
 from .screening import SCREENING_CSV, cohen_kappa
 
 MANUSCRIPT = PROJECT_ROOT / "manuscript.md"
@@ -56,7 +66,8 @@ IDENTIFIER_SPAN = re.compile(
     r"|ORCID[^\d]{0,4}[\d-]+X?"
     r"|Claude [A-Za-z]+ [\d.]+"                             # coder model
     r"|(?:Python|pandas|scipy|numpy|statsmodels|matplotlib|weasyprint) [\d.]+"
-    r"|45 CFR [\d.()a-z]+"
+    r"|45 CFR §?[\d.()a-z]+"
+    r"|§\d+(?:\.\d+)*"                                      # protocol section
     r"|\b(?=[0-9a-f]{7,40}\b)[0-9a-f]*[a-f][0-9a-f]*\b"     # commit anchor
 )
 
@@ -109,6 +120,46 @@ def counts_reference(counts: pd.DataFrame) -> set[str]:
     return values
 
 
+def axis_a_ledger_reference() -> set[str]:
+    """The Axis A candidate ledger's own tallies, as printable strings.
+
+    Axis A enters `verify_stats` only as a breadth count, so nothing else in the
+    reference set can vouch for the ledger the Methods now describe — its size,
+    its agreement statistic, its adjudications or its exclusion codes. Without
+    this the entire Route D account reads as unmatched, which would bury the
+    tokens that genuinely need a read.
+    """
+    ledger = pd.read_csv(LEDGER_CSV)
+    recon = pd.DataFrame(
+        {
+            "label_c1": ledger["coder1"],
+            "label_c2": ledger["coder2"],
+            "status": (ledger["coder1"] == ledger["coder2"]).map(
+                {True: "agree", False: "disagree"}
+            ),
+        }
+    )
+    kappa = ledger_kappa(recon)
+    values: set[str] = set()
+    for value in (
+        len(ledger),
+        int((ledger["final_label"] == "include").sum()),
+        int((ledger["final_label"] != "include").sum()),
+        int(ledger["adjudicated"].sum()),
+        int((ledger["coder1"] != ledger["coder2"]).sum()),
+        len(pd.read_csv(LEDGER_RULINGS_CSV)),
+        kappa["kappa"],
+        kappa["po"],
+    ):
+        values |= _renderings(str(value))
+    breakdown = ledger_exclusions(ledger)
+    for column in breakdown.columns:
+        if pd.api.types.is_numeric_dtype(breakdown[column]):
+            for value in breakdown[column]:
+                values |= _renderings(str(value))
+    return values
+
+
 def pipeline_inputs() -> dict:
     """The frames both reports read, loaded once so they cannot disagree.
 
@@ -134,6 +185,8 @@ def pipeline_inputs() -> dict:
         "frame": prepare_model_frame(prepare_scatter_data(claims, sources, counts)),
         "ledger": ledger,
         "kappa": cohen_kappa(recon),
+        "rulings": pd.read_csv(RULINGS_CSV),
+        "thirdpass": pd.read_csv(THIRDPASS_CSV),
     }
 
 
@@ -151,14 +204,25 @@ def pipeline_values(inputs: dict) -> set[str]:
     somewhere in the pipeline, not that it belongs where the manuscript prints
     it. `manuscript_tables` supplies the positional test for every table cell.
     """
-    buffer = io.StringIO()
-    with redirect_stdout(buffer):
-        verify_stats.main()
     values: set[str] = set()
-    for token in _tokens(buffer.getvalue()):
-        values |= _renderings(token)
+    # Both completeness scripts end by exiting on their pass/fail threshold, so
+    # the exit is caught rather than allowed to end this run.
+    for module in (verify_stats, verify_candidate_recall, verify_independent_read):
+        buffer = io.StringIO()
+        with redirect_stdout(buffer):
+            try:
+                module.main()
+            except SystemExit:
+                pass
+        for token in _tokens(buffer.getvalue()):
+            values |= _renderings(token)
 
     values |= counts_reference(pd.read_csv(PUBMED_COUNTS_CSV))
+    values |= axis_a_ledger_reference()
+    for value in manuscript_tables.expected_numbers(
+        MANUSCRIPT.read_text(encoding="utf-8"), inputs
+    ):
+        values |= _renderings(str(value))
 
     claims, sources = inputs["claims"], inputs["sources"]
     axis_a = aggregate_axis_a(claims, sources, max_tier=TIER_ORG)
@@ -245,8 +309,7 @@ def main() -> None:
         print(f"    ## {section}: {len(group)} tokens on lines "
               f"{sorted(set(group['line']))[:12]}")
 
-    manuscript_tables.report(text, inputs["claims"], inputs["sources"], inputs["frame"],
-                             inputs["counts"], inputs["ledger"], inputs["kappa"])
+    manuscript_tables.report(text, inputs)
 
 
 if __name__ == "__main__":

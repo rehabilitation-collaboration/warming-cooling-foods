@@ -8,7 +8,13 @@ whether the number in *this* cell is the quantity *this* row and column name.
 import pandas as pd
 import pytest
 
-from src.manuscript_tables import _agrees, check_table, table4_expected, table_body
+from src.manuscript_tables import (
+    _agrees,
+    adjudication_split,
+    check_table,
+    table4_expected,
+    table_body,
+)
 
 TABLE = """### Table X. Demo
 
@@ -85,6 +91,22 @@ class TestCheckTable:
                         {"onion": {"Sources": 5}, "green onion": {"Sources": 6}})
         assert check_table(FOODS, "### T", {"green onion": {"Sources": 6}},
                            exact=True) == []
+
+
+class TestAdjudicationSplit:
+    def test_each_pass_is_counted_separately(self):
+        rulings = pd.DataFrame({"batch": [
+            "2026-08-07", "2026-08-07", "2026-08-08 §2.3 sweep",
+            "2026-08-12 RD-5 homonym sweep",
+        ]})
+        assert adjudication_split(rulings) == {
+            "divergence": 2, "sweep": 1, "homonym": 1, "restoration": 0}
+
+    def test_an_unmapped_batch_fails_loudly(self):
+        # A new pass has to be classified deliberately. Folding it into whichever
+        # bucket happens to be checked last would move a published tally silently.
+        with pytest.raises(ValueError, match="unmapped batch"):
+            adjudication_split(pd.DataFrame({"batch": ["2026-09-01 a new sweep"]}))
 
 
 class TestTable4Expected:
