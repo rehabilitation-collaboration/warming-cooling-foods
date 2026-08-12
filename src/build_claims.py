@@ -1,780 +1,148 @@
-"""Build data/claims.csv from hand-coded warm/cool attributions.
+"""Generate data/claims.csv from the adjudicated candidate ledger (RD-4, D46).
 
-Each row is one (food, source, direction) claim coded BY HAND from the fetched
-source text under ``data/sources_raw/{source_id}.txt``, following
-``data/coding_protocol.md``. ``food_en`` is the canonical aggregation key;
-``food_ja`` and ``quote`` (source's own label + section/location) preserve
-traceability. Directions use the source's own vocabulary mapped to the binary
-lay axis per protocol §3 (warm / cool / neutral).
+Until Route D this module carried the coding itself, as 781 lines of literal
+tuples, and ``claims.csv`` was its output. That arrangement is what the review's
+fourth point was about: the file recorded what was coded and nothing about what
+was read and rejected, so a reader could not tell a miss from an exclusion the
+protocol called for. ``claims_ledger.csv`` now carries both sides of every
+judgment, and ``claims.csv`` is a projection of its include rows.
 
-Running this script regenerates claims.csv deterministically. It is the audit
-trail of the manual coding: to re-check any row, open the cited source txt.
+The hand coding is not deleted — it is frozen at ``data/claims_frozen.csv``,
+which stays the reference for ``verify_candidate_recall`` and
+``verify_independent_read``. Those two measure the extractor against a set it did
+not produce; pointing them at a generated file would make them measure the
+ledger against itself.
+
+**The projection is not lossless, and it is not supposed to be.** §9.7's wording
+predates the rollout; measured, the ledger loses nothing from the frozen file and
+adds 220 (source, food) attributions, because the protocol reaches attributions
+the original pass did not. ``src/rd4_delta.py`` classifies the addition.
+
+Two things happen on the way across:
+
+- **Collapse.** The ledger's key is (source_id, candidate) — one row per span —
+  while §2's unit of coding is (food, source). Spans naming the same food in the
+  same source with the same direction become one row. §9.4's note on ``duplicate``
+  says this explicitly: collapsing "is a property of claims.csv … and it happens
+  mechanically when the ledger is projected there".
+- **``condition`` is carried over, not re-derived.** The ledger has no condition
+  column (D69 measured that no (food, source) pair splits direction on one, so
+  adding one would have re-run 110 codings to record an annotation). Most of the
+  47 frozen annotations are seasonal and sit in a section heading two to five
+  lines above the food, which no candidate span reaches. They are joined back
+  from the frozen file on (source_id, food_ja), then on food_en.
+
+Run: ``python3 -m src.build_claims``
 """
 
 from __future__ import annotations
 
 import pandas as pd
 
-from .definitions import CLAIMS_CSV
+from .definitions import CLAIMS_CSV, CLAIMS_FROZEN_CSV, DATA_DIR
+from .rd4_delta import _norm_en, kata
 
+LEDGER_CSV = DATA_DIR / "claims_ledger.csv"
 COLUMNS = ["food_en", "food_ja", "source_id", "direction", "quote", "condition"]
 
-# (food_en, food_ja, source_id, direction, quote, condition)
-# food_en is the canonical key kept consistent across sources (e.g. きゅうり /
-# キュウリ / 胡瓜 all -> "cucumber"). food_ja is the source's verbatim label.
-CLAIMS: list[tuple[str, str, str, str, str, str]] = [
-    # ==================================================================
-    # yomeishu (Tier 1) 養命酒製造 健康コラム
-    #   東洋医学: 陽性=warm / 陰性=cool。温=「体を温める食べ物」節+見分け方。
-    #   冷=「体を冷やす食べ物」節(陰性リスト)+見分け方(白米)。
-    # ==================================================================
-    # -- warm (陽性) --
-    ("ginger", "生姜", "yomeishu", "warm", "体を温める食べ物: 生姜", ""),
-    ("green onion", "ねぎ", "yomeishu", "warm", "体を温める食べ物: ねぎ", ""),
-    ("chicken", "鶏むね肉", "yomeishu", "warm", "体を温める食べ物: 鶏むね肉(むね肉→chickenに一般化)", ""),
-    ("pumpkin", "かぼちゃ", "yomeishu", "warm", "体を温める食べ物: かぼちゃ", ""),
-    ("mandarin orange", "みかん", "yomeishu", "warm", "体を温める食べ物: みかん", ""),
-    ("pork liver", "豚レバー", "yomeishu", "warm", "体を温める食べ物: 豚レバー", ""),
-    ("carrot", "人参", "yomeishu", "warm", "見分け方: 人参などの根菜類は陽性", ""),
-    ("burdock", "ごぼう", "yomeishu", "warm", "見分け方: ごぼうなどの根菜類は陽性", ""),
-    ("miso", "味噌", "yomeishu", "warm", "見分け方: 味噌など色が濃いものは陽性", ""),
-    ("brown rice", "玄米", "yomeishu", "warm", "見分け方: 色が濃い玄米は陽性", ""),
-    ("brown sugar", "黒糖", "yomeishu", "warm", "見分け方: 黒糖は陽性", ""),
-    ("beet sugar", "てんさい糖", "yomeishu", "warm", "見分け方: てんさい糖は陽性", ""),
-    ("honey", "ハチミツ", "yomeishu", "warm", "見分け方: ハチミツは陽性", ""),
-    # -- cool (陰性) 穀物・豆類 --
-    ("wheat", "小麦", "yomeishu", "cool", "体を冷やす食べ物＞穀物・豆類: 小麦", ""),
-    ("barley", "大麦", "yomeishu", "cool", "体を冷やす食べ物＞穀物・豆類: 大麦", ""),
-    ("buckwheat", "そば", "yomeishu", "cool", "体を冷やす食べ物＞穀物・豆類: そば", ""),
-    ("edamame", "枝豆", "yomeishu", "cool", "体を冷やす食べ物＞穀物・豆類: 枝豆", ""),
-    ("tofu", "豆腐", "yomeishu", "cool", "体を冷やす食べ物＞穀物・豆類: 豆腐", ""),
-    ("mung bean", "緑豆", "yomeishu", "cool", "体を冷やす食べ物＞穀物・豆類: 緑豆", ""),
-    ("konjac", "こんにゃく", "yomeishu", "cool", "体を冷やす食べ物＞穀物・豆類: こんにゃく", ""),
-    # -- cool 肉 --
-    ("horse meat", "馬肉", "yomeishu", "cool", "体を冷やす食べ物＞肉: 馬肉", ""),
-    ("duck meat", "鴨肉", "yomeishu", "cool", "体を冷やす食べ物＞肉: 鴨肉", ""),
-    ("animal fat", "動物性脂肪", "yomeishu", "cool", "体を冷やす食べ物＞肉: 動物性脂肪", ""),
-    # -- cool 魚介類 --
-    ("oyster", "牡蠣", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: 牡蠣", ""),
-    ("asari clam", "あさり", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: あさり", ""),
-    ("shijimi clam", "しじみ", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: しじみ", ""),
-    ("hamaguri clam", "はまぐり", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: はまぐり", ""),
-    ("crab", "カニ", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: カニ", ""),
-    ("octopus", "タコ", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: タコ", ""),
-    ("wakame", "わかめ", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: わかめ", ""),
-    ("hijiki", "ひじき", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: ひじき", ""),
-    ("nori", "のり", "yomeishu", "cool", "体を冷やす食べ物＞魚介類: のり", ""),
-    # -- cool 野菜 --
-    ("cucumber", "きゅうり", "yomeishu", "cool", "体を冷やす食べ物＞野菜: きゅうり", ""),
-    ("tomato", "トマト", "yomeishu", "cool", "体を冷やす食べ物＞野菜: トマト", ""),
-    ("chinese cabbage", "白菜", "yomeishu", "cool", "体を冷やす食べ物＞野菜: 白菜", ""),
-    ("eggplant", "なす", "yomeishu", "cool", "体を冷やす食べ物＞野菜: なす", ""),
-    ("bitter melon", "ゴーヤ", "yomeishu", "cool", "体を冷やす食べ物＞野菜: ゴーヤ", ""),
-    ("spinach", "ほうれん草", "yomeishu", "cool", "体を冷やす食べ物＞野菜: ほうれん草", ""),
-    ("bok choy", "チンゲン菜", "yomeishu", "cool", "体を冷やす食べ物＞野菜: チンゲン菜", ""),
-    # celery added 2026-08-04 after inter-coder reconciliation: coder 1 missed
-    # it though it is listed verbatim in the 野菜 cooling line (protocol §3).
-    ("celery", "セロリ", "yomeishu", "cool", "体を冷やす食べ物＞野菜: セロリ", ""),
-    ("radish sprouts", "かいわれ大根", "yomeishu", "cool", "体を冷やす食べ物＞野菜: かいわれ大根", ""),
-    ("winter melon", "冬瓜", "yomeishu", "cool", "体を冷やす食べ物＞野菜: 冬瓜", ""),
-    # -- cool 果物 --
-    ("strawberry", "いちご", "yomeishu", "cool", "体を冷やす食べ物＞果物: いちご", ""),
-    ("banana", "バナナ", "yomeishu", "cool", "体を冷やす食べ物＞果物: バナナ", ""),
-    ("watermelon", "スイカ", "yomeishu", "cool", "体を冷やす食べ物＞果物: スイカ", ""),
-    ("persimmon", "柿", "yomeishu", "cool", "体を冷やす食べ物＞果物: 柿", ""),
-    ("pear", "梨", "yomeishu", "cool", "体を冷やす食べ物＞果物: 梨", ""),
-    ("melon", "メロン", "yomeishu", "cool", "体を冷やす食べ物＞果物: メロン", ""),
-    ("kiwi", "キウイ", "yomeishu", "cool", "体を冷やす食べ物＞果物: キウイ", ""),
-    ("mango", "マンゴー", "yomeishu", "cool", "体を冷やす食べ物＞果物: マンゴー", ""),
-    # -- cool 調味料 --
-    ("vinegar", "酢", "yomeishu", "cool", "体を冷やす食べ物＞調味料: 酢", ""),
-    ("white sugar", "白砂糖", "yomeishu", "cool", "体を冷やす食べ物＞調味料: 白砂糖", ""),
-    ("sesame oil", "ごま油", "yomeishu", "cool", "体を冷やす食べ物＞調味料: ごま油", ""),
-    ("rapeseed oil", "菜種油", "yomeishu", "cool", "体を冷やす食べ物＞調味料: 菜種油", ""),
-    ("oyster sauce", "オイスターソース", "yomeishu", "cool", "体を冷やす食べ物＞調味料: オイスターソース", ""),
-    # -- cool 見分け方 --
-    ("white rice", "白米", "yomeishu", "cool", "見分け方: 白米は色が薄く体を冷やす", ""),
 
-    # ==================================================================
-    # esse (Tier 1) ESSEonline (扶桑社) 管理栄養士監修
-    #   ＜温食材＞=warm / ＜冷食材＞=cool の2区分リスト。
-    # ==================================================================
-    # -- warm ＜温食材＞ --
-    ("carrot", "ニンジン", "esse", "warm", "＜温食材＞野菜: ニンジン", ""),
-    ("burdock", "ゴボウ", "esse", "warm", "＜温食材＞野菜: ゴボウ(根菜類)", ""),
-    ("pumpkin", "カボチャ", "esse", "warm", "＜温食材＞野菜: カボチャ", ""),
-    ("brown rice", "玄米", "esse", "warm", "＜温食材＞炭水化物: 玄米", ""),
-    ("buckwheat", "そば", "esse", "warm", "＜温食材＞炭水化物: そば", ""),
-    ("whole grain bread", "全粒粉パン", "esse", "warm", "＜温食材＞炭水化物: 全粒粉パン", ""),
-    ("salt", "塩", "esse", "warm", "＜温食材＞調味料: 塩", ""),
-    ("miso", "みそ", "esse", "warm", "＜温食材＞調味料: みそ", ""),
-    ("soy sauce", "しょうゆ", "esse", "warm", "＜温食材＞調味料: しょうゆ", ""),
-    ("brown sugar", "黒砂糖", "esse", "warm", "＜温食材＞調味料: 黒砂糖", ""),
-    ("umeboshi", "梅干し", "esse", "warm", "＜温食材＞調味料: 梅干し", ""),
-    ("red meat and fish", "赤身（肉·魚）", "esse", "warm", "＜温食材＞タンパク質: 赤身（肉·魚）", ""),
-    ("shrimp", "エビ", "esse", "warm", "＜温食材＞タンパク質: エビ", ""),
-    ("octopus", "タコ", "esse", "warm", "＜温食材＞タンパク質: タコ", ""),
-    ("shellfish", "貝類", "esse", "warm", "＜温食材＞タンパク質: 貝類", ""),
-    ("small fish", "小魚", "esse", "warm", "＜温食材＞タンパク質: 小魚", ""),
-    ("natto", "納豆", "esse", "warm", "＜温食材＞タンパク質: 納豆", ""),
-    ("black tea", "紅茶", "esse", "warm", "＜温食材＞飲み物: 紅茶", ""),
-    ("cocoa", "ココア", "esse", "warm", "＜温食材＞飲み物: ココア", ""),
-    ("sake", "日本酒", "esse", "warm", "＜温食材＞飲み物: 日本酒", ""),
-    ("red wine", "赤ワイン", "esse", "warm", "＜温食材＞飲み物: 赤ワイン", ""),
-    ("apple", "リンゴ", "esse", "warm", "＜温食材＞果物: リンゴ", ""),
-    ("cherry", "サクランボ", "esse", "warm", "＜温食材＞果物: サクランボ", ""),
-    ("grape", "ブドウ", "esse", "warm", "＜温食材＞果物: ブドウ", ""),
-    ("prune", "プルーン", "esse", "warm", "＜温食材＞果物: プルーン", ""),
-    # -- cool ＜冷食材＞ --
-    ("leafy greens", "葉野菜", "esse", "cool", "＜冷食材＞野菜: 葉野菜", ""),
-    ("eggplant", "ナス", "esse", "cool", "＜冷食材＞野菜: ナス", ""),
-    ("cucumber", "キュウリ", "esse", "cool", "＜冷食材＞野菜: キュウリ", ""),
-    ("tomato", "トマト", "esse", "cool", "＜冷食材＞野菜: トマト", ""),
-    ("bean sprouts", "モヤシ", "esse", "cool", "＜冷食材＞野菜: モヤシ", ""),
-    ("pasta", "パスタ", "esse", "cool", "＜冷食材＞炭水化物: パスタ", ""),
-    ("udon", "うどん", "esse", "cool", "＜冷食材＞炭水化物: うどん", ""),
-    ("white rice", "白米", "esse", "cool", "＜冷食材＞炭水化物: 白米", ""),
-    ("white bread", "白パン", "esse", "cool", "＜冷食材＞炭水化物: 白パン", ""),
-    ("mayonnaise", "マヨネーズ", "esse", "cool", "＜冷食材＞調味料: マヨネーズ", ""),
-    ("ketchup", "ケチャップ", "esse", "cool", "＜冷食材＞調味料: ケチャップ", ""),
-    ("vinegar", "酢", "esse", "cool", "＜冷食材＞調味料: 酢", ""),
-    ("white sugar", "白砂糖", "esse", "cool", "＜冷食材＞調味料: 白砂糖", ""),
-    ("white fish", "白身の魚", "esse", "cool", "＜冷食材＞タンパク質: 白身の魚", ""),
-    ("fatty meat", "脂身", "esse", "cool", "＜冷食材＞タンパク質: 脂身", ""),
-    ("tofu", "豆腐", "esse", "cool", "＜冷食材＞タンパク質: 豆腐", ""),
-    ("white sesame", "白ゴマ", "esse", "cool", "＜冷食材＞タンパク質: 白ゴマ", ""),
-    ("green tea", "緑茶", "esse", "cool", "＜冷食材＞飲み物: 緑茶", ""),
-    ("coffee", "コーヒー", "esse", "cool", "＜冷食材＞飲み物: コーヒー", ""),
-    ("milk", "牛乳", "esse", "cool", "＜冷食材＞飲み物: 牛乳", ""),
-    ("beer", "ビール", "esse", "cool", "＜冷食材＞飲み物: ビール", ""),
-    ("white wine", "白ワイン", "esse", "cool", "＜冷食材＞飲み物: 白ワイン", ""),
-    ("banana", "バナナ", "esse", "cool", "＜冷食材＞果物: バナナ", ""),
-    ("pineapple", "パイナップル", "esse", "cool", "＜冷食材＞果物: パイナップル", ""),
-    ("mango", "マンゴー", "esse", "cool", "＜冷食材＞果物: マンゴー", ""),
-    ("kiwi", "キウイ", "esse", "cool", "＜冷食材＞果物: キウイ", ""),
-    ("melon", "メロン", "esse", "cool", "＜冷食材＞果物: メロン", ""),
-    ("grapefruit", "グレープフルーツ", "esse", "cool", "＜冷食材＞果物: グレープフルーツ", ""),
+def load_includes(path=LEDGER_CSV) -> pd.DataFrame:
+    led = pd.read_csv(path, dtype=str).fillna("")
+    inc = led[led["final_label"] == "include"].copy()
+    missing = inc[(inc.food_ja == "") | (inc.food_en == "") | (inc.direction == "")]
+    if not missing.empty:
+        raise ValueError(
+            f"{len(missing)} include rows in {path.name} lack food_ja/food_en/"
+            f"direction, which §9.3 requires on every include: "
+            f"{list(zip(missing.source_id, missing.candidate))[:5]}"
+        )
+    return inc
 
-    # ==================================================================
-    # macaroni (Tier 1) macaroni (トラストリッジ) 管理栄養士執筆
-    #   五性ベース。体を「温める」一覧=warm / 体を「冷やす」一覧=cool。
-    # ==================================================================
-    # -- warm 温める野菜 --
-    ("carrot", "にんじん", "macaroni", "warm", "体を温める野菜: にんじん", ""),
-    ("burdock", "ごぼう", "macaroni", "warm", "体を温める野菜: ごぼう", ""),
-    ("lotus root", "れんこん", "macaroni", "warm", "体を温める野菜: れんこん", ""),
-    ("pumpkin", "かぼちゃ", "macaroni", "warm", "体を温める野菜: かぼちゃ", ""),
-    ("green onion", "ねぎ", "macaroni", "warm", "体を温める野菜: ねぎ", ""),
-    ("onion", "たまねぎ", "macaroni", "warm", "体を温める野菜: たまねぎ", ""),
-    ("ginger", "しょうが", "macaroni", "warm", "体を温める野菜: しょうが", ""),
-    # -- warm 温める果物 --
-    ("apple", "りんご", "macaroni", "warm", "体を温める果物: りんご", ""),
-    ("cherry", "さくらんぼ", "macaroni", "warm", "体を温める果物: さくらんぼ", ""),
-    ("grape", "ぶどう", "macaroni", "warm", "体を温める果物: ぶどう", ""),
-    ("prune", "プルーン", "macaroni", "warm", "体を温める果物: プルーン", ""),
-    ("orange", "オレンジ", "macaroni", "warm", "体を温める果物: オレンジ", ""),
-    # -- warm そのほか(温) --
-    ("chili pepper", "唐辛子", "macaroni", "warm", "体を温めるそのほか: 唐辛子", ""),
-    ("spices", "香辛料", "macaroni", "warm", "体を温めるそのほか: 香辛料", ""),
-    ("miso", "みそ", "macaroni", "warm", "体を温めるそのほか: みそ(発酵食品)", ""),
-    ("black tea", "紅茶", "macaroni", "warm", "体を温めるそのほか: 紅茶(発酵食品)", ""),
-    ("sake", "日本酒", "macaroni", "warm", "体を温めるそのほか: 日本酒(発酵食品)", ""),
-    # -- cool 冷やす野菜 --
-    ("lettuce", "レタス", "macaroni", "cool", "体を冷やす野菜: レタス", ""),
-    ("cabbage", "キャベツ", "macaroni", "cool", "体を冷やす野菜: キャベツ", ""),
-    ("chinese cabbage", "白菜", "macaroni", "cool", "体を冷やす野菜: 白菜", ""),
-    ("spinach", "ほうれんそう", "macaroni", "cool", "体を冷やす野菜: ほうれんそう", ""),
-    ("komatsuna", "小松菜", "macaroni", "cool", "体を冷やす野菜: 小松菜", ""),
-    ("cucumber", "きゅうり", "macaroni", "cool", "体を冷やす野菜: きゅうり", ""),
-    ("tomato", "トマト", "macaroni", "cool", "体を冷やす野菜: トマト", ""),
-    ("eggplant", "なす", "macaroni", "cool", "体を冷やす野菜: なす", ""),
-    # -- cool 冷やす果物 --
-    ("mango", "マンゴー", "macaroni", "cool", "体を冷やす果物: マンゴー", ""),
-    ("banana", "バナナ", "macaroni", "cool", "体を冷やす果物: バナナ", ""),
-    ("pineapple", "パイナップル", "macaroni", "cool", "体を冷やす果物: パイナップル", ""),
-    ("watermelon", "スイカ", "macaroni", "cool", "体を冷やす果物(本文): スイカも夏が旬", ""),
-    ("melon", "メロン", "macaroni", "cool", "体を冷やす果物(本文): メロンも夏が旬", ""),
-    # -- cool そのほか(冷) --
-    ("vinegar", "酢", "macaroni", "cool", "体を冷やすそのほか: 酢", ""),
-    ("mayonnaise", "マヨネーズ", "macaroni", "cool", "体を冷やすそのほか: マヨネーズ", ""),
-    ("beer", "ビール", "macaroni", "cool", "体を冷やすそのほか: ビール", ""),
-    ("coffee", "コーヒー", "macaroni", "cool", "体を冷やすそのほか: コーヒー", ""),
-    ("green tea", "緑茶", "macaroni", "cool", "体を冷やすそのほか: 緑茶", ""),
-    ("white sugar", "白砂糖", "macaroni", "cool", "チョコレートの項: 白砂糖は体を冷やす食材", ""),
 
-    # ==================================================================
-    # oitr (Tier 1) いつでもオイテル (IBGメディア)
-    #   薬膳「陽性食品」=warm(6カテゴリ表)。体を冷やしやすい食材=cool。
-    #   「冷たい飲み物・アイス」は提供温度カテゴリなので除外(protocol §3)。
-    # ==================================================================
-    # -- warm 根菜・冬野菜 --
-    ("carrot", "にんじん", "oitr", "warm", "体を温める食材(陽性)＞根菜・冬野菜: にんじん", ""),
-    ("burdock", "ごぼう", "oitr", "warm", "体を温める食材(陽性)＞根菜・冬野菜: ごぼう", ""),
-    ("lotus root", "れんこん", "oitr", "warm", "体を温める食材(陽性)＞根菜・冬野菜: れんこん", ""),
-    ("pumpkin", "かぼちゃ", "oitr", "warm", "体を温める食材(陽性)＞根菜・冬野菜: かぼちゃ", ""),
-    ("sweet potato", "さつまいも", "oitr", "warm", "体を温める食材(陽性)＞根菜・冬野菜: さつまいも", ""),
-    ("daikon", "大根", "oitr", "warm", "体を温める食材(陽性)＞根菜・冬野菜: 大根", ""),
-    # -- warm 薬味・香味野菜 --
-    ("ginger", "生姜", "oitr", "warm", "体を温める食材(陽性)＞薬味・香味野菜: 生姜", ""),
-    ("garlic", "にんにく", "oitr", "warm", "体を温める食材(陽性)＞薬味・香味野菜: にんにく", ""),
-    ("green onion", "ねぎ", "oitr", "warm", "体を温める食材(陽性)＞薬味・香味野菜: ねぎ", ""),
-    ("onion", "玉ねぎ", "oitr", "warm", "体を温める食材(陽性)＞薬味・香味野菜: 玉ねぎ", ""),
-    ("nira", "にら", "oitr", "warm", "体を温める食材(陽性)＞薬味・香味野菜: にら", ""),
-    ("myoga", "みょうが", "oitr", "warm", "体を温める食材(陽性)＞薬味・香味野菜: みょうが", ""),
-    # -- warm 発酵食品 --
-    ("miso", "味噌", "oitr", "warm", "体を温める食材(陽性)＞発酵食品: 味噌", ""),
-    ("natto", "納豆", "oitr", "warm", "体を温める食材(陽性)＞発酵食品: 納豆", ""),
-    ("amazake", "甘酒", "oitr", "warm", "体を温める食材(陽性)＞発酵食品: 甘酒", ""),
-    ("kimchi", "キムチ", "oitr", "warm", "体を温める食材(陽性)＞発酵食品: キムチ", ""),
-    ("nukazuke", "ぬか漬け", "oitr", "warm", "体を温める食材(陽性)＞発酵食品: ぬか漬け", ""),
-    ("shio koji", "塩麹", "oitr", "warm", "体を温める食材(陽性)＞発酵食品: 塩麹", ""),
-    # -- warm スパイス・調味料 --
-    ("cinnamon", "シナモン", "oitr", "warm", "体を温める食材(陽性)＞スパイス・調味料: シナモン", ""),
-    ("chili pepper", "唐辛子", "oitr", "warm", "体を温める食材(陽性)＞スパイス・調味料: 唐辛子", ""),
-    ("pepper", "こしょう", "oitr", "warm", "体を温める食材(陽性)＞スパイス・調味料: こしょう", ""),
-    ("curry powder", "カレー粉", "oitr", "warm", "体を温める食材(陽性)＞スパイス・調味料: カレー粉", ""),
-    ("sansho", "山椒", "oitr", "warm", "体を温める食材(陽性)＞スパイス・調味料: 山椒", ""),
-    ("sesame", "ごま", "oitr", "warm", "体を温める食材(陽性)＞スパイス・調味料: ごま", ""),
-    # -- warm たんぱく質 --
-    ("chicken", "鶏肉", "oitr", "warm", "体を温める食材(陽性)＞たんぱく質: 鶏肉", ""),
-    ("pork", "豚肉", "oitr", "warm", "体を温める食材(陽性)＞たんぱく質: 豚肉", ""),
-    ("mackerel", "サバ", "oitr", "warm", "体を温める食材(陽性)＞たんぱく質: サバ", ""),
-    ("sardine", "イワシ", "oitr", "warm", "体を温める食材(陽性)＞たんぱく質: イワシ", ""),
-    ("egg", "卵", "oitr", "warm", "体を温める食材(陽性)＞たんぱく質: 卵", ""),
-    ("tofu", "豆腐", "oitr", "warm", "体を温める食材(陽性)＞たんぱく質: 大豆製品(豆腐)", ""),
-    # -- warm 寒冷地の果物・ナッツ --
-    ("apple", "りんご", "oitr", "warm", "体を温める食材(陽性)＞寒冷地の果物・ナッツ: りんご", ""),
-    ("grape", "ぶどう", "oitr", "warm", "体を温める食材(陽性)＞寒冷地の果物・ナッツ: ぶどう", ""),
-    ("jujube", "なつめ", "oitr", "warm", "体を温める食材(陽性)＞寒冷地の果物・ナッツ: なつめ", ""),
-    ("walnut", "くるみ", "oitr", "warm", "体を温める食材(陽性)＞寒冷地の果物・ナッツ: くるみ", ""),
-    ("almond", "アーモンド", "oitr", "warm", "体を温める食材(陽性)＞寒冷地の果物・ナッツ: アーモンド", ""),
-    ("black sesame", "黒ごま", "oitr", "warm", "体を温める食材(陽性)＞寒冷地の果物・ナッツ: 黒ごま", ""),
-    # -- cool 体を冷やしやすい食材 --
-    ("tomato", "トマト", "oitr", "cool", "体を冷やしやすい食材＞夏野菜: トマト", ""),
-    ("cucumber", "きゅうり", "oitr", "cool", "体を冷やしやすい食材＞夏野菜: きゅうり", ""),
-    ("eggplant", "なす", "oitr", "cool", "体を冷やしやすい食材＞夏野菜: なす", ""),
-    ("bitter melon", "ゴーヤ", "oitr", "cool", "体を冷やしやすい食材＞夏野菜: ゴーヤ", ""),
-    ("banana", "バナナ", "oitr", "cool", "体を冷やしやすい食材＞南国の果物(陰性): バナナ", ""),
-    ("mango", "マンゴー", "oitr", "cool", "体を冷やしやすい食材＞南国の果物(陰性): マンゴー", ""),
-    ("pineapple", "パイナップル", "oitr", "cool", "体を冷やしやすい食材＞南国の果物(陰性): パイナップル", ""),
-    ("kiwi", "キウイ", "oitr", "cool", "体を冷やしやすい食材＞南国の果物(陰性): キウイ", ""),
-    ("white sugar", "白砂糖", "oitr", "cool", "体を冷やしやすい食材: 白砂糖・精製食品", ""),
+def canonicalise_food_en(inc: pd.DataFrame, frozen_path=CLAIMS_FROZEN_CSV) -> pd.DataFrame:
+    """Adopt the frozen file's `food_en` wherever the Japanese label matches.
 
-    # ==================================================================
-    # kawashimaya (Tier 1) かわしま屋 Food for Well-being
-    #   体を温める食材一覧(表)=warm。体を冷やしやすい食べ物一覧(表)=cool。
-    #   「冷たい食べ物」(アイス/かき氷/そうめん等)は提供温度カテゴリなので除外。
-    # ==================================================================
-    # -- warm 根菜類などの冬野菜 --
-    ("carrot", "にんじん", "kawashimaya", "warm", "体を温める食べ物一覧＞根菜類などの冬野菜: にんじん", ""),
-    ("burdock", "ごぼう", "kawashimaya", "warm", "体を温める食べ物一覧＞根菜類などの冬野菜: ごぼう", ""),
-    ("lotus root", "れんこん", "kawashimaya", "warm", "体を温める食べ物一覧＞根菜類などの冬野菜: れんこん", ""),
-    ("daikon", "だいこん", "kawashimaya", "warm", "体を温める食べ物一覧＞根菜類などの冬野菜: だいこん", ""),
-    ("pumpkin", "かぼちゃ", "kawashimaya", "warm", "体を温める食べ物一覧＞根菜類などの冬野菜: かぼちゃ", ""),
-    # -- warm たんぱく質が多い食材 --
-    ("chicken", "鶏肉", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: 鶏肉", ""),
-    ("beef", "牛肉", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: 牛肉", ""),
-    ("pork", "豚肉", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: 豚肉", ""),
-    ("lamb", "羊肉", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: 羊肉", ""),
-    ("salmon", "鮭", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: 鮭", ""),
-    ("mackerel", "サバ", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: サバ", ""),
-    ("horse mackerel", "アジ", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: アジ", ""),
-    ("sardine", "イワシ", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: イワシ", ""),
-    ("tuna", "マグロ", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: マグロ", ""),
-    ("egg", "卵", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: 卵", ""),
-    ("tofu", "豆腐", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: 豆腐", ""),
-    ("atsuage", "厚揚げ", "kawashimaya", "warm", "体を温める食べ物一覧＞たんぱく質: 厚揚げ", ""),
-    # -- warm 香味野菜・スパイス --
-    ("ginger", "しょうが", "kawashimaya", "warm", "体を温める食べ物一覧＞香味野菜・スパイス: しょうが", ""),
-    ("garlic", "にんにく", "kawashimaya", "warm", "体を温める食べ物一覧＞香味野菜・スパイス: にんにく", ""),
-    ("green onion", "ねぎ", "kawashimaya", "warm", "体を温める食べ物一覧＞香味野菜・スパイス: ねぎ", ""),
-    ("chili pepper", "唐辛子", "kawashimaya", "warm", "体を温める食べ物一覧＞香味野菜・スパイス: 唐辛子", ""),
-    ("cinnamon", "シナモン", "kawashimaya", "warm", "体を温める食べ物一覧＞香味野菜・スパイス: シナモン", ""),
-    # -- warm 発酵食品 --
-    ("natto", "納豆", "kawashimaya", "warm", "体を温める食べ物一覧＞発酵食品: 納豆", ""),
-    ("miso", "味噌", "kawashimaya", "warm", "体を温める食べ物一覧＞発酵食品: 味噌", ""),
-    ("soy sauce", "醤油", "kawashimaya", "warm", "体を温める食べ物一覧＞発酵食品: 醤油", ""),
-    ("tsukemono", "漬物", "kawashimaya", "warm", "体を温める食べ物一覧＞発酵食品: 漬物", ""),
-    ("kimchi", "キムチ", "kawashimaya", "warm", "体を温める食べ物一覧＞発酵食品: キムチ", ""),
-    # -- warm 寒冷地の果物 --
-    ("apple", "りんご", "kawashimaya", "warm", "体を温める食べ物一覧＞寒冷地の果物: りんご", ""),
-    ("grape", "ぶどう", "kawashimaya", "warm", "体を温める食べ物一覧＞寒冷地の果物: ぶどう", ""),
-    ("cherry", "さくらんぼ", "kawashimaya", "warm", "体を温める食べ物一覧＞寒冷地の果物: さくらんぼ", ""),
-    ("peach", "もも", "kawashimaya", "warm", "体を温める食べ物一覧＞寒冷地の果物: もも", ""),
-    ("apricot", "あんず", "kawashimaya", "warm", "体を温める食べ物一覧＞寒冷地の果物: あんず", ""),
-    # -- cool 夏野菜 --
-    ("cucumber", "きゅうり", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞夏野菜: きゅうり", ""),
-    ("tomato", "トマト", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞夏野菜: トマト", ""),
-    ("eggplant", "ナス", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞夏野菜: ナス", ""),
-    ("lettuce", "レタス", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞夏野菜: レタス", ""),
-    ("bell pepper", "ピーマン", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞夏野菜: ピーマン", ""),
-    ("zucchini", "ズッキーニ", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞夏野菜: ズッキーニ", ""),
-    # -- cool 南国の果物 --
-    ("banana", "バナナ", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞南国の果物: バナナ", ""),
-    ("pineapple", "パイナップル", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞南国の果物: パイナップル", ""),
-    ("mango", "マンゴー", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞南国の果物: マンゴー", ""),
-    ("watermelon", "スイカ", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞南国の果物: スイカ", ""),
-    ("melon", "メロン", "kawashimaya", "cool", "体を冷やしやすい食べ物一覧＞南国の果物: メロン", ""),
+    `food_en` is the aggregation key the whole Axis B side is built on —
+    `food_query_terms` maps it to a PubMed query — and the frozen coding is where
+    that vocabulary was fixed. The two ledger coders named foods independently
+    and produced 94 rows naming a known food under a new English key (`burdock`
+    -> `burdock root`, `nira` -> `garlic chives`, `daikon` -> `daikon radish`).
+    Left alone those foods would not join to their own Axis B measurements and
+    would read as new foods needing queries built.
 
-    # ==================================================================
-    # basefood (Tier 1) BASE FOOD HEALTH MAGAZINE
-    #   陽=warm / 陰=cool(色・産地・形状・水分量の表)。個別食材+飲み物節。
-    #   コーヒー=cool を「温活で控えた方がよい飲み物」で明記(coffee確認源)。
-    # ==================================================================
-    # -- warm 根菜類 --
-    ("carrot", "ニンジン", "basefood", "warm", "効率的に体を温める食べ物＞根菜類: ニンジン", ""),
-    ("pumpkin", "カボチャ", "basefood", "warm", "効率的に体を温める食べ物＞根菜類: カボチャ", ""),
-    ("burdock", "ゴボウ", "basefood", "warm", "効率的に体を温める食べ物＞根菜類: ゴボウ", ""),
-    ("lotus root", "れんこん", "basefood", "warm", "効率的に体を温める食べ物＞根菜類: れんこん", ""),
-    ("potato", "ジャガイモ", "basefood", "warm", "効率的に体を温める食べ物＞根菜類: ジャガイモ", ""),
-    ("taro", "サトイモ", "basefood", "warm", "効率的に体を温める食べ物＞根菜類: サトイモ", ""),
-    # -- warm 発酵食品 --
-    ("miso", "味噌", "basefood", "warm", "効率的に体を温める食べ物＞発酵食品: 味噌(赤味噌)", ""),
-    ("natto", "納豆", "basefood", "warm", "効率的に体を温める食べ物＞発酵食品: 納豆", ""),
-    ("kimchi", "キムチ", "basefood", "warm", "効率的に体を温める食べ物＞発酵食品: キムチ", ""),
-    # -- warm たんぱく質 --
-    ("beef", "牛肉", "basefood", "warm", "効率的に体を温める食べ物＞たんぱく質: 牛肉", ""),
-    ("chicken", "鶏肉", "basefood", "warm", "効率的に体を温める食べ物＞たんぱく質: 鶏肉", ""),
-    ("pork", "豚肉", "basefood", "warm", "効率的に体を温める食べ物＞たんぱく質: 豚肉", ""),
-    ("salmon", "鮭", "basefood", "warm", "効率的に体を温める食べ物＞たんぱく質: 鮭", ""),
-    ("tuna", "マグロ", "basefood", "warm", "効率的に体を温める食べ物＞たんぱく質: マグロ", ""),
-    ("bonito", "カツオ", "basefood", "warm", "効率的に体を温める食べ物＞たんぱく質: カツオ", ""),
-    ("egg", "卵", "basefood", "warm", "効率的に体を温める食べ物＞たんぱく質: 卵", ""),
-    # -- warm スパイス・薬味 --
-    ("ginger", "生姜", "basefood", "warm", "効率的に体を温める食べ物＞スパイス・薬味: 生姜", ""),
-    ("chili pepper", "唐辛子", "basefood", "warm", "効率的に体を温める食べ物＞スパイス・薬味: 唐辛子", ""),
-    ("cinnamon", "シナモン", "basefood", "warm", "効率的に体を温める食べ物＞スパイス・薬味: シナモン", ""),
-    ("garlic", "ニンニク", "basefood", "warm", "効率的に体を温める食べ物＞スパイス・薬味: ニンニク", ""),
-    ("green onion", "ネギ", "basefood", "warm", "効率的に体を温める食べ物＞スパイス・薬味: ネギ", ""),
-    # -- warm フルーツ(冬が旬) --
-    ("apple", "リンゴ", "basefood", "warm", "フルーツの選び方: リンゴなど冬が旬のものは体を冷やしにくい", ""),
-    ("grape", "ブドウ", "basefood", "warm", "フルーツの選び方: ブドウなど冬が旬のものは体を冷やしにくい", ""),
-    ("prune", "プルーン", "basefood", "warm", "フルーツの選び方: プルーンなど冬が旬のものは体を冷やしにくい", ""),
-    # -- warm 飲み物(発酵茶) --
-    ("hojicha", "ほうじ茶", "basefood", "warm", "飲み物の選び方: 温活向き ほうじ茶", ""),
-    ("black tea", "紅茶", "basefood", "warm", "飲み物の選び方: 発酵茶(紅茶)は体を温めやすい", ""),
-    ("oolong tea", "ウーロン茶", "basefood", "warm", "飲み物の選び方: 発酵茶(ウーロン茶)は体を温めやすい", ""),
-    ("cocoa", "ココア", "basefood", "warm", "飲み物の選び方: 温活向き ココア", ""),
-    # NOTE: てんさい糖/はちみつ/玄米/そば were previously coded warm here but
-    # DROPPED after inter-coder reconciliation (2026-08-04, kappa pass): the
-    # source (L172-173 "白い食べ物と糖質対策") only recommends them as
-    # substitutes for white sugar/refined flour ("置き換えるのも有効") and does
-    # NOT assign them a warming nature. Coding them warm violated protocol §3
-    # (do not infer a direction the source does not state). Coder 2 correctly
-    # omitted them.
-    # -- cool 南国系フルーツ --
-    ("banana", "バナナ", "basefood", "cool", "フルーツの選び方: バナナなど南国系は体の熱を落ち着かせる", ""),
-    ("mango", "マンゴー", "basefood", "cool", "フルーツの選び方: マンゴーなど南国系は体の熱を落ち着かせる", ""),
-    ("pineapple", "パイナップル", "basefood", "cool", "フルーツの選び方: パイナップルなど南国系は体の熱を落ち着かせる", ""),
-    # -- cool 飲み物 --
-    ("coffee", "コーヒー", "basefood", "cool", "飲み物の選び方: 温活で控えた方がよい=コーヒー(体を冷やしやすい)", ""),
-    ("green tea", "緑茶", "basefood", "cool", "飲み物の選び方: 温活で控えた方がよい=緑茶(体を冷やしやすい)", ""),
-    ("mugicha", "麦茶", "basefood", "cool", "飲み物の選び方: 温活で控えた方がよい=麦茶(体を冷やしやすい)", ""),
-    # -- cool 白い食べ物 --
-    ("white sugar", "白砂糖", "basefood", "cool", "白い食べ物と糖質対策: 白砂糖は冷えを感じやすくする", ""),
-    # ==================================================================
-    # ROUND 2 (2026-08-04): 9 remaining sources, double-coded + adjudicated
-    #   agree accepted as-is; only_* coverage diffs adjudicated per §3
-    #   (drops: substitute-recommendation context, prepared beverages,
-    #    verbatim-absent forms). See coding_protocol.md §8 round-2 note.
-    # ==================================================================
-    # -- prezo (Tier1): 75 claims --
-    ("cucumber", "きゅうり", "prezo", "cool", "体を冷やす食べ物", ""),
-    ("eggplant", "なす", "prezo", "cool", "レタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります", ""),
-    ("cabbage", "キャベツ", "prezo", "cool", "レタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります", ""),
-    ("watermelon", "スイカ", "prezo", "cool", "体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です", ""),
-    ("tomato", "トマト", "prezo", "cool", "トマトや柿は体を冷やす特徴があり、暖色系の食べ物でも例外はあります", ""),
-    ("banana", "バナナ", "prezo", "cool", "バナナやマンゴーなどは南国原産のフルーツで、水分量も多く体を冷やす食べ物です", ""),
-    ("pineapple", "パイナップル", "prezo", "cool", "体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です", ""),
-    ("mango", "マンゴー", "prezo", "cool", "バナナやマンゴーなどは南国原産のフルーツで、水分量も多く体を冷やす食べ物です", ""),
-    ("melon", "メロン", "prezo", "cool", "体を冷やす果物は暖かい地域で収穫されるものが多く、スイカやメロン、パイナップルなどが代表的です", ""),
-    ("lettuce", "レタス", "prezo", "cool", "レタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります", ""),
-    ("daikon", "大根", "prezo", "cool", "大根は冬が旬の根菜類ですが、水分が多いため体を冷やす食べ物に分類されます", ""),
-    ("persimmon", "柿", "prezo", "cool", "トマトや柿は体を冷やす特徴があり、暖色系の食べ物でも例外はあります", ""),
-    ("milk", "牛乳", "prezo", "cool", "体を冷やす食べ物", ""),
-    ("white sugar", "白砂糖", "prezo", "cool", "体を冷やす食べ物", ""),
-    ("chinese cabbage", "白菜", "prezo", "cool", "レタスやキャベツ、白菜、なすなどの地面の上で育つ野菜は、体を冷やす特徴を持つ傾向があります", ""),
-    ("pork", "豚肉", "prezo", "cool", "豚肉や馬肉は体を冷やす傾向にあります", ""),
-    ("horse meat", "馬肉", "prezo", "cool", "豚肉や馬肉は体を冷やす傾向にあります", ""),
-    ("soybean", "大豆", "prezo", "neutral", "大豆には体を温める・冷やす作用はありません", ""),
-    ("white fish", "白身魚", "prezo", "neutral", "白身魚は温めも冷やしもしないとされています", ""),
-    ("horse mackerel", "あじ", "prezo", "warm", "体を温める肉・魚: 青魚（あじなど）", ""),
-    ("flaxseed oil", "あまに油", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("eel", "うなぎ", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("pumpkin", "かぼちゃ", "prezo", "warm", "かぼちゃやにんじん、りんごなどは暖色系で体を温める代表的な食べ物", ""),
-    ("burdock", "ごぼう", "prezo", "warm", "にんじんやごぼうなどは体を温める代表的な根菜類です", ""),
-    ("cherry", "さくらんぼ", "prezo", "warm", "体を温めてくれる果物は、寒い地域で採れるものが多いです", ""),
-    ("sweet potato", "さつまいも", "prezo", "warm", "さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです", ""),
-    ("ginger", "しょうが", "prezo", "warm", "しょうがには発汗を促す作用があり体の芯から温めてくれます", ""),
-    ("potato", "じゃがいも", "prezo", "warm", "体を温める野菜は土の中で育つ根菜類が多く", ""),
-    ("buckwheat", "そば", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("onion", "たまねぎ", "prezo", "warm", "体を温める野菜は土の中で育つ根菜類が多く", ""),
-    ("chili pepper", "とうがらし", "prezo", "warm", "とうがらしに含まれる成分「カプサイシン」は体を温めるホルモンの分泌に役立つほか、血流を改善して冷え性体質の改善に有効です", ""),
-    ("rapeseed oil", "なたね油", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("nira", "にら", "prezo", "warm", "さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです", ""),
-    ("carrot", "にんじん", "prezo", "warm", "にんじんやごぼうなどは体を温める代表的な根菜類です", ""),
-    ("green onion", "ねぎ", "prezo", "warm", "薬味野菜（ねぎやしょうがなど）", ""),
-    ("grape", "ぶどう", "prezo", "warm", "体を温めてくれる果物は、寒い地域で採れるものが多いです", ""),
-    ("hojicha", "ほうじ茶", "prezo", "warm", "紅茶や中国茶、ほうじ茶（番茶）などは寝る前に飲むと体が温まり、眠りやすくなるとされています", ""),
-    ("tuna", "まぐろ", "prezo", "warm", "体を温める肉・魚: 赤身魚（まぐろなど）", ""),
-    ("mandarin orange", "みかん", "prezo", "warm", "オレンジやみかんは暖かい地域で育つ果物ですが、血行を促進して体を温めるはたらきがあります", ""),
-    ("apple", "りんご", "prezo", "warm", "かぼちゃやにんじん、りんごなどは暖色系で体を温める代表的な食べ物", ""),
-    ("lotus root", "れんこん", "prezo", "warm", "体を温める野菜は土の中で育つ根菜類が多く", ""),
-    ("acerola", "アセロラ", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("almond", "アーモンド", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("orange", "オレンジ", "prezo", "warm", "オレンジやみかんは暖かい地域で育つ果物ですが、血行を促進して体を温めるはたらきがあります", ""),
-    ("kimchi", "キムチ", "prezo", "warm", "チーズやキムチも体を温める発酵食品のひとつです", ""),
-    ("cocoa", "ココア", "prezo", "warm", "体を温める飲み物には以下のものがあります", ""),
-    ("cinnamon", "シナモン", "prezo", "warm", "しょうが紅茶にシナモンを加えれば、体を温める効果がさらに高まります", ""),
-    ("cheese", "チーズ", "prezo", "warm", "さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです", ""),
-    ("nuts", "ナッツ類", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("bell pepper", "パプリカ", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("broccoli", "ブロッコリー", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("pu-erh tea", "プーアール茶", "prezo", "warm", "体を温める飲み物には以下のものがあります", ""),
-    ("rooibos tea", "ルイボスティー", "prezo", "warm", "体を温める飲み物には以下のものがあります", ""),
-    ("chinese tea", "中国茶", "prezo", "warm", "紅茶や中国茶、ほうじ茶（番茶）などは寝る前に飲むと体が温まり、眠りやすくなるとされています", ""),
-    ("dried daikon", "切り干し大根", "prezo", "warm", "柿は干し柿に、大根は切り干し大根に加工することで、体を冷やす食べ物から体を温める食べ物に変わります", ""),
-    ("egg", "卵", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("miso", "味噌", "prezo", "warm", "発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります", ""),
-    ("komatsuna", "小松菜", "prezo", "warm", "さつまいもや小松菜、にら、チーズなどは体を温める食べ物のひとつです", ""),
-    ("sansho", "山椒", "prezo", "warm", "香辛料は少量で体を温めてくれることが特徴です", ""),
-    ("yam", "山芋", "prezo", "warm", "体を温める野菜は土の中で育つ根菜類が多く", ""),
-    ("dried persimmon", "干し柿", "prezo", "warm", "柿は干し柿に、大根は切り干し大根に加工することで、体を冷やす食べ物から体を温める食べ物に変わります", ""),
-    ("sake", "日本酒", "prezo", "warm", "発酵して造られる日本酒も体を温める飲み物として知られています", ""),
-    ("citrus", "柑橘類", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("beef", "牛肉", "prezo", "warm", "肉は全般的に体を温める食べ物ですが、豚肉や馬肉は体を冷やす傾向にあります", ""),
-    ("brown rice", "玄米", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("white rice", "白米", "prezo", "warm", "白米のアミノ酸には血管を拡張して体を温めるはたらきがあります", ""),
-    ("black tea", "紅茶", "prezo", "warm", "紅茶は茶葉を発酵させて作られるお茶で、体を温めるはたらきがあります", ""),
-    ("natto", "納豆", "prezo", "warm", "発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります", ""),
-    ("yellow-green vegetables", "緑黄色野菜", "prezo", "warm", "ビタミンE・ビタミンB1・ビタミンCには体を温めるはたらきがあります", ""),
-    ("lamb", "羊肉", "prezo", "warm", "羊肉は体を温める肉の代表", ""),
-    ("red wine", "赤ワイン", "prezo", "warm", "酒類では、赤ワインや日本酒が体を温める飲み物のひとつです", ""),
-    ("red meat and fish", "赤身魚（まぐろなど）", "prezo", "warm", "赤身魚や青魚は体を温める傾向にあり", ""),
-    ("soy sauce", "醤油", "prezo", "warm", "発酵させて納豆や味噌、醤油などにすると体を温める食べ物・食材になります", ""),
-    ("horse mackerel", "青魚（あじなど）", "prezo", "warm", "赤身魚や青魚は体を温める傾向にあり", ""),
-    ("chicken", "鶏肉", "prezo", "warm", "肉は全般的に体を温める食べ物ですが、豚肉や馬肉は体を冷やす傾向にあります", ""),
-    # -- jsfca (Tier1): 34 claims --
-    ("cucumber", "きゅうり", "jsfca", "cool", "ほうれん草や大根、きゅうりは陰性になります", ""),
-    ("spinach", "ほうれん草", "jsfca", "cool", "ほうれん草や大根、きゅうりは陰性になります", ""),
-    ("mozuku seaweed", "もずく", "jsfca", "cool", "わかめやもずくは、味噌汁やサラダに加えることで栄養を摂取できます", ""),
-    ("wakame", "わかめ", "jsfca", "cool", "海藻も陰性食材の一つで、わかめやもずくは", ""),
-    ("oatmeal", "オートミール", "jsfca", "cool", "穀物では、白米やオートミールが陰性で", ""),
-    ("watermelon", "スイカ", "jsfca", "cool", "果物では、スイカやメロン、バナナが陰性で", ""),
-    ("tomato", "トマト", "jsfca", "cool", "トマトやスイカ、きゅうりなどの水分が多い果物や野菜を摂り、体をクールダウンさせましょう。", ""),
-    ("banana", "バナナ", "jsfca", "cool", "果物では、スイカやメロン、バナナが陰性で", ""),
-    ("melon", "メロン", "jsfca", "cool", "果物では、スイカやメロン、バナナが陰性で", ""),
-    ("daikon", "大根", "jsfca", "cool", "ほうれん草や大根、きゅうりは陰性になります", ""),
-    ("white rice", "白米", "jsfca", "cool", "穀物では、白米やオートミールが陰性で", ""),
-    ("leafy greens", "葉物野菜", "jsfca", "cool", "柔らかくて軽い豆腐や葉物野菜は陰性に分類されます", ""),
-    ("tofu", "豆腐", "jsfca", "cool", "柔らかくて軽い豆腐や葉物野菜は陰性に分類されます", ""),
-    ("asparagus", "アスパラガス", "jsfca", "cool", "陰性の食材として、アスパラガスや菜の花、若竹が適しており", "春"),
-    ("young bamboo", "若竹", "jsfca", "cool", "陰性の食材として、アスパラガスや菜の花、若竹が適しており", "春"),
-    ("rapeseed flowers", "菜の花", "jsfca", "cool", "陰性の食材として、アスパラガスや菜の花、若竹が適しており", "春"),
-    ("ginger", "しょうが", "jsfca", "warm", "しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり", ""),
-    ("garlic", "にんにく", "jsfca", "warm", "しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり", ""),
-    ("nuts", "ナッツ類", "jsfca", "warm", "硬くて重い食材、小麦製品やナッツ類は陽性", ""),
-    ("tuna", "マグロ", "jsfca", "warm", "魚類では、鮭やマグロなどが陽性で", ""),
-    ("chili pepper", "唐辛子", "jsfca", "warm", "しょうがやにんにく、唐辛子は、料理に加えることで体を温める効果があり", ""),
-    ("barley", "大麦", "jsfca", "warm", "穀物では、玄米や大麦が陽性食材としておすすめです", ""),
-    ("wheat", "小麦製品", "jsfca", "warm", "硬くて重い食材、小麦製品やナッツ類は陽性", ""),
-    ("beef", "牛肉", "jsfca", "warm", "肉類では、鶏肉や牛肉、豚肉が陽性です", ""),
-    ("brown rice", "玄米", "jsfca", "warm", "穀物では、玄米や大麦が陽性食材としておすすめです", ""),
-    ("pork", "豚肉", "jsfca", "warm", "肉類では、鶏肉や牛肉、豚肉が陽性です", ""),
-    ("spices", "香辛料", "jsfca", "warm", "温かく感じる肉や魚、香辛料は陽性とされ", ""),
-    ("salmon", "鮭", "jsfca", "warm", "魚類では、鮭やマグロなどが陽性で", ""),
-    ("chicken", "鶏肉", "jsfca", "warm", "肉類では、鶏肉や牛肉、豚肉が陽性です", ""),
-    ("pepper", "黒胡椒", "jsfca", "warm", "4-3冬(陽性): 鶏肉や赤身肉、しょうがや黒胡椒を使った温かい料理", ""),
-    ("red meat and fish", "赤身肉", "jsfca", "warm", "冬は、寒さに備えるため、陽性の食材が重要です。鶏肉や赤身肉、しょうがや黒胡椒を使った温かい料理が最適です", "冬"),
-    ("pepper", "黒胡椒", "jsfca", "warm", "冬は、寒さに備えるため、陽性の食材が重要です。鶏肉や赤身肉、しょうがや黒胡椒を使った温かい料理が最適です", "冬"),
-    ("pumpkin", "かぼちゃ", "jsfca", "warm", "さつまいもやかぼちゃやナッツ類を取り入れ、体を温める食材を意識的に選ぶと良いでしょう", "秋"),
-    ("sweet potato", "さつまいも", "jsfca", "warm", "さつまいもやかぼちゃやナッツ類を取り入れ、体を温める食材を意識的に選ぶと良いでしょう", "秋"),
-    # -- kracie (Tier1): 17 claims --
-    ("cucumber", "きゅうり", "kracie", "cool", "体を冷やすもの（野菜）：レタス、トマト、ナス、きゅうり等の水分の多い夏野菜", ""),
-    ("coffee", "コーヒー", "kracie", "cool", "体を冷やすもの（飲み物）：コーヒー、牛乳、緑茶等", ""),
-    ("watermelon", "スイカ", "kracie", "cool", "体を冷やすもの（フルーツ）：バナナ、スイカ等の南国フルーツ", ""),
-    ("tomato", "トマト", "kracie", "cool", "体を冷やすもの（野菜）：レタス、トマト、ナス、きゅうり等の水分の多い夏野菜", ""),
-    ("eggplant", "ナス", "kracie", "cool", "体を冷やすもの（野菜）：レタス、トマト、ナス、きゅうり等の水分の多い夏野菜", ""),
-    ("banana", "バナナ", "kracie", "cool", "体を冷やすもの（フルーツ）：バナナ、スイカ等の南国フルーツ", ""),
-    ("lettuce", "レタス", "kracie", "cool", "体を冷やすもの（野菜）：レタス、トマト、ナス、きゅうり等の水分の多い夏野菜", ""),
-    ("milk", "牛乳", "kracie", "cool", "体を冷やすもの（飲み物）：コーヒー、牛乳、緑茶等", ""),
-    ("green tea", "緑茶", "kracie", "cool", "体を冷やすもの（飲み物）：コーヒー、牛乳、緑茶等", ""),
-    ("hojicha", "ほうじ茶", "kracie", "warm", "体を温めるもの（飲み物）：白湯、生姜湯、紅茶、ほうじ茶等", ""),
-    ("apple", "りんご", "kracie", "warm", "体を温めるもの（フルーツ）：りんご、桃等", ""),
-    ("carrot", "人参", "kracie", "warm", "体を温めるもの（野菜）：玉ねぎ、人参、等の根菜類、冬野菜、加熱した生姜", ""),
-    ("peach", "桃", "kracie", "warm", "体を温めるもの（フルーツ）：りんご、桃等", ""),
-    ("onion", "玉ねぎ", "kracie", "warm", "体を温めるもの（野菜）：玉ねぎ、人参、等の根菜類、冬野菜、加熱した生姜", ""),
-    ("black tea", "紅茶", "kracie", "warm", "体を温めるもの（飲み物）：白湯、生姜湯、紅茶、ほうじ茶等", ""),
-    ("ginger", "加熱した生姜", "kracie", "warm", "体を温めるもの＞野菜: 冬野菜、加熱した生姜", "heated"),
-    ("ginger", "加熱した生姜", "kracie", "warm", "体を温めるもの（野菜）：玉ねぎ、人参、等の根菜類、冬野菜、加熱した生姜", "加熱"),
-    # -- attaka_navi (Tier2): 72 claims --
-    ("cucumber", "きゅうり", "attaka_navi", "cool", "冷やす食材：きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ", ""),
-    ("eggplant", "なす", "attaka_navi", "cool", "冷やす食材：きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ", ""),
-    ("spinach", "ほうれん草", "attaka_navi", "cool", "涼性 — 体を穏やかに冷やす（大根、白菜、ほうれん草など）", ""),
-    ("asari clam", "アサリ", "attaka_navi", "cool", "冷やす食材：タコ、カニ、アサリ、牡蠣", ""),
-    ("crab", "カニ", "attaka_navi", "cool", "冷やす食材：タコ、カニ、アサリ、牡蠣", ""),
-    ("burdock", "ゴボウ", "attaka_navi", "cool", "冷やす食材：きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ", ""),
-    ("watermelon", "スイカ", "attaka_navi", "cool", "冷やす食材：バナナ、パイナップル、マンゴー、梨、柿、スイカ", ""),
-    ("celery", "セロリ", "attaka_navi", "cool", "冷やす食材：きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ", ""),
-    ("octopus", "タコ", "attaka_navi", "cool", "冷やす食材：タコ、カニ、アサリ、牡蠣", ""),
-    ("tomato", "トマト", "attaka_navi", "cool", "冷やす食材：きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ", ""),
-    ("banana", "バナナ", "attaka_navi", "cool", "冷やす食材：バナナ、パイナップル、マンゴー、梨、柿、スイカ", ""),
-    ("pineapple", "パイナップル", "attaka_navi", "cool", "冷やす食材：バナナ、パイナップル、マンゴー、梨、柿、スイカ", ""),
-    ("mayonnaise", "マヨネーズ", "attaka_navi", "cool", "冷やす食材：酢、マヨネーズ、白砂糖", ""),
-    ("mango", "マンゴー", "attaka_navi", "cool", "冷やす食材：バナナ、パイナップル、マンゴー、梨、柿、スイカ", ""),
-    ("lettuce", "レタス", "attaka_navi", "cool", "冷やす食材：きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ", ""),
-    ("daikon", "大根", "attaka_navi", "cool", "冷やす食材：きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ", ""),
-    ("persimmon", "柿", "attaka_navi", "cool", "果物・ナッツ 冷やす食材: 柿", ""),
-    ("pear", "梨", "attaka_navi", "cool", "冷やす食材：バナナ、パイナップル、マンゴー、梨、柿、スイカ", ""),
-    ("oyster", "牡蠣", "attaka_navi", "cool", "冷やす食材：タコ、カニ、アサリ、牡蠣", ""),
-    ("white sugar", "白砂糖", "attaka_navi", "cool", "冷やす食材：酢、マヨネーズ、白砂糖", ""),
-    ("chinese cabbage", "白菜", "attaka_navi", "cool", "冷やす食材：きゅうり、トマト、なす、レタス、白菜、大根、ゴボウ、セロリ", ""),
-    ("tofu", "豆腐", "attaka_navi", "cool", "豆腐（大豆を加工） → 寒性（体を冷やす）", ""),
-    ("vinegar", "酢", "attaka_navi", "cool", "冷やす食材：酢、マヨネーズ、白砂糖", ""),
-    ("persimmon", "柿", "attaka_navi", "cool", "生の柿は寒性ですが、干し柿にすると温性に変化。", "生"),
-    ("mushroom", "きのこ類", "attaka_navi", "neutral", "どちらでもない：じゃがいも、さつまいも、長いも、とうもろこし、きのこ類", ""),
-    ("sweet potato", "さつまいも", "attaka_navi", "neutral", "どちらでもない：じゃがいも、さつまいも、長いも、とうもろこし、きのこ類", ""),
-    ("potato", "じゃがいも", "attaka_navi", "neutral", "どちらでもない：じゃがいも、さつまいも、長いも、とうもろこし、きのこ類", ""),
-    ("corn", "とうもろこし", "attaka_navi", "neutral", "どちらでもない：じゃがいも、さつまいも、長いも、とうもろこし、きのこ類", ""),
-    ("honey", "はちみつ", "attaka_navi", "neutral", "どちらでもない：塩、はちみつ", ""),
-    ("squid", "イカ", "attaka_navi", "neutral", "どちらでもない：豚肉、牛肉、イカ、卵", ""),
-    ("egg", "卵", "attaka_navi", "neutral", "どちらでもない：豚肉、牛肉、イカ、卵", ""),
-    ("salt", "塩", "attaka_navi", "neutral", "どちらでもない：塩、はちみつ", ""),
-    ("soybean", "大豆", "attaka_navi", "neutral", "大豆 → 平性（温めも冷やしもしない）", ""),
-    ("beef", "牛肉", "attaka_navi", "neutral", "どちらでもない：豚肉、牛肉、イカ、卵", ""),
-    ("white rice", "米", "attaka_navi", "neutral", "平性 — 温めも冷やしもしない（米、大豆、じゃがいも、卵など）", ""),
-    ("pork", "豚肉", "attaka_navi", "neutral", "どちらでもない：豚肉、牛肉、イカ、卵", ""),
-    ("nagaimo", "長いも", "attaka_navi", "neutral", "どちらでもない：じゃがいも、さつまいも、長いも、とうもろこし、きのこ類", ""),
-    ("turnip", "かぶ", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("pumpkin", "かぼちゃ", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("walnut", "くるみ", "attaka_navi", "warm", "温める食材：りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実", ""),
-    ("cherry", "さくらんぼ", "attaka_navi", "warm", "温める食材：りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実", ""),
-    ("perilla", "しそ", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("nira", "にら", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("carrot", "にんじん", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("garlic", "にんにく", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("grape", "ぶどう", "attaka_navi", "warm", "温める食材：りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実", ""),
-    ("apple", "りんご", "attaka_navi", "warm", "温める食材：りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実", ""),
-    ("lotus root", "れんこん", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("shrimp", "エビ", "attaka_navi", "warm", "温める食材：鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー", ""),
-    ("kimchi", "キムチ", "attaka_navi", "warm", "温める食材：味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒", ""),
-    ("cinnamon", "シナモン", "attaka_navi", "warm", "熱性 — 体を強く温める（唐辛子、シナモン、山椒など）", ""),
-    ("yellowtail", "ブリ", "attaka_navi", "warm", "温める食材：鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー", ""),
-    ("prune", "プルーン", "attaka_navi", "warm", "温める食材：りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実", ""),
-    ("tuna", "マグロ", "attaka_navi", "warm", "温める食材：鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー", ""),
-    ("pork liver", "レバー", "attaka_navi", "warm", "温める食材：鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー", ""),
-    ("miso", "味噌", "attaka_navi", "warm", "温める食材：味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒", ""),
-    ("chili pepper", "唐辛子", "attaka_navi", "warm", "熱性 — 体を強く温める（唐辛子、シナモン、山椒など）", ""),
-    ("sansho", "山椒", "attaka_navi", "warm", "熱性 — 体を強く温める（唐辛子、シナモン、山椒など）", ""),
-    ("sake", "日本酒", "attaka_navi", "warm", "温める食材：味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒", ""),
-    ("pine nut", "松の実", "attaka_navi", "warm", "温める食材：りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実", ""),
-    ("chestnut", "栗", "attaka_navi", "warm", "温める食材：りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実", ""),
-    ("peach", "桃", "attaka_navi", "warm", "温める食材：りんご、ぶどう、さくらんぼ、桃、プルーン、栗、くるみ、松の実", ""),
-    ("ginger", "生姜", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("natto", "納豆", "attaka_navi", "warm", "温める食材：味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒", ""),
-    ("shaoxing wine", "紹興酒", "attaka_navi", "warm", "温める食材：味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒", ""),
-    ("lamb", "羊肉（ラム）", "attaka_navi", "warm", "温める食材：鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー", ""),
-    ("sake lees", "酒粕", "attaka_navi", "warm", "温める食材：味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒", ""),
-    ("soy sauce", "醤油", "attaka_navi", "warm", "温める食材：味噌、納豆、キムチ、醤油、酒粕、日本酒、紹興酒", ""),
-    ("green onion", "長ねぎ", "attaka_navi", "warm", "温める食材：生姜、にんにく、長ねぎ、にら、かぶ、にんじん、かぼちゃ、れんこん、しそ", ""),
-    ("salmon", "鮭", "attaka_navi", "warm", "温める食材：鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー", ""),
-    ("chicken", "鶏肉", "attaka_navi", "warm", "温める食材：鶏肉、羊肉（ラム）、鮭、ブリ、マグロ、エビ、レバー", ""),
-    ("dried persimmon", "干し柿", "attaka_navi", "warm", "生の柿は寒性ですが、干し柿にすると温性に変化。", "干し柿"),
-    # -- onkatsu_note (Tier2): 31 claims --
-    ("cucumber", "きゅうり", "onkatsu_note", "cool", "南国育ちの食材（バナナ・マンゴー・きゅうり・トマトなど）は体を冷やす性質がある", ""),
-    ("tomato", "トマト", "onkatsu_note", "cool", "南国育ちの食材（バナナ・マンゴー・きゅうり・トマトなど）は体を冷やす性質がある", ""),
-    ("banana", "バナナ", "onkatsu_note", "cool", "南国育ちの食材（バナナ・マンゴー・きゅうり・トマトなど）は体を冷やす性質がある", ""),
-    ("beer", "ビール", "onkatsu_note", "cool", "ビールや炭酸系カクテルは体を冷やしやすい", ""),
-    ("mango", "マンゴー", "onkatsu_note", "cool", "南国育ちの食材（バナナ・マンゴー・きゅうり・トマトなど）は体を冷やす性質がある", ""),
-    ("white rice", "お米", "onkatsu_note", "warm", "お米は腹持ちが良く体を温める食材", ""),
-    ("pumpkin", "かぼちゃ", "onkatsu_note", "warm", "赤・黒・オレンジ └小豆・黒豆・かぼちゃ・にんじん・ひじきなど", ""),
-    ("burdock", "ごぼう", "onkatsu_note", "warm", "土の中で育つ野菜は体を温める「陽」の性質を持つとされています", ""),
-    ("sweet potato", "さつまいも", "onkatsu_note", "warm", "土の中で育つ野菜は体を温める「陽」の性質を持つとされています", ""),
-    ("carrot", "にんじん", "onkatsu_note", "warm", "土の中で育つ野菜は体を温める「陽」の性質を持つとされています", ""),
-    ("garlic", "にんにく", "onkatsu_note", "warm", "血行をサポートする食材（生姜・にんにく・ビタミンE）", ""),
-    ("nukazuke", "ぬか漬け", "onkatsu_note", "warm", "味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）", ""),
-    ("hijiki", "ひじき", "onkatsu_note", "warm", "赤・黒・オレンジ └小豆・黒豆・かぼちゃ・にんじん・ひじきなど", ""),
-    ("hojicha", "ほうじ茶", "onkatsu_note", "warm", "冷え対策に向いている飲み物", ""),
-    ("lotus root", "れんこん", "onkatsu_note", "warm", "土の中で育つ野菜は体を温める「陽」の性質を持つとされています", ""),
-    ("miso", "味噌", "onkatsu_note", "warm", "味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）", ""),
-    ("daikon", "大根", "onkatsu_note", "warm", "土の中で育つ野菜は体を温める「陽」の性質を持つとされています", ""),
-    ("adzuki bean", "小豆", "onkatsu_note", "warm", "赤・黒・オレンジ └小豆・黒豆・かぼちゃ・にんじん・ひじきなど", ""),
-    ("sansho", "山椒", "onkatsu_note", "warm", "胃腸を温めて消化をサポートするとされています", ""),
-    ("yam", "山芋", "onkatsu_note", "warm", "土の中で育つ野菜は体を温める「陽」の性質を持つとされています", ""),
-    ("sake", "日本酒", "onkatsu_note", "warm", "アミノ酸を含む日本酒や、ポリフェノール豊富な赤ワインが比較的向いている", ""),
-    ("kombu", "昆布", "onkatsu_note", "warm", "具材は鮭・梅干し・昆布など陽性のものを", ""),
-    ("umeboshi", "梅干し", "onkatsu_note", "warm", "具材は鮭・梅干し・昆布など陽性のものを", ""),
-    ("amazake", "甘酒", "onkatsu_note", "warm", "発酵食品 味噌・納豆・ぬか漬け・甘酒", ""),
-    ("ginger", "生姜", "onkatsu_note", "warm", "体の芯から温める働きがあるとされています", ""),
-    ("natto", "納豆", "onkatsu_note", "warm", "味噌・納豆・ぬか漬け（腸内環境を整えて代謝をサポートするとされています）", ""),
-    ("pork", "豚肉", "onkatsu_note", "warm", "豚肉のビタミンB群・根菜の食物繊維・味噌の発酵成分が揃う豚汁は、一度に多くの温活食材を摂れる一品", ""),
-    ("red wine", "赤ワイン", "onkatsu_note", "warm", "アミノ酸を含む日本酒や、ポリフェノール豊富な赤ワインが比較的向いている", ""),
-    ("salmon", "鮭", "onkatsu_note", "warm", "具材は鮭・梅干し・昆布など陽性のものを", ""),
-    ("black soybean", "黒豆", "onkatsu_note", "warm", "赤・黒・オレンジ └小豆・黒豆・かぼちゃ・にんじん・ひじきなど", ""),
-    ("black soybean tea", "黒豆茶", "onkatsu_note", "warm", "冷え対策に向いている飲み物", ""),
-    # -- karada_onkatsu (Tier2): 37 claims --
-    ("cucumber", "きゅうり", "karada_onkatsu", "cool", "夏が旬の野菜は体を冷やす性質", ""),
-    ("eggplant", "なす", "karada_onkatsu", "cool", "夏が旬の野菜は体を冷やす性質", ""),
-    ("coffee", "コーヒー", "karada_onkatsu", "cool", "緑茶・麦茶・コーヒーの飲みすぎは体を冷やしやすいとされているため", ""),
-    ("watermelon", "スイカ", "karada_onkatsu", "cool", "南国の果物は体を冷やしやすいとされています", ""),
-    ("tomato", "トマト", "karada_onkatsu", "cool", "夏が旬の野菜は体を冷やす性質", ""),
-    ("banana", "バナナ", "karada_onkatsu", "cool", "南国の果物は体を冷やしやすいとされています", ""),
-    ("melon", "メロン", "karada_onkatsu", "cool", "南国の果物は体を冷やしやすいとされています", ""),
-    ("daikon", "大根", "karada_onkatsu", "cool", "大根は根菜ですが水分が多く冷やしやすい性質を持ちます", ""),
-    ("milk", "牛乳", "karada_onkatsu", "cool", "発酵前の乳製品・豆腐は冷やしやすい性質", ""),
-    ("white sugar", "白砂糖", "karada_onkatsu", "cool", "精白・加工されたものは体を冷やしやすい", ""),
-    ("white rice", "白米", "karada_onkatsu", "cool", "精白・加工されたものは体を冷やしやすい", ""),
-    ("tofu", "白豆腐", "karada_onkatsu", "cool", "冷やしやすい食材: 牛乳・白豆腐(発酵前の乳製品・豆腐は冷やしやすい)", ""),
-    ("green tea", "緑茶", "karada_onkatsu", "cool", "東洋医学では体を冷やす性質とされています", ""),
-    ("tofu", "豆腐", "karada_onkatsu", "cool", "豆腐（体を冷やす）が発酵して体を温める性質に変化", ""),
-    ("mugicha", "麦茶", "karada_onkatsu", "cool", "東洋医学では体を冷やす性質とされています", ""),
-    ("pumpkin", "かぼちゃ", "karada_onkatsu", "warm", "血行促進に関わる栄養素が多い温活向き食材", ""),
-    ("burdock", "ごぼう", "karada_onkatsu", "warm", "血行促進作用があるとされています", ""),
-    ("sweet potato", "さつまいも", "karada_onkatsu", "warm", "体を温める根菜・いも類", ""),
-    ("ginger", "しょうが", "karada_onkatsu", "warm", "温活食材の中で最も代表的なのがしょうがです", ""),
-    ("onion", "たまねぎ", "karada_onkatsu", "warm", "硫化アリルが血行を促進し体を温める作用があるとされています", ""),
-    ("nira", "にら", "karada_onkatsu", "warm", "体を温め、免疫アップにも関わる食材", ""),
-    ("carrot", "にんじん", "karada_onkatsu", "warm", "加熱するとより温め効果が高まりやすくなります", ""),
-    ("garlic", "にんにく", "karada_onkatsu", "warm", "硫化アリルが血行を促進し体を温める作用があるとされています", ""),
-    ("nukazuke", "ぬか漬け", "karada_onkatsu", "warm", "体を温める発酵食品", ""),
-    ("hojicha", "ほうじ茶", "karada_onkatsu", "warm", "ほうじ茶・ルイボスティー・しょうが湯・甘酒・紅茶（体を温める）が特におすすめです", ""),
-    ("lotus root", "れんこん", "karada_onkatsu", "warm", "血行促進・体を温める作用があるとされる食材", ""),
-    ("kimchi", "キムチ", "karada_onkatsu", "warm", "キムチの唐辛子は血行を促進する効果も", ""),
-    ("cinnamon", "シナモン", "karada_onkatsu", "warm", "血行を促進し体を温める効果が高いとされるスパイス", ""),
-    ("green onion", "ネギ", "karada_onkatsu", "warm", "体を温め、免疫アップにも関わる食材", ""),
-    ("miso", "味噌", "karada_onkatsu", "warm", "朝の味噌汁は体温を上げる最高の習慣", ""),
-    ("chili pepper", "唐辛子", "karada_onkatsu", "warm", "カプサイシンが血行を促進", ""),
-    ("amazake", "甘酒", "karada_onkatsu", "warm", "しょうが湯・甘酒・紅茶（体を温める）が特におすすめです", ""),
-    ("black tea", "紅茶", "karada_onkatsu", "warm", "紅茶（体を温める）が特におすすめです", ""),
-    ("natto", "納豆", "karada_onkatsu", "warm", "豆腐（体を冷やす）が発酵して体を温める性質に変化", ""),
-    ("lamb", "羊肉", "karada_onkatsu", "warm", "特に羊肉は温め効果が高いとされています", ""),
-    ("chicken", "鶏肉", "karada_onkatsu", "warm", "体を温める性質の肉類", ""),
-    ("brown sugar", "黒砂糖", "karada_onkatsu", "warm", "白砂糖（体を冷やす）の代わりに使える天然甘味料", ""),
-    # -- hiesyo_com (Tier2): 29 claims --
-    ("potato", "じゃがいも", "hiesyo_com", "cool", "カリウムが多いじゃがいもは陰性です", ""),
-    ("bamboo shoot", "たけのこ", "hiesyo_com", "cool", "春に延びゆくたけのこや山菜、水分が多いスイカやなしなどの果物も陰性食品です", ""),
-    ("pear", "なし", "hiesyo_com", "cool", "水分が多いスイカやなしなどの果物も陰性食品です", ""),
-    ("watermelon", "スイカ", "hiesyo_com", "cool", "水分が多いスイカやなしなどの果物も陰性食品です", ""),
-    ("tomato", "トマト", "hiesyo_com", "cool", "夏にできるナスやトマトも陰性食品です", ""),
-    ("eggplant", "ナス", "hiesyo_com", "cool", "夏にできるナスやトマトも陰性食品です", ""),
-    ("banana", "バナナ", "hiesyo_com", "cool", "南の国で穫れるバナナやパイナップルは陰性食品", ""),
-    ("pineapple", "パイナップル", "hiesyo_com", "cool", "南の国で穫れるバナナやパイナップルは陰性食品", ""),
-    ("chemical seasonings", "化学調味料", "hiesyo_com", "cool", "化学調味料は極陰性ですので", ""),
-    ("mountain vegetables", "山菜", "hiesyo_com", "cool", "春に延びゆくたけのこや山菜、水分が多いスイカやなしなどの果物も陰性食品です", ""),
-    ("raw vegetables", "生野菜", "hiesyo_com", "cool", "生野菜は陰性で体を冷やしますが", ""),
-    ("white sugar", "白いお砂糖", "hiesyo_com", "cool", "それは、食品添加物や化学調味料、そして白いお砂糖", ""),
-    ("white sugar", "白砂糖", "hiesyo_com", "cool", "一番体を冷やすのは食品添加物や化学調味料、そして白いお砂糖", ""),
-    ("food additives", "食品添加物", "hiesyo_com", "cool", "それは、食品添加物や化学調味料、そして白いお砂糖", ""),
-    ("dried persimmon", "干し柿", "hiesyo_com", "cool", "柿は干し柿にすると陰性になります", "干し柿"),
-    ("whole grain bread", "全粒粉の天然酵母パン", "hiesyo_com", "neutral", "玄米や全粒粉の天然酵母パンなどは中庸です", ""),
-    ("seaweed", "海藻", "hiesyo_com", "neutral", "海藻はおおむね中庸(真ん中）ですし", ""),
-    ("brown rice", "玄米", "hiesyo_com", "neutral", "玄米や全粒粉の天然酵母パンなどは中庸です", ""),
-    ("burdock", "ごぼう", "hiesyo_com", "warm", "地面に向かって伸びていくごぼうやにんじんは陽性食品", ""),
-    ("carrot", "にんじん", "hiesyo_com", "warm", "地面に向かって伸びていくごぼうやにんじんは陽性食品", ""),
-    ("apple", "りんご", "hiesyo_com", "warm", "体を冷やさない果物はりんごや柿", ""),
-    ("persimmon", "柿", "hiesyo_com", "warm", "体を冷やさない果物はりんごや柿", ""),
-    ("chicken", "鶏肉", "hiesyo_com", "warm", "陽性の強い肉の中でもよく動き体温の高い鶏肉は極陽です", ""),
-    ("salmon", "塩サケ", "hiesyo_com", "warm", "アジの開きや塩サケはしっかり体を温めます", "塩漬け（塩サケ）"),
-    ("horse mackerel", "アジの開き", "hiesyo_com", "warm", "アジの開きや塩サケはしっかり体を温めます", "干物（開き）"),
-    ("potato", "ポテトチップス", "hiesyo_com", "warm", "油で揚げて塩をまぶしたポテトチップスは陽性です", "油で揚げて塩をまぶした（ポテトチップス）"),
-    ("miso", "鉄火味噌", "hiesyo_com", "warm", "鉄火味噌や黒焼き梅干し、黒焼き玄米などは極陽性です", "鉄火味噌（黒焼き）"),
-    ("umeboshi", "黒焼き梅干し", "hiesyo_com", "warm", "鉄火味噌や黒焼き梅干し、黒焼き玄米などは極陽性です", "黒焼き"),
-    ("brown rice", "黒焼き玄米", "hiesyo_com", "warm", "鉄火味噌や黒焼き梅干し、黒焼き玄米などは極陽性です", "黒焼き"),
-    # -- macrobiotic_rashinban (Tier2): 57 claims --
-    ("cucumber", "きゅうり", "macrobiotic_rashinban", "cool", "スイカやキュウリなど、暑くなると自然に食べたくなるものは陰性であることが多い", ""),
-    ("sweet potato", "さつまいも", "macrobiotic_rashinban", "cool", "いも類（里芋、さつまいも）……３．５", ""),
-    ("spinach", "ほうれん草", "macrobiotic_rashinban", "cool", "シュウ酸は…「ナトリウムを消す」（＝食べると陰性になってしまう）", ""),
-    ("cucumber", "キュウリ", "macrobiotic_rashinban", "cool", "季節: スイカやキュウリなど、暑くなると自然に食べたくなるものは陰性", ""),
-    ("coffee", "コーヒー", "macrobiotic_rashinban", "cool", "刺激の強い飲み物（コーヒー、紅茶など）", ""),
-    ("potato", "ジャガイモ", "macrobiotic_rashinban", "cool", "ナス科（ナス、トマト、ジャガイモ）……１．８", ""),
-    ("watermelon", "スイカ", "macrobiotic_rashinban", "cool", "スイカやキュウリなど、暑くなると自然に食べたくなるものは陰性であることが多い", ""),
-    ("bamboo shoot", "タケノコ", "macrobiotic_rashinban", "cool", "タケノコはとても短い間に上に伸びるので陰性", ""),
-    ("tomato", "トマト", "macrobiotic_rashinban", "cool", "ナス科（ナス、トマト、ジャガイモ）……１．８", ""),
-    ("eggplant", "ナス", "macrobiotic_rashinban", "cool", "ナス科（ナス、トマト、ジャガイモ）……１．８", ""),
-    ("banana", "バナナ", "macrobiotic_rashinban", "cool", "バナナやマンゴー、パパイヤ、アボガドなどや、熱帯原産のナス科の植物である…は、極端に陰性で", ""),
-    ("mango", "マンゴー", "macrobiotic_rashinban", "cool", "バナナやマンゴー、パパイヤ、アボガドなどや、熱帯原産のナス科の植物である…は、極端に陰性で", ""),
-    ("milk", "牛乳", "macrobiotic_rashinban", "cool", "避けた方が良い食品群（下に行くほどより陰性が強い）…牛乳、クリーム、ヨーグルト、アイスクリーム", ""),
-    ("white rice", "白米", "macrobiotic_rashinban", "cool", "避けた方が良い食品群（下に行くほどより陰性が強い）白米など精製した穀物", ""),
-    ("white sugar", "砂糖", "macrobiotic_rashinban", "cool", "避けた方が良い食品群（下に行くほどより陰性が強い）…砂糖など精製した甘味料", ""),
-    ("black tea", "紅茶", "macrobiotic_rashinban", "cool", "刺激の強い飲み物（コーヒー、紅茶など）", ""),
-    ("vinegar", "酢", "macrobiotic_rashinban", "cool", "香辛料をきかせたり酢を使ったりすると陰性になります", ""),
-    ("taro", "里芋", "macrobiotic_rashinban", "cool", "いも類（里芋、さつまいも）……３．５", ""),
-    ("spices", "香辛料", "macrobiotic_rashinban", "cool", "避けた方が良い食品群（下に行くほどより陰性が強い）…香辛料", ""),
-    ("tsukemono", "たくあん", "macrobiotic_rashinban", "neutral", "常用品として天然古式製法の醤油・味噌・梅干し・たくあん", ""),
-    ("nori", "のり", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…海藻（ひじき、わかめ、のり、昆布）", ""),
-    ("hijiki", "ひじき", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…海藻（ひじき、わかめ、のり、昆布）", ""),
-    ("wakame", "わかめ", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…海藻（ひじき、わかめ、のり、昆布）", ""),
-    ("cabbage", "キャベツ", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…温帯性の野菜（ジネンジョ、ゴボウ、人参、カボチャ、蓮根、玉ねぎ、大根、きゅうり、白菜、小松菜、ネギ、キャベツなど）", ""),
-    ("nuts", "ナッツ類", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…ナッツ類", ""),
-    ("green onion", "ネギ", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…温帯性の野菜（ジネンジョ、ゴボウ、人参、カボチャ、蓮根、玉ねぎ、大根、きゅうり、白菜、小松菜、ネギ、キャベツなど）", ""),
-    ("hojicha", "三年番茶", "macrobiotic_rashinban", "neutral", "刺激の強くない飲み物（三年番茶など）", ""),
-    ("whole grains", "全粒穀物", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…全粒穀物", ""),
-    ("miso", "味噌", "macrobiotic_rashinban", "neutral", "常用品として天然古式製法の醤油・味噌・梅干し・たくあん", ""),
-    ("daikon", "大根", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…温帯性の野菜（ジネンジョ、ゴボウ、人参、カボチャ、蓮根、玉ねぎ、大根、きゅうり、白菜、小松菜、ネギ、キャベツなど）", ""),
-    ("komatsuna", "小松菜", "macrobiotic_rashinban", "neutral", "葉菜（白菜、小松菜、大根の葉）……５", ""),
-    ("adzuki bean", "小豆", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…豆類や豆を原料とした食品（小豆、胡麻、油揚げ、高野豆腐、がんもどき、豆腐）", ""),
-    ("kombu", "昆布", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…海藻（ひじき、わかめ、のり、昆布）", ""),
-    ("umeboshi", "梅干し", "macrobiotic_rashinban", "neutral", "常用品として天然古式製法の醤油・味噌・梅干し・たくあん", ""),
-    ("vegetable oil", "植物油", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…海水からとった天然のあら塩、植物油", ""),
-    ("atsuage", "油揚げ", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…豆類や豆を原料とした食品（小豆、胡麻、油揚げ、高野豆腐、がんもどき、豆腐）", ""),
-    ("brown rice", "玄米", "macrobiotic_rashinban", "neutral", "全粒の穀物が食物の中でももっとも中庸でバランスがとれていて、食事の要とするのにふさわしい", ""),
-    ("chinese cabbage", "白菜", "macrobiotic_rashinban", "neutral", "葉菜（白菜、小松菜、大根の葉）……５", ""),
-    ("sesame", "胡麻", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…豆類や豆を原料とした食品（小豆、胡麻、油揚げ、高野豆腐、がんもどき、豆腐）", ""),
-    ("lotus root", "蓮根", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…温帯性の野菜（ジネンジョ、ゴボウ、人参、カボチャ、蓮根、玉ねぎ、大根、きゅうり、白菜、小松菜、ネギ、キャベツなど）", ""),
-    ("tofu", "豆腐", "macrobiotic_rashinban", "neutral", "好ましい（中庸の）食品群…豆類や豆を原料とした食品（小豆、胡麻、油揚げ、高野豆腐、がんもどき、豆腐）", ""),
-    ("soy sauce", "醤油", "macrobiotic_rashinban", "neutral", "常用品として天然古式製法の醤油・味噌・梅干し・たくあん", ""),
-    ("burdock", "ごぼう", "macrobiotic_rashinban", "warm", "根菜（ごぼう、玉ネギ、にんじん、ジネンジョ）……７", ""),
-    ("carrot", "にんじん", "macrobiotic_rashinban", "warm", "下に向かって育つにんじんは陽性と言えます。この性質から、一般的に根菜類は陽性と言えます。", ""),
-    ("pumpkin", "カボチャ", "macrobiotic_rashinban", "warm", "カボチャは陽性野菜の代表格ですが、中でも北海道のカボチャが一番陽性なのです", ""),
-    ("burdock", "ゴボウ", "macrobiotic_rashinban", "warm", "種類による陰陽判断: 根菜（ごぼう、玉ネギ、にんじん、ジネンジョ）……7(陽性)。一般的に根菜類は陽性", ""),
-    ("jinenjo", "ジネンジョ", "macrobiotic_rashinban", "warm", "根菜（ごぼう、玉ネギ、にんじん、ジネンジョ）……７", ""),
-    ("cheese", "チーズ", "macrobiotic_rashinban", "warm", "避けた方が良い食品群（上に行くほどより陽性が強い）…チーズ / 魚介", ""),
-    ("egg", "卵", "macrobiotic_rashinban", "warm", "避けた方が良い食品群（上に行くほどより陽性が強い）精製塩 / 卵 / 鳥肉（鶏、鴨、きじなど） / 獣肉（牛、豚など） / チーズ / 魚介", ""),
-    ("beef", "牛", "macrobiotic_rashinban", "warm", "避けた方が良い食品群（上に行くほどより陽性が強い）…獣肉（牛、豚など）", ""),
-    ("onion", "玉ねぎ", "macrobiotic_rashinban", "warm", "根菜（ごぼう、玉ネギ、にんじん、ジネンジョ）……７", ""),
-    ("onion", "玉ネギ", "macrobiotic_rashinban", "warm", "種類による陰陽判断: 根菜（ごぼう、玉ネギ、にんじん、ジネンジョ）……7(陽性)", ""),
-    ("salt", "精製塩", "macrobiotic_rashinban", "warm", "避けた方が良い食品群（上に行くほどより陽性が強い）精製塩 / 卵 / 鳥肉（鶏、鴨、きじなど） / 獣肉（牛、豚など） / チーズ / 魚介", ""),
-    ("pork", "豚", "macrobiotic_rashinban", "warm", "避けた方が良い食品群（上に行くほどより陽性が強い）…獣肉（牛、豚など）", ""),
-    ("seafood", "魚介", "macrobiotic_rashinban", "warm", "避けた方が良い食品群（上に行くほどより陽性が強い）精製塩 / 卵 / 鳥肉（鶏、鴨、きじなど） / 獣肉（牛、豚など） / チーズ / 魚介", ""),
-    ("duck meat", "鴨", "macrobiotic_rashinban", "warm", "避けた方が良い食品群（上に行くほどより陽性が強い）…鳥肉（鶏、鴨、きじなど）", ""),
-    ("chicken", "鶏", "macrobiotic_rashinban", "warm", "避けた方が良い食品群（上に行くほどより陽性が強い）…鳥肉（鶏、鴨、きじなど）", ""),
-    # -- gveggie (Tier2): 29 claims --
-    ("edamame", "いんげん豆", "gveggie", "cool", "春夏向きの食べ物(陰性)＞豆類: レンズ豆・大きい豆（いんげん豆・花豆など）", "spring-summer"),
-    ("corn", "とうもろこし", "gveggie", "cool", "穀　物 　：　麦類・とうもろこし・キヌア・アマランサス", "spring-summer"),
-    ("nori", "のり", "gveggie", "cool", "春夏向きの食べ物(陰性)＞海藻: わかめ・のり・寒天", "spring-summer"),
-    ("yuba", "ゆば", "gveggie", "cool", "豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）", "spring-summer"),
-    ("wakame", "わかめ", "gveggie", "cool", "春夏向きの食べ物(陰性)＞海藻: わかめ・のり・寒天", "spring-summer"),
-    ("amaranth", "アマランサス", "gveggie", "cool", "穀　物 　：　麦類・とうもろこし・キヌア・アマランサス", "spring-summer"),
-    ("quinoa", "キヌア", "gveggie", "cool", "穀　物 　：　麦類・とうもろこし・キヌア・アマランサス", "spring-summer"),
-    ("tempeh", "テンペ", "gveggie", "cool", "豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）", "spring-summer"),
-    ("lentil", "レンズ豆", "gveggie", "cool", "豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）", "spring-summer"),
-    ("agar", "寒天", "gveggie", "cool", "海藻 ： わかめ・のり・寒天", "spring-summer"),
-    ("natto", "納豆", "gveggie", "cool", "春夏向きの食べ物(陰性)＞豆の加工品: 納豆・テンペ・ゆば・豆腐（冷たい）", "spring-summer"),
-    ("runner bean", "花豆", "gveggie", "cool", "豆　類　：　レンズ豆　・　大きい豆（いんげん豆・花豆など）", "spring-summer"),
-    ("tofu", "豆腐（冷たい）", "gveggie", "cool", "豆の加工品 ：納豆・テンペ　・ゆば・豆腐（冷たい）", "spring-summer"),
-    ("barley", "麦類", "gveggie", "cool", "春夏向きの食べ物(陰性)＞穀物: 麦類・とうもろこし・キヌア・アマランサス", "spring-summer"),
-    ("arame", "あらめ", "gveggie", "warm", "海藻：　あらめ・　ひじき　・　昆布", "autumn-winter"),
-    ("okara", "おから", "gveggie", "warm", "豆の加工品　：　豆腐（温かい）・おから・高野豆腐", "autumn-winter"),
-    ("buckwheat", "そば", "gveggie", "warm", "秋冬向きの食べ物(陽性)＞穀物: 雑穀・もち米・玄米・もち・そば", "autumn-winter"),
-    ("hijiki", "ひじき", "gveggie", "warm", "秋冬向きの食べ物(陽性)＞海藻: あらめ・ひじき・昆布", "autumn-winter"),
-    ("chickpea", "ひよこ豆", "gveggie", "warm", "豆　類　：　ひよこ豆・大豆・小豆・黒豆", "autumn-winter"),
-    ("rice cake", "もち", "gveggie", "warm", "穀　物　：　雑穀・もち米・玄米・もち・そば", "autumn-winter"),
-    ("glutinous rice", "もち米", "gveggie", "warm", "穀　物　：　雑穀・もち米・玄米・もち・そば", "autumn-winter"),
-    ("soybean", "大豆", "gveggie", "warm", "豆　類　：　ひよこ豆・大豆・小豆・黒豆", "autumn-winter"),
-    ("adzuki bean", "小豆", "gveggie", "warm", "豆　類　：　ひよこ豆・大豆・小豆・黒豆", "autumn-winter"),
-    ("kombu", "昆布", "gveggie", "warm", "海藻：　あらめ・　ひじき　・　昆布", "autumn-winter"),
-    ("brown rice", "玄米", "gveggie", "warm", "秋冬向きの食べ物(陽性)＞穀物: 雑穀・もち米・玄米・もち・そば", "autumn-winter"),
-    ("tofu", "豆腐（温かい）", "gveggie", "warm", "豆の加工品　：　豆腐（温かい）・おから・高野豆腐", "autumn-winter"),
-    ("mixed grains", "雑穀", "gveggie", "warm", "穀　物　：　雑穀・もち米・玄米・もち・そば", "autumn-winter"),
-    ("freeze-dried tofu", "高野豆腐", "gveggie", "warm", "豆の加工品　：　豆腐（温かい）・おから・高野豆腐", "autumn-winter"),
-    ("black soybean", "黒豆", "gveggie", "warm", "豆　類　：　ひよこ豆・大豆・小豆・黒豆", "autumn-winter"),
-]
+    Matching is on the Japanese label, kana-folded, first within the source and
+    then across the corpus, because the frozen vocabulary is deliberately
+    consistent across sources. A label the frozen file never carried keeps the
+    coder's `food_en`: this canonicalises, it does not invent.
+    """
+    frozen = pd.read_csv(frozen_path, dtype=str).fillna("")
+    within = {(r.source_id, kata(r.food_ja)): r.food_en for r in frozen.itertuples()}
+    across: dict[str, str] = {}
+    for r in frozen.itertuples():
+        across.setdefault(kata(r.food_ja), r.food_en)
+    inc = inc.copy()
+    inc["food_en"] = [
+        within.get((r.source_id, kata(r.food_ja)))
+        or across.get(kata(r.food_ja), r.food_en)
+        for r in inc.itertuples()
+    ]
+    return inc
+
+
+def collapse(inc: pd.DataFrame) -> pd.DataFrame:
+    """Ledger rows -> one row per (source, food, direction).
+
+    The representative span is the one with the shortest ``food_ja``, which is
+    §9.4 rule 2's own tie-break ("the shorter one is the row") applied at the
+    point where the granularities the enumeration emits on purpose have to become
+    a single claim.
+    """
+    inc = inc.copy()
+    inc["_k"] = inc["food_en"].map(_norm_en)
+    inc["_len"] = inc["food_ja"].str.len()
+    inc = inc.sort_values(["source_id", "_k", "direction", "_len", "food_ja"])
+    out = inc.drop_duplicates(["source_id", "_k", "direction"], keep="first")
+    return out[["food_en", "food_ja", "source_id", "direction", "quote"]].copy()
+
+
+def attach_condition(claims: pd.DataFrame, frozen_path=CLAIMS_FROZEN_CSV) -> pd.DataFrame:
+    """Restore the frozen ``condition`` annotations (D69).
+
+    Joined rather than re-derived, and on the record: a condition the frozen file
+    does not carry is not invented here, so a row with no counterpart gets none.
+    """
+    frozen = pd.read_csv(frozen_path, dtype=str).fillna("")
+    frozen = frozen[frozen["condition"] != ""]
+    by_ja = {(r.source_id, r.food_ja): r.condition for r in frozen.itertuples()}
+    by_en: dict[tuple[str, str], str] = {}
+    for r in frozen.itertuples():
+        by_en.setdefault((r.source_id, _norm_en(r.food_en)), r.condition)
+    claims = claims.copy()
+    claims["condition"] = [
+        by_ja.get((r.source_id, r.food_ja))
+        or by_en.get((r.source_id, _norm_en(r.food_en)), "")
+        for r in claims.itertuples()
+    ]
+    return claims
+
+
+def build() -> pd.DataFrame:
+    df = attach_condition(collapse(canonicalise_food_en(load_includes())))
+    return df[COLUMNS].sort_values(
+        ["source_id", "food_en", "direction"]).reset_index(drop=True)
 
 
 def main() -> None:
-    df = pd.DataFrame(CLAIMS, columns=COLUMNS)
+    df = build()
     df.to_csv(CLAIMS_CSV, index=False)
+    frozen = pd.read_csv(CLAIMS_FROZEN_CSV, dtype=str).fillna("")
     print(f"wrote {len(df)} claims to {CLAIMS_CSV}")
+    print(f"  frozen hand coding: {len(frozen)} rows")
+    print(f"  condition annotations carried over: "
+          f"{int((df['condition'] != '').sum())} of "
+          f"{int((frozen['condition'] != '').sum())}")
+    print(f"  distinct (source, food_en): "
+          f"{df.groupby(['source_id', df.food_en.map(_norm_en)]).ngroups}")
 
 
 if __name__ == "__main__":

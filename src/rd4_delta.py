@@ -20,11 +20,14 @@ from __future__ import annotations
 
 import pandas as pd
 
-from .definitions import DATA_DIR
+from .definitions import CLAIMS_FROZEN_CSV, DATA_DIR
 from .food_query_terms import EXCLUDE
 
 LEDGER = DATA_DIR / "claims_ledger.csv"
-CLAIMS = DATA_DIR / "claims.csv"
+# The frozen hand coding, never the generated claims.csv: `build_claims` now
+# projects the ledger into claims.csv, so comparing the ledger against it would
+# compare the ledger to itself and report a delta of almost nothing.
+CLAIMS = CLAIMS_FROZEN_CSV
 
 
 def kata(s: str) -> str:
@@ -79,6 +82,55 @@ def delta(inc: pd.DataFrame, claims: pd.DataFrame) -> pd.DataFrame:
     return new
 
 
+def coverage(inc: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Axis A foods with no Axis B measurement, split by whether that is expected.
+
+    The Route D goal declaration counts "adding include foods and quietly
+    dropping the ones whose Axis B is missing" as a failure of the route, and the
+    drop really is quiet: the analysis frame is built from `pubmed_counts.csv`,
+    so a food the ledger added simply never appears and nothing warns.
+
+    A `category` or `dish` sub-label is the ledger's own record that no
+    single-food query represents the label, which is D30's ground for holding the
+    21 composite labels out of the 175-food frame. Those are expected to be
+    missing. Anything else is work RD-5 owes.
+    """
+    from .build_claims import canonicalise_food_en, load_includes
+
+    if inc is None:
+        inc = load_includes()
+    # On the canonical vocabulary, not the coders' — `burdock root` is `burdock`
+    # once claims.csv is built, and counting it as unmeasured would invent work.
+    inc = canonicalise_food_en(inc)
+    counts = pd.read_csv(DATA_DIR / "pubmed_counts.csv", dtype=str)
+    measured = set(counts["food_key"])
+    sub = inc.groupby("food_en")["sublabels"].apply(
+        lambda s: s.str.split(";").str[0].str.split(":").str[0].mode().iat[0]
+        if len(s.mode()) else "")
+
+    # A measured food under a preparation modifier is not a new food. The frozen
+    # coding settled this shape: kracie's 加熱した生姜 is `ginger` with
+    # condition=heated, not a food called "heated ginger". Six ginger variants
+    # reach here (raw / dried / powder / heated-dried …); building a PubMed query
+    # for each would be six queries for one food.
+    measured_words = {w for f in measured for w in _norm_en(f).split()}
+
+    rows = []
+    for food in sorted(inc["food_en"].unique()):
+        if food in measured or food in EXCLUDE:
+            continue
+        head = sub.get(food, "")
+        words = set(_norm_en(food).split())
+        prep = bool(words & measured_words) and food not in measured
+        rows.append({
+            "food_en": food,
+            "sublabel": head,
+            "expected": head in ("category", "dish"),
+            "prep_variant_of_measured": prep,
+        })
+    return pd.DataFrame(rows)
+
+
 def main() -> None:
     inc, claims = load()
     new = delta(inc, claims)
@@ -105,6 +157,19 @@ def main() -> None:
               f"（RD-5 の前に正規化が要る・RB-4 と同じ作業）")
         for f in sorted(alias.food_en.unique())[:20]:
             print(f"    {f}")
+
+    cov = coverage()
+    owed = cov[~cov["expected"]]
+    print(f"\n★ Axis B 未取得の Axis A 食品: {len(cov)}")
+    print(f"    うち category/dish（D30 の理由で測れんのが正常）: {int(cov['expected'].sum())}")
+    prep = owed[owed["prep_variant_of_measured"]]
+    fresh = owed[~owed["prep_variant_of_measured"]]
+    print(f"    既存食品の調理形態・別形（RD-5 は condition として扱うか判断）: {len(prep)}")
+    for f in prep["food_en"]:
+        print(f"       ~ {f}")
+    print(f"    ★★ RD-5 が新規にクエリを建てる食品: {len(fresh)}")
+    for f in fresh["food_en"]:
+        print(f"       {f}")
 
     print(f"\n★ n_sources が増えるだけの既存食品: "
           f"{int((~new.food_en.isin(frame.food_en) & (new.sublabel_head == '')).sum())} 行")

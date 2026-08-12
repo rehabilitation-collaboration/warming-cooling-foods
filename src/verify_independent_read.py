@@ -31,7 +31,7 @@ import sys
 
 import pandas as pd
 
-from .definitions import CLAIMS_CSV, DATA_DIR, SOURCES_CSV, SOURCES_RAW_DIR
+from .definitions import CLAIMS_FROZEN_CSV, DATA_DIR, SOURCES_CSV, SOURCES_RAW_DIR
 from .extract_candidates import dedupe, extract_all
 
 INDEPENDENT_READ_DIR = DATA_DIR / "independent_read"
@@ -112,7 +112,7 @@ def claims_only(reads: pd.DataFrame, claims: pd.DataFrame) -> pd.DataFrame:
 
 def main() -> None:
     reads = load_reads()
-    claims = pd.read_csv(CLAIMS_CSV).fillna("")
+    claims = pd.read_csv(CLAIMS_FROZEN_CSV).fillna("")
     candidates = dedupe(extract_all())
     scored = check(reads, candidates, claims)
     missing = claims_only(reads, claims)

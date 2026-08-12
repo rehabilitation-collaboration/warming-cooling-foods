@@ -31,7 +31,7 @@ import sys
 
 import pandas as pd
 
-from .definitions import CLAIMS_CSV, SOURCES_CSV
+from .definitions import CLAIMS_FROZEN_CSV, SOURCES_CSV
 from .extract_candidates import dedupe, extract_all
 
 RECALL_TARGET = 0.90  # PLAN branch condition: below this, extend the paths
@@ -84,7 +84,7 @@ def summarise(scored: pd.DataFrame, tier1: set[str]) -> pd.DataFrame:
 
 
 def main() -> None:
-    claims = pd.read_csv(CLAIMS_CSV).fillna("")
+    claims = pd.read_csv(CLAIMS_FROZEN_CSV).fillna("")
     sources = pd.read_csv(SOURCES_CSV)
     tier1 = set(sources[sources["tier"] == 1]["source_id"])
 

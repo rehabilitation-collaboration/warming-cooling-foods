@@ -2497,7 +2497,7 @@ basefood,178,生野菜,prose,include,include,False,include,,category,生野菜,r
 basefood,178,生野菜を過剰に摂る習慣も,list|prose,exclude,exclude,False,exclude,fragment,,,,,
 basefood,178,過剰,prose,exclude,exclude,False,exclude,not-food,,,,,
 basefood,179,ためす忙しい毎日,wrapped,exclude,exclude,False,exclude,fragment,,,,,
-basefood,179,ベースフード,prose|scoped|wrapped,include,include,False,include,,dish,ベースフード,BASE FOOD,warm,ここでは、ベースフードが温活に役立つ理由と活用法を紹介します。
+basefood,179,ベースフード,prose|scoped|wrapped,include,include,True,exclude,not-food,dish,,,,
 basefood,179,支えるBASE FOOD,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 basefood,179,活用,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
 basefood,180,忙しい毎日,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
@@ -2510,7 +2510,7 @@ basefood,181,忙しくて毎日の栄養管理が難しい方には,prose,exclud
 basefood,182,1食,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
 basefood,182,1食で33種類の栄養素を補える設計で,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 basefood,182,33種類,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
-basefood,182,「ベースフード」,prose|wrapped,exclude,include,True,include,,,ベースフード,BASE FOOD,warm,忙しい毎日の温活を支えるBASE FOOD（ベースフード）の活用
+basefood,182,「ベースフード」,prose|wrapped,exclude,include,True,exclude,not-food,,,,,
 basefood,182,きます,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 basefood,182,す※15,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 basefood,182,ビタミン類,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
@@ -2674,7 +2674,7 @@ basefood,204,ちっ,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 basefood,204,もちっとした麺を組みあわせており,list|prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 basefood,204,コク,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
 basefood,204,スープで体を温めながら,list|prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
-basefood,204,ベースラーメン,prose|scoped|wrapped,include,include,False,include,,dish,ベースラーメン,BASE RAMEN,warm,ベースラーメンは、スープで体を温めながら、必要な栄養を補えるカップラーメンです。
+basefood,204,ベースラーメン,prose|scoped|wrapped,include,include,True,exclude,not-food,dish,,,,
 basefood,204,必要な栄養,prose|wrapped,exclude,exclude,False,exclude,not-food,,,,,
 basefood,204,必要な栄養を補えるカップラーメンです,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,
 basefood,204,温めな,prose|wrapped,exclude,exclude,False,exclude,fragment,,,,,

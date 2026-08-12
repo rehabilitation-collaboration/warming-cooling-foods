@@ -80,3 +80,71 @@ class TestDelta:
         claims = pd.DataFrame(columns=["source_id", "food_ja", "food_en", "direction"])
         out = rd.delta(_rows(food_ja="海藻", food_en="seaweed"), claims)
         assert out["class"].iloc[0] == "non-queryable (D30 EXCLUDE)"
+
+
+class TestBuildClaims:
+    """The projection ledger -> claims.csv (D46)."""
+
+    def test_spans_naming_one_food_in_one_source_become_one_claim(self):
+        """§2's unit is (food, source); the ledger's is (source, candidate)."""
+        from src.build_claims import collapse
+
+        inc = pd.DataFrame([
+            {"source_id": "s1", "food_ja": "すりおろし生姜", "food_en": "ginger",
+             "direction": "warm", "quote": "q1"},
+            {"source_id": "s1", "food_ja": "生姜", "food_en": "ginger",
+             "direction": "warm", "quote": "q2"},
+        ])
+        out = collapse(inc)
+        assert len(out) == 1
+        # rule 2's own tie-break: the shorter label is the row
+        assert out.iloc[0]["food_ja"] == "生姜"
+
+    def test_a_condition_split_survives_the_collapse(self):
+        """§3 requires both sides where the source splits one food by condition."""
+        from src.build_claims import collapse
+
+        inc = pd.DataFrame([
+            {"source_id": "s1", "food_ja": "豆腐（冷たい）", "food_en": "tofu",
+             "direction": "cool", "quote": "q1"},
+            {"source_id": "s1", "food_ja": "豆腐（温かい）", "food_en": "tofu",
+             "direction": "warm", "quote": "q2"},
+        ])
+        assert len(collapse(inc)) == 2
+
+    def test_a_coders_new_english_name_is_canonicalised_to_the_frozen_key(self, tmp_path):
+        """food_en is the key Axis B joins on, so drift would orphan the food."""
+        from src.build_claims import canonicalise_food_en
+
+        frozen = tmp_path / "frozen.csv"
+        pd.DataFrame([{"food_en": "burdock", "food_ja": "ごぼう", "source_id": "s1",
+                       "direction": "warm", "quote": "", "condition": ""}]).to_csv(
+            frozen, index=False)
+        inc = pd.DataFrame([{"source_id": "s1", "food_ja": "ごぼう",
+                             "food_en": "burdock root", "direction": "warm", "quote": ""}])
+        assert canonicalise_food_en(inc, frozen).iloc[0]["food_en"] == "burdock"
+
+    def test_a_label_the_frozen_file_never_carried_keeps_the_coders_name(self, tmp_path):
+        """Canonicalising must not invent a mapping for a genuinely new food."""
+        from src.build_claims import canonicalise_food_en
+
+        frozen = tmp_path / "frozen.csv"
+        pd.DataFrame([{"food_en": "burdock", "food_ja": "ごぼう", "source_id": "s1",
+                       "direction": "warm", "quote": "", "condition": ""}]).to_csv(
+            frozen, index=False)
+        inc = pd.DataFrame([{"source_id": "s1", "food_ja": "フェンネル",
+                             "food_en": "fennel", "direction": "warm", "quote": ""}])
+        assert canonicalise_food_en(inc, frozen).iloc[0]["food_en"] == "fennel"
+
+    def test_an_include_missing_its_coded_fields_is_an_error_not_a_blank_row(self, tmp_path):
+        """§9.3 requires them on every include; a blank row would reach claims.csv."""
+        import pytest
+
+        from src.build_claims import load_includes
+
+        led = tmp_path / "ledger.csv"
+        pd.DataFrame([{"source_id": "s1", "candidate": "x", "final_label": "include",
+                       "food_ja": "生姜", "food_en": "", "direction": "warm"}]).to_csv(
+            led, index=False)
+        with pytest.raises(ValueError, match="§9.3"):
+            load_includes(led)

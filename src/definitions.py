@@ -11,6 +11,13 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 SOURCES_CSV = DATA_DIR / "sources.csv"
 CLAIMS_CSV = DATA_DIR / "claims.csv"
+# The hand coding as it stood before Route D, frozen. `claims.csv` is now
+# generated from `claims_ledger.csv` (§9.7), which makes it useless as the
+# reference for two checks that have to stay independent of the ledger:
+# `verify_candidate_recall` measures the extractor against a set it did not
+# produce, and the Route D goal declaration counts "claiming coverage from a
+# recall figure measured against your own output" as a failure of the route.
+CLAIMS_FROZEN_CSV = DATA_DIR / "claims_frozen.csv"
 WU_XING_CSV = DATA_DIR / "wu_xing_reference.csv"
 SOURCES_RAW_DIR = DATA_DIR / "sources_raw"
 # Axis B evidence mapping (evidence_mapping.py).
