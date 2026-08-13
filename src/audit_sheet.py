@@ -84,6 +84,49 @@ DIRECTION_VOCABULARY = [
     ("冷（温活）", "温活で控えたい／温活中は避けたい／温活の妨げになる"),
 ]
 
+# A worked example of the end-to-end read: an invented page, and the rows it
+# should produce. Invented rather than excerpted, because the two sources being
+# read are the two the reader must not see first, and quoting a third would
+# reveal part of the precision sample for that source. Every row names the §3
+# term that licenses it, and a test reads those terms back against the protocol.
+READ_EXAMPLE_PAGE = """■ 体を温める食材
+　根菜類（にんじん、ごぼう）、しょうが、シナモン
+
+■ 五性でみると
+　なつめは温性、きゅうりは寒性にあたります。
+
+■ 温活向きの飲み物
+　ほうじ茶は温活向き。逆に緑茶は温活で控えた方がよいでしょう。
+
+■ 温活レシピ
+　しょうが焼きの作り方はこちら
+
+　※ 冷たい飲み物は体を冷やすので控えめに"""
+
+READ_EXAMPLE_ROWS = [
+    ("根菜類", "warm", "体を温める食材：根菜類", "体を温める",
+     "クラス名もそのまま1件。食品名やないから飛ばす、はせん"),
+    ("にんじん", "warm", "体を温める食材：根菜類（にんじん、ごぼう）", "体を温める",
+     "括りとは別に、個別に名前が出とるので別の1件"),
+    ("ごぼう", "warm", "同上", "体を温める", ""),
+    ("しょうが", "warm", "体を温める食材：しょうが", "体を温める", ""),
+    ("シナモン", "warm", "体を温める食材：シナモン", "体を温める", ""),
+    ("なつめ", "warm", "なつめは温性", "温性", "五性の語も §3 の表で温になる"),
+    ("きゅうり", "cool", "きゅうりは寒性", "寒性", ""),
+    ("ほうじ茶", "warm", "ほうじ茶は温活向き", "温活向き",
+     "温活でも、食品を味方側に置いとる文なら向きになる"),
+    ("緑茶", "cool", "緑茶は温活で控えた方がよい", "温活で控えた方がよい",
+     "同じ温活でも、控える側に置かれとるので冷"),
+]
+
+READ_EXAMPLE_SKIPPED = [
+    ("「温活レシピ」の見出し", "食品をどっち側にも置いてへん。温活は活動の名前"),
+    ("しょうが焼き",
+     "見出しが「温活レシピ」で、作り方の案内をしとるだけ。"
+     "ただし「しょうが焼きは体を温める」と書いてあったら、料理でも1件として書く"),
+    ("「冷たい飲み物は体を冷やす」", "出す温度の話で、食品そのものの性質やない"),
+]
+
 # The cases §3 names where something that looks like a direction is not one.
 NOT_A_DIRECTION = [
     ("「温活レシピ」「温活商品」など",
@@ -184,6 +227,17 @@ def render(state: dict) -> str:
                     for d, words in DIRECTION_VOCABULARY)
     not_dir = "".join(f"<li><b>{html.escape(what)}</b> — {html.escape(why)}</li>"
                       for what, why in NOT_A_DIRECTION)
+    example_page = html.escape(READ_EXAMPLE_PAGE)
+    n_rows = len(READ_EXAMPLE_ROWS)
+    example_rows = "".join(
+        f"<tr><td><b>{html.escape(food)}</b></td>"
+        f'<td class="dir">{DIRECTION_LABELS[direction]}</td>'
+        f"<td>{html.escape(quote)}</td>"
+        f'<td class="ex">{html.escape(why)}</td></tr>'
+        for food, direction, quote, _term, why in READ_EXAMPLE_ROWS)
+    example_skipped = "".join(
+        f"<li><b>{html.escape(what)}</b> — {html.escape(why)}</li>"
+        for what, why in READ_EXAMPLE_SKIPPED)
 
     parts = [_HEAD, f"""
 <header>
@@ -214,6 +268,24 @@ def render(state: dict) -> str:
   <p class="why">ページを最初から最後まで読んで、<b>温か冷かが付いとる食品を全部</b>書き出す。
      <b>台帳は見んと</b>やる —— 見てもうたら「AIが挙げた分を確認する作業」になって、
      見落としが永久に出てこんくなる。だから答え合わせ側はこれが済むまで一部伏せてある。</p>
+  <details class="guide" open>
+    <summary>やってみせる —— 架空のページを1枚読んだら、こう書き出す</summary>
+    <div class="demo">
+      <div class="demopage">
+        <p class="demolabel">架空の例ページ（実在のソースやない）</p>
+        <pre>{example_page}</pre>
+      </div>
+      <div class="demoout">
+        <p class="demolabel">→ 書き出す（{n_rows} 件）</p>
+        <table class="ex">
+          <tr><th>食品名</th><th>向き</th><th>根拠の文</th><th>なんで</th></tr>
+          {example_rows}
+        </table>
+        <p class="demolabel skip">→ 書かへんもの</p>
+        <ul class="skiplist">{example_skipped}</ul>
+      </div>
+    </div>
+  </details>
   <details class="guide">
     <summary>何を書き出す？ 迷った時は？</summary>
     <ul>
@@ -313,6 +385,8 @@ def render(state: dict) -> str:
     parts.append(f"""
 </section>
 <footer>
+  <p>この画面は<b>起動した時のコード</b>で動いとる。作りを直してもろたら、再読み込みやなく
+     ターミナルで <kbd>Ctrl</kbd>+<kbd>C</kbd> → <code>python3 -m src.audit_sheet</code> を叩き直す。</p>
   <p>両方うまったら、クロコンに「採点して」と言うだけ。
      （中身は <code>data/human_audit_results.csv</code> と
      <code>data/human_audit_source_reads.csv</code> に入っとる）</p>
@@ -352,6 +426,15 @@ _HEAD = """<!doctype html><html lang="ja"><meta charset="utf-8">
  .v.sample{display:inline-block;border:1px solid #ccc;border-radius:6px;padding:3px 10px;
            background:#fff;font-size:12.5px;white-space:nowrap}
  .filter{display:block;color:#666;font-size:13px;margin-bottom:12px;cursor:pointer}
+ .demo{display:grid;grid-template-columns:minmax(230px,1fr) 1.6fr;gap:18px;margin-bottom:14px}
+ @media(max-width:820px){.demo{grid-template-columns:1fr}}
+ .demopage pre{background:#fbfbf8;border:1px solid #e6e6df;border-radius:8px;padding:12px 14px;
+               margin:0;font:13px/1.9 "Hiragino Sans",monospace;white-space:pre-wrap}
+ .demolabel{font-size:12.5px;color:#777;margin:0 0 6px;font-weight:600}
+ .demolabel.skip{margin-top:14px;color:#a33}
+ .skiplist{list-style:none;padding:0;margin:0;font-size:13px}
+ .skiplist li{padding:5px 0;border-bottom:1px dashed #eee;color:#444}
+ .demoout table.ex td{padding:5px 8px;font-size:13px}
  .why{color:#555;font-size:14px;margin:0 0 14px}
  .src{border-top:1px solid #eee;padding:16px 0}
  .src h3{font-size:15px;margin:0 0 10px;display:flex;align-items:center;gap:12px}

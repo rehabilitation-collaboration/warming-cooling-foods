@@ -76,6 +76,20 @@ class TestTheGuideDoesNotInventRules:
             for term in words.split("／"):
                 assert term in protocol, f"{term!r} is not in the coding protocol"
 
+        # The worked example is instruction too, and a made-up page is exactly
+        # where an invented rule would be hardest to spot. Every row names the
+        # term that licenses it; each has to be one §3 holds.
+        for food, _direction, _quote, term, _why in audit_sheet.READ_EXAMPLE_ROWS:
+            assert term in protocol, f"{food}: {term!r} is not in the coding protocol"
+
+    def test_the_example_page_is_not_one_of_the_sources_being_read(self):
+        # Quoting the two end-to-end sources in the instructions would hand the
+        # reader the answer to the half that matters; quoting a third would
+        # reveal part of that source's precision sample.
+        page = audit_sheet.READ_EXAMPLE_PAGE
+        for source_id in audit_sheet.load_sources()["source_id"]:
+            assert source_id not in page
+
 
 class TestReads:
     def test_a_food_is_appended_with_its_source_and_direction(self, sheets):
