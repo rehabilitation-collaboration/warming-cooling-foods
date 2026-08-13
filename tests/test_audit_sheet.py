@@ -82,6 +82,10 @@ class TestTheGuideDoesNotInventRules:
         for food, _direction, _quote, term, _why in audit_sheet.READ_EXAMPLE_ROWS:
             assert term in protocol, f"{food}: {term!r} is not in the coding protocol"
 
+        # The specimen beside the entry form is one of those rows, not a second
+        # example able to say something else.
+        assert audit_sheet.form_example() in audit_sheet.READ_EXAMPLE_ROWS
+
     def test_the_example_page_is_not_one_of_the_sources_being_read(self):
         # Quoting the two end-to-end sources in the instructions would hand the
         # reader the answer to the half that matters; quoting a third would

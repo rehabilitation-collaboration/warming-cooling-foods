@@ -119,6 +119,22 @@ READ_EXAMPLE_ROWS = [
      "同じ温活でも、控える側に置かれとるので冷"),
 ]
 
+# The row shown beside the entry form itself, as a filled-in specimen. Taken
+# from the invented page above rather than written separately, so the two cannot
+# say different things, and deliberately not the obvious food: an example naming
+# something a warming-foods article almost certainly lists would hand the reader
+# an item they are supposed to find by reading.
+FORM_EXAMPLE_FOOD = "なつめ"
+
+
+def form_example() -> tuple:
+    """The specimen row, looked up in the worked example so it stays one thing."""
+    for row in READ_EXAMPLE_ROWS:
+        if row[0] == FORM_EXAMPLE_FOOD:
+            return row
+    raise ValueError(f"the worked example no longer holds {FORM_EXAMPLE_FOOD!r}")
+
+
 READ_EXAMPLE_SKIPPED = [
     ("「温活レシピ」の見出し", "食品をどっち側にも置いてへん。温活は活動の名前"),
     ("しょうが焼き",
@@ -238,6 +254,10 @@ def render(state: dict) -> str:
     example_skipped = "".join(
         f"<li><b>{html.escape(what)}</b> — {html.escape(why)}</li>"
         for what, why in READ_EXAMPLE_SKIPPED)
+    ex_food, ex_direction, ex_quote, _term, _why = form_example()
+    ex_food, ex_quote = html.escape(ex_food), html.escape(ex_quote)
+    ex_dir = {"warm": "温める", "cool": "冷やす", "neutral": "どちらでもない（平）"}[
+        ex_direction]
 
     parts = [_HEAD, f"""
 <header>
@@ -308,15 +328,19 @@ def render(state: dict) -> str:
     <h3><a href="{link}" target="_blank" rel="noreferrer">{html.escape(target)} を開く ↗</a>
         <span class="count">{len(rows)} 件 記入済み</span></h3>
     <form class="readform" data-source="{html.escape(target)}">
-      <input name="food_ja" placeholder="食品名（ページの表記のまま）" autocomplete="off" required>
+      <input name="food_ja" placeholder="例）{ex_food}" autocomplete="off" required>
       <select name="direction">
         <option value="warm">温める</option>
         <option value="cool">冷やす</option>
         <option value="neutral">どちらでもない（平）</option>
       </select>
-      <input name="quote" placeholder="そう読める根拠の文（任意）" autocomplete="off">
+      <input name="quote" placeholder="例）{ex_quote}" autocomplete="off">
       <button type="submit">追加</button>
     </form>
+    <p class="formex"><span class="exlabel">記入例</span>
+      ページに <q>{ex_quote}</q> とあったら →
+      食品名 <b>{ex_food}</b> ／ <b>{ex_dir}</b> ／ 根拠の文 <b>{ex_quote}</b>
+      と入れて「追加」。下に1行たまる。</p>
     <ul class="readlist">""")
         for index, row in rows.iterrows():
             direction = DIRECTION_LABELS.get(row["direction"], row["direction"])
@@ -454,6 +478,11 @@ _HEAD = """<!doctype html><html lang="ja"><meta charset="utf-8">
  .readform{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
  .readform input{flex:1;min-width:150px;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font:inherit}
  .readform select{padding:6px;border:1px solid #ddd;border-radius:6px;font:inherit}
+ .formex{background:#fbfbf6;border:1px dashed #ddd;border-radius:8px;padding:8px 12px;
+         margin:0 0 12px;font-size:13px;color:#555}
+ .formex q{color:#1c1c1a;font-style:normal}
+ .exlabel{background:#e8e8e2;border-radius:4px;padding:1px 8px;font-size:12px;
+          font-weight:600;color:#555;margin-right:6px}
  .readlist{list-style:none;padding:0;margin:0}
  .readlist li{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px dashed #eee;font-size:14px}
  .readlist .q{color:#888;font-size:13px;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
