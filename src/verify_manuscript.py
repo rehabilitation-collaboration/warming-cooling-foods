@@ -15,6 +15,14 @@ them, and it flags the ones that look like identifiers (years, PMIDs, versions)
 as hints only. Nothing is dropped silently: the counts printed at the end add up
 to every token found, which is the property that makes the report auditable.
 
+Three layers run, weakest first, because each covers what the one before cannot.
+The walk asks whether a number occurs anywhere in the pipeline; `manuscript_tables`
+asks whether each table cell equals the quantity its row and column name; and
+`manuscript_prose` asks the same of the sentences that carry a quantity in words
+around it. The second layer exists because the first passed four stale rows of
+Table 1, the third because the first passed five stale numbers in prose, and both
+failures were of one kind — the number printed was real, just not there.
+
 Run it as `python3 -m src.verify_manuscript`. It writes nothing.
 """
 
@@ -28,6 +36,7 @@ import pandas as pd
 
 from . import (
     claim_directed,
+    manuscript_prose,
     manuscript_tables,
     verify_candidate_recall,
     verify_independent_read,
@@ -220,10 +229,10 @@ def pipeline_values(inputs: dict) -> set[str]:
 
     values |= counts_reference(pd.read_csv(PUBMED_COUNTS_CSV))
     values |= axis_a_ledger_reference()
-    for value in manuscript_tables.expected_numbers(
-        MANUSCRIPT.read_text(encoding="utf-8"), inputs
-    ):
-        values |= _renderings(str(value))
+    text = MANUSCRIPT.read_text(encoding="utf-8")
+    for module in (manuscript_tables, manuscript_prose):
+        for value in module.expected_numbers(text, inputs):
+            values |= _renderings(str(value))
 
     claims, sources = inputs["claims"], inputs["sources"]
     axis_a = aggregate_axis_a(claims, sources, max_tier=TIER_ORG)
@@ -326,6 +335,7 @@ def main() -> None:
               f"{sorted(set(group['line']))[:12]}")
 
     manuscript_tables.report(text, inputs)
+    manuscript_prose.report(text, inputs)
 
 
 if __name__ == "__main__":

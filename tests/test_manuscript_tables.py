@@ -10,11 +10,13 @@ import pytest
 
 from src.manuscript_tables import (
     _agrees,
+    _checks,
     adjudication_split,
     check_table,
     table4_expected,
     table_body,
 )
+from src.verify_manuscript import MANUSCRIPT, pipeline_inputs
 
 TABLE = """### Table X. Demo
 
@@ -107,6 +109,21 @@ class TestAdjudicationSplit:
         # bucket happens to be checked last would move a published tally silently.
         with pytest.raises(ValueError, match="unmapped batch"):
             adjudication_split(pd.DataFrame({"batch": ["2026-09-01 a new sweep"]}))
+
+
+class TestAgainstTheRealManuscript:
+    def test_every_expected_row_and_column_resolves_in_the_manuscript(self):
+        # `test_a_renamed_column_fails_loudly` shows the mechanism on a
+        # synthetic table; nothing pinned the column names these expectations
+        # actually use to the ones the manuscript actually prints. When
+        # `Whole-food primary` became `Food-form primary` both sides were
+        # edited together and the suite would not have noticed either alone.
+        # Stale *values* are the report's business, not this suite's; what has
+        # to fail here is a heading, row label or column that no longer exists.
+        text = MANUSCRIPT.read_text(encoding="utf-8")
+        inputs = pipeline_inputs()
+        for heading, expected, exact in _checks(text, inputs):
+            check_table(text, heading, expected, exact=exact)
 
 
 class TestTable4Expected:
