@@ -35,6 +35,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 import pandas as pd
 
+from .definitions import DATA_DIR
 from .human_audit import READS_CSV, RESULTS_CSV, SAMPLE_CSV, VERDICTS, completeness_sources
 from .claim_mapping import load_sources
 
@@ -53,7 +54,45 @@ VERDICT_LABELS = {
     "unlocatable": "ページが変わった",
 }
 
+# One worked example per verdict, so the choice is made against a case rather
+# than against a definition. The five are the protocol's; the examples are
+# illustrations of them and are not claims that any of these errors is present.
+VERDICT_EXAMPLES = {
+    "supported": ("ページがその食品をその向きで書いとる",
+                  "行「しょうが・温」／ページ「しょうがは体を温める代表格」"),
+    "wrong-direction": ("食品は載っとるが、向きが逆",
+                        "行「緑茶・温」／ページ「温活で控えた方がよい：緑茶」→ 実際は冷"),
+    "not-in-source": ("その食品に温冷をひとことも与えてへん",
+                      "行「ココア・温」／ページはレシピで名前を挙げるだけで、温冷を言うてない"),
+    "wrong-food": ("引用の文が指しとるのは別の食品",
+                   "行「ねぎ・温」／引用文をよう見たら「玉ねぎ」の話やった"),
+    "unlocatable": ("8/3 の取得後にページが変わって確かめられん",
+                    "リンクが404／記事が別内容に差し替わっとる（AIのせいやないので集計から外れる）"),
+}
+
 DIRECTION_LABELS = {"warm": "温", "cool": "冷", "neutral": "平"}
+
+# The direction vocabulary of protocol §3, for the reader's reference. Both
+# halves of the audit need it: the end-to-end read has to recognise a direction
+# to write one down, and the precision check has to recognise the one the ledger
+# recorded. Reproduced rather than paraphrased.
+DIRECTION_VOCABULARY = [
+    ("温", "温める／体を温める／温性／熱性／陽性／陽"),
+    ("冷", "冷やす／体を冷やす／涼性／寒性／陰性／陰"),
+    ("平", "平／どちらでもない／中庸"),
+    ("温（温活）", "温活向き／温活食材／温活におすすめ／温活に適している／温活に役立つ"),
+    ("冷（温活）", "温活で控えたい／温活中は避けたい／温活の妨げになる"),
+]
+
+# The cases §3 names where something that looks like a direction is not one.
+NOT_A_DIRECTION = [
+    ("「温活レシピ」「温活商品」など",
+     "食品をどっち側にも置いてへん。温活は活動の名前であって向きやない"),
+    ("「冷たい飲み物」など",
+     "出す温度の話で、食品そのものの性質やない（§3 が名指しで区別しとる）"),
+    ("自分の知識で補うこと",
+     "ページが言うてへん向きは書かん。「一般に生姜は温めるから」は根拠にせん"),
+]
 
 
 def fragment_link(url: str, quote: str) -> str:
@@ -141,16 +180,52 @@ def render(state: dict) -> str:
     notes = list(results["note"]) if len(results) else [""] * len(sample)
     done = sum(1 for v in verdicts if v)
 
+    vocab = "".join(f"<tr><td class=dir>{d}</td><td>{html.escape(words)}</td></tr>"
+                    for d, words in DIRECTION_VOCABULARY)
+    not_dir = "".join(f"<li><b>{html.escape(what)}</b> — {html.escape(why)}</li>"
+                      for what, why in NOT_A_DIRECTION)
+
     parts = [_HEAD, f"""
 <header>
   <h1>Axis A 人手監査（coding protocol §10）</h1>
-  <p class="lede">判定は5つから選ぶだけ。押した瞬間にファイルへ保存される。閉じても続きからやれる。</p>
+  <p class="lede">やることは2つ。<b>ページを読んで書き出す</b>のと、<b>台帳を元ページで確かめる</b>。
+     押した瞬間にファイルへ保存されるので、いつ閉じてもええ。</p>
+  <div class="map">
+    <div><span class="tag now">先にやる</span> <b>通読</b> ——
+         AIが<b>落とした</b>ものを探す。2ページ。</div>
+    <div><span class="tag later">通読のあと</span> <b>答え合わせ</b> ——
+         AIが<b>書いた</b>ことを確かめる。{len(sample)}件。</div>
+    <p class="mapwhy">この2つは逆のミスを測っとる。答え合わせでは<b>見落としは原理的に1件も出てこん</b>
+       （台帳に載っとるものしか見んから）。査読者が刺しとるのは見落としの方やから、通読が本丸にゃ。</p>
+  </div>
 </header>
 
+<details class="guide" open>
+  <summary>どの言葉が「温／冷」になるか（protocol §3・両方の作業で使う）</summary>
+  <table class="vocab">{vocab}</table>
+  <p class="sub">向きに<b>ならん</b>もの:</p>
+  <ul>{not_dir}</ul>
+  <p class="sub">2列の表（温めるもの｜冷やすもの）は、近くの文やなく<b>列の見出し</b>で決める。
+     生と加熱で分かれとったら<b>両方</b>書く。</p>
+</details>
+
 <section class="step {'done' if unlocked else 'open'}">
-  <h2><span class="n">1</span> 通読 —— {targets[0]} と {targets[1]} を頭から最後まで読む</h2>
-  <p class="why">これは <b>AIの見落とし</b>を測る唯一の手段。見落としは結論を「関係なし」側に寄せるので、
-     この論文で一番効く。<b>台帳を見ずに</b>やる必要があるから、下の作業2はこれが済むまで一部伏せてある。</p>
+  <h2><span class="tag now">先にやる</span> 通読 —— {targets[0]} と {targets[1]} を頭から最後まで読む</h2>
+  <p class="why">ページを最初から最後まで読んで、<b>温か冷かが付いとる食品を全部</b>書き出す。
+     <b>台帳は見んと</b>やる —— 見てもうたら「AIが挙げた分を確認する作業」になって、
+     見落としが永久に出てこんくなる。だから答え合わせ側はこれが済むまで一部伏せてある。</p>
+  <details class="guide">
+    <summary>何を書き出す？ 迷った時は？</summary>
+    <ul>
+      <li><b>クラス名も書く</b> —— 「葉物野菜」「香辛料」みたいな括りも、ページがそう言うてるなら1件。
+          食品名やないから飛ばす、はせんといて</li>
+      <li><b>食品名はページの表記のまま</b> —— 「しょうが」を「生姜」に直さんでええ。
+          表記が違うだけの分はうちが後で突き合わせる</li>
+      <li><b>根拠の文は任意</b>やけど、迷った時ほど入れといてほしい。判断はうちが引き取れる</li>
+      <li><b>迷ったら書く</b> —— 余分に書いた分は「台帳になし」として出てくるけど、それはうちが見て裁く。
+          逆に<b>書かんかったものは誰も気づけん</b></li>
+    </ul>
+  </details>
 """]
 
     for target in targets:
@@ -180,14 +255,29 @@ def render(state: dict) -> str:
             )
         parts.append("</ul></div>")
 
+    examples = "".join(
+        f'<tr><td><span class="v sample">{VERDICT_LABELS[v]}</span></td>'
+        f"<td>{html.escape(VERDICT_EXAMPLES[v][0])}</td>"
+        f'<td class="ex">{html.escape(VERDICT_EXAMPLES[v][1])}</td></tr>'
+        for v in VERDICTS)
+
     parts.append(f"""
 </section>
 
 <section class="step">
-  <h2><span class="n">2</span> 答え合わせ —— 台帳の {len(sample)} 件を元ページで確かめる
+  <h2><span class="tag later">通読のあと</span> 答え合わせ —— 台帳の {len(sample)} 件を元ページで確かめる
       <span class="count">{done} / {len(sample)} 判定済み</span></h2>
-  <p class="why">リンクを押すと <b>その文まで自動で飛んで光る</b>（Chrome推奨）。同じサイトの行はまとめてあるので、
-     開くページは8枚だけ。キーボード <kbd>1</kbd>〜<kbd>5</kbd> でも選べる。</p>
+  <p class="why">1行ずつ「このページ、ほんまにこの食品をこの向きで書いてる？」を見るだけ。
+     リンクを押すと <b>その文まで自動で飛んで光る</b>（Chrome推奨）。同じサイトの行はまとめてあるので、
+     開くページは8枚だけ。マウスを行に乗せて <kbd>1</kbd>〜<kbd>5</kbd> でも押せる。</p>
+  <details class="guide" open>
+    <summary>どれを選ぶ？（解答例つき）</summary>
+    <table class="ex"><tr><th>選ぶやつ</th><th>こういう時</th><th>例</th></tr>{examples}</table>
+    <p class="sub">★ <b>飛んだ先に引用文が見つからん</b>のは、それ自体は判定やない。
+       ページ内を探しても本当に無いのか、ページが書き換わったのかを見てから決めてにゃ。<br>
+       ★ 迷ったら<b>メモ欄</b>に一言だけ残しといて。後でうちが読む。</p>
+  </details>
+  <label class="filter"><input type="checkbox" id="hidejudged"> 判定済みを隠す</label>
 """)
 
     for source_id, group in sample.groupby("source_id", sort=False):
@@ -239,10 +329,30 @@ _HEAD = """<!doctype html><html lang="ja"><meta charset="utf-8">
  header{padding-top:32px} h1{font-size:22px;margin:0 0 4px}
  .lede{color:#555;margin:0 0 24px}
  .step{background:#fff;border:1px solid #e2e2dd;border-radius:10px;padding:20px 24px;margin:0 auto 24px}
- .step h2{font-size:17px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
- .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;
-    background:#1c1c1a;color:#fff;font-size:14px}
- .why{color:#555;font-size:14px;margin:0 0 18px}
+ .step h2{font-size:17px;margin:0 0 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+ .tag{font-size:12px;font-weight:600;padding:2px 9px;border-radius:20px;white-space:nowrap}
+ .tag.now{background:#1c1c1a;color:#fff}
+ .tag.later{background:#e8e8e2;color:#555}
+ .map{background:#fff;border:1px solid #e2e2dd;border-radius:10px;padding:14px 18px;margin-bottom:24px}
+ .map>div{display:flex;align-items:center;gap:10px;padding:4px 0;font-size:14px}
+ .mapwhy{color:#555;font-size:13px;margin:8px 0 0;padding-top:8px;border-top:1px solid #eee}
+ .guide{background:#fff;border:1px solid #e2e2dd;border-radius:10px;padding:0 18px;margin:0 auto 18px;
+        max-width:900px;font-size:14px}
+ .step .guide{margin:0 0 18px;max-width:none}
+ .guide summary{cursor:pointer;padding:12px 0;font-weight:600;font-size:14px}
+ .guide[open] summary{border-bottom:1px solid #eee;margin-bottom:12px}
+ .guide ul{margin:0 0 14px;padding-left:20px} .guide li{margin-bottom:5px;color:#333}
+ .guide .sub{color:#555;font-size:13px;margin:0 0 12px}
+ table.vocab,table.ex{border-collapse:collapse;width:100%;margin-bottom:12px;font-size:13.5px}
+ table.vocab td,table.ex td,table.ex th{border-bottom:1px solid #eee;padding:7px 10px;text-align:left;
+                                        vertical-align:top}
+ table.ex th{color:#777;font-weight:600;font-size:12.5px}
+ table.vocab td.dir{width:90px;font-weight:600;white-space:nowrap}
+ table.ex td.ex,td.ex{color:#555}
+ .v.sample{display:inline-block;border:1px solid #ccc;border-radius:6px;padding:3px 10px;
+           background:#fff;font-size:12.5px;white-space:nowrap}
+ .filter{display:block;color:#666;font-size:13px;margin-bottom:12px;cursor:pointer}
+ .why{color:#555;font-size:14px;margin:0 0 14px}
  .src{border-top:1px solid #eee;padding:16px 0}
  .src h3{font-size:15px;margin:0 0 10px;display:flex;align-items:center;gap:12px}
  .count{font-weight:400;color:#777;font-size:13px;margin-left:auto}
@@ -265,6 +375,7 @@ _HEAD = """<!doctype html><html lang="ja"><meta charset="utf-8">
  .readlist li{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px dashed #eee;font-size:14px}
  .readlist .q{color:#888;font-size:13px;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
  .locked{opacity:.55} .lock{color:#a33;font-size:14px;margin:0}
+ body.hide-judged .row.judged{display:none}
  kbd{background:#eee;border:1px solid #ccc;border-bottom-width:2px;border-radius:4px;padding:0 5px;font-size:12px}
  a{color:#0a58ca} footer{color:#777;font-size:13px;padding-bottom:40px}
 </style>
@@ -312,6 +423,11 @@ document.addEventListener('keydown', e => {
   if (!hovered || e.target.tagName === 'INPUT') return;
   const i = '12345'.indexOf(e.key);
   if (i >= 0) hovered.querySelectorAll('button.v')[i].click();
+});
+
+document.addEventListener('change', e => {
+  if (e.target.id !== 'hidejudged') return;
+  document.body.classList.toggle('hide-judged', e.target.checked);
 });
 
 function bumpCounts(){

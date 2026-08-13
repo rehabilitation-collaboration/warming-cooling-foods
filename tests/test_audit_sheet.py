@@ -61,6 +61,20 @@ class TestSaveVerdict:
 
     def test_the_five_it_accepts_are_the_ones_the_protocol_fixed(self):
         assert set(audit_sheet.VERDICT_LABELS) == set(VERDICTS)
+        assert set(audit_sheet.VERDICT_EXAMPLES) == set(VERDICTS)
+
+
+class TestTheGuideDoesNotInventRules:
+    def test_every_direction_word_shown_to_the_reader_is_in_the_protocol(self):
+        # The worksheet tells the reader which words carry a direction. Those
+        # words are §3's, and a term added here that §3 does not hold would be a
+        # rule invented at the point of measurement — by the tool, in front of
+        # the one human check the paper has.
+        protocol = (audit_sheet.DATA_DIR / "coding_protocol.md").read_text(
+            encoding="utf-8")
+        for _, words in audit_sheet.DIRECTION_VOCABULARY:
+            for term in words.split("／"):
+                assert term in protocol, f"{term!r} is not in the coding protocol"
 
 
 class TestReads:
