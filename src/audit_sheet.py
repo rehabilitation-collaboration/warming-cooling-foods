@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 import urllib.parse
 import webbrowser
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -224,6 +225,45 @@ def add_read(source_id: str, food_ja: str, direction: str, quote: str = "") -> N
         READS_CSV, index=False)
 
 
+# The separators these pages use between food names, in running text and in
+# lists. Splitting on them is what lets a whole "warming foods" list be pasted
+# in one go, which is how the sources are actually laid out.
+BULK_SEPARATORS = re.compile(r"[\n\r、，,・･/／|｜；;（）()［］\[\]【】〔〕「」『』]+")
+BULLET = re.compile(r"^(?:\d+[.)．、]|[-−—–●○◆■□★☆※])\s*")
+
+
+def split_foods(text: str) -> list[str]:
+    """Food names out of a pasted list.
+
+    Brackets separate rather than wrap, because that is how these lists are
+    written: 根菜類（にんじん、ごぼう） is the class and two of its members, and
+    the worked example records all three. Leaving the bracket in would produce
+    one row reading 根菜類（にんじん, which is nobody's food.
+
+    Order is kept and duplicates are not removed: a page that names a food twice
+    is a fact about the page, and silently collapsing it would be this tool
+    deciding something the reader did not.
+    """
+    names = []
+    for chunk in BULK_SEPARATORS.split(text or ""):
+        name = BULLET.sub("", chunk.strip()).strip("（）()「」『』【】 　").strip()
+        if name:
+            names.append(name)
+    return names
+
+
+def add_reads_bulk(source_id: str, text: str, direction: str) -> int:
+    """Append a whole pasted list at one direction, returning how many landed."""
+    names = split_foods(text)
+    if not names:
+        raise ValueError("nothing to add — paste some food names first")
+    reads = pd.read_csv(READS_CSV, dtype=str).fillna("")
+    added = pd.DataFrame([{"source_id": source_id, "food_ja": name,
+                           "direction": direction, "quote": ""} for name in names])
+    pd.concat([reads, added], ignore_index=True).to_csv(READS_CSV, index=False)
+    return len(names)
+
+
 def delete_read(index: int) -> None:
     reads = pd.read_csv(READS_CSV, dtype=str).fillna("")
     reads.drop(index=int(index)).to_csv(READS_CSV, index=False)
@@ -341,6 +381,23 @@ def render(state: dict) -> str:
       ページに <q>{ex_quote}</q> とあったら →
       食品名 <b>{ex_food}</b> ／ <b>{ex_dir}</b> ／ 根拠の文 <b>{ex_quote}</b>
       と入れて「追加」。下に1行たまる。</p>
+    <details class="bulk">
+      <summary>一覧をまとめて貼る（こっちの方が速い）</summary>
+      <p class="bulkwhy">こういうページは「体を温める食材：にんじん、ごぼう、しょうが…」と
+         <b>同じ向きの食品がまとめて並んどる</b>。その並びをそのままコピペして、向きを1つ選んで押すだけ。
+         読点・中黒・改行で勝手に切り分ける。根拠の文は後から要る分だけ足したらええ。</p>
+      <form class="bulkform" data-source="{html.escape(target)}">
+        <textarea name="text" rows="3" placeholder="にんじん、ごぼう、れんこん&#10;しょうが&#10;シナモン"></textarea>
+        <div class="bulkrow">
+          <select name="direction">
+            <option value="warm">ぜんぶ 温める</option>
+            <option value="cool">ぜんぶ 冷やす</option>
+            <option value="neutral">ぜんぶ どちらでもない（平）</option>
+          </select>
+          <button type="submit">まとめて追加</button>
+        </div>
+      </form>
+    </details>
     <ul class="readlist">""")
         for index, row in rows.iterrows():
             direction = DIRECTION_LABELS.get(row["direction"], row["direction"])
@@ -483,6 +540,13 @@ _HEAD = """<!doctype html><html lang="ja"><meta charset="utf-8">
  .formex q{color:#1c1c1a;font-style:normal}
  .exlabel{background:#e8e8e2;border-radius:4px;padding:1px 8px;font-size:12px;
           font-weight:600;color:#555;margin-right:6px}
+ .bulk{margin-bottom:12px;font-size:13px}
+ .bulk summary{cursor:pointer;color:#0a58ca;padding:4px 0}
+ .bulkwhy{color:#555;margin:6px 0 8px;font-size:13px}
+ .bulkform textarea{width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid #ddd;
+                    border-radius:6px;font:inherit;font-size:13.5px;line-height:1.8}
+ .bulkrow{display:flex;gap:8px;align-items:center;margin-top:8px}
+ .bulkrow select{padding:6px;border:1px solid #ddd;border-radius:6px;font:inherit}
  .readlist{list-style:none;padding:0;margin:0}
  .readlist li{display:flex;align-items:center;gap:10px;padding:5px 0;border-bottom:1px dashed #eee;font-size:14px}
  .readlist .q{color:#888;font-size:13px;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
@@ -513,10 +577,13 @@ document.addEventListener('click', async e => {
 });
 
 document.addEventListener('submit', async e => {
-  if (!e.target.classList.contains('readform')) return;
+  const f = e.target;
+  const bulk = f.classList.contains('bulkform');
+  if (!bulk && !f.classList.contains('readform')) return;
   e.preventDefault();
-  const f = e.target, data = Object.fromEntries(new FormData(f));
-  await post('/read', {source_id:f.dataset.source, ...data});
+  const data = Object.fromEntries(new FormData(f));
+  await post(bulk ? '/read-bulk' : '/read', {source_id:f.dataset.source, ...data})
+    .catch(msg => alert(msg));
   location.reload();
 });
 
@@ -579,6 +646,8 @@ class Handler(BaseHTTPRequestHandler):
             "/note": lambda p: save_note(p["row"], p["note"]),
             "/read": lambda p: add_read(p["source_id"], p.get("food_ja", ""),
                                         p.get("direction", "warm"), p.get("quote", "")),
+            "/read-bulk": lambda p: add_reads_bulk(p["source_id"], p.get("text", ""),
+                                                   p.get("direction", "warm")),
             "/read-delete": lambda p: delete_read(p["index"]),
         }
         if self.path not in actions:

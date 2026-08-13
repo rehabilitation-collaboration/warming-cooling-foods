@@ -12,11 +12,13 @@ import pytest
 from src import audit_sheet
 from src.audit_sheet import (
     add_read,
+    add_reads_bulk,
     delete_read,
     fragment_link,
     reads_complete,
     render,
     save_verdict,
+    split_foods,
 )
 from src.human_audit import VERDICTS
 
@@ -105,6 +107,31 @@ class TestReads:
     def test_a_blank_food_name_is_refused(self, sheets):
         with pytest.raises(ValueError, match="needs a food name"):
             add_read("basefood", "   ", "warm")
+
+    def test_a_pasted_list_is_split_the_way_these_pages_are_written(self):
+        # The sources lay foods out as lists, so the read is mostly transcription
+        # and pasting a list is the fast path. A class with its members in
+        # brackets becomes the class and the members, which is what the worked
+        # example records.
+        assert split_foods("にんじん、ごぼう、れんこん") == ["にんじん", "ごぼう", "れんこん"]
+        assert split_foods("根菜類（にんじん、ごぼう）") == ["根菜類", "にんじん", "ごぼう"]
+        assert split_foods("・しょうが\n・シナモン\n1. なつめ") == ["しょうが", "シナモン", "なつめ"]
+
+    def test_a_pasted_list_lands_at_one_direction(self, sheets):
+        assert add_reads_bulk("basefood", "しょうが、シナモン", "warm") == 2
+        rows = pd.read_csv(sheets["reads"])
+        assert list(rows["food_ja"]) == ["しょうが", "シナモン"]
+        assert set(rows["direction"]) == {"warm"}
+
+    def test_the_same_food_twice_is_kept_twice(self, sheets):
+        # A page naming a food in two places is a fact about the page. Collapsing
+        # it here would be the tool editing the read.
+        add_reads_bulk("basefood", "しょうが、しょうが", "warm")
+        assert len(pd.read_csv(sheets["reads"])) == 2
+
+    def test_pasting_nothing_is_refused(self, sheets):
+        with pytest.raises(ValueError, match="nothing to add"):
+            add_reads_bulk("basefood", "　\n・\n", "warm")
 
     def test_a_row_can_be_taken_back(self, sheets):
         add_read("basefood", "しょうが", "warm")
