@@ -36,7 +36,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 import pandas as pd
 
-from .definitions import DATA_DIR
+from .definitions import DATA_DIR, SOURCES_RAW_DIR
 from .human_audit import READS_CSV, RESULTS_CSV, SAMPLE_CSV, VERDICTS, completeness_sources
 from .claim_mapping import load_sources
 
@@ -161,6 +161,58 @@ def fragment_link(url: str, quote: str) -> str:
     if not text:
         return url
     return f"{url}#:~:text={urllib.parse.quote(text, safe='')}"
+
+
+CONTEXT_BEFORE = 130
+CONTEXT_AFTER = 170
+
+
+def frozen_context(source_id: str, quote: str, food_ja: str = "") -> str | None:
+    """The archived page around this quotation, as HTML, or None if not found.
+
+    Why the sheet shows this. The ledger's quotation is a candidate span, not a
+    sentence: 11,160 of the 18,730 candidates carry no thermal word on their own
+    line and take their direction from the heading above. So a row can read
+    「発汗や一時的な体温上昇を促し」 with the food名 on the line before it and the
+    heading two lines up, and judging it means reconstructing that by hand,
+    sixty times. The surrounding text answers it at a glance.
+
+    This is the page as fetched on 2026-08-03 — the text the coders were given.
+    The live page stays one click away, and it is the live page that decides
+    whether a claim is still locatable today.
+    """
+    path = SOURCES_RAW_DIR / f"{source_id}.txt"
+    if not (quote and path.exists()):
+        return None
+    text = path.read_text(encoding="utf-8")
+    found = text.find(quote)
+    if found < 0:
+        return None
+    start = max(0, found - CONTEXT_BEFORE)
+    end = min(len(text), found + len(quote) + CONTEXT_AFTER)
+    window = text[start:end]
+    q_start, q_end = found - start, found - start + len(quote)
+
+    # Mark the quotation, and the food name where it sits outside the quotation
+    # — which is the usual case, and the whole reason the row is hard to read.
+    spans = [(q_start, q_end, "mark")]
+    if food_ja:
+        offset = window.find(food_ja)
+        while offset >= 0:
+            if offset >= q_end or offset + len(food_ja) <= q_start:
+                spans.append((offset, offset + len(food_ja), "b"))
+            offset = window.find(food_ja, offset + 1)
+    spans.sort()
+
+    out, cursor = [], 0
+    for begin, stop, tag in spans:
+        if begin < cursor:
+            continue
+        out.append(html.escape(window[cursor:begin]))
+        out.append(f"<{tag}>{html.escape(window[begin:stop])}</{tag}>")
+        cursor = stop
+    out.append(html.escape(window[cursor:]))
+    return ("…" if start else "") + "".join(out) + ("…" if end < len(text) else "")
 
 
 def load_state() -> dict:
@@ -446,6 +498,12 @@ def render(state: dict) -> str:
         for i, row in group.iterrows():
             link = html.escape(fragment_link(row["url"], row["quote"]))
             direction = DIRECTION_LABELS.get(row["direction"], row["direction"])
+            around = frozen_context(row["source_id"], row["quote"], row["food_ja"])
+            context = (f'<details class="ctx" open><summary>取得時（2026-08-03）の'
+                       f'ページ本文</summary><pre>{around}</pre></details>'
+                       if around else
+                       '<p class="ctx none">取得時の本文に引用が見つからん。'
+                       '生ページで確かめて</p>')
             buttons = "".join(
                 f'<button class="v {"on" if verdicts[i] == verdict else ""}" '
                 f'data-row="{i}" data-verdict="{verdict}">{VERDICT_LABELS[verdict]}</button>'
@@ -457,6 +515,7 @@ def render(state: dict) -> str:
         <span class="dir">{direction}</span>
         <a href="{link}" target="_blank" rel="noreferrer">この文へ飛ぶ ↗</a></div>
       <blockquote>{html.escape(row["quote"])}</blockquote>
+      {context}
       <div class="verdicts">{buttons}</div>
       <input class="note" data-row="{i}" placeholder="メモ（任意）"
              value="{html.escape(notes[i])}">
@@ -526,6 +585,13 @@ _HEAD = """<!doctype html><html lang="ja"><meta charset="utf-8">
  .dir{background:#eee;border-radius:4px;padding:1px 7px;font-size:13px}
  blockquote{margin:8px 0;padding:8px 12px;background:#fff;border-left:3px solid #ddd;
             color:#333;font-size:14px}
+ .ctx{margin:0 0 10px;font-size:13px}
+ .ctx summary{cursor:pointer;color:#777;font-size:12px;padding:2px 0}
+ .ctx pre{background:#fbfbf6;border:1px solid #e6e6df;border-radius:8px;padding:10px 12px;
+          margin:6px 0 0;font:13px/1.85 "Hiragino Sans",sans-serif;white-space:pre-wrap}
+ .ctx mark{background:#ffe9a8;padding:1px 2px;border-radius:3px}
+ .ctx pre b{background:#dff0d8;padding:1px 3px;border-radius:3px}
+ .ctx.none{color:#a33;font-size:12.5px}
  .verdicts{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
  button{font:inherit;font-size:13px;padding:5px 12px;border:1px solid #ccc;background:#fff;
         border-radius:6px;cursor:pointer}

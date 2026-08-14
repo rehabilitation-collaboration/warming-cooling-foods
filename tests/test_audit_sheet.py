@@ -15,6 +15,7 @@ from src.audit_sheet import (
     add_reads_bulk,
     delete_read,
     fragment_link,
+    frozen_context,
     reads_complete,
     render,
     save_verdict,
@@ -46,6 +47,39 @@ class TestFragmentLink:
 
     def test_a_row_with_no_quotation_still_links_to_the_page(self):
         assert fragment_link("https://example.com/a", "") == "https://example.com/a"
+
+
+class TestFrozenContext:
+    def test_the_quotation_is_marked_and_the_food_shown_where_it_sits(self, tmp_path,
+                                                                      monkeypatch):
+        # The row that prompted this: the quotation is a fragment carrying no
+        # food name, and the name is on the line above it.
+        page = tmp_path / "demo.txt"
+        page.write_text("見出し\n唐辛子\n：カプサイシンは発汗を促し、巡りを高める\n次の項目",
+                        encoding="utf-8")
+        monkeypatch.setattr(audit_sheet, "SOURCES_RAW_DIR", tmp_path)
+        out = frozen_context("demo", "発汗を促し", "唐辛子")
+        assert "<mark>発汗を促し</mark>" in out
+        assert "<b>唐辛子</b>" in out
+        assert "見出し" in out
+
+    def test_a_quotation_that_is_not_in_the_archived_page_gives_nothing(self, tmp_path,
+                                                                       monkeypatch):
+        # Rather than a window that silently starts somewhere else. The sheet
+        # says so and sends the reader to the live page.
+        (tmp_path / "demo.txt").write_text("何か別の本文", encoding="utf-8")
+        monkeypatch.setattr(audit_sheet, "SOURCES_RAW_DIR", tmp_path)
+        assert frozen_context("demo", "ここには無い文", "唐辛子") is None
+        assert frozen_context("missing", "何か", "") is None
+
+    def test_every_sampled_row_can_be_shown_in_context(self):
+        # If this stops holding, the sheet quietly degrades to the old hunt for
+        # sixty quotations, and nothing else would report it.
+        sample = pd.read_csv(audit_sheet.SAMPLE_CSV, dtype=str).fillna("")
+        missing = [row["food_ja"] for _, row in sample.iterrows()
+                   if frozen_context(row["source_id"], row["quote"],
+                                     row["food_ja"]) is None]
+        assert missing == []
 
 
 class TestSaveVerdict:
