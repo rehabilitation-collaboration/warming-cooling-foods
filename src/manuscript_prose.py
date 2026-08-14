@@ -48,7 +48,7 @@ from .build_screening import exclusion_breakdown
 from .claim_directed import INCIDENTAL, attach, load_ledger
 from .definitions import PROJECT_ROOT
 from .evidence_mapping import CORE_MIN_SOURCES
-from .gap_models import presence_logit
+from .gap_models import cloglog_exact_offset, presence_logit
 from .human_audit import (
     READS_CSV as AUDIT_READS_CSV,
     RESULTS_CSV as AUDIT_RESULTS_CSV,
@@ -225,6 +225,30 @@ def _food(frame: pd.DataFrame, food: str, column: str) -> float:
     return float(row.iloc[0][column])
 
 
+DECLARED_UNPLANNED = re.compile(
+    r"(\w+) analyses are reported that were \*\*not\*\* in the fixed plan")
+
+
+def _declared_unplanned(text: str) -> float | None:
+    """How many unplanned analyses the Methods declares.
+
+    The pipeline cannot compute this one: it counts choices the analysis plan
+    did not fix, not anything in the data. So the Methods sentence is read as
+    the source and every other statement of the count is checked against it.
+    That is the failure that actually occurred — the count moved to seventeen
+    when the complementary log-log pair was added, and the Limitations sentence
+    kept the old word through a full review round. A wrong number here is still
+    wrong everywhere; what this forecloses is the three places disagreeing.
+
+    None when the declaration is absent, which the facts report as unchecked
+    rather than as agreement. Losing it from the real manuscript is caught by
+    ``unplanned_declaration``'s locator, so raising here would add no guarantee
+    while breaking every caller that checks a fragment of the text.
+    """
+    match = DECLARED_UNPLANNED.search(text)
+    return None if match is None else word_value(match.group(1))
+
+
 def context(text: str, inputs: dict) -> dict:
     """Everything the facts below compute against, built once.
 
@@ -264,6 +288,8 @@ def context(text: str, inputs: dict) -> dict:
         "whole_food": l2_screened(ledger, exclude_sublabels=("constituent", "review")),
         "claim_directed": claim_directed,
         "alt_l1": None if alt is None else alt.set_index("food_key"),
+        "cloglog_exact": cloglog_exact_offset(frame),
+        "unplanned_declared": _declared_unplanned(text),
     }
     # The §8 refit is the one expensive quantity here and several facts read it,
     # so it is fitted once rather than once per capture group.
@@ -697,6 +723,43 @@ FACTS: tuple[Fact, ...] = (
         ],
         tol=0.05,
     ),
+    # ---- what L1 spans, and what the exactly-derived offset would cost -------
+    Fact(
+        "l1_range",
+        rf"compresses a range running from {QUANTITY} foods holding no records at all "
+        rf"to salt's {QUANTITY} \(hojicha has {QUANTITY}, milk {QUANTITY}\)",
+        lambda c: [float((c["frame"]["l1"] == 0).sum()),
+                   _food(c["frame"], "salt", "l1"),
+                   _food(c["frame"], "hojicha", "l1"),
+                   _food(c["frame"], "milk", "l1")],
+    ),
+    Fact(
+        "cloglog_exact_offset",
+        rf"because the {QUANTITY} foods holding no records at all have no log L1 to "
+        rf"carry; taking the derivation's exact form means dropping those {QUANTITY} "
+        rf"and fitting the check on a different set of foods from the primary model's, "
+        rf"which leaves coverage at HR {QUANTITY} \({QUANTITY}[–-]{QUANTITY}\) and "
+        rf"still rejects the offset \(likelihood ratio {QUANTITY} on 1 df, "
+        rf"p = {QUANTITY}\)",
+        lambda c: [c["cloglog_exact"]["n_dropped"],
+                   c["cloglog_exact"]["n_dropped"],
+                   c["cloglog_exact"]["offset"]["hr"],
+                   c["cloglog_exact"]["offset"]["hr_lo"],
+                   c["cloglog_exact"]["offset"]["hr_hi"],
+                   c["cloglog_exact"]["lr"]["stat"],
+                   c["cloglog_exact"]["lr"]["p"]],
+    ),
+    # ---- the count of unplanned analyses, which the paper states three times --
+    Fact(
+        "unplanned_table3",
+        rf"{QUANTITY} analyses were computed outside the fixed plan",
+        lambda c: [c["unplanned_declared"]],
+    ),
+    Fact(
+        "unplanned_limitations",
+        rf"and {QUANTITY} reported analyses were computed outside it",
+        lambda c: [c["unplanned_declared"]],
+    ),
 )
 
 # Sentences whose numbers the pipeline cannot regenerate. Located but not
@@ -721,6 +784,13 @@ OUT_OF_SCOPE: tuple[Fact, ...] = (
         r"from (\d+\.\d)% to (\d+\.\d)%",
         why="the before-values belong to the four-term query, which the pipeline no "
             "longer runs",
+    ),
+    Fact(
+        "unplanned_declaration",
+        rf"{QUANTITY} analyses are reported that were \*\*not\*\* in the fixed plan",
+        why="a count of choices the analysis plan did not fix, which is not a "
+            "quantity in the data; this sentence is the source, and the paper's two "
+            "other statements of the count are checked against it",
     ),
 )
 

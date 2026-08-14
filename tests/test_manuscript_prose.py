@@ -143,7 +143,10 @@ class TestCatchesWhatGotThrough:
     a digit the pipeline held as a different quantity, the second a number
     written as a word and therefore never tokenised at all, the third a derived
     interval left at the value its old inputs produced — the clue that exposed
-    seven stale numbers in an earlier revision.
+    seven stale numbers in an earlier revision. The fourth reached an external
+    reviewer: the count of unplanned analyses moved to seventeen and one of the
+    three sentences stating it kept the old word. The fifth is the confusion the
+    fourth invites, the exact-offset estimate written as the reported one.
     """
 
     MUTATIONS = [
@@ -153,6 +156,10 @@ class TestCatchesWhatGotThrough:
          "carrot at all eight Tier-1 sources"),
         ("an odds ratio from 0.35 to 7.62",
          "an odds ratio from 0.35 to 8.21"),
+        ("and seventeen reported analyses were computed outside it",
+         "and fifteen reported analyses were computed outside it"),
+        ("coverage at HR 1.035 (0.892–1.202)",
+         "coverage at HR 1.036 (0.892–1.202)"),
     ]
 
     @pytest.mark.parametrize("original,stale", MUTATIONS)
