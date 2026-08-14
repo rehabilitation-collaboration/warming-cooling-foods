@@ -352,3 +352,50 @@ def test_the_real_frame_rejects_the_proportional_offset():
     # Both fits leave coverage where the primary logistic leaves it: null.
     for side in ("offset", "free"):
         assert out[side]["hr_lo"] < 1.0 < out[side]["hr_hi"]
+
+
+def _frame_with_zero_l1(n_zeros: int = 4) -> pd.DataFrame:
+    """The synthetic frame, plus the case log(L1) cannot take: foods at L1 = 0."""
+    frame = _cloglog_frame(gamma=1.0)
+    frame["l1"] = np.expm1(frame["log_l1"])
+    frame.loc[frame.index[:n_zeros], ["l1", "log_l1"]] = 0.0
+    return frame
+
+
+def test_the_exact_offset_fits_only_the_foods_where_log_l1_exists():
+    # Review proposed log(L1), which the derivation does state exactly — but it
+    # is undefined wherever L1 is 0. The exact form is therefore available on a
+    # different set of foods than the one the paper reports on, and that is the
+    # cost the manuscript states rather than assumes.
+    frame = _frame_with_zero_l1(n_zeros=4)
+    out = gm.cloglog_exact_offset(frame)
+    assert out["n_dropped"] == 4
+    assert out["n"] == len(frame) - 4
+    assert out["converged"]
+
+
+def test_taking_log_l1_without_dropping_those_foods_does_not_fit():
+    # What following the review comment literally would produce. Without this the
+    # manuscript's stated reason for keeping log(L1 + 1) would rest on a claim
+    # nothing here checks.
+    frame = _frame_with_zero_l1(n_zeros=4)
+    frame["log_l1"] = np.log(frame["l1"].astype(float))
+    assert gm.presence_cloglog_opportunity(frame)["converged"] is False
+
+
+def test_the_real_frame_holds_foods_the_exact_offset_cannot_take():
+    # Pins the reason the manuscript gives. If PubMed counts ever move every food
+    # off zero, this fails and the sentence saying three foods hold no records
+    # gets reread rather than going quietly stale.
+    from src.analysis import _read_counts, prepare_scatter_data
+    from src.claim_mapping import load_claims, load_sources
+
+    frame = gm.prepare_model_frame(
+        prepare_scatter_data(load_claims(), load_sources(), _read_counts())
+    )
+    out = gm.cloglog_exact_offset(frame)
+    assert out["n_dropped"] == 3
+    assert out["converged"]
+    # Dropping them changes neither verdict, which is why they are kept instead.
+    assert out["lr"]["rejects_offset"] is True
+    assert out["offset"]["hr_lo"] < 1.0 < out["offset"]["hr_hi"]

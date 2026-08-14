@@ -36,6 +36,7 @@ from .claim_mapping import load_claims, load_sources
 from .definitions import COOL, TIER_INDIVIDUAL, TIER_ORG, WARM
 from .evidence_mapping import CORE_MIN_SOURCES
 from .gap_models import (
+    cloglog_exact_offset,
     count_negbin,
     presence_cloglog_opportunity,
     leave_one_food_out,
@@ -167,6 +168,19 @@ def main() -> None:
               f"   — the offset asserts 1; inside the interval: {lr['offset_in_ci']}")
         print(f"    LR test of that assertion: {lr['stat']:.3f} on {lr['df']} df, "
               f"p={lr['p']:.5f} -> offset rejected: {lr['rejects_offset']}")
+        # The derivation puts log(L1) in the offset exactly. It is undefined for
+        # the foods at L1 = 0, so the exact form costs a different set of foods.
+        exact = cloglog_exact_offset(frame)
+        print(f"    exact offset log(L1): undefined for {exact['n_dropped']} foods at "
+              f"L1=0, so fitted on n={exact['n']} rather than {cll['n']}")
+        if exact["converged"]:
+            eo, elr = exact["offset"], exact["lr"]
+            print(f"      with offset   n_sources HR={eo['hr']:.3f} "
+                  f"[{eo['hr_lo']:.3f}, {eo['hr_hi']:.3f}]  p={eo['p']:.4f}")
+            print(f"      LR test: {elr['stat']:.3f} on {elr['df']} df, p={elr['p']:.5f} "
+                  f"-> offset rejected: {elr['rejects_offset']}")
+        else:
+            print(f"      DID NOT CONVERGE — {exact.get('error')}")
     else:
         print(f"[cloglog] DID NOT CONVERGE — {cll.get('error')}")
     print(RULE)

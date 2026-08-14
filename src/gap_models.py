@@ -344,8 +344,12 @@ def presence_cloglog_opportunity(frame: pd.DataFrame) -> dict:
     is "did at least one of this food's records turn out to be an on-construct
     study", and if each record were an independent opportunity with rate lambda
     then P(Y = 1) = 1 - exp(-L1 * lambda), which is exactly a complementary
-    log-log link carrying log(L1) as an offset. Where the primary logistic lets
-    the data choose how log(L1 + 1) enters, this asserts the mechanism.
+    log-log link carrying log L1 as an offset. The offset actually carried is
+    log(L1 + 1), because three foods in this frame hold no records at all and
+    log L1 is undefined for them; ``cloglog_exact_offset`` fits the derivation's
+    exact form on the foods where it is defined, so the cost of that substitution
+    can be read rather than assumed. Where the primary logistic lets the data
+    choose how log(L1 + 1) enters, this asserts the mechanism.
 
     The assertion is testable, because the offset is the constraint that L1's
     coefficient equals 1. So the fit is returned three ways — with the offset,
@@ -402,3 +406,24 @@ def presence_cloglog_opportunity(frame: pd.DataFrame) -> dict:
             "rejects_offset": bool(p_lr < 0.05),
         },
     }
+
+
+def cloglog_exact_offset(frame: pd.DataFrame) -> dict:
+    """The offset the derivation states exactly, on the foods where it exists.
+
+    Review proposed log(L1) in place of log(L1 + 1), because 1 - exp(-L1 * rate)
+    puts log L1 in the offset exactly, and on the ground that every analysed food
+    has L1 > 0. The first is right and the second is not: three foods in this
+    frame hold no records at all, so log L1 is undefined for them and the exact
+    form is available only on the rest. Fitting it there is not a substitute for
+    the reported model — it is a different set of foods — but it is what makes
+    the cost of the substitution readable rather than asserted.
+
+    Returns the same shape as ``presence_cloglog_opportunity`` plus
+    ``n_dropped``, the count of foods the exact form cannot take.
+    """
+    usable = frame[frame["l1"] > 0].copy()
+    usable["log_l1"] = np.log(usable["l1"].astype(float))
+    out = presence_cloglog_opportunity(usable)
+    out["n_dropped"] = int(len(frame) - len(usable))
+    return out
