@@ -13,6 +13,7 @@ from src import audit_sheet
 from src.audit_sheet import (
     add_read,
     add_reads_bulk,
+    clear_verdict,
     delete_read,
     fragment_link,
     frozen_context,
@@ -93,6 +94,14 @@ class TestSaveVerdict:
         # sixth value would change the instrument without anyone deciding to.
         with pytest.raises(ValueError, match="unknown verdict"):
             save_verdict(0, bad)
+        assert pd.read_csv(sheets["results"], dtype=str).fillna("")["verdict"][0] == ""
+
+    def test_a_row_can_be_put_back_to_unjudged(self, sheets):
+        # A misclick was otherwise final, and a hard row could not be left for
+        # later. Clearing is its own path rather than a sixth accepted value:
+        # an empty cell is the absence of a reading, not a reading.
+        save_verdict(0, "unlocatable")
+        clear_verdict(0)
         assert pd.read_csv(sheets["results"], dtype=str).fillna("")["verdict"][0] == ""
 
     def test_the_five_it_accepts_are_the_ones_the_protocol_fixed(self):

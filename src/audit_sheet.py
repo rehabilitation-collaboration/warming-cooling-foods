@@ -259,6 +259,20 @@ def save_verdict(row: int, verdict: str) -> None:
     results.to_csv(RESULTS_CSV, index=False)
 
 
+def clear_verdict(row: int) -> None:
+    """Put a row back to unjudged.
+
+    Separate from ``save_verdict`` rather than a sixth accepted value: the five
+    are the instrument and an empty cell is the absence of a reading, not a
+    reading. A reader who clicked the wrong button, or who wants to come back to
+    a hard row, needs the absence to be reachable — otherwise the first click
+    on a row is final, which is a worse instrument than a slow one.
+    """
+    results = pd.read_csv(RESULTS_CSV, dtype=str).fillna("")
+    results.loc[int(row), "verdict"] = ""
+    results.to_csv(RESULTS_CSV, index=False)
+
+
 def save_note(row: int, note: str) -> None:
     results = pd.read_csv(RESULTS_CSV, dtype=str).fillna("")
     results.loc[int(row), "note"] = note
@@ -473,6 +487,7 @@ def render(state: dict) -> str:
   <h2><span class="tag later">通読のあと</span> 答え合わせ —— 台帳の {len(sample)} 件を元ページで確かめる
       <span class="count">{done} / {len(sample)} 判定済み</span></h2>
   <p class="why">1行ずつ「このページ、ほんまにこの食品をこの向きで書いてる？」を見るだけ。
+     <b>選んだボタンをもう一回押したら未判定に戻る</b>（押し間違い・保留はこれで）。
      リンクを押すと <b>その文まで自動で飛んで光る</b>（Chrome推奨）。同じサイトの行はまとめてあるので、
      開くページは8枚だけ。マウスを行に乗せて <kbd>1</kbd>〜<kbd>5</kbd> でも押せる。</p>
   <details class="guide" open>
@@ -631,10 +646,14 @@ const post = (path, body) => fetch(path, {method:'POST', body:JSON.stringify(bod
 document.addEventListener('click', async e => {
   const v = e.target.closest('button.v');
   if (v) {
-    await post('/verdict', {row:+v.dataset.row, verdict:v.dataset.verdict});
-    const box = v.closest('.row');
+    const box = v.closest('.row'), off = v.classList.contains('on');
+    // Clicking the chosen one again takes the row back to unjudged, so a
+    // misclick is recoverable and a hard row can be left for later.
+    await post(off ? '/verdict-clear' : '/verdict',
+               {row:+v.dataset.row, verdict:v.dataset.verdict});
     box.querySelectorAll('button.v').forEach(b => b.classList.remove('on'));
-    v.classList.add('on'); box.classList.add('judged');
+    box.classList.toggle('judged', !off);
+    if (!off) v.classList.add('on');
     bumpCounts();
     return;
   }
@@ -709,6 +728,7 @@ class Handler(BaseHTTPRequestHandler):
         payload = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         actions = {
             "/verdict": lambda p: save_verdict(p["row"], p["verdict"]),
+            "/verdict-clear": lambda p: clear_verdict(p["row"]),
             "/note": lambda p: save_note(p["row"], p["note"]),
             "/read": lambda p: add_read(p["source_id"], p.get("food_ja", ""),
                                         p.get("direction", "warm"), p.get("quote", "")),

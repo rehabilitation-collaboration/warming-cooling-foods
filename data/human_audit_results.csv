@@ -1,8 +1,8 @@
 source_id,food_en,food_ja,direction,verdict,note
-basefood,chicken,鶏肉,warm,,
-basefood,chili pepper,唐辛子,warm,,
-basefood,cocoa,ココア,warm,,
-basefood,vegetables,野菜,warm,,
+basefood,chicken,鶏肉,warm,supported,
+basefood,chili pepper,唐辛子,warm,supported,
+basefood,cocoa,ココア,warm,supported,
+basefood,vegetables,野菜,warm,unlocatable,冬が旬の野菜であって野菜全部ではない
 esse,banana,バナナ,cool,,
 esse,carrot,ニンジン,warm,,
 esse,kiwi,キウイ,cool,,
