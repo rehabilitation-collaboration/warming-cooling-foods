@@ -37,6 +37,7 @@ from .definitions import COOL, TIER_INDIVIDUAL, TIER_ORG, WARM
 from .evidence_mapping import CORE_MIN_SOURCES
 from .gap_models import (
     count_negbin,
+    presence_cloglog_opportunity,
     leave_one_food_out,
     predictor_vif,
     prepare_model_frame,
@@ -151,6 +152,23 @@ def main() -> None:
         # zero-inflated model this data cannot identify (PLAN Phase RB-5).
         print(f"[NB] DID NOT CONVERGE — {nb.get('error')}")
         print("     Reported as such; the primary logistic model stands alone.")
+    print(THIN)
+
+    # --- SENSITIVITY: cloglog with log(L1+1) as exposure -------------------
+    cll = presence_cloglog_opportunity(frame)
+    if cll["converged"]:
+        o, fr, l1, lr = cll["offset"], cll["free"], cll["l1_free"], cll["lr"]
+        print("[cloglog] volume as opportunity: P(any study) = 1 - exp(-L1 * rate)")
+        print(f"    with offset   n_sources HR={o['hr']:.3f} "
+              f"[{o['hr_lo']:.3f}, {o['hr_hi']:.3f}]  p={o['p']:.4f}   llf={o['llf']:.2f}")
+        print(f"    L1 term free  n_sources HR={fr['hr']:.3f} "
+              f"[{fr['hr_lo']:.3f}, {fr['hr_hi']:.3f}]  p={fr['p']:.4f}   llf={fr['llf']:.2f}")
+        print(f"    log(L1+1) beta={l1['beta']:.3f} [{l1['ci_lo']:.3f}, {l1['ci_hi']:.3f}]"
+              f"   — the offset asserts 1; inside the interval: {lr['offset_in_ci']}")
+        print(f"    LR test of that assertion: {lr['stat']:.3f} on {lr['df']} df, "
+              f"p={lr['p']:.5f} -> offset rejected: {lr['rejects_offset']}")
+    else:
+        print(f"[cloglog] DID NOT CONVERGE — {cll.get('error')}")
     print(RULE)
 
     # --- Descriptive: zero-research rates ---------------------------------

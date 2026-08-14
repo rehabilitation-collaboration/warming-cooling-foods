@@ -335,3 +335,70 @@ def count_negbin(frame: pd.DataFrame) -> dict:
             for name in X.columns
         },
     }
+
+
+def presence_cloglog_opportunity(frame: pd.DataFrame) -> dict:
+    """SENSITIVITY: complementary log-log with literature volume as exposure.
+
+    External review proposed this form, and the reasoning is sound: the outcome
+    is "did at least one of this food's records turn out to be an on-construct
+    study", and if each record were an independent opportunity with rate lambda
+    then P(Y = 1) = 1 - exp(-L1 * lambda), which is exactly a complementary
+    log-log link carrying log(L1) as an offset. Where the primary logistic lets
+    the data choose how log(L1 + 1) enters, this asserts the mechanism.
+
+    The assertion is testable, because the offset is the constraint that L1's
+    coefficient equals 1. So the fit is returned three ways — with the offset,
+    with log(L1 + 1) free, and the likelihood-ratio test between them — since
+    reporting only the offset version would impose a proportionality the reader
+    cannot check and, on this frame, would not accept. Both fits carry the same
+    ``n_sources`` term, so the coverage estimate can be read either way.
+    """
+    import statsmodels.api as sm
+    from scipy import stats as sps
+
+    y = frame["has_study"].astype(float)
+    breadth = sm.add_constant(frame[["n_sources"]].astype(float), has_constant="add")
+    both = sm.add_constant(
+        frame[["n_sources", "log_l1"]].astype(float), has_constant="add"
+    )
+    cloglog = sm.families.Binomial(link=sm.families.links.CLogLog())
+
+    try:
+        offset_fit = sm.GLM(y, breadth, family=cloglog, offset=frame["log_l1"].to_numpy()).fit()
+        free_fit = sm.GLM(y, both, family=cloglog).fit()
+    except Exception as exc:  # separation / singular design
+        return {"converged": False, "error": f"{type(exc).__name__}: {exc}"}
+
+    def _term(fit, name):
+        ci = fit.conf_int()
+        return {
+            "beta": float(fit.params[name]),
+            "hr": float(np.exp(fit.params[name])),
+            "hr_lo": float(np.exp(ci.loc[name, 0])),
+            "hr_hi": float(np.exp(ci.loc[name, 1])),
+            "ci_lo": float(ci.loc[name, 0]),
+            "ci_hi": float(ci.loc[name, 1]),
+            "p": float(fit.pvalues[name]),
+        }
+
+    lr = float(2 * (free_fit.llf - offset_fit.llf))
+    p_lr = float(sps.chi2.sf(lr, df=1))
+    l1 = _term(free_fit, "log_l1")
+    return {
+        "converged": bool(offset_fit.converged and free_fit.converged),
+        "n": int(len(frame)),
+        "n_with_study": int(y.sum()),
+        "offset": {**_term(offset_fit, "n_sources"), "llf": float(offset_fit.llf)},
+        "free": {**_term(free_fit, "n_sources"), "llf": float(free_fit.llf)},
+        "l1_free": l1,
+        "lr": {
+            "stat": lr,
+            "df": 1,
+            "p": p_lr,
+            # The offset says this coefficient is 1. The interval is the readable
+            # form of the same question the LR test answers.
+            "offset_in_ci": bool(l1["ci_lo"] <= 1.0 <= l1["ci_hi"]),
+            "rejects_offset": bool(p_lr < 0.05),
+        },
+    }

@@ -286,3 +286,69 @@ def test_l1_forms_leave_the_breadth_estimate_alone_when_it_does_not_bend():
     assert out["quadratic"]["curvature_p"] > 0.05
     for spec in ("quadratic", "spline"):
         assert abs(np.log(out[spec]["or"] / linear)) < 0.05
+
+
+def _cloglog_frame(gamma: float, n: int = 600, seed: int = 11) -> pd.DataFrame:
+    """Foods whose chance of holding a study follows 1 - exp(-exp(g*log(L1+1))).
+
+    ``gamma`` is what the offset asserts to be 1: at 1.0 the offset is the true
+    model, away from 1.0 it is false and the test has something to detect.
+    """
+    rng = np.random.default_rng(seed)
+    l1 = rng.integers(1, 5000, n).astype(float)
+    log_l1 = np.log(l1 + 1.0)
+    eta = -5.0 + gamma * log_l1
+    y = (rng.random(n) < (1.0 - np.exp(-np.exp(eta)))).astype(float)
+    return pd.DataFrame(
+        {"n_sources": rng.integers(1, 10, n).astype(float), "log_l1": log_l1, "has_study": y}
+    )
+
+
+def test_cloglog_keeps_the_offset_when_volume_really_is_proportional():
+    out = gm.presence_cloglog_opportunity(_cloglog_frame(gamma=1.0))
+    assert out["converged"]
+    assert out["lr"]["rejects_offset"] is False
+    assert out["lr"]["offset_in_ci"] is True
+
+
+def test_cloglog_rejects_the_offset_when_volume_is_not_proportional():
+    # Without this the paired fit would be decoration: a test that cannot fire
+    # is not evidence that the constraint holds.
+    out = gm.presence_cloglog_opportunity(_cloglog_frame(gamma=0.5))
+    assert out["lr"]["rejects_offset"] is True
+    assert out["lr"]["offset_in_ci"] is False
+    assert out["l1_free"]["ci_hi"] < 1.0
+
+
+def test_cloglog_lr_is_the_gap_between_the_two_fits():
+    out = gm.presence_cloglog_opportunity(_cloglog_frame(gamma=0.7))
+    expected = 2 * (out["free"]["llf"] - out["offset"]["llf"])
+    assert out["lr"]["stat"] == pytest.approx(expected)
+    assert out["lr"]["df"] == 1
+
+
+def test_cloglog_reports_the_same_coverage_term_from_both_fits():
+    # The paper reads the coverage estimate off this model, so both fits have to
+    # carry it — otherwise dropping the offset would change the question.
+    out = gm.presence_cloglog_opportunity(_cloglog_frame(gamma=1.0))
+    for side in ("offset", "free"):
+        assert {"hr", "hr_lo", "hr_hi", "p"} <= set(out[side])
+
+
+def test_the_real_frame_rejects_the_proportional_offset():
+    # Pins what the manuscript says about the reviewer's proposed model: it fits
+    # and it agrees on coverage, but the proportionality it assumes is not one
+    # this frame supports, so the offset version is not reported on its own.
+    from src.analysis import _read_counts, prepare_scatter_data
+    from src.claim_mapping import load_claims, load_sources
+
+    frame = gm.prepare_model_frame(
+        prepare_scatter_data(load_claims(), load_sources(), _read_counts())
+    )
+    out = gm.presence_cloglog_opportunity(frame)
+    assert out["converged"]
+    assert out["lr"]["rejects_offset"] is True
+    assert out["l1_free"]["ci_hi"] < 1.0
+    # Both fits leave coverage where the primary logistic leaves it: null.
+    for side in ("offset", "free"):
+        assert out[side]["hr_lo"] < 1.0 < out[side]["hr_hi"]
