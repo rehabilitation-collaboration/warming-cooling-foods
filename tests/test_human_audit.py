@@ -112,3 +112,61 @@ def test_a_surface_form_mismatch_counts_as_missed():
     out = ha.score_completeness(reads, ROWS)["a"]
     assert out["missed_by_ledger"] == ["食０"]  # full-width zero, not 食0
     assert out["recall"] == 0.0
+
+
+READS = pd.DataFrame({
+    "source_id": ["a"] * 5,
+    "food_ja": ["食0", "食1", "ネギ", "冷たい飲み物", "おでん"],
+    "direction": ["warm"] * 5,
+    "quote": [""] * 5,
+})
+
+
+def _with_rulings(monkeypatch, tmp_path, rows):
+    path = tmp_path / "rulings.csv"
+    pd.DataFrame(rows, columns=["source_id", "read_as", "ruling",
+                                "ledger_form", "rationale"]).to_csv(path, index=False)
+    monkeypatch.setattr(ha, "RULINGS_CSV", path)
+
+
+def test_both_figures_are_reported_because_one_alone_would_be_a_choice(
+        monkeypatch, tmp_path):
+    # As specified, every unmatched name is missed. After adjudication a name
+    # the ledger holds elsewhere joins the numerator and one it was right to
+    # omit leaves the denominator. Reporting only the second would be picking
+    # the number after seeing it, so the scorer returns both.
+    _with_rulings(monkeypatch, tmp_path, [
+        ("a", "ネギ", "same-food", "食2", ""),
+        ("a", "冷たい飲み物", "serving-temperature", "", ""),
+        ("a", "おでん", "missed", "", ""),
+    ])
+    out = ha.score_completeness(READS, ROWS)["a"]
+    assert out["recall"] == pytest.approx(2 / 5)          # 食0, 食1 only
+    assert out["adjudicated_recall"] == pytest.approx(3 / 4)
+    assert out["adjudicated_n"] == 4
+    assert out["misses"] == ["おでん"]
+    assert out["unresolved"] == []
+
+
+def test_a_name_with_no_ruling_is_reported_rather_than_absorbed(
+        monkeypatch, tmp_path):
+    # The one thing that would let the adjudicated figure mean less than it
+    # says: a name quietly dropped from the denominator without a ruling.
+    _with_rulings(monkeypatch, tmp_path, [("a", "ネギ", "same-food", "食2", "")])
+    out = ha.score_completeness(READS, ROWS)["a"]
+    assert out["unresolved"] == ["おでん", "冷たい飲み物"]
+    assert out["adjudicated_n"] == 5
+
+
+def test_an_unknown_ruling_word_is_a_hard_error(monkeypatch, tmp_path):
+    _with_rulings(monkeypatch, tmp_path, [("a", "ネギ", "たぶん同じ", "", "")])
+    with pytest.raises(ValueError, match="unknown ruling"):
+        ha.load_audit_rulings()
+
+
+def test_the_filed_rulings_resolve_every_name_the_reader_wrote():
+    # Against the real audit: if a name goes unruled the printed figure is not
+    # the one the rationales support.
+    reads = pd.read_csv(ha.READS_CSV, dtype=str).fillna("")
+    for source, scored in ha.score_completeness(reads, ha.tier1_claims()).items():
+        assert scored["unresolved"] == [], source

@@ -1,0 +1,32 @@
+source_id,read_as,ruling,ledger_form,rationale
+basefood,おでん,missed,,「コンビニで買える温活メニューは、豚汁やおでんなどがおすすめ」。同じ並びの豚汁は台帳にある
+basefood,発酵茶,missed,,「紅茶やウーロン茶のような発酵茶は体を温めやすい性質があります」。§3 の直球で、クラスが主語
+basefood,精製された白い食品,missed,,「温活を妨げやすいNG習慣」節のクラス。下位の白砂糖のみ台帳にある
+basefood,カツオなど,same-food,カツオ,貼り付け時に列挙の「など」が残った表記差
+basefood,豚肉など,same-food,豚肉,同上
+basefood,肉類,same-food,肉,
+basefood,魚類,same-food,魚,
+basefood,根菜類,same-food,根菜,
+basefood,ネギ,same-food,ねぎ,カタカナ／ひらがなの差
+basefood,スパイス,same-food,香辛料,同一クラスの別称。台帳は香辛料と薬味の双方を持つ
+basefood,ホットココア,same-food,ココア,同一の飲料
+basefood,冬が旬の野菜,broader-label,野菜,attribution は台帳にあるが「野菜」と広く記録されている。人手監査の precision 側で wrong-food として計上済み
+basefood,冬が旬のもの,broader-label,野菜,同上
+basefood,冷たい飲食物,serving-temperature,,§3: 出す温度であって食品の性質ではない
+basefood,氷入りの飲み物,serving-temperature,,同上
+basefood,冷やしうどん,serving-temperature,,原文が「料理の温度とたんぱく質の確保を意識する」と自ら温度の話と述べている
+basefood,温かいうどん,serving-temperature,,同上
+basefood,刺身,serving-temperature,,同上（冷たい料理と温かい料理の対比）
+basefood,焼き魚,serving-temperature,,同上
+basefood,煮魚,serving-temperature,,同上
+basefood,白湯,serving-temperature,,「温かい状態で胃腸へ入ると…一時的に体温が上がる」＝出す温度
+basefood,生姜湯,prior-ruling,,§9.5 が記録する §8 kracie 裁定（白湯・生姜湯は調理済み飲料として除外）を踏襲。★同一文の5件中4件は include されており、この1件だけ分岐する
+basefood,ゆで卵,no-direction,,述語は「調理の手間が少なく、毎食に取り入れやすい」で方向ではない
+basefood,冷奴,no-direction,,同上（同一文）
+basefood,玄米のおにぎり,no-direction,,§9.5 の vehicle 規則。温めているのは鮭のたんぱく質と玄米のビタミンB群
+basefood,おにぎりは鮭を具として使っているもの,not-a-food,,"文の断片。§2 の coding unit は (food, source) の対"
+basefood,スパイスの効いた料理,not-a-food,,「料理」は §9 rule 4 が挙げる総称
+basefood,スパイスを組みあわせた食事,not-a-food,,「食事」は同上
+macaroni,ゴーヤ,not-in-page,,原文に無い（ゴーヤー／にがうり／ニガウリ／苦瓜も総当たりで0件）。読み手の転記由来
+macaroni,チョコレート,no-direction,,「チョコレートに多く含まれる白砂糖は体を冷やす食材」＝主語は白砂糖。見出し「チョコレートは体を冷やすのか」は問いかけ
+macaroni,カカオポリフェノール,not-a-food,,成分名。§9 rule 4 が「ビタミンB群 a nutrient」を同型として挙げる

@@ -45,6 +45,31 @@ COMPLETENESS_N = 2
 SAMPLE_CSV = DATA_DIR / "human_audit_sample.csv"
 RESULTS_CSV = DATA_DIR / "human_audit_results.csv"
 READS_CSV = DATA_DIR / "human_audit_source_reads.csv"
+RULINGS_CSV = DATA_DIR / "human_audit_rulings.csv"
+
+# What the author may rule about a food the reader named that the ledger does
+# not hold under that surface form. §10.2 fixed the *procedure* — such a food
+# counts as missed until the author rules otherwise — but not the vocabulary,
+# so it is fixed here, once, with every ruling published beside its rationale.
+#
+# The first three leave the attribution in the ledger; the next four say the
+# ledger was right to omit it; the last is a gap. Only the last is a miss, and
+# the raw figure that counts all eight as missed is reported beside the
+# adjudicated one, because reporting only the adjudicated one would be choosing
+# the number after seeing it.
+RULINGS = {
+    "same-food": "the ledger holds this food under another surface form",
+    "broader-label": "the ledger holds the attribution under a broader name",
+    "serving-temperature": "the source describes how it is served, not what it is",
+    "no-direction": "named, but no direction is predicated of it",
+    "not-a-food": "a generic term, a fragment, or a nutrient",
+    "prior-ruling": "excluded by a ruling filed before this audit",
+    "not-in-page": "does not appear in the source at all",
+    "missed": "the source attributes it and the ledger does not hold it",
+}
+IN_LEDGER = ("same-food", "broader-label")
+CORRECTLY_ABSENT = ("serving-temperature", "no-direction", "not-a-food",
+                    "prior-ruling", "not-in-page")
 
 # What the reader may write in the `verdict` column, fixed before any row was
 # read (the RD-2 rule: the decision rule is written before the decisions).
@@ -164,6 +189,23 @@ def score_precision(results: pd.DataFrame) -> dict:
     }
 
 
+def load_audit_rulings() -> dict:
+    """The author's rulings, keyed by (source, the name the reader wrote).
+
+    Fails loudly on an unknown ruling word: the eight are the vocabulary, and a
+    ninth entered by hand would move a published tally without anyone deciding
+    to.
+    """
+    if not RULINGS_CSV.exists():
+        return {}
+    filed = pd.read_csv(RULINGS_CSV, dtype=str).fillna("")
+    unknown = sorted(set(filed["ruling"]) - set(RULINGS))
+    if unknown:
+        raise ValueError(f"{RULINGS_CSV.name} carries unknown ruling(s): {unknown}")
+    return {(r["source_id"], r["read_as"].strip()): r["ruling"]
+            for _, r in filed.iterrows()}
+
+
 def score_completeness(reads: pd.DataFrame, rows: pd.DataFrame) -> dict:
     """Diff a human end-to-end read against the ledger, per source.
 
@@ -172,16 +214,37 @@ def score_completeness(reads: pd.DataFrame, rows: pd.DataFrame) -> dict:
     different Japanese surface form counts as missed until the author says
     otherwise, which is the conservative direction for a completeness claim.
     """
+    rulings = load_audit_rulings()
     out: dict[str, dict] = {}
     for sid, group in reads.groupby("source_id"):
         read = {str(f).strip() for f in group["food_ja"] if str(f).strip()}
         held = {str(f).strip() for f in rows[rows["source_id"] == sid]["food_ja"]}
+        unmatched = sorted(read - held)
+        filed = [(name, rulings.get((str(sid), name))) for name in unmatched]
+        unresolved = sorted(name for name, ruling in filed if ruling is None)
+        counts = {word: sorted(name for name, ruling in filed if ruling == word)
+                  for word in RULINGS}
+
+        # Raw: every unmatched name counts as missed, which is what §10.2 fixed
+        # in advance. Adjudicated: names the ledger holds elsewhere join the
+        # numerator, names it was right to omit leave the denominator, and what
+        # remains is the gap.
+        matched = len(read & held)
+        recovered = sum(len(counts[word]) for word in IN_LEDGER)
+        dropped = sum(len(counts[word]) for word in CORRECTLY_ABSENT)
+        adjudicated_n = len(read) - dropped
         out[str(sid)] = {
             "read_by_human": len(read),
             "in_ledger": len(held),
-            "missed_by_ledger": sorted(read - held),
+            "missed_by_ledger": unmatched,
             "in_ledger_only": sorted(held - read),
-            "recall": len(read & held) / len(read) if read else float("nan"),
+            "recall": matched / len(read) if read else float("nan"),
+            "unresolved": unresolved,
+            "by_ruling": {word: names for word, names in counts.items() if names},
+            "adjudicated_recall": ((matched + recovered) / adjudicated_n
+                                   if adjudicated_n else float("nan")),
+            "adjudicated_n": adjudicated_n,
+            "misses": counts["missed"],
         }
     return out
 
@@ -204,9 +267,16 @@ def main(score: bool = False) -> None:
             print()
             for sid, r in score_completeness(reads, rows).items():
                 print(f"{sid}: human read {r['read_by_human']}, ledger holds "
-                      f"{r['in_ledger']}, recall {100 * r['recall']:.1f}%")
-                if r["missed_by_ledger"]:
-                    print(f"  missed by the ledger: {r['missed_by_ledger']}")
+                      f"{r['in_ledger']}")
+                print(f"  recall as specified: {100 * r['recall']:.1f}%   "
+                      f"after adjudication: {100 * r['adjudicated_recall']:.1f}% "
+                      f"(of {r['adjudicated_n']})")
+                for word, names in r["by_ruling"].items():
+                    print(f"    {word:20s} {len(names):2d}  {'、'.join(names)}")
+                if r["unresolved"]:
+                    # Never silently: an unruled name is the one thing that
+                    # would let the adjudicated figure mean less than it says.
+                    print(f"  ⚠ UNRULED, counted as missed: {r['unresolved']}")
                 if r["in_ledger_only"]:
                     print(f"  in the ledger only:   {r['in_ledger_only']}")
 

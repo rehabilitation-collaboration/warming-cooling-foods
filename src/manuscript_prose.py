@@ -49,6 +49,13 @@ from .claim_directed import INCIDENTAL, attach, load_ledger
 from .definitions import PROJECT_ROOT
 from .evidence_mapping import CORE_MIN_SOURCES
 from .gap_models import presence_logit
+from .human_audit import (
+    READS_CSV as AUDIT_READS_CSV,
+    RESULTS_CSV as AUDIT_RESULTS_CSV,
+    score_completeness,
+    score_precision,
+    tier1_claims,
+)
 from .screening import l2_screened
 
 COLLECTED = re.compile(r"(\d+) tests? collected")
@@ -234,7 +241,17 @@ def context(text: str, inputs: dict) -> dict:
     claim_directed = l2_screened(with_sublabels, exclude_sublabels=(INCIDENTAL,))
 
     alt = load_alt_l1()
+    # The §10 audit's own figures. Both counts are checked, the one the
+    # procedure fixed in advance and the one adjudication leaves, because the
+    # manuscript reports both and a check on only one would let the other drift.
+    audit_rows = tier1_claims()
+    precision = score_precision(pd.read_csv(AUDIT_RESULTS_CSV, dtype=str))
+    completeness = score_completeness(
+        pd.read_csv(AUDIT_READS_CSV, dtype=str).fillna(""), audit_rows)
     built = {
+        "audit_rows": audit_rows,
+        "audit_precision": precision,
+        "audit_completeness": completeness,
         "frame": frame,
         "ledger": ledger,
         "counts": inputs["counts"],
@@ -264,6 +281,24 @@ def _narrowed(ctx: dict, series: pd.Series) -> tuple[int, int, float]:
     kept = frame["food_key"].map(series).fillna(0)
     return (int(kept.sum()), int((kept > 0).sum()),
             100 * float((kept == 0).mean()))
+
+
+def _audit_recall(ctx: dict, key: str) -> list[float]:
+    """The two sources' recall as numerator and denominator, in manuscript order.
+
+    The longer source first, as the Methods introduces them. Fails loudly on a
+    source the audit does not hold, rather than checking one pair twice.
+    """
+    scored = ctx["audit_completeness"]
+    out: list[float] = []
+    for source in ("basefood", "macaroni"):
+        if source not in scored:
+            raise ValueError(f"the audit holds no end-to-end read of {source!r}")
+        stats = scored[source]
+        denominator = (stats["read_by_human"] if key == "recall"
+                       else stats["adjudicated_n"])
+        out += [round(stats[key] * denominator), denominator]
+    return out
 
 
 def _refit(ctx: dict, series: pd.Series) -> dict:
@@ -618,6 +653,31 @@ FACTS: tuple[Fact, ...] = (
         "unit_tests_acknowledgments",
         r"Python 3\.\d+\.\d+; unit tests n = (\d+), all passing",
         lambda c: [collected_tests()],
+    ),
+    # ---- the human audit of §10 ----------------------------------------------
+    Fact(
+        "audit_sample",
+        r"a simple random sample of \*\*(\d+) of the (\d+) Tier-1 claim rows\*\*",
+        lambda c: [c["audit_precision"]["n_sampled"], len(c["audit_rows"])],
+    ),
+    Fact(
+        "audit_precision_result",
+        rf"Of \*\*(\d+) claim rows drawn at random\*\*, \*\*(\d+) are supported\*\*",
+        lambda c: [c["audit_precision"]["n_sampled"],
+                   c["audit_precision"]["n_supported"]],
+    ),
+    Fact(
+        "audit_recall_as_specified",
+        r"recall is \*\*(\d+)/(\d+)\*\* for the longer source and \*\*(\d+)/(\d+)\*\* "
+        r"for the other",
+        lambda c: _audit_recall(c, "recall"),
+    ),
+    Fact(
+        "audit_recall_adjudicated",
+        rf"leaving \*\*(\d+)/(\d+)\*\* and \*\*(\d+)/(\d+)\*\*, and "
+        rf"\*\*{QUANTITY} genuine gaps\*\*",
+        lambda c: _audit_recall(c, "adjudicated_recall") + [
+            sum(len(s["misses"]) for s in c["audit_completeness"].values())],
     ),
     # ---- quantities written as fractions -------------------------------------
     Fact(
