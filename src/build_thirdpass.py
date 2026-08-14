@@ -151,6 +151,93 @@ AUTHOR_RULINGS: dict[tuple[str, str], tuple[str, str]] = {
         "would attach one study to six unrelated food keys, which is not what the constituent "
         "rule is for.",
     ),
+    # --- 2026-08-14 pass over every remaining zero food (1,331 records) -------
+    # Seven records were flagged and none was overturned. Each already carried a
+    # standing reason in the ledger, written before this pass and not visible to
+    # it; the readings below were made against title, abstract and publication
+    # type and reached the same place independently. Where the pass named a
+    # ground the standing reason does not, that is stated rather than merged.
+    ("bell pepper", "23179202"): (
+        "exclude",
+        "Chilli-and-MCT crossover in seven volunteers with diet-induced thermogenesis by indirect "
+        "calorimetry. The pass read bell pepper as eaten in two of the four arms and called all "
+        "four conditions met. Conditions 1 to 3 do hold; condition 4 does not. The paper's "
+        "question is the combined effect of chilli and MCT — the title says so, and the "
+        "conclusion attributes the DIT rise to 'adding chilli and MCT to meals' — with bell "
+        "pepper as the non-pungent control the chilli arms are measured against. Being eaten is "
+        "condition 2; being the exposure the outcome is attributed to is condition 4, and here "
+        "that is the chilli and the MCT. The one significant contrast within the pepper arms "
+        "(pepper-sunflower against pepper-MCT) isolates the oil, not the pepper. The ledger's "
+        "standing reason says the same and is unchanged.",
+    ),
+    ("wakame", "19840063"): (
+        "exclude",
+        "Sixteen-week Xanthigen trial in 151 obese premenopausal women, with resting energy "
+        "expenditure in the 41 with NAFLD. Two independent grounds, either sufficient. First, "
+        "2.3 as written: the trial's stated aim is weight management — body weight, body fat, "
+        "liver lipids — and REE is one readout inside it, which is the energy-expenditure "
+        "carve-out and is the ledger's standing reason. Second, 3's botanical-species rule: the "
+        "abstract says 'brown marine algae' and never names Undaria pinnatifida, and fucoxanthin "
+        "is carried by Sargassum and Laminaria as well. The pass named this itself and proposed "
+        "to settle it from a different record in the same batch; taking a species the abstract "
+        "withholds from a neighbouring record is the inference this pass is instructed not to "
+        "make about subjects, and the reason is the same one. The same pass excluded "
+        "wakame/28620480 because its seaweed is Sargassum, so the standard is applied in one "
+        "direction only if this record is kept.",
+    ),
+    ("walnut", "20439557"): (
+        "exclude",
+        "Eight-hour room-calorimeter crossover in 16 overweight adults on a walnut diet against "
+        "an olive-oil control. The pass read energy expenditure as an endpoint the study was "
+        "built to move. The text does not support that: the title is 'on substrate oxidation', "
+        "the hypothesis is that the diet 'may be advantageous in promoting greater use of fat "
+        "stores', no thermogenesis, diet-induced thermogenesis or thermic-effect language "
+        "appears anywhere, and energy expenditure is explicitly null ('no difference in energy "
+        "expenditure was noted between the diets') while the significant results are RQ and fat "
+        "oxidation. That is 2.3's energy-expenditure qualifier on a body-composition framing, "
+        "and it is the same shape as white rice/15447894. The ledger's standing reason is "
+        "unchanged.",
+    ),
+    ("pear", "10520620"): (
+        "exclude",
+        "Double-blind trial in 14 infants given pear or white grape juice, with metabolic rate "
+        "over 3 h in a respiratory chamber. Conditions 1 and 2 hold and the pass said so; it "
+        "could not settle condition 3 and returned uncertain, which was the right call to hand "
+        "over. It resolves against inclusion: the stated hypothesis is that malabsorption raises "
+        "activity and metabolic rate, the contrast that carries the metabolic-rate result is "
+        "malabsorbers against absorbers rather than pear against grape, and by juice type only "
+        "physical activity reached significance. No thermogenic framing is present, so the "
+        "measurement is 2.3's carve-out rather than a thermal outcome attributed to the food. "
+        "The ledger's standing reason reads it the same way.",
+    ),
+    ("white wine", "31632281"): (
+        "exclude",
+        "Cheese fondue against Nasi Goreng in 12 healthy men, with skin blood flow and skin "
+        "temperature. The pass held conditions 1 to 3 and could not settle condition 4, naming "
+        "the tension exactly: the wine accompanies both meals at a dose the paper reports as "
+        "equivalent, so the thermal difference is attributed to the meal. A food held constant "
+        "across every arm is not the exposure of interest, which is condition 4 and the ledger's "
+        "standing reason. The comparison that settles it is inside this same record: it is "
+        "included under `cheese`, because the cheese is what varies between the arms. Vehicle "
+        "and exposure are distinguished here the way they are everywhere else in the ledger.",
+    ),
+    ("cabbage", "12343033"): (
+        "exclude",
+        "Title-only record, 'Iodine deficiency disorders', with an empty abstract. The pass "
+        "returned uncertain, correctly: a three-word title naming no subject, no ingestion and "
+        "no outcome establishes none of the four conditions. Under 2's no-abstract clause a "
+        "title settles a record only when it is sufficient, and this one is not, so the "
+        "exclusion stands on the absence of any positive ground rather than on a judgment about "
+        "the study. The ledger's standing reason records it as a title-only review.",
+    ),
+    ("wakame", "11365014"): (
+        "exclude",
+        "'AquaMUNE, a brown seaweed extract...', a Newspaper Article with no abstract. The pass "
+        "returned uncertain. Nothing in the record establishes a subject species, an ingestion "
+        "protocol, a measured thermal outcome, or the seaweed species 3 requires, and the "
+        "publication type leaves open whether a study is reported at all. The ledger's standing "
+        "reason is the same and carries the `uncertain-species` code.",
+    ),
 }
 
 
