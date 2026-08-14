@@ -110,3 +110,85 @@ class TestWriteBatches:
         path = dtb.batch_path("white rice")
         assert path.name == "records_white_rice.json"
         assert json.loads(path.read_text(encoding="utf-8"))["food_key"] == "white rice"
+
+    def test_the_extension_writes_to_its_own_directory(self, tmp_path, monkeypatch):
+        # The 2026-08-09 pass's inputs must stay byte-identical, so §9's batches
+        # go somewhere else and the caller says where.
+        monkeypatch.setattr(dtb, "BATCH_DIR", tmp_path / "c3_batches")
+        candidates = pd.DataFrame([
+            {"food_key": "amazake", "pmid": "1", "title": "t", "abstract": "a", "pubtypes": "Journal Article"},
+        ])
+        dtb.write_batches(candidates, batch_dir=tmp_path / "c3_ext_batches")
+        assert (tmp_path / "c3_ext_batches" / "records_amazake.json").exists()
+        assert not (tmp_path / "c3_batches").exists()
+
+    def _lamb(self, n: int) -> pd.DataFrame:
+        return pd.DataFrame([
+            {"food_key": "lamb", "pmid": str(i), "title": f"t{i}", "abstract": f"a{i}",
+             "pubtypes": "Journal Article"}
+            for i in range(n)
+        ])
+
+    def test_a_food_past_the_cap_is_split_into_indexed_ranges(self, tmp_path):
+        files, total = dtb.write_batches(self._lamb(5), batch_dir=tmp_path, max_records=2)
+        assert (files, total) == (3, 5)
+        assert sorted(p.name for p in tmp_path.glob("*.json")) == [
+            "records_lamb_000_001.json",
+            "records_lamb_002_003.json",
+            "records_lamb_004_004.json",
+        ]
+
+    def test_a_split_batch_names_the_range_it_holds(self, tmp_path):
+        dtb.write_batches(self._lamb(5), batch_dir=tmp_path, max_records=2)
+        payload = json.loads((tmp_path / "records_lamb_002_003.json").read_text(encoding="utf-8"))
+        assert payload["food_key"] == "lamb"
+        assert payload["range"] == "2-3"
+        assert [r["pmid"] for r in payload["records"]] == ["2", "3"]
+
+    def test_a_split_loses_and_duplicates_nothing(self, tmp_path):
+        # Splitting is a delivery decision. If it dropped or repeated a record it
+        # would change what the pass screened, which is not a delivery decision.
+        dtb.write_batches(self._lamb(5), batch_dir=tmp_path, max_records=2)
+        seen = [
+            r["pmid"]
+            for p in sorted(tmp_path.glob("*.json"))
+            for r in json.loads(p.read_text(encoding="utf-8"))["records"]
+        ]
+        assert sorted(seen) == sorted({"0", "1", "2", "3", "4"})
+
+    def test_a_food_at_or_under_the_cap_keeps_its_plain_name(self, tmp_path):
+        dtb.write_batches(self._lamb(2), batch_dir=tmp_path, max_records=2)
+        assert [p.name for p in tmp_path.glob("*.json")] == ["records_lamb.json"]
+
+
+class TestRescreenScope:
+    def test_keeps_the_low_coverage_zeros_the_core_scope_dropped(self):
+        # §9's whole point: coverage is the explanatory variable, so it cannot
+        # also decide which foods get the extra check. amazake carries one source
+        # and was out of scope for the 2026-08-09 pass.
+        out = dtb.rescreen_scope(_frame(), already_read=set())
+        assert set(out["food_key"]) == {"cucumber", "amazake"}
+
+    def test_subtracts_the_foods_an_earlier_pass_already_read(self):
+        out = dtb.rescreen_scope(_frame(), already_read={"cucumber"})
+        assert set(out["food_key"]) == {"amazake"}
+
+    def test_drops_a_zero_food_whose_query_returned_nothing(self):
+        # burdock is at zero with no retrieved record: a retrieval question, not
+        # a screening one, so there is nothing for a re-screen to read.
+        out = dtb.rescreen_scope(_frame(), already_read=set())
+        assert "burdock" not in set(out["food_key"])
+
+    def test_never_offers_a_food_that_already_has_a_study(self):
+        out = dtb.rescreen_scope(_frame(), already_read=set())
+        assert "ginger" not in set(out["food_key"])
+
+    def test_already_read_is_read_from_the_published_ledger(self, tmp_path, monkeypatch):
+        path = tmp_path / "screening_thirdpass.csv"
+        pd.DataFrame([
+            {"food_key": "cucumber", "pmid": "1"},
+            {"food_key": "cucumber", "pmid": "2"},
+            {"food_key": "carrot", "pmid": "3"},
+        ]).to_csv(path, index=False)
+        monkeypatch.setattr(dtb, "THIRDPASS_CSV", path)
+        assert dtb.already_read_foods() == {"cucumber", "carrot"}

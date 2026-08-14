@@ -691,3 +691,76 @@ pass under the final text, so no record's sub-label was decided under a
 superseded reading. The canary outputs are retained under
 `data/screening_work/cd_canary/` (git-ignored, like the other coder
 intermediates) as the evidence for the revisions.
+
+## 9. Extending the adversarial third pass to every zero food (added 2026-08-14)
+
+§5 pairs two coders and routes their divergences to the author. The failure mode
+that survives both steps is two coders excluding the same record for the same
+wrong reason: it leaves no trace in κ, and because the analysis outcome is binary
+— does this food have any on-construct study — one such record changes a food's
+outcome outright. The third pass tests that mode by inverting the instruction:
+every record in front of you was excluded; find the ones where that was wrong.
+
+The pass as first run (2026-08-09) read only the **core** foods at L2′ = 0 —
+those carrying at least three Tier-1 sources. The external review of 2026-08-14
+named what that costs. Coverage, the number of lay sources attributing a
+direction to a food, is the analysis's explanatory variable, so screening the
+high-coverage zeros harder than the low-coverage ones makes the detection rate
+for outcome misclassification a function of the variable under test. One food did
+flip under that pass — watermelon, from no retrieved study to one — which is what
+makes the asymmetry material rather than theoretical: a correction that can only
+occur where coverage is high can only move the estimate one way.
+
+**Scope, as of this section.** Every food in the primary analysis frame whose L2′
+is zero and whose L2 query returned at least one record, with no coverage
+threshold. Measured against the current ledger:
+
+| | foods | excluded records |
+|---|---:|---:|
+| primary analysis frame (Tier-1) | 146 | — |
+| of those, at L2′ = 0 | 96 | — |
+| of those, with at least one retrieved record | **69** | **1,688** |
+| of those, already read by the 2026-08-09 pass | 22 | 357 |
+| **remaining, read under this section** | **47** | **1,331** |
+
+The 27 foods at L2′ = 0 whose query returned nothing have no record to re-read;
+their zero is a question about the search vocabulary rather than about screening,
+and the Limitations place it there. The 2026-08-09 pass covered 23 foods and 388
+records when it ran; it appears as 22 and 357 here because watermelon left the
+zero set by that pass's own result.
+
+**The earlier pass is not re-run.** Its verdict files stay untouched under
+`data/screening_work/c3/`; this extension writes to `data/screening_work/c3_ext/`,
+and the aggregation reads both and tags every row with the pass that produced it.
+Re-reading a record already judged would let a second reading replace the first,
+which is a change to a settled judgment rather than a test of one.
+
+**Coverage of the foods this section adds.** All 47 carry one or two Tier-1
+sources (median 1), because the foods with three or more were the earlier pass's
+scope. This is stated because it fixes the direction of any correction: a flip
+among these foods raises the outcome rate in the low-coverage stratum and so
+moves the coverage estimate *down*, which is the direction the earlier pass could
+not produce.
+
+**Instrument and instruction.** As in the earlier pass — a third agent (Claude
+Opus 5) that cannot see the existing labels, the golden set, or the
+reconciliation code, told that every record in front of it was excluded and that
+its task is to find the ones where that was wrong. Verdicts are `exclude-agreed`,
+`uncertain`, or `include-candidate`, with standing instructions to return
+`uncertain` whenever it hesitates and never to infer an unstated subject species.
+The inclusion rule it applies is §2 and §3 unchanged; **this section adds no
+criterion** and cannot change one.
+
+**Adjudication.** Every verdict other than `exclude-agreed` is read by the author
+against title, abstract and MEDLINE indexing, and every ruling is published with
+its reason, as the earlier pass's are.
+
+**Fixed before the pass runs.** The primary model is refit on the result and
+reported whatever that result is, including when nothing flips. If any food
+changes outcome, the paper reports the coverage estimate both before and after
+this extension — as the Axis A protocol (`coding_protocol.md` §10) reports the
+human audit's raw and adjudicated counts — so that neither number is one chosen
+after it was seen. No boundary rule in §2 or §3 is rewritten in response to what
+this pass returns: a record that appears to require a new rule is reported as
+such and left excluded, because rewriting a rule once it is known which record it
+decides is the failure this protocol exists to prevent.
