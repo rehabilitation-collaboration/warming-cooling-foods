@@ -25,6 +25,7 @@ import re
 import pandas as pd
 
 from .build_screening import exclusion_breakdown
+from .build_thirdpass import PASS_ALL_ZERO, PASS_CORE
 from .claim_mapping import CONTESTED, aggregate_axis_a
 from .definitions import COOL, NEUTRAL, TIER_INDIVIDUAL, TIER_ORG, WARM
 from .evidence_mapping import CORE_MIN_SOURCES
@@ -226,6 +227,22 @@ def adjudication_split(rulings: pd.DataFrame) -> dict[str, int]:
     return {name: int(passes.get(name, 0)) for name in set(ADJUDICATION_PASSES.values())}
 
 
+def _thirdpass_row(thirdpass: pd.DataFrame, pass_id: str) -> list[int]:
+    """records / flagged / overturned for one third pass.
+
+    Fail-loud on an unknown pass: a typo here would silently report zeros for a
+    pass that ran, which reads as a pass that found nothing.
+    """
+    if pass_id not in set(thirdpass["pass_id"]):
+        raise ValueError(f"no third-pass rows carry pass_id {pass_id!r}")
+    rows = thirdpass[thirdpass["pass_id"] == pass_id]
+    return [
+        len(rows),
+        int(rows["author_ruling"].notna().sum()),
+        int((rows["author_ruling"] == INCLUDE).sum()),
+    ]
+
+
 def table2_expected(ledger: pd.DataFrame, frame: pd.DataFrame, counts: pd.DataFrame,
                     kappa: dict, rulings: pd.DataFrame,
                     thirdpass: pd.DataFrame) -> dict[str, dict[str, object]]:
@@ -245,11 +262,11 @@ def table2_expected(ledger: pd.DataFrame, frame: pd.DataFrame, counts: pd.DataFr
             "Value": [split["divergence"], split["sweep"]]},
         "reason sweep of agreed exclusions": {"Value": split["homonym"]},
         "third-pass restoration": {"Value": split["restoration"]},
-        "Third-pass re-screen": {"Value": [
-            len(thirdpass),
-            int(thirdpass["author_ruling"].notna().sum()),
-            int((thirdpass["author_ruling"] == INCLUDE).sum()),
-        ]},
+        # Reported per pass rather than pooled: the two were scoped differently,
+        # and the whole point of the second is that the first was scoped by the
+        # variable under test. A pooled row would hide that.
+        "Third-pass re-screen, core-zero": {"Value": _thirdpass_row(thirdpass, PASS_CORE)},
+        "Third-pass re-screen, remaining": {"Value": _thirdpass_row(thirdpass, PASS_ALL_ZERO)},
         "L2 records screened": {"Value": len(ledger)},
         "Foods with": {"Value": [int((counts["l2_raw"] > 0).sum()),
                                  int((counts["l2_raw"] == 0).sum())]},
