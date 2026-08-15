@@ -53,6 +53,7 @@ PLAN-DEVIATIONS.md
 LITERATURE.md
 REVIEW-REPORT*.md
 GPT-REVIEW-*.md
+RESPONSE-NOTE-*.md
 
 # SSRN submission guide (internal workflow tool, not a reproducibility artifact)
 ssrn-submission.html
