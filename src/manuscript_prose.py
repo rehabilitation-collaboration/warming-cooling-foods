@@ -450,8 +450,8 @@ FACTS: tuple[Fact, ...] = (
     # ---- screening totals ----------------------------------------------------
     Fact(
         "screened_universe",
-        r"screened all \*\*([\d,]+) records across the (\d+) of the (\d+) queried foods "
-        r"that returned at least one hit\*\*",
+        r"screened all \*\*([\d,]+) records\*\* — those from the \*\*(\d+) of the (\d+) "
+        r"queried foods that returned at least one hit\*\*",
         lambda c: [len(c["ledger"]),
                    int((c["counts"]["l2_raw"] > 0).sum()),
                    len(c["counts"])],
@@ -461,7 +461,8 @@ FACTS: tuple[Fact, ...] = (
         # printed as 37, which is white sugar's screened count, so the token
         # walk matched it.
         "queried_with_no_hit",
-        r"The (\d+) queried foods with zero L2 hits have L2′ = 0 by construction",
+        r"The (\d+) queried foods with zero L2 hits — a different set from those "
+        r"without a Tier-1 source in Table 1 — have L2′ = 0 by construction",
         lambda c: [int((c["counts"]["l2_raw"] == 0).sum())],
     ),
     Fact(
@@ -494,7 +495,8 @@ FACTS: tuple[Fact, ...] = (
     Fact(
         "chicken_screening",
         rf"\*\*Chicken fell from (\d+) raw hits to {QUANTITY}\*\*, a "
-        r"(\d+\.\d)% reduction, with (\d+) of the (\d+) excluded as animal research",
+        r"(\d+\.\d)% reduction, with (\d+) of the (\d+) excluded as `animal` or "
+        r"`livestock-heat` research",
         lambda c: [
             _food(c["frame"], "chicken", "l2_raw"),
             _food(c["frame"], "chicken", "l2_screened"),
@@ -683,7 +685,8 @@ FACTS: tuple[Fact, ...] = (
     # ---- the human audit of §10 ----------------------------------------------
     Fact(
         "audit_sample",
-        r"a simple random sample of \*\*(\d+) of the (\d+) Tier-1 claim rows\*\*",
+        r"a simple random sample of \*\*(\d+) of the (\d+) Tier-1 rows among the "
+        r"ledger's [\d,]+ claim rows\*\*",
         lambda c: [c["audit_precision"]["n_sampled"], len(c["audit_rows"])],
     ),
     Fact(
@@ -708,7 +711,7 @@ FACTS: tuple[Fact, ...] = (
     # ---- quantities written as fractions -------------------------------------
     Fact(
         "two_thirds_abstract",
-        rf"For {QUANTITY} of these foods, the search retrieved none",
+        rf"For {QUANTITY} of these foods, the search and screen retrieved none",
         lambda c: [float((c["frame"]["l2_screened"] == 0).mean())],
         tol=0.05,
     ),
