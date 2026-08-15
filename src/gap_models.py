@@ -421,6 +421,14 @@ def cloglog_exact_offset(frame: pd.DataFrame) -> dict:
 
     Returns the same shape as ``presence_cloglog_opportunity`` plus
     ``n_dropped``, the count of foods the exact form cannot take.
+
+    Only the offset fit is reported. The free fit and the likelihood-ratio test
+    come back because this reuses the paired function, but the paper prints
+    neither: the proportionality question they answer is already answered on the
+    146-food pair, and printing this test would mean reporting a fourth log-log
+    model — the one that frees log L1 on these 143 foods — which the enumeration
+    of unplanned analyses does not include. The test is sound where it stands;
+    it is the reporting that would need a fourth entry to be honest.
     """
     usable = frame[frame["l1"] > 0].copy()
     usable["log_l1"] = np.log(usable["l1"].astype(float))

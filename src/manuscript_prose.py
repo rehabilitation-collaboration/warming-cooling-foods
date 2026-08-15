@@ -743,32 +743,29 @@ FACTS: tuple[Fact, ...] = (
                    c["cloglog_exact"]["n_dropped"],
                    c["cloglog_exact"]["n"]],
     ),
+    # The exact fit reports its coverage estimate and nothing else. Its own
+    # proportionality test exists in the returned dict but is not printed: the
+    # question it answers is already answered on the 146-food pair, and its
+    # denominator is a fourth log-log model the paper does not report.
     Fact(
         "cloglog_exact_results",
         rf"on the {QUANTITY} foods for which log L1 exists, leaves coverage at "
-        rf"{QUANTITY} \({QUANTITY}[–-]{QUANTITY}, p = {QUANTITY}\) and rejects the "
-        rf"offset by the same margin \({QUANTITY} on 1 degree of freedom, "
-        rf"p = {QUANTITY}\)",
+        rf"{QUANTITY} \({QUANTITY}[–-]{QUANTITY}, p = {QUANTITY}\)",
         lambda c: [c["cloglog_exact"]["n"],
                    c["cloglog_exact"]["offset"]["hr"],
                    c["cloglog_exact"]["offset"]["hr_lo"],
                    c["cloglog_exact"]["offset"]["hr_hi"],
-                   c["cloglog_exact"]["offset"]["p"],
-                   c["cloglog_exact"]["lr"]["stat"],
-                   c["cloglog_exact"]["lr"]["p"]],
+                   c["cloglog_exact"]["offset"]["p"]],
     ),
     Fact(
         "cloglog_exact_table3",
         rf"fitted on the {QUANTITY} foods for which it is defined, coverage {QUANTITY} "
-        rf"\({QUANTITY}[–-]{QUANTITY}\), p = {QUANTITY} and the same test {QUANTITY} "
-        rf"on 1 df, p = {QUANTITY}",
+        rf"\({QUANTITY}[–-]{QUANTITY}\), p = {QUANTITY}\.",
         lambda c: [c["cloglog_exact"]["n"],
                    c["cloglog_exact"]["offset"]["hr"],
                    c["cloglog_exact"]["offset"]["hr_lo"],
                    c["cloglog_exact"]["offset"]["hr_hi"],
-                   c["cloglog_exact"]["offset"]["p"],
-                   c["cloglog_exact"]["lr"]["stat"],
-                   c["cloglog_exact"]["lr"]["p"]],
+                   c["cloglog_exact"]["offset"]["p"]],
     ),
     # ---- the count of unplanned analyses, which the paper states three times --
     Fact(
