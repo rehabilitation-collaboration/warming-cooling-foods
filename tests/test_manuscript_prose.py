@@ -156,10 +156,10 @@ class TestCatchesWhatGotThrough:
          "carrot at all eight Tier-1 sources"),
         ("an odds ratio from 0.35 to 7.62",
          "an odds ratio from 0.35 to 8.21"),
-        ("and seventeen reported analyses were computed outside it",
+        ("and eighteen reported analyses were computed outside it",
          "and fifteen reported analyses were computed outside it"),
-        ("coverage at HR 1.035 (0.892–1.202)",
-         "coverage at HR 1.036 (0.892–1.202)"),
+        ("leaves coverage at 1.035 (0.892–1.202, p = 0.648)",
+         "leaves coverage at 1.036 (0.892–1.202, p = 0.648)"),
     ]
 
     @pytest.mark.parametrize("original,stale", MUTATIONS)

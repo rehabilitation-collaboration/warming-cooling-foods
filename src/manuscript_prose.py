@@ -734,18 +734,39 @@ FACTS: tuple[Fact, ...] = (
                    _food(c["frame"], "milk", "l1")],
     ),
     Fact(
-        "cloglog_exact_offset",
-        rf"because the {QUANTITY} foods holding no records at all have no log L1 to "
-        rf"carry; taking the derivation's exact form means dropping those {QUANTITY} "
-        rf"and fitting the check on a different set of foods from the primary model's, "
-        rf"which leaves coverage at HR {QUANTITY} \({QUANTITY}[–-]{QUANTITY}\) and "
-        rf"still rejects the offset \(likelihood ratio {QUANTITY} on 1 df, "
-        rf"p = {QUANTITY}\)",
-        lambda c: [c["cloglog_exact"]["n_dropped"],
+        "cloglog_exact_methods",
+        rf"so that all {QUANTITY} foods enter one model with a finite exposure: "
+        rf"{QUANTITY} hold no records at all, and log L1 does not exist for them\. "
+        rf"That substitution is an approximation to the exact form, so the exact form "
+        rf"is fitted as well, on the {QUANTITY} foods where log L1 is defined",
+        lambda c: [c["cloglog_exact"]["n"] + c["cloglog_exact"]["n_dropped"],
                    c["cloglog_exact"]["n_dropped"],
+                   c["cloglog_exact"]["n"]],
+    ),
+    Fact(
+        "cloglog_exact_results",
+        rf"on the {QUANTITY} foods for which log L1 exists, leaves coverage at "
+        rf"{QUANTITY} \({QUANTITY}[–-]{QUANTITY}, p = {QUANTITY}\) and rejects the "
+        rf"offset by the same margin \({QUANTITY} on 1 degree of freedom, "
+        rf"p = {QUANTITY}\)",
+        lambda c: [c["cloglog_exact"]["n"],
                    c["cloglog_exact"]["offset"]["hr"],
                    c["cloglog_exact"]["offset"]["hr_lo"],
                    c["cloglog_exact"]["offset"]["hr_hi"],
+                   c["cloglog_exact"]["offset"]["p"],
+                   c["cloglog_exact"]["lr"]["stat"],
+                   c["cloglog_exact"]["lr"]["p"]],
+    ),
+    Fact(
+        "cloglog_exact_table3",
+        rf"fitted on the {QUANTITY} foods for which it is defined, coverage {QUANTITY} "
+        rf"\({QUANTITY}[–-]{QUANTITY}\), p = {QUANTITY} and the same test {QUANTITY} "
+        rf"on 1 df, p = {QUANTITY}",
+        lambda c: [c["cloglog_exact"]["n"],
+                   c["cloglog_exact"]["offset"]["hr"],
+                   c["cloglog_exact"]["offset"]["hr_lo"],
+                   c["cloglog_exact"]["offset"]["hr_hi"],
+                   c["cloglog_exact"]["offset"]["p"],
                    c["cloglog_exact"]["lr"]["stat"],
                    c["cloglog_exact"]["lr"]["p"]],
     ),
