@@ -65,3 +65,4 @@ output/reference_verification.json
 
 # Tier1 目視 audit の作業シート (内部作業物)
 AUDIT-tier1-checklist.md
+build_ssrn_guide.py
